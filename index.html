@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Goude Group: Brand Architecture for the AI-Shaped Company</title>
+<meta name="description" content="Goude Group helps founders reshape the brand, offer, systems, and operating structure for what comes next." />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="apple-touch-icon" href="favicon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://goudegroup.com/" />
+<meta property="og:title" content="Goude Group: Brand Architecture for the AI-Shaped Company" />
+<meta property="og:description" content="Build the world the business is becoming. Goude Group reshapes the brand, offer, systems, and operating structure for what comes next." />
+<meta property="og:image" content="https://goudegroup.com/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Goude Group: Brand Architecture for the AI-Shaped Company" />
+<meta name="twitter:description" content="Build the world the business is becoming." />
+<meta name="twitter:image" content="https://goudegroup.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --baby-blue:#a9d8ef;
+  --dark-green:#06120c;
+  --dark-navy:#071426;
+  --bone:#f3efe4;
+  --cream:#fbf8f1;
+
+  /* lifeline comet — orange-red */
+  --comet-core:#ff7a52;
+  --comet-warm:#f0654a;
+
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+
+  --maxw:1320px;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--cream);
+  color:var(--dark-navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+p,li,button,a,label,input,span,div,h1,h2,h3,h4{opacity:1}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+
+/* ---------- TYPE ---------- */
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.018em}
+.kicker{
+  font-family:var(--system);font-size:12px;font-weight:600;
+  letter-spacing:.2em;text-transform:uppercase;
+  display:flex;align-items:center;gap:14px;
+}
+.label{font-family:var(--system);font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 6vw;
+  background:transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(251,248,241,0.88);backdrop-filter:blur(10px);border-bottom:1px solid rgba(7,20,38,0.12);padding-top:14px;padding-bottom:14px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:40px;width:auto;display:block}
+.nav-cta{
+  font-family:var(--system);font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:11px 20px;border:1px solid var(--dark-navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.nav-cta:hover{background:var(--dark-navy);color:var(--cream)}
+
+/* ---------- BUTTONS ---------- */
+.btn{
+  font-family:var(--system);font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:15px 26px;border-radius:2px;display:inline-flex;align-items:center;gap:10px;
+  transition:transform .2s ease,background .25s ease,color .25s ease,border-color .25s ease;
+}
+.btn:hover{transform:translateY(-1px)}
+.btn-solid{background:var(--dark-navy);color:var(--cream)}
+.btn-solid:hover{background:var(--dark-green)}
+.btn-ghost{border:1px solid var(--dark-navy);color:var(--dark-navy)}
+.btn-ghost:hover{background:var(--dark-navy);color:var(--cream)}
+.scroll-cue{
+  font-family:var(--system);font-size:11.5px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:10px;color:inherit;opacity:.72;
+}
+
+/* ====================================================== */
+/* EDITORIAL FIELD — one color world per screen            */
+/* ====================================================== */
+.page-field{
+  min-height:100vh;position:relative;
+  padding:140px 6vw 110px;
+  display:grid;
+  grid-template-columns:minmax(0,1.25fr) minmax(340px,460px);
+  column-gap:clamp(60px,8vw,140px);
+  align-items:center;
+}
+.headline-zone{grid-column:1;max-width:920px}
+.headline-zone .kicker{margin-bottom:clamp(24px,3vw,40px)}
+.headline-zone h1{font-size:clamp(40px,5.4vw,84px);line-height:1.0;letter-spacing:-.02em}
+.headline-zone h2{
+  font-family:var(--display);font-weight:400;
+  font-size:clamp(21px,2.5vw,36px);line-height:1.12;letter-spacing:-.01em;
+  margin-top:clamp(20px,2.4vw,34px);max-width:24ch;opacity:.9;
+}
+.copy-zone{grid-column:2;align-self:end;justify-self:end;max-width:460px;text-align:left;padding-bottom:6px}
+.copy-zone p{font-family:var(--system);font-size:clamp(16px,1.15vw,18px);line-height:1.62;font-weight:400}
+.copy-zone .cz-rule{display:none}
+.copy-zone .cta-row{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+
+/* field atmospheres */
+.mint-field{background:var(--mint);color:var(--dark-green)}
+.bone-field{background:var(--bone);color:var(--dark-green)}
+.cream-field{background:var(--cream);color:var(--dark-green)}
+.baby-field{background:var(--baby-blue);color:var(--dark-navy)}
+.navy-field{background:var(--dark-navy);color:var(--baby-blue)}
+.green-field{background:var(--dark-green);color:var(--cream)}
+
+/* mint + cream/bone worlds use dark-green instruments */
+.mint-field .btn-solid,.cream-field .btn-solid,.bone-field .btn-solid{background:var(--dark-green);color:var(--mint)}
+.mint-field .btn-solid:hover,.cream-field .btn-solid:hover,.bone-field .btn-solid:hover{background:var(--dark-navy)}
+.mint-field .btn-ghost,.cream-field .btn-ghost,.bone-field .btn-ghost{border-color:var(--dark-green);color:var(--dark-green)}
+.mint-field .btn-ghost:hover,.cream-field .btn-ghost:hover,.bone-field .btn-ghost:hover{background:var(--dark-green);color:var(--mint)}
+/* baby world uses dark-navy instruments */
+.baby-field .btn-solid{background:var(--dark-navy);color:var(--cream)}
+.baby-field .btn-ghost{border-color:var(--dark-navy);color:var(--dark-navy)}
+.baby-field .btn-ghost:hover{background:var(--dark-navy);color:var(--cream)}
+/* dark navy world uses baby-blue instruments */
+.navy-field .btn-solid{background:var(--baby-blue);color:var(--dark-navy)}
+.navy-field .btn-ghost{border-color:var(--baby-blue);color:var(--baby-blue)}
+.navy-field .btn-ghost:hover{background:var(--baby-blue);color:var(--dark-navy)}
+/* dark green world uses mint instruments */
+.green-field .btn-solid{background:var(--mint);color:var(--dark-green)}
+.green-field .btn-ghost{border-color:var(--mint);color:var(--mint)}
+.green-field .btn-ghost:hover{background:var(--mint);color:var(--dark-green)}
+
+/* ---------- HERO — the type fills the page ---------- */
+#hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+  padding:clamp(104px,13vh,148px) 6vw clamp(120px,17vh,150px);
+}
+#hero .hero-title{
+  font-family:var(--display);font-weight:500;
+  font-size:clamp(56px,12.6vw,224px);line-height:.85;letter-spacing:-.038em;
+  max-width:96%;
+}
+/* supporting copy: a justified box in the bottom-right corner */
+#hero .hero-box{
+  position:absolute;right:6vw;bottom:clamp(40px,6vh,62px);
+  width:min(46vw,440px);
+}
+#hero .hero-box p{
+  font-family:var(--system);font-size:clamp(13.5px,1.02vw,16px);line-height:1.55;
+  text-align:justify;text-align-last:left;hyphens:auto;
+}
+/* scroll cue: a subtle pulsing line down, centered at the bottom */
+#hero .hero-cue{
+  position:absolute;left:50%;bottom:clamp(26px,4vh,46px);transform:translateX(-50%);
+  width:1px;height:clamp(46px,7vh,68px);
+  background:rgba(6,18,12,0.16);overflow:hidden;
+  font-size:0;color:transparent;letter-spacing:0;
+}
+#hero .hero-cue::after{
+  content:"";position:absolute;left:0;top:0;width:1px;height:42%;
+  background:linear-gradient(to bottom,transparent,var(--dark-green));
+  animation:cueDown 2.4s ease-in-out infinite;
+}
+@keyframes cueDown{
+  0%{transform:translateY(-110%);opacity:0}
+  30%{opacity:1}
+  100%{transform:translateY(260%);opacity:0}
+}
+
+/* ---------- DARK NAVY WORLD (baby-blue type) ---------- */
+.navy-field .headline-zone h1{color:var(--baby-blue)}
+.navy-field .headline-zone h2{color:var(--baby-blue);opacity:.82}
+.navy-field .kicker{color:var(--baby-blue);opacity:.85}
+.navy-field .copy-zone{color:var(--baby-blue)}
+.navy-field .copy-zone .cz-rule{background:var(--baby-blue);opacity:.55}
+/* ---------- DARK GREEN WORLD (mint + cream type) ---------- */
+.green-field .headline-zone h1{color:var(--mint)}
+.green-field .headline-zone h2{color:var(--cream);opacity:.85}
+.green-field .kicker{color:var(--mint);opacity:.9}
+.green-field .copy-zone{color:var(--cream)}
+.green-field .copy-zone .cz-rule{background:var(--mint);opacity:.7}
+
+/* ---------- WEEKLY INTELLIGENCE signup ---------- */
+.signup{margin-top:30px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-family:var(--system);font-size:14px;padding:13px 15px;border-radius:3px;
+  background:transparent;border:1px solid var(--dark-green);color:var(--dark-green);
+}
+.signup input::placeholder{color:rgba(6,18,12,.5)}
+.signup button{
+  background:var(--dark-green);color:var(--mint);padding:13px 20px;border-radius:3px;
+  font-family:var(--system);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  transition:background .2s ease;
+}
+.signup button:hover{background:var(--dark-navy)}
+.green-field .signup input{border-color:var(--mint);color:var(--cream)}
+.green-field .signup input::placeholder{color:rgba(243,239,228,.5)}
+.green-field .signup button{background:var(--mint);color:var(--dark-green)}
+.green-field .signup button:hover{background:var(--baby-blue)}
+
+/* ---------- REVIEW final line ---------- */
+.review-close{grid-template-rows:1fr auto;align-content:center}
+.review-close .headline-zone,.review-close .copy-zone{grid-row:1}
+.review-close .finalline{
+  grid-column:1/-1;grid-row:2;font-family:var(--display);font-weight:500;
+  font-size:clamp(28px,4.6vw,68px);line-height:1.0;letter-spacing:-.02em;
+  margin-top:clamp(60px,9vh,120px);max-width:18ch;
+}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--dark-green);color:var(--cream);padding:56px 6vw 44px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:58px;filter:invert(1) brightness(1.05)}
+.foot-meta{font-family:var(--system);font-size:13px;letter-spacing:.02em;line-height:1.8;text-align:right;opacity:.92}
+.foot-meta a:hover{color:var(--comet-warm)}
+
+/* ====================================================== */
+/* REQUEST PANEL                                          */
+/* ====================================================== */
+.scrim{position:fixed;inset:0;background:rgba(6,18,12,0.55);backdrop-filter:blur(3px);z-index:80;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.scrim.open{opacity:1;pointer-events:auto}
+.panel{
+  position:fixed;top:0;right:0;bottom:0;width:min(540px,100%);z-index:90;
+  background:var(--cream);color:var(--dark-green);transform:translateX(100%);
+  transition:transform .42s cubic-bezier(.4,0,.1,1);overflow-y:auto;box-shadow:-30px 0 60px rgba(6,18,12,0.25);
+}
+.panel.open{transform:translateX(0)}
+.panel-inner{padding:40px 38px 60px}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.panel-close{font-family:var(--system);font-size:22px;line-height:1;width:38px;height:38px;border:1px solid rgba(6,18,12,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s ease,color .2s ease}
+.panel-close:hover{background:var(--dark-green);color:var(--cream)}
+.panel h3{font-family:var(--display);font-weight:500;font-size:34px;line-height:1.0;margin:14px 0 8px}
+.panel .psub{font-size:15px;line-height:1.55;margin-bottom:26px;max-width:420px}
+.field{margin-bottom:18px}
+.field label{font-family:var(--system);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:7px}
+.field input,.field select,.field textarea{
+  width:100%;font-family:var(--system);font-size:15px;padding:13px 14px;border-radius:3px;
+  background:#fff;border:1px solid rgba(6,18,12,.2);color:var(--dark-green);
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--dark-green);box-shadow:0 0 0 3px rgba(246,198,107,0.4)}
+.field textarea{resize:vertical;min-height:74px}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.panel .submit{width:100%;justify-content:center;margin-top:10px}
+.panel-foot{font-family:var(--system);font-size:11.5px;letter-spacing:.02em;line-height:1.65;margin-top:18px;opacity:.7}
+.panel-success{padding:70px 38px;text-align:center}
+.panel-success h3{font-size:30px;margin-bottom:14px}
+.panel-success p{font-size:15px;line-height:1.55}
+
+/* ---------- SYSTEM LINE (orange-red lifeline) ---------- */
+#systemLine{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:5;overflow:visible}
+.comet-path{stroke:rgba(240,101,74,0.42);stroke-width:1.2;filter:drop-shadow(0 0 3px rgba(240,101,74,0.25))}
+.comet-trail{stroke:rgba(255,108,72,0.92);stroke-width:1.9;filter:drop-shadow(0 0 5px rgba(240,101,74,0.5)) drop-shadow(0 0 13px rgba(255,122,82,0.28))}
+.comet-node{filter:drop-shadow(0 0 7px rgba(240,101,74,0.7)) drop-shadow(0 0 20px rgba(255,122,82,0.45))}
+.sl-node{transition:r .45s ease,fill-opacity .45s ease}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:860px){
+  .page-field{grid-template-columns:1fr;row-gap:38px;align-items:start;padding:120px 7vw 90px}
+  .headline-zone{grid-column:1;max-width:none}
+  .copy-zone{grid-column:1;justify-self:start;align-self:start;max-width:560px}
+  #hero{justify-content:flex-start;align-items:stretch;padding:116px 7vw 80px}
+  #hero .hero-title{max-width:none}
+  #hero .hero-box{position:static;width:auto;max-width:560px;margin-top:34px}
+  #hero .hero-cue{position:static;transform:none;margin:30px auto 0}
+  /* review stacks cleanly on narrow widths (no overlap) */
+  .review-close{grid-template-rows:none;align-content:start}
+  .review-close .headline-zone,.review-close .copy-zone,.review-close .finalline{grid-row:auto;grid-column:1}
+  .review-close .finalline{margin-top:30px}
+}
+@media(max-width:760px){
+  #systemLine{display:none}
+  nav{padding:16px 7vw}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#hero" class="brand" aria-label="GOUDE group home"><img src="goude-logo.png" alt="GOUDE group" /></a>
+  <button class="nav-cta" data-open-panel>Request Operating Review</button>
+</nav>
+
+<!-- ============ 01 HERO — mint ============ -->
+<section id="hero" class="mint-field">
+  <h1 class="hero-title">Build the world the business is becoming.</h1>
+  <div class="hero-box">
+    <p>Goude Group helps founders reshape the brand, offer, systems, and operating structure for what comes next. We do not add AI decoration to the old machine. We rebuild the world around the business: how it speaks, sells, moves, serves, and scales.</p>
+  </div>
+  <a href="#brand" class="scroll-cue hero-cue">Scroll the system</a>
+</section>
+
+<!-- ============ 02 BRAND ARCHITECTURE — bone breaker ============ -->
+<section id="brand" class="page-field bone-field">
+  <div class="headline-zone">
+    <div class="kicker">02 / Brand Architecture</div>
+    <h1>A brand is not the logo. It is the world the business asks people to enter.</h1>
+    <h2>If the world is unclear, the offer has to shout.</h2>
+  </div>
+  <div class="copy-zone">
+    <div class="cz-rule"></div>
+    <p>We shape the position, language, commercial logic, client journey, and surrounding world so the business feels coherent before it tries to scale.</p>
+  </div>
+</section>
+
+<!-- ============ 03 WORLD-BUILDING — dark navy, baby-blue type ============ -->
+<section id="world" class="page-field navy-field">
+  <div class="headline-zone">
+    <div class="kicker">03 / World-Building</div>
+    <h1>Attention comes faster when the world is clear.</h1>
+    <h2>People do not follow companies. They follow gravity.</h2>
+  </div>
+  <div class="copy-zone">
+    <div class="cz-rule"></div>
+    <p>We help founders build the story, structure, language, rituals, offers, and visual system that make the company feel inevitable instead of assembled.</p>
+  </div>
+</section>
+
+<!-- ============ 04 AI-SHAPED OPERATIONS — baby blue, dark navy type ============ -->
+<section id="ops" class="page-field baby-field">
+  <div class="headline-zone">
+    <div class="kicker">04 / AI-Shaped Operations</div>
+    <h1>AI will not save a business that refuses to change.</h1>
+    <h2>The model is not the miracle. The operating structure is.</h2>
+  </div>
+  <div class="copy-zone">
+    <div class="cz-rule"></div>
+    <p>We use AI to remove drag, sharpen decisions, speed up work, and expose where the company is still pretending the old way is fine.</p>
+  </div>
+</section>
+
+<!-- ============ 05 BUSINESS DEVELOPMENT — white ============ -->
+<section id="bizdev" class="page-field cream-field">
+  <div class="headline-zone">
+    <div class="kicker">05 / Business Development</div>
+    <h1>The future does not reward messy motion.</h1>
+    <h2>Momentum needs somewhere to land.</h2>
+  </div>
+  <div class="copy-zone">
+    <div class="cz-rule"></div>
+    <p>We tighten the offer, clean up the path to revenue, build better partnerships, and create the systems that turn interest into forward motion.</p>
+  </div>
+</section>
+
+<!-- ============ 06 WEEKLY INTELLIGENCE — dark green ============ -->
+<section id="intel" class="page-field green-field">
+  <div class="headline-zone">
+    <div class="kicker">06 / Weekly Intelligence</div>
+    <h1>A weekly briefing for operators who would rather not be surprised later.</h1>
+    <h2>Sharp reads on the systems, tools, risks, and commercial shifts serious companies should be watching.</h2>
+  </div>
+  <div class="copy-zone">
+    <div class="cz-rule"></div>
+    <p>Not AI news for people collecting tabs. Operating intelligence for companies trying to understand what is changing, what matters, and what should be inspected before the drag gets expensive.</p>
+    <form class="signup" id="signupForm">
+      <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+      <button type="submit">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<!-- ============ 07 REVIEW — mint final CTA, comet lands ============ -->
+<section id="review" class="page-field mint-field review-close">
+  <div class="headline-zone">
+    <div class="kicker">07 / Review</div>
+    <h1>Start with what the business is becoming.</h1>
+    <h2>Then build what it needs underneath.</h2>
+  </div>
+  <div class="copy-zone">
+    <p>We look at the brand world, offer, systems, client journey, sales motion, AI opportunities, and the places where the company is not yet shaped for what comes next.</p>
+  </div>
+  <div class="finalline">Build the world the business is becoming.</div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="#hero" class="brand" aria-label="GOUDE group home"><img src="goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      <a href="mailto:info@goudegroup.com">info@goudegroup.com</a><br>
+      © 2026 The Goude Group
+    </div>
+  </div>
+</footer>
+
+<!-- ============ REQUEST PANEL ============ -->
+<div class="scrim" id="scrim" data-close-panel></div>
+<aside class="panel" id="panel" aria-hidden="true">
+  <div class="panel-inner" id="panelInner">
+    <div class="panel-head">
+      <span class="label">Operating Review // Intake</span>
+      <button class="panel-close" data-close-panel aria-label="Close">×</button>
+    </div>
+    <h3>Begin the review.</h3>
+    <p class="psub">The more specific you are, the sharper the read we bring back.</p>
+    <form id="reviewForm">
+      <div class="field-row">
+        <div class="field"><label>Company type</label><input name="ctype" placeholder="e.g. agency, services, ecom" required></div>
+        <div class="field"><label>Team size</label>
+          <select name="tsize" required>
+            <option value="">Select</option><option>1 to 5</option><option>6 to 15</option><option>16 to 50</option><option>51 to 150</option><option>150 plus</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>What is the business becoming</label><input name="becoming" placeholder="Where is it headed next?" required></div>
+      <div class="field"><label>Where it feels unshaped for that</label><textarea name="gap" placeholder="Brand, offer, systems, sales motion, operating structure…"></textarea></div>
+      <div class="field"><label>What you want clearer in 90 days</label><textarea name="goal" placeholder="The outcome that would actually change things"></textarea></div>
+      <div class="field-row">
+        <div class="field"><label>Name</label><input name="name" placeholder="Your name" required></div>
+        <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@company.com" required></div>
+      </div>
+      <button type="submit" class="btn btn-solid submit">Request Operating Review</button>
+      <p class="panel-foot">We come back with the highest-leverage moves: what to reshape, in what order, and what it unlocks.</p>
+    </form>
+  </div>
+</aside>
+
+<script>
+/* ===================== PANEL ===================== */
+const scrim=document.getElementById('scrim'),panel=document.getElementById('panel');
+function openPanel(){scrim.classList.add('open');panel.classList.add('open');panel.setAttribute('aria-hidden','false')}
+function closePanel(){scrim.classList.remove('open');panel.classList.remove('open');panel.setAttribute('aria-hidden','true')}
+document.addEventListener('click',e=>{
+  if(e.target.closest('[data-open-panel]')){e.preventDefault();openPanel();}
+  else if(e.target.closest('[data-close-panel]')){e.preventDefault();closePanel();}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
+
+document.getElementById('reviewForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  document.getElementById('panelInner').innerHTML=`
+    <div class="panel-head"><span class="label">Operating Review // Received</span>
+    <button class="panel-close" data-close-panel aria-label="Close">×</button></div>
+    <div class="panel-success">
+      <h3>The review is underway.</h3>
+      <p>We have your intake. Goude will come back with the highest-leverage moves: what to reshape, in what order, and what it unlocks.</p>
+    </div>`;
+});
+document.getElementById('signupForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  e.target.innerHTML='<p style="font-family:var(--system);font-size:14px;line-height:1.5">On the list. The next briefing comes your way.</p>';
+});
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* ===================== SYSTEM LINE (orange-red lifeline) ===================== */
+/* One continuous line, like a lifeline running through the page. It enters
+   top-left, dips into the hero, arcs up and out to the right, then weaves down
+   through every section and lands in the final CTA. The bright head leads on
+   scroll; the head breathes; and two faint pulses keep travelling the whole
+   line so it feels alive even at rest. */
+(function(){
+  const NS='http://www.w3.org/2000/svg';
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const svg=document.createElementNS(NS,'svg');
+  svg.id='systemLine';
+  svg.setAttribute('aria-hidden','true');
+  svg.innerHTML=
+    '<defs><filter id="haloBlur" x="-300%" y="-300%" width="700%" height="700%">'+
+    '<feGaussianBlur stdDeviation="8"/></filter></defs>'+
+    '<path id="slBase" class="comet-path" fill="none"/>'+
+    '<path id="slDraw" class="comet-trail" fill="none" stroke-linecap="round"/>'+
+    '<g id="slNodes"></g>'+
+    '<g id="slPulses"></g>'+
+    '<circle id="slHalo" r="14" fill="#f0654a" fill-opacity="0.35" filter="url(#haloBlur)"/>'+
+    '<circle id="slComet" class="comet-node" r="4.6" fill="#ff7a52"/>'+
+    '<circle id="slCore" r="1.9" fill="#fff2ea"/>';
+  document.body.appendChild(svg);
+
+  const base=svg.querySelector('#slBase'),
+        draw=svg.querySelector('#slDraw'),
+        nodesG=svg.querySelector('#slNodes'),
+        pulsesG=svg.querySelector('#slPulses'),
+        halo=svg.querySelector('#slHalo'),
+        comet=svg.querySelector('#slComet'),
+        core=svg.querySelector('#slCore');
+
+  /* one slow pulse — a quiet heartbeat travelling the lifeline */
+  const pulses=[];
+  [{speed:0.07,phase:0.0}].forEach(cfg=>{
+    const c=document.createElementNS(NS,'circle');
+    c.setAttribute('class','comet-node');c.setAttribute('r','2.6');
+    c.setAttribute('fill','#ff7a52');c.setAttribute('fill-opacity','0');
+    pulsesG.appendChild(c);
+    pulses.push({el:c,speed:cfg.speed,phase:cfg.phase});
+  });
+
+  let docH=0,total=0,nodes=[];
+  const clamp=(v,a,b)=>v<a?a:v>b?b:v;
+
+  function catmull(p){
+    if(p.length<2) return '';
+    let d='M '+p[0].x.toFixed(1)+' '+p[0].y.toFixed(1);
+    for(let i=0;i<p.length-1;i++){
+      const p0=p[i-1]||p[i], p1=p[i], p2=p[i+1], p3=p[i+2]||p2;
+      const c1x=p1.x+(p2.x-p0.x)/6, c1y=p1.y+(p2.y-p0.y)/6;
+      const c2x=p2.x-(p3.x-p1.x)/6, c2y=p2.y-(p3.y-p1.y)/6;
+      d+=' C '+c1x.toFixed(1)+' '+c1y.toFixed(1)+' '+c2x.toFixed(1)+' '+c2y.toFixed(1)+' '+p2.x.toFixed(1)+' '+p2.y.toFixed(1);
+    }
+    return d;
+  }
+
+  function buildAnchors(){
+    const W=window.innerWidth;
+    const hero=document.getElementById('hero');
+    const H0=hero?hero.getBoundingClientRect().height:window.innerHeight;
+    const pts=[];
+    /* The lifeline is a GUIDE, not a flourish. It stays in the open right side,
+       to the RIGHT of the headline column, and never crosses the big type.
+       Hero: enter top (right of the headline), glide down the right margin,
+       then ease inward to land on the CTA. */
+    pts.push({x:W*0.93, y:-H0*0.06});
+    pts.push({x:W*0.955, y:H0*0.42});
+    pts.push({x:W*0.92, y:H0*0.92});
+    /* Each following section: the guide enters from the right and tracks down
+       through the open right space, clear of the left headlines. */
+    const rest=[...document.querySelectorAll('section')].slice(1);
+    const foot=document.querySelector('footer'); if(foot) rest.push(foot);
+    rest.forEach((sec,i)=>{
+      const r=sec.getBoundingClientRect();
+      const top=r.top+window.scrollY, h=r.height, last=(i===rest.length-1);
+      /* enter high on the right, settle slightly inward at the reading line */
+      pts.push({x:W*0.90, y:top+h*0.24});
+      pts.push({x:W*(last?0.62:0.80), y:top+h*0.66, station:true});
+    });
+    return pts;
+  }
+
+  function nearestLen(px,py){
+    let best=0,bd=Infinity;const N=260;
+    for(let i=0;i<=N;i++){const l=total*i/N;const pt=base.getPointAtLength(l);
+      const dx=pt.x-px,dy=pt.y-py,dd=dx*dx+dy*dy;if(dd<bd){bd=dd;best=l;}}
+    return best;
+  }
+
+  function placeNodes(anchors){
+    nodesG.innerHTML='';nodes=[];
+    anchors.forEach(a=>{
+      if(!a.station) return;
+      const c=document.createElementNS(NS,'circle');
+      c.setAttribute('class','sl-node');
+      c.setAttribute('cx',a.x.toFixed(1));
+      c.setAttribute('cy',a.y.toFixed(1));
+      c.setAttribute('r','2.6');
+      c.setAttribute('fill','#f0654a');
+      c.setAttribute('fill-opacity','0.3');
+      nodesG.appendChild(c);
+      nodes.push({el:c,len:nearestLen(a.x,a.y)});
+    });
+  }
+
+  /* sampled points along the path, so the head can sit at the reader's exact
+     vertical position (tracks from the very top, not by length fraction) */
+  let samples=[];
+  function buildSamples(){
+    samples=[];const N=420;
+    for(let i=0;i<=N;i++){const l=total*i/N;const p=draw.getPointAtLength(l);samples.push({len:l,x:p.x,y:p.y});}
+  }
+  function headAtY(ty){
+    for(let i=0;i<samples.length-1;i++){
+      const a=samples[i],b=samples[i+1];
+      if((a.y<=ty&&b.y>=ty)||(a.y>=ty&&b.y<=ty)){
+        const t=(ty-a.y)/((b.y-a.y)||1);
+        return {len:a.len+(b.len-a.len)*t, x:a.x+(b.x-a.x)*t, y:a.y+(b.y-a.y)*t};
+      }
+    }
+    return ty<=samples[0].y?samples[0]:samples[samples.length-1];
+  }
+
+  function measure(){
+    docH=Math.max(document.documentElement.scrollHeight,document.body.scrollHeight);
+    svg.style.height=docH+'px';
+    const anchors=buildAnchors();
+    const d=catmull(anchors);
+    base.setAttribute('d',d);
+    draw.setAttribute('d',d);
+    total=draw.getTotalLength();
+    draw.style.strokeDasharray=total;
+    buildSamples();
+    placeNodes(anchors);
+  }
+
+  function frame(now){
+    if(!document.hidden && total && samples.length){
+      /* head sits at the reader's eye line and tracks down from the start */
+      const ty=clamp(window.scrollY+window.innerHeight*0.5,0,docH);
+      const h=headAtY(ty);
+      draw.style.strokeDashoffset=(total-h.len);
+      comet.setAttribute('cx',h.x);comet.setAttribute('cy',h.y);
+      core.setAttribute('cx',h.x);core.setAttribute('cy',h.y);
+      halo.setAttribute('cx',h.x);halo.setAttribute('cy',h.y);
+      /* breathing head */
+      if(!reduce){
+        const b=0.5+0.5*Math.sin(now/720);
+        halo.setAttribute('r',(11+5*b).toFixed(1));
+        halo.setAttribute('fill-opacity',(0.2+0.22*b).toFixed(2));
+      }
+      /* stations light as the lifeline reaches them */
+      nodes.forEach(n=>{
+        const on=h.len>=n.len-4;
+        n.el.setAttribute('r',on?'4.2':'2.6');
+        n.el.setAttribute('fill-opacity',on?'1':'0.3');
+      });
+      /* one quiet pulse travelling the line */
+      if(!reduce){
+        const t=((now/1000)*pulses[0].speed)%1;
+        const pp=base.getPointAtLength(total*t);
+        pulses[0].el.setAttribute('cx',pp.x);pulses[0].el.setAttribute('cy',pp.y);
+        const edge=clamp(Math.min(t,1-t)*7,0,1);
+        pulses[0].el.setAttribute('fill-opacity',(0.38*edge).toFixed(2));
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  addEventListener('resize',measure);
+  addEventListener('load',()=>setTimeout(measure,300));
+  if('ResizeObserver' in window) new ResizeObserver(()=>measure()).observe(document.body);
+  measure();
+  setTimeout(measure,500); // after fonts settle
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
