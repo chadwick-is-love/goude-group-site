@@ -87,6 +87,10 @@ nav.scrolled{background:rgba(251,248,241,0.88);backdrop-filter:blur(10px);border
   transition:background .25s ease,color .25s ease;
 }
 .nav-cta:hover{background:var(--dark-navy);color:var(--cream)}
+.nav-actions{display:inline-flex;align-items:center;gap:10px}
+.nav-book{background:var(--dark-navy);color:var(--cream)}
+.nav-book:hover{background:var(--dark-green);border-color:var(--dark-green)}
+@media(max-width:620px){.nav-book{padding:10px 18px}}
 
 /* ---------- BUTTONS ---------- */
 .btn{
@@ -239,38 +243,6 @@ footer{background:var(--dark-green);color:var(--cream);padding:56px 6vw 44px}
 .foot-meta{font-family:var(--system);font-size:13px;letter-spacing:.02em;line-height:1.8;text-align:right;opacity:.92}
 .foot-meta a:hover{color:var(--comet-warm)}
 
-/* ====================================================== */
-/* REQUEST PANEL                                          */
-/* ====================================================== */
-.scrim{position:fixed;inset:0;background:rgba(6,18,12,0.55);backdrop-filter:blur(3px);z-index:80;opacity:0;pointer-events:none;transition:opacity .3s ease}
-.scrim.open{opacity:1;pointer-events:auto}
-.panel{
-  position:fixed;top:0;right:0;bottom:0;width:min(540px,100%);z-index:90;
-  background:var(--cream);color:var(--dark-green);transform:translateX(100%);
-  transition:transform .42s cubic-bezier(.4,0,.1,1);overflow-y:auto;box-shadow:-30px 0 60px rgba(6,18,12,0.25);
-}
-.panel.open{transform:translateX(0)}
-.panel-inner{padding:40px 38px 60px}
-.panel-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
-.panel-close{font-family:var(--system);font-size:22px;line-height:1;width:38px;height:38px;border:1px solid rgba(6,18,12,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:background .2s ease,color .2s ease}
-.panel-close:hover{background:var(--dark-green);color:var(--cream)}
-.panel h3{font-family:var(--display);font-weight:500;font-size:34px;line-height:1.0;margin:14px 0 8px}
-.panel .psub{font-size:15px;line-height:1.55;margin-bottom:26px;max-width:420px}
-.field{margin-bottom:18px}
-.field label{font-family:var(--system);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:7px}
-.field input,.field select,.field textarea{
-  width:100%;font-family:var(--system);font-size:15px;padding:13px 14px;border-radius:3px;
-  background:#fff;border:1px solid rgba(6,18,12,.2);color:var(--dark-green);
-}
-.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--dark-green);box-shadow:0 0 0 3px rgba(246,198,107,0.4)}
-.field textarea{resize:vertical;min-height:74px}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.panel .submit{width:100%;justify-content:center;margin-top:10px}
-.panel-foot{font-family:var(--system);font-size:11.5px;letter-spacing:.02em;line-height:1.65;margin-top:18px;opacity:.7}
-.panel-success{padding:70px 38px;text-align:center}
-.panel-success h3{font-size:30px;margin-bottom:14px}
-.panel-success p{font-size:15px;line-height:1.55}
-
 /* ---------- SYSTEM LINE (orange-red lifeline) ---------- */
 #systemLine{position:absolute;top:0;left:0;width:100%;pointer-events:none;z-index:5;overflow:visible}
 .comet-path{stroke:rgba(240,101,74,0.42);stroke-width:1.2;filter:drop-shadow(0 0 3px rgba(240,101,74,0.25))}
@@ -295,6 +267,14 @@ footer{background:var(--dark-green);color:var(--cream);padding:56px 6vw 44px}
 @media(max-width:760px){
   #systemLine{display:none}
   nav{padding:16px 7vw}
+  /* larger, more legible type on phones (older users) */
+  .copy-zone p{font-size:17px;line-height:1.62}
+  #hero .hero-box p{font-size:15px}
+  .signup input{font-size:17px}
+  .signup button{font-size:14px}
+  .foot-meta{font-size:14px}
+  .label{font-size:12px}
+  .kicker{font-size:12px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -303,7 +283,7 @@ footer{background:var(--dark-green);color:var(--cream);padding:56px 6vw 44px}
 
 <nav id="nav">
   <a href="#hero" class="brand" aria-label="GOUDE group home"><img src="goude-logo.png" alt="GOUDE group" /></a>
-  <button class="nav-cta" data-open-panel>Request Operating Review</button>
+  <a class="nav-cta nav-book" href="https://calendly.com/gabrielle-goudegroup/30min" target="_blank" rel="noopener">Book a Call</a>
 </nav>
 
 <!-- ============ 01 HERO — mint ============ -->
@@ -393,6 +373,7 @@ footer{background:var(--dark-green);color:var(--cream);padding:56px 6vw 44px}
   </div>
   <div class="copy-zone">
     <p>We look at the brand world, offer, systems, client journey, sales motion, AI opportunities, and the places where the company is not yet shaped for what comes next.</p>
+    <div class="cta-row"><a class="btn btn-solid" href="https://calendly.com/gabrielle-goudegroup/30min" target="_blank" rel="noopener">Book a Call</a></div>
   </div>
   <div class="finalline">Build the world the business is becoming.</div>
 </section>
@@ -402,68 +383,30 @@ footer{background:var(--dark-green);color:var(--cream);padding:56px 6vw 44px}
     <a href="#hero" class="brand" aria-label="GOUDE group home"><img src="goude-logo.png" alt="GOUDE group" /></a>
     <div class="foot-meta">
       Brand architecture for the AI-shaped company<br>
-      <a href="mailto:info@goudegroup.com">info@goudegroup.com</a><br>
-      © 2026 The Goude Group
+      <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      © 2026 The Goude Group<br>
+      <a href="/privacy/" style="border-bottom:1px solid rgba(255,255,255,.35)">Privacy Policy</a> &middot; <a href="/terms/" style="border-bottom:1px solid rgba(255,255,255,.35)">Terms of Service</a>
     </div>
   </div>
 </footer>
 
-<!-- ============ REQUEST PANEL ============ -->
-<div class="scrim" id="scrim" data-close-panel></div>
-<aside class="panel" id="panel" aria-hidden="true">
-  <div class="panel-inner" id="panelInner">
-    <div class="panel-head">
-      <span class="label">Operating Review // Intake</span>
-      <button class="panel-close" data-close-panel aria-label="Close">×</button>
-    </div>
-    <h3>Begin the review.</h3>
-    <p class="psub">The more specific you are, the sharper the read we bring back.</p>
-    <form id="reviewForm">
-      <div class="field-row">
-        <div class="field"><label>Company type</label><input name="ctype" placeholder="e.g. agency, services, ecom" required></div>
-        <div class="field"><label>Team size</label>
-          <select name="tsize" required>
-            <option value="">Select</option><option>1 to 5</option><option>6 to 15</option><option>16 to 50</option><option>51 to 150</option><option>150 plus</option>
-          </select>
-        </div>
-      </div>
-      <div class="field"><label>What is the business becoming</label><input name="becoming" placeholder="Where is it headed next?" required></div>
-      <div class="field"><label>Where it feels unshaped for that</label><textarea name="gap" placeholder="Brand, offer, systems, sales motion, operating structure…"></textarea></div>
-      <div class="field"><label>What you want clearer in 90 days</label><textarea name="goal" placeholder="The outcome that would actually change things"></textarea></div>
-      <div class="field-row">
-        <div class="field"><label>Name</label><input name="name" placeholder="Your name" required></div>
-        <div class="field"><label>Email</label><input name="email" type="email" placeholder="you@company.com" required></div>
-      </div>
-      <button type="submit" class="btn btn-solid submit">Request Operating Review</button>
-      <p class="panel-foot">We come back with the highest-leverage moves: what to reshape, in what order, and what it unlocks.</p>
-    </form>
-  </div>
-</aside>
-
 <script>
-/* ===================== PANEL ===================== */
-const scrim=document.getElementById('scrim'),panel=document.getElementById('panel');
-function openPanel(){scrim.classList.add('open');panel.classList.add('open');panel.setAttribute('aria-hidden','false')}
-function closePanel(){scrim.classList.remove('open');panel.classList.remove('open');panel.setAttribute('aria-hidden','true')}
-document.addEventListener('click',e=>{
-  if(e.target.closest('[data-open-panel]')){e.preventDefault();openPanel();}
-  else if(e.target.closest('[data-close-panel]')){e.preventDefault();closePanel();}
-});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel();});
-
-document.getElementById('reviewForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  document.getElementById('panelInner').innerHTML=`
-    <div class="panel-head"><span class="label">Operating Review // Received</span>
-    <button class="panel-close" data-close-panel aria-label="Close">×</button></div>
-    <div class="panel-success">
-      <h3>The review is underway.</h3>
-      <p>We have your intake. Goude will come back with the highest-leverage moves: what to reshape, in what order, and what it unlocks.</p>
-    </div>`;
-});
+// Newsletter capture. Same Formspree form as the operating-index digest. Swap this one URL for the GHL
+// inbound webhook when GHL is ready; nothing else changes.
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
 document.getElementById('signupForm').addEventListener('submit',e=>{
   e.preventDefault();
-  e.target.innerHTML='<p style="font-family:var(--system);font-size:14px;line-height:1.5">On the list. The next briefing comes your way.</p>';
+  const form=e.target;
+  const email=form.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  const btn=form.querySelector('button'); if(btn){ btn.disabled=true; btn.textContent='Adding you…'; }
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Homepage Weekly Intelligence'})
+  }).catch(()=>{}).finally(()=>{
+    form.innerHTML='<p style="font-family:var(--system);font-size:14px;line-height:1.5">On the list. The next briefing comes your way.</p>';
+  });
 });
 
 /* nav scroll state */
@@ -648,5 +591,8 @@ addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passi
   requestAnimationFrame(frame);
 })();
 </script>
+
+<!-- LeadConnector (GoHighLevel) chat widget -->
+<script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a592d14d1e06722f8b43b19"></script>
 </body>
 </html>
