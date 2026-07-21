@@ -81,11 +81,12 @@ header.masthead{
 .masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
 .masthead .kicker{margin-bottom:30px}
 .masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
 .mast-row{
   display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
   margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
 }
-.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
 .standfirst{max-width:452px}
 .standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
 .standfirst p + p{margin-top:13px}
@@ -272,15 +273,15 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
 <header class="masthead">
   <div class="masthead-inner">
     <div class="kicker">Goude Group · Weekly Intelligence</div>
-    <h1>The Briefing.</h1>
+    <h1>The Brie<span class="kern-fi">f</span>ing.</h1>
     <div class="mast-row">
-      <div class="mast-meta">
-        No. 001<br>
-        July 21, 2026
-      </div>
       <div class="standfirst">
         <p>Five things moved. Each one changes a decision you are already making: what you pay, what you delegate, what you sign, what you protect.</p>
         <p>Read the whole thing in three minutes. Where it touches your business, there is a tool that does the work for you on the spot. We talk about the market here, not about ourselves.</p>
+      </div>
+      <div class="mast-meta">
+        No. 001<br>
+        July 21, 2026
       </div>
     </div>
     <div class="mast-rule"></div>
