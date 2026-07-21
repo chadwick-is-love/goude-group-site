@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Briefing, No. 001: Goude Group Weekly Intelligence</title>
+<meta name="description" content="Five things that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
+<link rel="icon" type="image/png" href="../favicon.png" />
+<link rel="apple-touch-icon" href="../favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/" />
+<meta property="og:title" content="The Briefing, No. 001: Goude Group Weekly Intelligence" />
+<meta property="og:description" content="Five things that moved, what they change, what not to do. Each one comes with a tool you can use right now." />
+<meta property="og:image" content="https://goudegroup.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:48px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* go deeper */
+.deep-toggle{
+  margin-top:38px;display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE INSTRUMENT (dark navy console, mint accents) ---------- */
+.tool{background:var(--navy);color:var(--mint);border-radius:4px;padding:26px 26px 24px;box-shadow:0 24px 60px -34px rgba(6,22,43,.7)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--mint);opacity:.72;display:block;margin-bottom:11px}
+.tool .tname{font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:#fff}
+.tool .tsub{font-size:12.5px;line-height:1.5;color:rgba(216,247,201,.78);margin-top:9px}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:13px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(216,247,201,.72);display:block;margin-bottom:6px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:rgba(251,248,241,.06);border:1px solid rgba(216,247,201,.28);border-radius:3px;
+  color:#fff;font-size:14px;padding:11px 12px;transition:border-color .2s ease,background .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;border-color:var(--mint);background:rgba(251,248,241,.1)}
+.tool input::placeholder,.tool textarea::placeholder{color:rgba(216,247,201,.4)}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23d8f7c9' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:16px;background:var(--mint);color:var(--navy);border-radius:3px;padding:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;transition:background .2s ease,transform .15s ease;
+}
+.tool .tbtn:hover{background:#fff;transform:translateY(-1px)}
+.tool .tbtn.ghost{background:transparent;border:1px solid rgba(216,247,201,.4);color:var(--mint);margin-top:9px}
+.tool .tbtn.ghost:hover{background:rgba(216,247,201,.1);transform:none}
+/* live readout */
+.tool .readout{margin-top:20px;padding-top:18px;border-top:1px solid rgba(216,247,201,.22)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:#fff}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:rgba(216,247,201,.82);margin-top:10px}
+.tool .readout .cap b{color:var(--mint);font-weight:600}
+.tool .out{margin-top:18px;background:rgba(251,248,241,.06);border:1px solid rgba(216,247,201,.22);border-radius:3px;padding:14px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:rgba(255,255,255,.94);max-height:230px;overflow:auto;display:none}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:16px;padding-top:15px;border-top:1px solid rgba(216,247,201,.22);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:3px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:rgba(216,247,201,.55);margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--mint);margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  header.masthead{min-height:74vh;padding-top:122px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="../goude-logo.png" alt="GOUDE group" /></a>
+  <span class="nav-tag">Weekly Intelligence · No. 001</span>
+</nav>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="kicker">Goude Group · Weekly Intelligence</div>
+    <h1>The Briefing.</h1>
+    <div class="mast-row">
+      <div class="mast-meta">
+        No. 001<br>
+        July 21, 2026
+      </div>
+      <div class="standfirst">
+        <p>Five things moved. Each one changes a decision you are already making: what you pay, what you delegate, what you sign, what you protect.</p>
+        <p>Read the whole thing in three minutes. Where it touches your business, there is a tool that does the work for you on the spot. We talk about the market here, not about ourselves.</p>
+      </div>
+    </div>
+    <div class="mast-rule"></div>
+  </div>
+</header>
+
+<div class="readkey">
+  <div class="readkey-inner">
+    <span><b>Headline · 5 seconds</b></span>
+    <span><b>The brief · under a minute</b></span>
+    <span><b>Go deeper · the read, plus a working tool</b></span>
+  </div>
+</div>
+
+<section class="contents">
+  <div class="contents-inner">
+    <span class="label">In this issue</span>
+    <div class="toc">
+      <a href="#t1"><span class="n">01</span><span class="t">Intelligence got repriced in thirty days. Most AI bills did not.</span><span class="go">Models and money</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">The biggest AI job is now paperwork, not code.</span><span class="go">The back office</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">Voice AI stopped sounding like software. Missed calls are now a choice.</span><span class="go">The phone line</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">The per-seat license is dying. The billable hour is next.</span><span class="go">Pricing power</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">Two people studied your AI exposure this year: your insurer and your fraudster.</span><span class="go">Risk</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 MODELS AND MONEY ============ -->
+<section class="topic" id="t1">
+  <div class="topic-inner">
+    <div class="kicker"><span>01 / Models and Money</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>Intelligence got repriced in thirty days. Most AI bills did not.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Between June 9 and July 9, all three frontier labs shipped new model generations. OpenAI's GPT-5.6 arrived in three tiers, the cheapest at one dollar per million input tokens. Anthropic's Sonnet 5 launched near the bottom of the market while matching much of what flagships did in spring. July's budget tier beats January's flagship on most business work.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Every AI workflow quoted, piloted, or contracted before June is now mispriced. Support, document processing, research, drafting: the unit economics moved by multiples, not percentages. A vendor quote from Q1 is built on costs that no longer exist.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not sign an annual AI contract priced against last quarter's models. Do not compare per-token prices without token efficiency: a cheaper model that burns twice the tokens per task is not cheaper.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jun 9</span><span>Anthropic ships Fable 5 at $10 in, $50 out per million tokens: the first public model in a tier above its flagship line.</span></div>
+            <div class="tape-row"><span class="d">Jun 30</span><span>Claude Sonnet 5 launches at $2 in, $10 out through August 31, then $3 and $15. Near-flagship capability at a mid-market price.</span></div>
+            <div class="tape-row"><span class="d">Jul 9</span><span>OpenAI's GPT-5.6 lands in three tiers: Sol at $5 and $30, Terra at $2.50 and $15, Luna at $1 and $6. OpenAI claims 54% better token efficiency on multi-step work. Vendor number: treat as directional.</span></div>
+            <div class="tape-row"><span class="d">Cycle</span><span>Google's line moved to Gemini 3.1 Pro. All three labs are now a generation past January.</span></div>
+          </div>
+          <h3>What this actually means</h3>
+          <p>The price of good-enough intelligence fell to commodity levels while the ceiling rose. That splits every AI budget into two problems: route the routine work to the cheapest tier that passes, and reserve premium models for the work that deserves them. Companies still paying flagship prices for budget-tier tasks are funding the gap out of margin.</p>
+          <p>This also explains the failure statistics everyone quotes. S&amp;P Global found 42% of companies abandoned most of their AI initiatives in 2025, roughly double the year before. The failure is rarely the model. It is the absence of a baseline: nobody measured cost per completed task before or after, so nobody noticed when the economics moved.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Pull the last 90 days of AI spend: every vendor, every direct API line, mapped to the workflow it serves.</li>
+            <li>Re-benchmark your three biggest workflows on one budget tier and one mid tier. Score pass or fail against your definition of done. Price it per completed task, never per token.</li>
+            <li>Re-bid anything quoted before June. One question does the work: which model tier runs our workload, and what happens to our price when that tier gets cheaper.</li>
+            <li>Put a quarterly pricing review in every AI contract, tied to underlying model cost.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.anthropic.com/news/claude-sonnet-5" target="_blank" rel="noopener">Anthropic: Sonnet 5</a> · <a href="https://techcrunch.com/2026/07/09/openai-launches-its-new-family-of-models-with-gpt-5-6/" target="_blank" rel="noopener">TechCrunch: GPT-5.6</a> · <a href="https://www.anthropic.com/news/claude-fable-5-mythos-5" target="_blank" rel="noopener">Anthropic: Fable 5</a> · <a href="https://www.pertamapartners.com/insights/ai-project-failure-statistics-2026" target="_blank" rel="noopener">S&amp;P Global abandonment data</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The failure is rarely the model. It is the absence of a baseline.</p></div>
+          <div class="tool" data-tool="reprice">
+            <span class="tlabel">The instrument · live</span>
+            <span class="tname">The Re-Price Check</span>
+            <span class="tsub">Your current AI spend, at today's prices instead of last quarter's.</span>
+            <div class="fieldset">
+              <div>
+                <label class="fl" for="rp-spend">Current AI spend, per month ($)</label>
+                <input id="rp-spend" type="number" inputmode="numeric" min="0" placeholder="e.g. 4000" data-live="reprice" />
+              </div>
+              <div>
+                <label class="fl" for="rp-tier">The tier most of that work runs on</label>
+                <select id="rp-tier" data-live="reprice">
+                  <option value="flagship">Flagship / premium models</option>
+                  <option value="mid">Mid tier</option>
+                  <option value="budget">Budget tier already</option>
+                </select>
+              </div>
+            </div>
+            <div class="readout" id="rp-readout" style="display:none">
+              <div class="big" id="rp-big">$0</div>
+              <div class="cap" id="rp-cap"></div>
+            </div>
+            <div class="emailcap" data-emailcap="reprice">
+              <div class="er"><input type="email" placeholder="Email this to me" aria-label="Email" /><button type="button" data-send="reprice">Send</button></div>
+              <div class="microcopy">One email. The number, and the four moves to act on it. No list you have to escape.</div>
+              <div class="done" data-done="reprice">Sent. Check your inbox.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 THE BACK OFFICE ============ -->
+<section class="topic" id="t2">
+  <div class="topic-inner">
+    <div class="kicker"><span>02 / The Back Office</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>The biggest AI job is now paperwork, not code.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Anthropic published usage data from 1.2 million sessions across 600,000 organizations. A third of the work is business operations: reports, checklists, reconciliations, spreadsheets. Software development is 8.7%. In July, both major labs put deliverable-producing assistants on ordinary subscriptions.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The unit of AI work moved from the answer to the deliverable. Recurring reports, reconciliations, and first drafts can be handed over with files attached and a definition of done: a subscription feature now, not a custom build. Non-technical staff are shipping internal tools too. Lovable reports a million new projects a week.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not run these like chatbots, typing questions at a tool built to finish work. Do not point one at the whole shared drive: scope what it reads and writes first. And do not measure adoption in logins. Measure completed units of work and error rate.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>Delegation, not conversation</h3>
+          <p>The quiet shift of 2026 is that the leading AI products stopped being places you type and became staff you brief. The working pattern is the same one you use with a good hire: here is the task, here are the files, here is what done looks like, here is what you may touch. Companies getting value write that down. Companies getting demos do not.</p>
+          <p>The usage data makes the point. Out of 1.2 million anonymized sessions, business process operations took 33.4%, content and copy 16.4%, and software development, the use case everyone assumed was the whole story, 8.7%. Your competitors' back offices are already doing this quietly.</p>
+          <h3>Where to start</h3>
+          <p>The right first candidates share three traits: recurring, file-based, and low blast radius. The weekly ops report. Month-end reconciliation against invoices. Proposal first drafts. Meeting notes to action lists. Wrong first candidates: anything customer-facing, anything touching payments, anything you cannot check in minutes.</p>
+          <p>The internal-tools lane deserves the same discipline. Lovable hit $500 million in annualized revenue in June, mostly from non-technical users building CRMs, inventory systems, and HR tools in plain English. The rule that keeps it useful: internal and low-stakes first, and a professional security review before anything holds customer data or money.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>List the deliverables your team produces on a schedule.</li>
+            <li>Pick the ones that are recurring, file-based, and safe to get wrong once.</li>
+            <li>Write a delegation brief for each: task, files, definition of done, permissions, reviewer. The tool on the right builds it.</li>
+            <li>Run two weeks with a human reviewing every output. Keep what passes. Kill what does not.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://techcrunch.com/2026/07/07/the-coding-agent-wars-are-spilling-into-the-rest-of-the-office-claude-cowork/" target="_blank" rel="noopener">TechCrunch: Cowork expansion + usage data</a> · <a href="https://techcrunch.com/2026/06/09/lovable-says-it-has-hit-500m-in-annualized-revenue-with-1-million-new-projects-a-week/" target="_blank" rel="noopener">TechCrunch: Lovable</a> · <a href="https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/" target="_blank" rel="noopener">Fortune: MIT pilot study</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The leading AI products stopped being places you type and became staff you brief.</p></div>
+          <div class="tool" data-tool="delegation">
+            <span class="tlabel">The instrument · builds it for you</span>
+            <span class="tname">The Delegation Brief</span>
+            <span class="tsub">Fill the five lines. It writes the brief you paste in when you hand the work over.</span>
+            <div class="fieldset">
+              <div><label class="fl" for="dg-task">The task, in one sentence</label><input id="dg-task" type="text" placeholder="Build the weekly ops report from these files" /></div>
+              <div><label class="fl" for="dg-files">The files</label><input id="dg-files" type="text" placeholder="Where the inputs live, exactly" /></div>
+              <div><label class="fl" for="dg-done">Definition of done</label><textarea id="dg-done" placeholder="What the finished thing contains, in what format"></textarea></div>
+              <div><label class="fl" for="dg-perm">May touch / must not touch</label><input id="dg-perm" type="text" placeholder="May read X. May write Y. Never Z." /></div>
+              <div><label class="fl" for="dg-rev">The reviewer</label><input id="dg-rev" type="text" placeholder="Who checks every output before it ships" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="delegation">Build the brief</button>
+            <div class="out" id="dg-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="dg-out" style="display:none" id="dg-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 THE PHONE LINE ============ -->
+<section class="topic" id="t3">
+  <div class="topic-inner">
+    <div class="kicker"><span>03 / The Phone Line</span><span class="rt">Brief · 40 sec</span></div>
+    <h2>Voice AI stopped sounding like software. Missed calls are now a choice.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>OpenAI shipped GPT-Live on July 8: a voice model that listens while it talks, takes interruptions, and hands hard questions to a bigger model mid-call. Sierra raised $950 million at a $15 billion valuation in May, with over 40% of the Fortune 50 as customers and published deployments live in five to ten weeks. Vendor numbers, but named customers.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Deployment moved from quarters to weeks, and the awkward turn-taking pause, the thing that made callers hang up, is gone. The same capability sells at mid-market prices. After-hours calls, bookings, order status, tier-one questions: every call you miss is now a decision, not a limitation.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not pilot on your hardest calls. Angry escalations will fail first and poison the project. Route the status checks and bookings, with a clean handoff to a human. And say it is AI. Callers and regulators both punish the alternative.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>Why this week is different</h3>
+          <p>Voice AI has been promised for a decade, and for most of it the tell was the pause: the half-second of silence while the machine waited for you to finish. Full-duplex models remove it. They listen and speak at the same time, acknowledge while you talk, and recover when you interrupt. That is the difference between a caller finishing the call and a caller asking for a person.</p>
+          <p>The enterprise evidence says the operational bar has been cleared at companies with far more brutal call volumes than yours. Resolution rates are now quoted like service-level metrics, and a five-to-ten week deployment at Fortune 50 scale means a focused mid-market rollout is a quarter's project, not a transformation program.</p>
+          <h3>The math worth doing first</h3>
+          <p>Before any vendor call, price your missed calls. That is what the tool on the right does. Then sort a month of answered calls into buckets: status checks, bookings, simple questions, account changes, everything else. The first two buckets are the pilot. The last bucket never is.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Price your missed calls. The number usually funds the project several times over.</li>
+            <li>Sort 30 days of calls into buckets. Automate the two most routine only.</li>
+            <li>Write the handoff rules by name: frustration, exceptions, anything above a dollar threshold goes to a person, with context carried over.</li>
+            <li>Disclose at the top of the call. Review weekly against baseline. Expand bucket by bucket, only on evidence.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://openai.com/index/introducing-gpt-live/" target="_blank" rel="noopener">OpenAI: GPT-Live</a> · <a href="https://www.cmswire.com/customer-experience/sierra-raises-950m-at-15b-valuation-eyes-transformation-beyond-customer-support/" target="_blank" rel="noopener">CMSWire: Sierra raise + deployments</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>This is the first AI capability your customers can hear.</p></div>
+          <div class="tool" data-tool="missed">
+            <span class="tlabel">The instrument · live</span>
+            <span class="tname">The Missed-Call Cost</span>
+            <span class="tsub">What silence on the line is costing you. It updates as you type.</span>
+            <div class="fieldset">
+              <div><label class="fl" for="mc-calls">Missed + after-hours calls per month</label><input id="mc-calls" type="number" inputmode="numeric" min="0" placeholder="e.g. 120" data-live="missed" /></div>
+              <div class="row2">
+                <div><label class="fl" for="mc-close">Close rate (%)</label><input id="mc-close" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 25" data-live="missed" /></div>
+                <div><label class="fl" for="mc-val">Avg value ($)</label><input id="mc-val" type="number" inputmode="numeric" min="0" placeholder="e.g. 800" data-live="missed" /></div>
+              </div>
+            </div>
+            <div class="readout" id="mc-readout" style="display:none">
+              <div class="big" id="mc-big">$0</div>
+              <div class="cap" id="mc-cap"></div>
+            </div>
+            <div class="emailcap" data-emailcap="missed">
+              <div class="er"><input type="email" placeholder="Email this to me" aria-label="Email" /><button type="button" data-send="missed">Send</button></div>
+              <div class="microcopy">The number, plus the call-sorting buckets to act on it. One email.</div>
+              <div class="done" data-done="missed">Sent. Check your inbox.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 PRICING POWER ============ -->
+<section class="topic" id="t4">
+  <div class="topic-inner">
+    <div class="kicker"><span>04 / Pricing Power</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>The per-seat license is dying. The billable hour is next.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Salesforce agreed on June 15 to buy Fin, formerly Intercom, for about $3.6 billion, and now sells support by the resolved ticket. Its AI line hit $1.2 billion in annual recurring revenue, up 205%, billed by completed units of work. The Wall Street Journal reports roughly a quarter of McKinsey's fees are now tied to outcomes.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Both sides of your ledger. As a buyer, your renewals will arrive with usage or outcome components: the paperwork decides whether that cuts idle-seat cost or blows the budget. As an owner, AI-native competitors are entering services with structurally lower cost bases, and the same funds are the likeliest acquirers.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not sign an outcome-priced contract without a written definition of the billable event, a monthly cap, and your own baseline volumes. Do not renew a multi-year, hours-billed retainer at legacy rates this year: that locks in the pre-AI cost structure right as it deflates.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The market is mid-transition, which means everything is negotiable</h3>
+          <p>Salesforce currently runs four pricing models at once: per seat, credits, per conversation, per resolution. A market that has not settled its own billing unit is a market where a prepared buyer sets terms. The practitioners closest to these deals give the same warning: "resolution" is a contested metric. What counts as resolved gets defined in the contract or it gets defined in the dispute.</p>
+          <h3>The services side is the bigger story</h3>
+          <p>The rollup thesis is blunt: buy firms running at 5 to 10% operating margins, automate 30 to 70% of the workflows, and run them at 30 to 40%. General Catalyst has put about $1.5 billion into buying property managers, contact centers, and accountants to do exactly this. If you buy services, incumbent cost bases just became negotiable. If you own a services firm, the choice is to capture the margin yourself or compete against someone who did.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>List every renewal in the next 12 months. Flag anything per-seat or hours-billed.</li>
+            <li>Before each one, measure your baseline volumes for a month. You cannot cap what you have not counted.</li>
+            <li>Demand three clauses in any outcome-priced deal: the billable event defined in writing, a monthly cap, audit rights on the meter.</li>
+            <li>Re-bid one hours-billed retainer this quarter against an outcome-priced alternative. The tool on the right writes the note.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.salesforce.com/news/press-releases/2026/06/15/salesforce-signs-definitive-agreement-to-acquire-fin/" target="_blank" rel="noopener">Salesforce: Fin acquisition</a> · <a href="https://www.salesforce.com/news/press-releases/2026/05/27/fy27-q1-earnings/" target="_blank" rel="noopener">Salesforce: Q1 FY27 earnings</a> · <a href="https://www.cnbc.com/2026/06/08/silicon-valleys-new-buyout-playbook-is-hitting-wall-street.html" target="_blank" rel="noopener">CNBC: the services rollup wave</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>What counts as resolved gets defined in the contract or it gets defined in the dispute.</p></div>
+          <div class="tool" data-tool="renewal">
+            <span class="tlabel">The instrument · writes the note</span>
+            <span class="tname">The Re-Bid Note</span>
+            <span class="tsub">Name the vendor and your volume. It writes the email that reopens the price, with the three clauses attached.</span>
+            <div class="fieldset">
+              <div><label class="fl" for="rn-vendor">Vendor or firm</label><input id="rn-vendor" type="text" placeholder="e.g. the support platform, the agency" /></div>
+              <div><label class="fl" for="rn-vol">Your monthly volume (what the meter would count)</label><input id="rn-vol" type="text" placeholder="e.g. 2,400 tickets / 60 hours" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="renewal">Write the note</button>
+            <div class="out" id="rn-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="rn-out" style="display:none" id="rn-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 RISK ============ -->
+<section class="topic" id="t5">
+  <div class="topic-inner">
+    <div class="kicker"><span>05 / Risk</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>Two people studied your AI exposure this year: your insurer and your fraudster.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>The insurance industry's standards body drafted three endorsements that strip generative-AI claims out of ordinary liability policies, and at least one major carrier sells an absolute AI exclusion on directors-and-officers coverage. Meanwhile Deloitte projects $40 billion in US fraud losses from synthetic media by 2027. The benchmark case: Arup wired $25.6 million after a video call where every other participant was generated.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Risk is being transferred to you quietly, at renewal, in endorsements nobody reads. And your finance team is the soft target: your executives' voices are on podcasts, your controller can move six figures alone, and crime policies often exclude wires you authorized, which is exactly what a deepfake makes you do.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not rubber-stamp this year's renewal. Do not let any payment or banking-detail change above a set threshold move on the strength of a call, video, or message alone. Ferrari's near miss is the lesson: one personal verification question, zero dollars lost.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The exclusions are already circulating</h3>
+          <p>The forms have numbers: CG 40 47, CG 40 48, and CG 35 08 exclude generative-AI claims from general liability, advertising injury, and completed operations. W. R. Berkley's absolute exclusion goes further, reaching claims arising out of AI use and AI-related disclosures, which can include what your investor deck says about your AI strategy. The same market is happy to sell the risk back as a specialty line. That is not a conspiracy. It is a repricing, and it only hurts the companies that do not read it.</p>
+          <h3>The fraud numbers are operational, not theoretical</h3>
+          <p>In one large survey, 85% of organizations saw at least one deepfake incident inside twelve months; of those that lost money, most lost over $100,000. The targets are not naive people. The Arup employee was on a video call with what looked and sounded like the CFO and colleagues. The defense that works costs nothing: it is procedure, not technology.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Ask your broker, in writing, whether any policy carries an AI exclusion by form number. The tool on the right writes that letter.</li>
+            <li>If yes, negotiate a carve-back or price specialty coverage against actual exposure.</li>
+            <li>Set the hard rule: no payment or banking change above your threshold moves on a call, video, or message alone. Callback to a number on file, plus a second approver.</li>
+            <li>Set a verification passphrase with your executives. The Ferrari move. Ten minutes to implement.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.claimsjournal.com/news/national/2026/07/20/338950.htm" target="_blank" rel="noopener">Claims Journal: AI exclusions</a> · <a href="https://natlawreview.com/article/continued-proliferation-ai-exclusions" target="_blank" rel="noopener">National Law Review: exclusion forms</a> · <a href="https://www.brightdefense.com/resources/deepfake-statistics/" target="_blank" rel="noopener">Deepfake loss data (Deloitte, IRONSCALES, Entrust)</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The defense that works costs nothing: it is procedure, not technology.</p></div>
+          <div class="tool" data-tool="defense">
+            <span class="tlabel">The instrument · writes both</span>
+            <span class="tname">The Two-Line Defense</span>
+            <span class="tsub">Your company and your threshold. It writes the broker letter and the payment rule, ready to send.</span>
+            <div class="fieldset">
+              <div><label class="fl" for="df-co">Company name</label><input id="df-co" type="text" placeholder="Your company" /></div>
+              <div><label class="fl" for="df-thr">Payment threshold ($) above which the rule kicks in</label><input id="df-thr" type="number" inputmode="numeric" min="0" placeholder="e.g. 10000" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="defense">Write both</button>
+            <div class="out" id="df-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="df-out" style="display:none" id="df-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>The market will not wait for your comfort level.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a tool for each. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="../goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      © 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, sends */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-send]');
+  if(!t) return;
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ navigator.clipboard&&navigator.clipboard.writeText(box.textContent);
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }
+    return;
+  }
+  if(t.dataset.send){ sendEmail(t.dataset.send,t); return; }
+});
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='reprice') calcReprice();
+  if(el.dataset.live==='missed') calcMissed();
+});
+
+function calcReprice(){
+  const spend=parseFloat($('#rp-spend').value)||0;
+  const tier=$('#rp-tier').value;
+  const ro=$('#rp-readout');
+  if(!spend){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  // directional: moving one tier down on work that qualifies
+  const factor=tier==='flagship'?0.42:tier==='mid'?0.5:1;
+  if(tier==='budget'){
+    $('#rp-big').textContent=money(spend*12)+'/yr';
+    $('#rp-cap').innerHTML='You are already on the budget tier. The move now is <b>token efficiency</b>: the same task on a newer model can cost less even at the same sticker price. Re-benchmark before you renew.';
+    return;
+  }
+  const newMonthly=spend*factor;
+  const saved=(spend-newMonthly)*12;
+  $('#rp-big').textContent=money(saved)+'/yr';
+  $('#rp-cap').innerHTML='Routing the work that qualifies to the tier below runs about <b>'+money(newMonthly)+'/mo</b> instead of '+money(spend)+'. That is roughly <b>'+money(saved)+' a year</b> back. A directional estimate, not a quote: the real number comes from benchmarking your three biggest workflows per completed task.';
+}
+
+function calcMissed(){
+  const calls=parseFloat($('#mc-calls').value)||0;
+  const close=(parseFloat($('#mc-close').value)||0)/100;
+  const val=parseFloat($('#mc-val').value)||0;
+  const ro=$('#mc-readout');
+  if(!calls||!close||!val){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const perMonth=calls*close*val;
+  $('#mc-big').textContent=money(perMonth*12)+'/yr';
+  $('#mc-cap').innerHTML='Missed calls are costing about <b>'+money(perMonth)+' a month</b>, or <b>'+money(perMonth*12)+' a year</b>. For most service businesses that funds the whole project several times over. If it does not, you do not have this problem yet.';
+}
+
+/* generators */
+function build(kind){
+  if(kind==='delegation'){
+    const v=id=>($('#'+id).value||'').trim();
+    const out=
+'DELEGATION BRIEF\n'+
+'\nTask: '+(v('dg-task')||'[one sentence]')+
+'\nFiles: '+(v('dg-files')||'[where the inputs live]')+
+'\nDefinition of done: '+(v('dg-done')||'[what the finished thing contains]')+
+'\nMay touch / must not touch: '+(v('dg-perm')||'[read X, write Y, never Z]')+
+'\nReviewer: '+(v('dg-rev')||'[who checks every output]')+
+'\n\nRun for two weeks with the reviewer checking every output before it ships. Score completed units and error rate against what the work cost before. Keep what passes.';
+    show('dg-out','dg-copy',out); return;
+  }
+  if(kind==='renewal'){
+    const vendor=($('#rn-vendor').value||'your team').trim();
+    const vol=($('#rn-vol').value||'[our monthly volume]').trim();
+    const out=
+'To: '+vendor+'\nSubject: Before we renew\n\n'+
+'Before we renew, we would like a proposal priced on outcomes rather than seats or hours. We are asking the same of others.\n\n'+
+'Our baseline volume is roughly '+vol+' per month, so we can measure this properly. If you propose an outcome or usage price, we will need three things in writing:\n\n'+
+'  1. The billable event, defined exactly. What counts, and what does not.\n'+
+'  2. A monthly cap.\n'+
+'  3. Audit rights on the meter: we can see the count, challenge it, and export the log.\n\n'+
+'What would you propose, and how would we both measure it?';
+    show('rn-out','rn-copy',out); return;
+  }
+  if(kind==='defense'){
+    const co=($('#df-co').value||'[Company]').trim();
+    const thrRaw=parseFloat($('#df-thr').value);
+    const thr=thrRaw?money(thrRaw):'[threshold]';
+    const out=
+'LINE ONE: THE BROKER LETTER\n\n'+
+'To our broker,\n\n'+
+'On behalf of '+co+': do any of our policies carry an AI exclusion endorsement, by form number, on general liability, D&O, E&O, or cyber? Specifically ISO CG 40 47, CG 40 48, CG 35 08, the W. R. Berkley absolute AI exclusion, or any carrier equivalent. Separately, what is our social-engineering fraud sub-limit, and does our crime policy exclude authorized transfers? Please answer in writing.\n\n'+
+'--------------------------------------------\n\n'+
+'LINE TWO: THE PAYMENT RULE ('+co+')\n\n'+
+'No payment or banking-detail change above '+thr+' moves on the strength of a call, video call, or message alone. Above that threshold:\n\n'+
+'  1. Mandatory callback to a number already on file. Never a number from the request itself.\n'+
+'  2. A second approver, every time.\n'+
+'  3. A verification passphrase with executives and their assistants: a question a clone cannot answer.\n\n'+
+'Urgency is the tell. Any request engineered to skip this is treated as an attack until verified.';
+    show('df-out','df-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* email-me capture (doubles as a quiet lead signal) */
+function sendEmail(kind,btn){
+  const cap=document.querySelector('[data-emailcap="'+kind+'"]');
+  const email=cap.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  let result='';
+  if(kind==='reprice') result=$('#rp-big').textContent+': '+$('#rp-cap').textContent;
+  if(kind==='missed') result=$('#mc-big').textContent+': '+$('#mc-cap').textContent;
+  btn.disabled=true; btn.textContent='...';
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 001 tool: '+kind,result:result})
+  }).catch(()=>{}).finally(()=>{
+    cap.querySelector('.er').style.display='none';
+    cap.querySelector('.microcopy').style.display='none';
+    document.querySelector('[data-done="'+kind+'"]').classList.add('show');
+  });
+}
+
+/* newsletter */
+document.getElementById('signupForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const form=e.target;
+  const email=form.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 001'})
+  }).catch(()=>{}).finally(()=>{
+    form.innerHTML='<p style="font-size:14px;line-height:1.5">On the list. No. 002 comes your way next week.</p>';
+  });
+});
+</script>
+</body>
+</html>
