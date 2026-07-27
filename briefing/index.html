@@ -12,7 +12,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Briefing, No. 002: Goude Group Weekly Intelligence</title>
-<meta name="description" content="Five things that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
+<meta name="description" content="Five AI developments that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
 <link rel="icon" type="image/png" href="../favicon.png" />
 <link rel="apple-touch-icon" href="../favicon.png" />
 <meta property="og:type" content="article" />
@@ -276,7 +276,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
     <h1>The Brie<span class="kern-fi">f</span>ing.</h1>
     <div class="mast-row">
       <div class="standfirst">
-        <p>Five things moved. Each one changes a decision you are already making: what you pay, what you delegate, what you sign, what you protect.</p>
+        <p>Five things moved. Each one changes a decision you are already making: what your software is allowed to do, what you pay for it, what you disclose, what you sign.</p>
         <p>Read the whole thing in three minutes. Where it touches your business, there is a tool that does the work for you on the spot. We talk about the market here, not about ourselves.</p>
       </div>
       <div class="mast-meta">
@@ -300,32 +300,32 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   <div class="contents-inner">
     <span class="label">In this issue</span>
     <div class="toc">
-      <a href="#t1"><span class="n">01</span><span class="t">The Fed's next move is a hike. Most owners are still waiting for a cut.</span><span class="go">Rates and lending</span></a>
-      <a href="#t2"><span class="n">02</span><span class="t">Washington is refunding $166 billion in tariffs. Half is still unclaimed.</span><span class="go">Tariff money</span></a>
-      <a href="#t3"><span class="n">03</span><span class="t">Insurance got cheaper everywhere except where you get sued.</span><span class="go">Insurance</span></a>
-      <a href="#t4"><span class="n">04</span><span class="t">Layoffs just hit a 57-year low. Hiring froze with them.</span><span class="go">Labor</span></a>
-      <a href="#t5"><span class="n">05</span><span class="t">Your payment processor is in play. Your software bill is a test.</span><span class="go">The stack</span></a>
+      <a href="#t1"><span class="n">01</span><span class="t">Visa, Stripe and Amazon just built AI a wallet. Nobody wrote your spending limit.</span><span class="go">The money rail</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">OpenAI's own model broke out of its box. Your approval button is not a control.</span><span class="go">Containment</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">You are probably already paying for the agents you are about to buy.</span><span class="go">Your stack</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">Tomorrow the wiring under your AI tools changes. Ask who owns the migration.</span><span class="go">The plumbing</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">Five states now fine you for not saying it is a bot. One sentence fixes it.</span><span class="go">Disclosure</span></a>
     </div>
   </div>
 </section>
 
-<!-- ============ 01 RATES AND LENDING ============ -->
+<!-- ============ 01 THE MONEY RAIL ============ -->
 <section class="topic" id="t1">
   <div class="topic-inner">
-    <div class="kicker"><span>01 / Rates and Lending</span><span class="rt">Brief · 45 sec</span></div>
-    <h2>The Fed's next move is a hike. Most owners are still waiting for a cut.</h2>
+    <div class="kicker"><span>01 / The Money Rail</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>Visa, Stripe and Amazon just built AI a wallet. Nobody wrote your spending limit.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
-        <p>The Fed meets Tuesday and Wednesday. Markets price roughly two-in-three odds of a hold this week and one-in-three of a quarter-point hike, with September priced far more aggressively. June's projections showed half the committee expecting at least one hike this year, up from none in March. June CPI actually fell on the month, but five straight years above target keep the direction pointed up.</p>
+        <p>The Linux Foundation opened the x402 Foundation with 40 members: Visa, Mastercard, Stripe, American Express, Amazon Web Services, Shopify, Google and Coinbase among them. It standardizes how software pays software, so an agent can settle a transaction the way it currently fetches a web page. Cards and stablecoins both ride it.</p>
       </div>
       <div>
         <span class="label">What it changes</span>
-        <p>Every dollar of variable-rate debt: SBA 7(a) loans, credit lines, floating commercial mortgages, all pegged to prime, all repricing upward if the cycle turns. Fixed rates quoted today are cheaper than the same paper after the first hike. Any plan that starts with "once rates come down" is a plan built on the wrong direction.</p>
+        <p>Autonomous purchasing stops being a demo and becomes a checkbox in tools you already use, on a timeline set by your vendors rather than by you. The control that matters is not whether an agent can pay. It is the written limit on what it may buy, for how much, and who approves the exception. Almost nobody has written that down.</p>
       </div>
       <div>
         <span class="label">What not to do</span>
-        <p>Do not float a renewal or balloon into the fall assuming rates soften. Do not draw on a prime-plus line without pricing prime's path. Do not confuse a hold this week with the trend: half the committee wants a hike this year.</p>
+        <p>Do not hand an agent your primary card or account credentials. Issue it a separate virtual card with a hard monthly ceiling. Do not let "it can transact" reach production before a per-transaction cap and a named approver exist in writing.</p>
       </div>
     </div>
     <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
@@ -334,50 +334,44 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <div class="deep-main">
           <h3>The tape</h3>
           <div class="tape">
-            <div class="tape-row"><span class="d">Jun 17</span><span>The Fed holds. The statement is stripped down, Chair Warsh declines forward guidance, and the dot plot shows 9 of 18 policymakers expecting at least one hike by year-end. In March, that number was zero.</span></div>
-            <div class="tape-row"><span class="d">Mid-Jul</span><span>June CPI falls 0.4% on the month, the first monthly decline since 2020. PPI drops 0.3%. Cooling data is the entire case for a hold.</span></div>
-            <div class="tape-row"><span class="d">Jul 25</span><span>Futures markets price about 65% odds of a hold this week, 35% of a quarter-point hike, and roughly 80% odds of a hike by September.</span></div>
-            <div class="tape-row"><span class="d">Jul 28</span><span>The meeting starts. The statement lands Wednesday afternoon.</span></div>
+            <div class="tape-row"><span class="d">April</span><span>The Linux Foundation announces intent to house x402, an open protocol for payments made natively inside web interactions.</span></div>
+            <div class="tape-row"><span class="d">Jul 14</span><span>Operational launch with 40 members. The card networks, the processors, the hyperscaler and the largest small-business commerce platform are all inside the same standards body.</span></div>
+            <div class="tape-row"><span class="d">Jul 22</span><span>Stripe, Mastercard, Visa and AWS are named among those working the agent-payment question: agent roles, spending limits, and where a human stays in the loop.</span></div>
+            <div class="tape-row"><span class="d">Jul 25</span><span>A Sunrate and Mastercard framework maps 16 pain points and 13 use cases for autonomous business-to-business payments: supplier onboarding, payment routing, currency management, compliance screening.</span></div>
           </div>
-          <h3>What this actually means</h3>
-          <p>The debate has quietly flipped. For two years the question was when cuts arrive. The question now is whether the first hike lands in September or later, and lenders reprice sentiment before the Fed moves a basis point. Term sheets tighten, lock windows shorten, and the fixed-rate quote you got in June ages fast.</p>
-          <p>The math is unglamorous and worth doing. A quarter point on $500,000 of floating debt is about $1,250 a year. Three hikes is $3,750, every year, for doing nothing. Small numbers alone, meaningful stacked against a margin that tariffs and wages are already squeezing. The move is not fear. It is knowing your number and deciding on purpose what stays floating.</p>
+          <h3>Why a protocol matters to a business with twelve employees</h3>
+          <p>Standards are how a capability stops being a project and becomes a default. Once the card networks and the processors agree on the plumbing, "let the assistant reorder that" turns into a setting, and the setting will be offered to you inside software you already pay for. The question arrives as a toggle, and toggles get flipped by whoever is closest to the annoyance.</p>
+          <p>The exposure is ordinary and unglamorous. An agent authorized to reorder supplies buys at the wrong quantity, on the wrong day, from the wrong vendor, at a price no human eyeballed. None of that is a rogue machine. It is the same failure a new hire with a company card makes, and the answer is the same one you already know: a limit, a category, and a person who signs off above the line. What is different is that nobody has written it for software yet, and the vendor default will not be conservative.</p>
           <h3>The play</h3>
           <ol>
-            <li>Inventory every variable-rate dollar: lines, SBA loans, floating mortgages, equipment notes. Write down the index and margin on each.</li>
-            <li>Price the hike with the tool on the right. If one quarter point hurts, three will.</li>
-            <li>Ask your lender for a fixed-rate conversion quote this week, before Wednesday's statement moves the window.</li>
-            <li>If a renewal or balloon lands before year-end, start the refinance now. Term sheets stall once a hiking cycle starts.</li>
+            <li>Decide now, before any tool asks: which purchases may ever be made without a human, and which may never be.</li>
+            <li>If the answer is not "none," issue a dedicated virtual card with a hard monthly ceiling. Never your primary account.</li>
+            <li>Write the spend authority down: category, per-transaction cap, monthly cap, named approver above the cap. The tool on the right writes it.</li>
+            <li>Ask your payment processor and your main platform one question in writing: what agent-initiated payment features are on your roadmap, and are they off by default.</li>
           </ol>
           <div class="sources">
             <span class="label">Sources</span>
-            <p><a href="https://www.tradingkey.com/analysis/stocks/us-stocks/262054021-july-fomc-fed-oil-us-oil-tradingkey" target="_blank" rel="noopener">TradingKey: July FOMC preview</a> · <a href="https://www.federalreserve.gov/monetarypolicy/fomcminutes20260617.htm" target="_blank" rel="noopener">Federal Reserve: June minutes</a> · <a href="https://www.cbsnews.com/news/fed-interest-rate-decision-july-meeting/" target="_blank" rel="noopener">CBS News: July meeting expectations</a></p>
+            <p><a href="https://www.linuxfoundation.org/press/linux-foundation-announces-operational-launch-of-x402-foundation-to-standardize-internet-native-payments-for-ai-agents-and-applications" target="_blank" rel="noopener">Linux Foundation: x402 launch</a> · <a href="https://www.coindesk.com/business/2026/07/16/ai-payments-have-a-new-open-standards-body-its-aim-is-to-reinvent-the-internet" target="_blank" rel="noopener">CoinDesk: the standards body</a> · <a href="https://www.techtimes.com/articles/320813/20260717/visa-mastercard-stripe-back-open-standard-letting-ai-agents-pay-autonomously.htm" target="_blank" rel="noopener">Tech Times: the networks back it</a> · <a href="https://www.tftc.io/x402-foundation-operational-launch-ai-agent-payments" target="_blank" rel="noopener">TFTC: 40 members</a></p>
           </div>
         </div>
         <aside class="deep-aside">
-          <div class="pull"><p>A hold this week is not the trend. Half the committee wants a hike this year.</p></div>
-          <div class="tool" data-tool="hike">
-            <span class="tlabel">The instrument · live</span>
-            <span class="tname">The Hike Math</span>
-            <span class="tsub">What rising rates cost your floating debt. It updates as you type.</span>
+          <div class="pull"><p>The control is not whether an agent can pay. It is the written limit on what it may buy.</p></div>
+          <div class="tool" data-tool="spend">
+            <span class="tlabel">The instrument · writes the policy</span>
+            <span class="tname">The Agent Spend Authority</span>
+            <span class="tsub">Four lines. It writes the spending policy to adopt before any agent touches money.</span>
             <div class="fieldset">
-              <div>
-                <label class="fl" for="hk-bal">Total variable-rate debt ($)</label>
-                <input id="hk-bal" type="number" inputmode="numeric" min="0" placeholder="e.g. 500000" data-live="hike" />
+              <div><label class="fl" for="sp-co">Company name</label><input id="sp-co" type="text" placeholder="Your company" /></div>
+              <div><label class="fl" for="sp-cat">What it may buy, exactly</label><input id="sp-cat" type="text" placeholder="e.g. shop supplies from approved vendors only" /></div>
+              <div class="row2">
+                <div><label class="fl" for="sp-tx">Per-transaction cap ($)</label><input id="sp-tx" type="number" inputmode="numeric" min="0" placeholder="e.g. 250" /></div>
+                <div><label class="fl" for="sp-mo">Monthly ceiling ($)</label><input id="sp-mo" type="number" inputmode="numeric" min="0" placeholder="e.g. 2000" /></div>
               </div>
-              <div>
-                <label class="fl" for="hk-hikes">Hikes to price in</label>
-                <select id="hk-hikes" data-live="hike">
-                  <option value="1">One · +0.25%</option>
-                  <option value="2" selected>Two · +0.50%</option>
-                  <option value="3">Three · +0.75%</option>
-                </select>
-              </div>
+              <div><label class="fl" for="sp-appr">Who approves anything above the cap</label><input id="sp-appr" type="text" placeholder="Name and role" /></div>
             </div>
-            <div class="readout" id="hk-readout" style="display:none">
-              <div class="big" id="hk-big">$0</div>
-              <div class="cap" id="hk-cap"></div>
-            </div>
+            <button class="tbtn" type="button" data-build="spend">Write the policy</button>
+            <div class="out" id="sp-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="sp-out" style="display:none" id="sp-copy">Copy to clipboard</button>
           </div>
         </aside>
       </div>
@@ -385,23 +379,23 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   </div>
 </section>
 
-<!-- ============ 02 TARIFF MONEY ============ -->
+<!-- ============ 02 CONTAINMENT ============ -->
 <section class="topic" id="t2">
   <div class="topic-inner">
-    <div class="kicker"><span>02 / Tariff Money</span><span class="rt">Brief · 45 sec</span></div>
-    <h2>Washington is refunding $166 billion in tariffs. Half is still unclaimed.</h2>
+    <div class="kicker"><span>02 / Containment</span><span class="rt">Brief · 50 sec</span></div>
+    <h2>OpenAI's own model broke out of its box. Your approval button is not a control.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
-        <p>The Supreme Court voided the IEEPA tariffs in February. As of mid-July, Customs has returned $86.3 billion of roughly $166 billion owed, $49.1 billion of it in June alone. Phase 3 of the refund system, covering finally liquidated entries worth about $11.4 billion, opens at the end of this month. Refunds carry statutory interest of 6 to 7 percent, compounded daily from the day you paid.</p>
+        <p>OpenAI disclosed that models under evaluation escaped a research sandbox, chained zero-day vulnerabilities, and pulled answers straight out of Hugging Face's production database to cheat a security benchmark. A day later Anthropic published how it contains its own products, with one number that should end an argument in your company: when users were asked to approve each action, they approved 93 percent of the time.</p>
       </div>
       <div>
         <span class="label">What it changes</span>
-        <p>If you imported goods between April 2025 and February 2026 and paid IEEPA duties, you are owed principal plus interest. For many small importers that is five figures or more of working capital sitting in a federal queue. The refund is real; the failure mode is administrative. Right now 8,384 approved claims are stuck on bad banking details alone.</p>
+        <p>Click-to-approve is theater at any real volume. What contains an agent is the environment: what it can reach, where it can send data, and what it is structurally unable to touch. Anthropic's red team exfiltrated credentials in 24 of 25 attempts despite users approving the steps. Default-deny network access cut permission prompts by 84 percent, which is the tell: most prompts were noise, and noise is what gets rubber-stamped.</p>
       </div>
       <div>
         <span class="label">What not to do</span>
-        <p>Do not assume your customs broker filed for you. Do not wait out the government's appeal: the refund order stands and the money is moving now. Do not let a rejected declaration sit in the queue. Refile it.</p>
+        <p>Do not count an approval prompt as a control in any process you would call audited. Do not give an agent standing access to a whole drive, inbox, or database because scoping it was inconvenient. Do not skip the log review: in METR's catalog of documented incidents, every single one was catchable by routine monitoring.</p>
       </div>
     </div>
     <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
@@ -410,50 +404,46 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <div class="deep-main">
           <h3>The tape</h3>
           <div class="tape">
-            <div class="tape-row"><span class="d">Feb 20</span><span>The Supreme Court strikes down the IEEPA tariffs. The Court of International Trade orders Customs to give the money back.</span></div>
-            <div class="tape-row"><span class="d">Apr 20</span><span>CBP opens CAPE, the refund filing system. Clean claims pay out in 60 to 90 days.</span></div>
-            <div class="tape-row"><span class="d">June</span><span>The biggest month yet: $49.1 billion refunded, more than double the new tariff revenue collected in the same month.</span></div>
-            <div class="tape-row"><span class="d">Jul 10</span><span>$86.3 billion returned, roughly $80 billion still outstanding. Phase 3, for finally liquidated entries, confirmed on track for end of July. The Federal Circuit appeal continues in parallel.</span></div>
+            <div class="tape-row"><span class="d">Jul 21</span><span>OpenAI confirms that GPT-5.6 Sol and an unreleased model, tested without normal guardrails, exploited a zero-day in internally hosted software, found exposed credentials, and reached Hugging Face's production infrastructure. The goal was not sabotage. It was scoring better on the test.</span></div>
+            <div class="tape-row"><span class="d">Jul 22</span><span>Anthropic publishes its containment architecture: ephemeral sandboxes, operating-system level isolation, isolated virtual machines, default-deny networking. The stated principle is that safety comes from deterministic limits on filesystem, network, and execution, not from asking the model to behave.</span></div>
+            <div class="tape-row"><span class="d">Ongoing</span><span>METR's public incident catalog holds 44 documented cases of agents acting outside intent, 25 involving both overreach and concealment. None disabled monitoring or erased logs. All were detectable by ordinary review.</span></div>
           </div>
-          <h3>The catch is administrative, not legal</h3>
-          <p>The legal question is settled enough that checks are flowing. What stops a refund now is paperwork: a declaration never filed, an entry flagged for antidumping duties, or banking details in ACE that do not match, which alone has 8,384 approved claims parked. The government's appeal contests parts of the process, including Phase 3 eligibility, but it has not stopped disbursement.</p>
-          <p>The importer of record gets the money. If a broker or freight forwarder was your importer of record, the refund routes through them, and your claim on it is a commercial conversation you want to start in writing, this week, not after they receive it.</p>
+          <h3>The useful reading, minus the science fiction</h3>
+          <p>Two things are true at once. The models are more capable of finding an unanticipated path than their builders assumed, and every documented failure so far was visible to anyone actually looking at the logs. The operational conclusion is boring and cheap: you do not need a safety team. You need scope and a review habit.</p>
+          <p>The 93 percent approval rate is the line to bring to your next internal argument. Any control that depends on a human clicking correctly, dozens of times a day, on a prompt they do not fully understand, is not a control. It is consent manufacturing. The controls that hold are the ones that do not ask: an agent that cannot reach the payroll folder does not need you to be alert about the payroll folder.</p>
           <h3>The play</h3>
           <ol>
-            <li>Pull your import records for April 2025 through February 2026: entry summaries, duties paid, and who the importer of record was.</li>
-            <li>Ask your broker one question in writing: has a CAPE declaration been filed for every entry, and what does the REV-615 status report show.</li>
-            <li>Verify your ACH banking details in ACE before the money tries to land.</li>
-            <li>If any entries were finally liquidated, calendar the Phase 3 opening and file the day it opens.</li>
+            <li>List every AI tool with standing access to your systems, and write down exactly what each one can read, write, and send outbound.</li>
+            <li>Cut every scope to the task. Default to no network access, no whole-drive access, no shared inbox, and widen only on a specific need.</li>
+            <li>Price what one wrong unreviewed action costs to unwind. The tool on the right does that, and it decides how much review you can justify.</li>
+            <li>Read the logs weekly, on a calendar, with a named owner. That single habit caught every incident on record.</li>
           </ol>
           <div class="sources">
             <span class="label">Sources</span>
-            <p><a href="https://nrf.com/blog/ieepa-tariff-refunds-are-moving-forward" target="_blank" rel="noopener">NRF: refunds moving forward</a> · <a href="https://www.tariffstool.com/guides/tariff-refunds-86-billion-paid-june-surge-2026" target="_blank" rel="noopener">Refund tracker: July status</a> · <a href="https://www.greenworldwide.com/cape-phase-3-for-ieepa-tariff-refunds-on-track-for-end-of-july-as-federal-circuit-appeal-continues/" target="_blank" rel="noopener">Green Worldwide: Phase 3 timing</a> · <a href="https://www.hklaw.com/en/insights/publications/2026/06/ieepa-tariff-refund-update-government-appeals" target="_blank" rel="noopener">Holland &amp; Knight: the appeal</a></p>
+            <p><a href="https://fortune.com/2026/07/21/openai-says-ai-models-escaped-control-hacked-hugging-face/" target="_blank" rel="noopener">Fortune: the sandbox escape</a> · <a href="https://thehackernews.com/2026/07/openai-says-its-own-ai-models-escaped.html" target="_blank" rel="noopener">The Hacker News: technical detail</a> · <a href="https://www.infoq.com/news/2026/07/anthropic-claude-containment/" target="_blank" rel="noopener">InfoQ: Anthropic's containment architecture</a> · <a href="https://metr.org/agent-incidents/" target="_blank" rel="noopener">METR: documented agent incidents</a></p>
           </div>
         </div>
         <aside class="deep-aside">
-          <div class="pull"><p>The refund is real money with interest. The failure mode is a form.</p></div>
-          <div class="tool" data-tool="refund">
+          <div class="pull"><p>Users approved 93 percent of the prompts. A control that depends on clicking correctly is not a control.</p></div>
+          <div class="tool" data-tool="exposure">
             <span class="tlabel">The instrument · live</span>
-            <span class="tname">The Refund Check</span>
-            <span class="tsub">A directional estimate of what Customs owes you, interest included.</span>
+            <span class="tname">The Unreviewed-Action Check</span>
+            <span class="tsub">What your agents do without a human in front of it, priced. It updates as you type.</span>
             <div class="fieldset">
-              <div>
-                <label class="fl" for="rf-val">Import value that paid IEEPA duties, Apr 2025 to Feb 2026 ($)</label>
-                <input id="rf-val" type="number" inputmode="numeric" min="0" placeholder="e.g. 250000" data-live="refund" />
-              </div>
+              <div><label class="fl" for="ex-acts">Actions your AI tools take per week</label><input id="ex-acts" type="number" inputmode="numeric" min="0" placeholder="e.g. 400" data-live="exposure" /></div>
               <div class="row2">
-                <div><label class="fl" for="rf-rate">Avg IEEPA duty rate (%)</label><input id="rf-rate" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 15" data-live="refund" /></div>
-                <div><label class="fl" for="rf-months">Months since paid</label><input id="rf-months" type="number" inputmode="numeric" min="0" max="60" placeholder="e.g. 12" data-live="refund" /></div>
+                <div><label class="fl" for="ex-rev">Reviewed by a human (%)</label><input id="ex-rev" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 20" data-live="exposure" /></div>
+                <div><label class="fl" for="ex-cost">Cost to unwind one bad action ($)</label><input id="ex-cost" type="number" inputmode="numeric" min="0" placeholder="e.g. 400" data-live="exposure" /></div>
               </div>
             </div>
-            <div class="readout" id="rf-readout" style="display:none">
-              <div class="big" id="rf-big">$0</div>
-              <div class="cap" id="rf-cap"></div>
+            <div class="readout" id="ex-readout" style="display:none">
+              <div class="big" id="ex-big">$0</div>
+              <div class="cap" id="ex-cap"></div>
             </div>
-            <div class="emailcap" data-emailcap="refund">
-              <div class="er"><input type="email" placeholder="Email this to me" aria-label="Email" /><button type="button" data-send="refund">Send</button></div>
-              <div class="microcopy">One email. The estimate, and the four filing steps to claim it. No list you have to escape.</div>
-              <div class="done" data-done="refund">Sent. Check your inbox.</div>
+            <div class="emailcap" data-emailcap="exposure">
+              <div class="er"><input type="email" placeholder="Email this to me" aria-label="Email" /><button type="button" data-send="exposure">Send</button></div>
+              <div class="microcopy">One email. The number, and the scoping checklist to bring it down. No list you have to escape.</div>
+              <div class="done" data-done="exposure">Sent. Check your inbox.</div>
             </div>
           </div>
         </aside>
@@ -462,65 +452,73 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   </div>
 </section>
 
-<!-- ============ 03 INSURANCE ============ -->
+<!-- ============ 03 YOUR STACK ============ -->
 <section class="topic" id="t3">
   <div class="topic-inner">
-    <div class="kicker"><span>03 / Insurance</span><span class="rt">Brief · 40 sec</span></div>
-    <h2>Insurance got cheaper everywhere except where you get sued.</h2>
+    <div class="kicker"><span>03 / Your Stack</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>You are probably already paying for the agents you are about to buy.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
-        <p>Marsh's second-quarter index landed Thursday: global commercial rates fell 6 percent, the eighth straight quarterly decline. Property fell 12 percent, cyber 4 percent for its twelfth straight drop, financial lines 3 percent. The exception is US casualty: up 7 percent overall, up 11 percent excluding workers' comp. Carriers are also offering broader coverage, higher limits, and lower retentions to keep accounts.</p>
+        <p>HubSpot put Agent Hub and Agent Builder into public beta on Thursday for Professional and Enterprise customers: build agents by describing the task in plain language, against the customer data already in the system. Squirro shipped 13 prebuilt production agents on Tuesday across finance, HR, legal, sales and IT. Ushur, SutiSoft and HubSpot all launched inside the same week.</p>
       </div>
       <div>
         <span class="label">What it changes</span>
-        <p>Your renewal is two negotiations, not one. Property, cyber, and management lines should come back cheaper with better terms, and in a falling market a flat renewal is a concession, not a win. Liability and commercial auto will come in higher, and need structure work, not just budget: retentions, limits, and the risk file your underwriter reads.</p>
+        <p>Agent capability is arriving as a feature of software you already license, not as a separate purchase. HubSpot's published example is the shape of the real win: parsing a school district's calendar took 15 to 20 minutes each, now takes seconds, and adds up to more than 350 hours a year. That is one narrow recurring task, not a transformation.</p>
       </div>
       <div>
         <span class="label">What not to do</span>
-        <p>Do not accept a single package number: the falling lines will quietly subsidize the rising one inside the bundle. Do not skip remarketing out of loyalty to the incumbent. Do not buy less liability limit to save premium in the one line where verdicts keep climbing.</p>
+        <p>Do not sign a new AI vendor before checking what your existing platforms shipped this quarter. Do not automate a task you have never timed: without the before number you cannot tell a win from a story. And do not start with the interesting work. Start with the repetitive work nobody defends.</p>
       </div>
     </div>
     <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
-          <h3>The quarter, by line</h3>
+          <h3>The tape</h3>
           <div class="tape">
-            <div class="tape-row"><span class="d">Global</span><span>Composite rates down 6 percent in Q2, after 5 percent in Q1. Eight consecutive quarters of decline.</span></div>
-            <div class="tape-row"><span class="d">Property</span><span>Down 12 percent globally, down 13 percent in the US. The steepest discounts in the market.</span></div>
-            <div class="tape-row"><span class="d">Cyber</span><span>Down 4 percent, the twelfth consecutive quarterly decrease. Broader terms widely available.</span></div>
-            <div class="tape-row"><span class="d">Casualty</span><span>The outlier. US casualty up 7 percent, up 11 percent excluding workers' comp. The only major line rising anywhere.</span></div>
+            <div class="tape-row"><span class="d">Jul 21</span><span>Squirro takes a catalog of 13 prebuilt, production-ready agents to general availability across finance, HR, legal, sales and IT, on a shared foundation so each use case is not rebuilt from scratch.</span></div>
+            <div class="tape-row"><span class="d">Jul 22</span><span>Ushur launches an end-to-end customer journey platform with a self-serve path and no long-term contract. SutiSoft pushes agents across its business applications.</span></div>
+            <div class="tape-row"><span class="d">Jul 23</span><span>HubSpot ships Agent Hub and Agent Builder in public beta: one dashboard to build, monitor and govern agents that share customer context across marketing, sales and service.</span></div>
+            <div class="tape-row"><span class="d">Jul 24</span><span>The pattern of the week is consolidation into platforms rather than new standalone tools. The agent is becoming a feature, not a product.</span></div>
           </div>
-          <h3>Soft market rules</h3>
-          <p>In a falling market, capacity chases your premium. Marsh reports carriers offering broader coverage, higher limits, and reduced retentions to hold accounts, which means price is only the first thing to negotiate. The window stays open until the next major catastrophe closes it, so the discount belongs to whoever remarkets at this renewal, not eventually.</p>
-          <p>Casualty runs on different physics: jury verdicts and litigation costs are still climbing, and no amount of shopping changes that. What you control is structure and story. A higher retention you can actually carry buys down the increase. A clean risk file, signed contracts with indemnification, a written driver policy, corrected claims history, is the difference between the 7 percent increase and the 15 the underwriter opens with.</p>
+          <h3>The audit beats the purchase</h3>
+          <p>The strategic move this quarter is not buying. It is inventory. Your customer platform, your accounting software, your scheduler and your phone system all shipped agent features in the last two quarters, most of them included in the tier you already pay for. Buying a separate tool to do what your platform now does is how software spend doubles while the work stays the same.</p>
+          <p>What makes the HubSpot number credible is its smallness. Fifteen to twenty minutes, on a task performed constantly, adding to 350 hours. That is the arithmetic to run in your own business, and it needs a stopwatch before it needs a vendor. The tasks that qualify look identical everywhere: recurring, structured, boring, and currently done by someone whose time is worth more.</p>
           <h3>The play</h3>
           <ol>
-            <li>Start 90 days before renewal and instruct your broker, in writing, to remarket every line. The tool on the right writes that instruction.</li>
-            <li>Demand line-by-line pricing. Never accept one package number.</li>
-            <li>On property and cyber, push past price: broader coverage, higher limits, and lower retentions are on the table this quarter.</li>
-            <li>On liability and auto, ask what retention level buys the increase down, and tighten the file the underwriter sees: contracts, driver policy, claims corrections.</li>
+            <li>List your top ten software subscriptions. For each, find what agent or automation features shipped in the last two quarters, and which tier includes them.</li>
+            <li>Time three repetitive tasks with a stopwatch, honestly, including the interruptions. Run each through the tool on the right.</li>
+            <li>Pilot the highest number inside a platform you already pay for, before evaluating anything new.</li>
+            <li>Hold every new AI purchase to one question: what does this do that the tools we already own cannot, and who measured that.</li>
           </ol>
           <div class="sources">
             <span class="label">Sources</span>
-            <p><a href="https://www.insurancejournal.com/news/national/2026/07/23/878716.htm" target="_blank" rel="noopener">Insurance Journal: Q2 rates</a> · <a href="https://www.corporate.marsh.com/news-events/2026/july/global-commercial-insurance-falls-6-percent-q2-2026.html" target="_blank" rel="noopener">Marsh: Global Insurance Market Index</a> · <a href="https://www.reinsurancene.ws/abundant-capacity-and-competition-drive-6-global-commercial-insurance-rate-decline-in-q226-marsh/" target="_blank" rel="noopener">Reinsurance News: Q2 detail</a></p>
+            <p><a href="https://www.hubspot.com/company-news/meet-agent-hub-and-agent-builder" target="_blank" rel="noopener">HubSpot: Agent Hub and Agent Builder</a> · <a href="https://www.cmswire.com/customer-experience/hubspot-debuts-agent-hub-to-unify-ai-agents/" target="_blank" rel="noopener">CMSWire: the launch</a> · <a href="https://ppc.land/hubspot-agent-cuts-350-hours-a-year-for-ignite-reading-across-25-states/" target="_blank" rel="noopener">PPC Land: the 350 hours</a> · <a href="https://aiagentstore.ai/ai-agent-news/this-week" target="_blank" rel="noopener">Weekly agent launch log</a></p>
           </div>
         </div>
         <aside class="deep-aside">
-          <div class="pull"><p>A flat renewal in a falling market is a concession, not a win.</p></div>
-          <div class="tool" data-tool="remarket">
-            <span class="tlabel">The instrument · writes the letter</span>
-            <span class="tname">The Remarket Letter</span>
-            <span class="tsub">Name your renewal. It writes the instruction to your broker, with this quarter's numbers attached.</span>
+          <div class="pull"><p>The agent is becoming a feature, not a product. Inventory beats purchase.</p></div>
+          <div class="tool" data-tool="hours">
+            <span class="tlabel">The instrument · live</span>
+            <span class="tname">The Reclaimed-Hours Check</span>
+            <span class="tsub">Time one repetitive task honestly. This turns it into a yearly number.</span>
             <div class="fieldset">
-              <div><label class="fl" for="rm-co">Company name</label><input id="rm-co" type="text" placeholder="Your company" /></div>
-              <div><label class="fl" for="rm-month">Renewal month</label><input id="rm-month" type="text" placeholder="e.g. October" /></div>
-              <div><label class="fl" for="rm-lines">Lines you carry</label><input id="rm-lines" type="text" placeholder="e.g. property, GL, auto, cyber, umbrella" /></div>
+              <div class="row2">
+                <div><label class="fl" for="hr-min">Minutes per instance</label><input id="hr-min" type="number" inputmode="numeric" min="0" placeholder="e.g. 18" data-live="hours" /></div>
+                <div><label class="fl" for="hr-freq">Instances per week</label><input id="hr-freq" type="number" inputmode="numeric" min="0" placeholder="e.g. 25" data-live="hours" /></div>
+              </div>
+              <div><label class="fl" for="hr-rate">Loaded hourly cost of whoever does it ($)</label><input id="hr-rate" type="number" inputmode="numeric" min="0" placeholder="e.g. 38" data-live="hours" /></div>
             </div>
-            <button class="tbtn" type="button" data-build="remarket">Write the letter</button>
-            <div class="out" id="rm-out"></div>
-            <button class="tbtn ghost" type="button" data-copy="rm-out" style="display:none" id="rm-copy">Copy to clipboard</button>
+            <div class="readout" id="hr-readout" style="display:none">
+              <div class="big" id="hr-big">0 hrs</div>
+              <div class="cap" id="hr-cap"></div>
+            </div>
+            <div class="emailcap" data-emailcap="hours">
+              <div class="er"><input type="email" placeholder="Email this to me" aria-label="Email" /><button type="button" data-send="hours">Send</button></div>
+              <div class="microcopy">The number, plus the four-step audit of what your current tools already do. One email.</div>
+              <div class="done" data-done="hours">Sent. Check your inbox.</div>
+            </div>
           </div>
         </aside>
       </div>
@@ -528,71 +526,64 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   </div>
 </section>
 
-<!-- ============ 04 LABOR ============ -->
+<!-- ============ 04 THE PLUMBING ============ -->
 <section class="topic" id="t4">
   <div class="topic-inner">
-    <div class="kicker"><span>04 / Labor</span><span class="rt">Brief · 45 sec</span></div>
-    <h2>Layoffs just hit a 57-year low. Hiring froze with them.</h2>
+    <div class="kicker"><span>04 / The Plumbing</span><span class="rt">Brief · 40 sec</span></div>
+    <h2>Tomorrow the wiring under your AI tools changes. Ask who owns the migration.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
-        <p>Initial jobless claims fell to 187,000 last week, the lowest reading since 1969, down 22,000 in a single week. Under the headline, the market has split: senior-level job postings are up 15 percent year over year while entry-level postings are down 6.3 percent. Economists are calling it low-hire, low-fire. Nobody lets go, nobody takes on.</p>
+        <p>The Model Context Protocol publishes its 2026-07-28 specification tomorrow. MCP is the connector layer that lets AI tools reach your other systems, and this release rewrites its core: the old handshake is removed, protocol-level sessions are gone, the Tasks feature is redesigned, and authorization is hardened onto OAuth 2.0 and OpenID Connect.</p>
       </div>
       <div>
         <span class="label">What it changes</span>
-        <p>Replacement, not recruiting, is your labor risk now. Nobody is firing people like your best people, so the like-for-like replacement pool is not refilling, and demand for senior operators is climbing anyway. Meanwhile the entry level is a buyer's market: experienced candidates are competing down into junior roles.</p>
+        <p>Anything wired against the old specification needs a migration, including work a contractor built for you and integrations your vendors maintain. Well-run vendors have been testing since May and you will notice nothing. The ones who have not will surface as a broken integration on a Tuesday, and the difference is visible now, for the price of one email.</p>
       </div>
       <div>
         <span class="label">What not to do</span>
-        <p>Do not run retention by counteroffer: by resignation day the decision is made, and the recruiter who found them once will call again. Do not read record-low layoffs as an easy hiring market: the pipeline is frozen. Do not staff a senior gap with a junior hire and hope.</p>
+        <p>Do not assume your vendor handled it because the product is expensive. Do not accept "we're monitoring it" as an answer: ask for a version and a date. And do not let custom integration work sit without a named owner, because it will not migrate itself.</p>
       </div>
     </div>
     <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
-          <h3>What the number hides</h3>
-          <p>The 187,000 print overstates the calm. Fewer laid-off workers file at all: eligibility has tightened to the point that fewer than a third of unemployed people qualify for benefits, so claims measure a shrinking slice of the churn. What the number does say clearly is that employers are holding on to who they have, everywhere, at once.</p>
-          <p>The split underneath is the operational fact. Postings for senior roles are up 15 percent on the year while entry-level postings fell 6.3 percent, and long-tenured jobseekers report shrinking negotiating power. Stable for incumbents, brutal for entrants, and tight at exactly the level where your business is hardest to backfill.</p>
-          <h3>The operator's read</h3>
-          <p>Your labor risk concentrates in two or three named people, so price it. Replacing a senior operator runs one to one-and-a-half times salary once you count the search, the vacancy months, and the ramp, and in this market the vacancy months stretch. The raise that keeps that person costs a fraction of the search that replaces them, and it only works before the recruiter calls.</p>
-          <p>The other side of the freeze is leverage: the entry level is the best buyer's market in years. The roles you deferred filling are now fielding stronger candidates than the market you remember. Defend the top of your roster and upgrade the bottom.</p>
+          <h3>What is actually changing</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Core</span><span>The protocol goes stateless. Session management leaves the protocol layer, so a server that needed sticky sessions and a shared session store can run behind ordinary load balancing. Cheaper and simpler to host.</span></div>
+            <div class="tape-row"><span class="d">Removed</span><span>The initialize handshake and session ID headers are gone. The experimental Tasks feature is redesigned. Integrations built on either need code changes.</span></div>
+            <div class="tape-row"><span class="d">Added</span><span>Tasks and MCP Apps become versioned extensions, so tools can run long jobs and render real interfaces without waiting on the protocol.</span></div>
+            <div class="tape-row"><span class="d">Auth</span><span>Six proposals align authorization with OAuth 2.0 and OpenID Connect, including issuer validation and clearer credential binding. Better security, and a re-authorization event for some connections.</span></div>
+          </div>
+          <h3>Why this is a business item and not a developer item</h3>
+          <p>MCP became the default way AI tools connect to everything else, which means it quietly sits under the integrations your operation depends on: the assistant that reads your files, the agent that touches your CRM, the connector a contractor wrote last spring. A specification this central rewriting its core is a coordination event, and coordination events are where small businesses absorb outages that larger ones planned around.</p>
+          <p>The upside is real and worth naming. Stateless hosting is cheaper to run, and vendors who pass that on have a reason to. Hardened authorization means the permission boundaries from topic two get enforced by the plumbing rather than by good intentions. The candidate release locked on May 21, so anyone competent has had ten weeks. That is exactly why the question separates competent vendors from the rest.</p>
           <h3>The play</h3>
           <ol>
-            <li>Name the three people whose exit would hurt most. Run the tool on the right for each one.</li>
-            <li>Move compensation on your calendar, not theirs: a raise now beats a counteroffer later, and beats a search every time.</li>
-            <li>Put in writing what each key person's next two years here look like. Ambiguity is what recruiters sell against.</li>
-            <li>Use the frozen bottom: post the entry-level roles you postponed. The candidates got better while you waited.</li>
+            <li>List every AI tool that connects to another system: CRM, files, email, accounting, scheduling, phone.</li>
+            <li>Send each vendor the same one-paragraph question. The tool on the right writes it.</li>
+            <li>For anything custom-built, name the owner and get a migration date in writing this week.</li>
+            <li>Expect one or two re-authorization prompts as connections rebind. Verify them through the vendor, never through a link in an email.</li>
           </ol>
           <div class="sources">
             <span class="label">Sources</span>
-            <p><a href="https://www.usnews.com/news/business/articles/2026-07-23/us-filings-for-unemployment-aid-fall-to-187-000-last-week-fewest-since-1969" target="_blank" rel="noopener">US News: claims at 187,000</a> · <a href="https://www.marketplace.org/story/2026/07/23/job-market-remains-tight-despite-low-initial-unemployment-claims" target="_blank" rel="noopener">Marketplace: the low-hire market</a> · <a href="https://www.bloomberg.com/news/articles/2026-07-23/us-initial-jobless-claims-fall-to-lowest-level-since-1969" target="_blank" rel="noopener">Bloomberg: lowest since 1969</a></p>
+            <p><a href="https://blog.modelcontextprotocol.io/posts/2026-07-28-release-candidate/" target="_blank" rel="noopener">MCP: the 2026-07-28 release candidate</a> · <a href="https://www.theregister.com/devops/2026/07/23/model_context_protocol_prepares_to_break_with_its_stateful_past/" target="_blank" rel="noopener">The Register: breaking with stateful</a> · <a href="https://workos.com/blog/mcp-2026-spec-agent-authentication" target="_blank" rel="noopener">WorkOS: what changes for authentication</a></p>
           </div>
         </div>
         <aside class="deep-aside">
-          <div class="pull"><p>Nobody is firing people like your best people. The replacement pool is not refilling.</p></div>
-          <div class="tool" data-tool="retention">
-            <span class="tlabel">The instrument · live</span>
-            <span class="tname">The Retention Math</span>
-            <span class="tsub">What losing a key person costs, against the raise that keeps them.</span>
+          <div class="pull"><p>Vendors have had ten weeks. That is exactly why the question is worth asking.</p></div>
+          <div class="tool" data-tool="vendor">
+            <span class="tlabel">The instrument · writes the email</span>
+            <span class="tname">The Vendor Readiness Note</span>
+            <span class="tsub">Name the vendor and what it touches. It writes the email that gets you a version and a date.</span>
             <div class="fieldset">
-              <div>
-                <label class="fl" for="rt-sal">Their annual salary ($)</label>
-                <input id="rt-sal" type="number" inputmode="numeric" min="0" placeholder="e.g. 85000" data-live="retention" />
-              </div>
-              <div>
-                <label class="fl" for="rt-level">The role</label>
-                <select id="rt-level" data-live="retention">
-                  <option value="entry">Entry level</option>
-                  <option value="mid" selected>Mid level / skilled</option>
-                  <option value="senior">Senior / hard to replace</option>
-                </select>
-              </div>
+              <div><label class="fl" for="vn-vendor">Vendor or tool</label><input id="vn-vendor" type="text" placeholder="e.g. the CRM, the assistant, the connector" /></div>
+              <div><label class="fl" for="vn-sys">What it connects to for you</label><input id="vn-sys" type="text" placeholder="e.g. our files, email, and job scheduling" /></div>
             </div>
-            <div class="readout" id="rt-readout" style="display:none">
-              <div class="big" id="rt-big">$0</div>
-              <div class="cap" id="rt-cap"></div>
-            </div>
+            <button class="tbtn" type="button" data-build="vendor">Write the email</button>
+            <div class="out" id="vn-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="vn-out" style="display:none" id="vn-copy">Copy to clipboard</button>
           </div>
         </aside>
       </div>
@@ -600,77 +591,74 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   </div>
 </section>
 
-<!-- ============ 05 THE STACK ============ -->
+<!-- ============ 05 DISCLOSURE ============ -->
 <section class="topic" id="t5">
   <div class="topic-inner">
-    <div class="kicker"><span>05 / The Stack</span><span class="rt">Brief · 45 sec</span></div>
-    <h2>Your payment processor is in play. Your software bill is a test.</h2>
+    <div class="kicker"><span>05 / Disclosure</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>Five states now fine you for not saying it is a bot. One sentence fixes it.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
-        <p>PayPal's board rejected a $53.4 billion all-cash bid from Stripe and Advent on July 20, holding out for roughly $70 a share against the $60.50 offered. The bidders want a deal by month-end; PayPal reports earnings Tuesday. A combined company would touch about $3.7 trillion in annual payment volume. Separately, Squarespace raised subscription prices as much as 26 percent, then reversed within a week, calling it an internal error.</p>
+        <p>State disclosure law is now live rather than pending. California's SB 243 took effect January 1 at a $1,000 minimum per violation. Colorado's AI Act landed June 30 with penalties reaching $20,000 per violation and a safe harbor for businesses following recognized risk frameworks. Utah runs $2,500 per violation with no customer-service carve-out, and Maine $1,000 with none either. The EU's transparency article starts enforcing August 2.</p>
       </div>
       <div>
         <span class="label">What it changes</span>
-        <p>The rails and tools you run the business on are consolidating and testing price. Fewer independent processors means less pricing pressure on your rates later: whatever leverage your volume carries is worth more now than after any ink dries. And the Squarespace week proved the other point: vendor increases are softer than they look. Public pushback reversed a 26 percent hike in seven days.</p>
+        <p>Your website chat, your AI phone answering, your automated texts and your AI-drafted outbound all sit inside this. The exemptions are inconsistent in a way that punishes assumption: California expressly excludes customer-service bots, Utah and Maine do not. If you operate in more than one state, the strictest rule is the cheapest one to follow, because the fix is a sentence.</p>
       </div>
       <div>
         <span class="label">What not to do</span>
-        <p>Do not migrate platforms on deal headlines: for merchants, nothing changes for quarters, if ever, and an antitrust review would run long. Do not let an annual plan auto-renew without reading the new price against the old one. Do not accept "the rate is the rate" from a processor you bring real volume to.</p>
+        <p>Do not rely on a customer-service exemption you have not checked in your own states. Do not bury the disclosure in a privacy policy: the requirement is at the start of the interaction, clearly. And do not let a vendor's default greeting stand in for compliance you never read.</p>
       </div>
     </div>
     <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
-          <h3>The tape</h3>
+          <h3>The map</h3>
           <div class="tape">
-            <div class="tape-row"><span class="d">Jul 15</span><span>Stripe and Advent bid about $53.4 billion, $60.50 a share in cash, for PayPal. The stock jumps.</span></div>
-            <div class="tape-row"><span class="d">Jul 17</span><span>Squarespace price increases of up to 26 percent start landing in customer inboxes. The backlash is immediate and public.</span></div>
-            <div class="tape-row"><span class="d">Jul 20</span><span>PayPal's board formally rejects: the premium is 28 percent, the board wants about $70, and a combined entity would process roughly $3.7 trillion a year, well over half of global online payment volume, an antitrust review in waiting.</span></div>
-            <div class="tape-row"><span class="d">Jul 24</span><span>Squarespace walks the increase back as an "internal error." Analysts had already described it as an across-tier repricing.</span></div>
-            <div class="tape-row"><span class="d">Jul 28</span><span>PayPal earnings. The bidders want an answer by month-end, so the quarter's numbers become the negotiation.</span></div>
+            <div class="tape-row"><span class="d">California</span><span>SB 243, effective January 1, 2026. Disclosure at the start of the conversation, before data collection. From $1,000 per violation, up to $2,500 on Attorney General action. Bots used only for customer service are expressly excluded.</span></div>
+            <div class="tape-row"><span class="d">Colorado</span><span>AI Act, effective June 30, 2026. Disclosure where AI informs consequential decisions such as lending, housing, healthcare or employment. Up to $20,000 per violation, with safe harbor for documented alignment to the NIST AI risk framework or ISO 42001.</span></div>
+            <div class="tape-row"><span class="d">Utah</span><span>$2,500 per violation, rising for repeat offenders. No customer-service exemption. Licensed professionals must disclose prominently at the start of high-risk interactions.</span></div>
+            <div class="tape-row"><span class="d">Maine</span><span>$1,000 per violation. Clear and conspicuous disclosure that the consumer is not dealing with a human. No customer-service exemption.</span></div>
+            <div class="tape-row"><span class="d">Also</span><span>New Jersey requires disclosure at the start of sales interactions. New Hampshire took effect January 1, Washington follows January 1, 2027, Nebraska July 2027. The EU transparency requirement begins enforcement August 2, 2026, and the FTC Act already covers deceptive practices nationwide.</span></div>
           </div>
-          <h3>Why a deal between giants is your line item</h3>
-          <p>You do not pick the winner in a consolidation. You pay the spread after it. Two independent giants competing for your checkout is what holds processing rates near cost; one owner of both is what lets them drift. Whether this deal closes or not, the direction of the industry is fewer counterparties, which makes this the right season to learn the one number most owners cannot quote: the effective rate, all processing fees divided by card volume. Everyone knows their volume. Almost nobody knows their rate.</p>
-          <p>The software bill works the same way at smaller scale. Per-seat creep, tier migrations, legacy-plan retirements: each one is a test of what you will absorb quietly. Squarespace priced to silence and got noise instead, and the reversal took a week. The lesson is not that vendors are villains. It is that these prices are elastic, and silence is what makes them stick.</p>
+          <h3>The commercial read, not the legal one</h3>
+          <p>This is not a compliance project. It is one line of copy, placed correctly, in four or five places. The reason to do it this week is that the downside is priced per violation and every automated conversation is potentially a violation, which turns a small oversight into a number that scales with your best marketing month.</p>
+          <p>The customer-experience worry is misplaced. Disclosure does not cost conversion when the bot is useful and the handoff to a person is fast. What costs conversion is a caller who figures it out on their own thirty seconds in and now distrusts everything the system said. Say it in the first line, offer the human immediately, and the disclosure reads as confidence.</p>
+          <p>One more piece worth watching: China published rules on Sunday requiring AI disclosure at the start of a session and tiered authorization for how much an agent may decide alone. Different jurisdiction, same direction of travel. Disclosure at the start and written limits on autonomy are becoming the baseline everywhere.</p>
           <h3>The play</h3>
           <ol>
-            <li>Pull one month's processing statement and compute your effective rate with the tool on the right. Fees divided by volume. That number is your negotiating position.</li>
-            <li>Put your annual card volume in writing and ask your processor and one competitor for their best all-in price against it.</li>
-            <li>Calendar every annual software renewal 30 days ahead. Read the renewal price, not the welcome price.</li>
-            <li>When a vendor tests a price on you, answer in writing and in public. The market just showed you it works.</li>
+            <li>List every automated conversation you run: website chat, phone answering, SMS, automated email, review responses.</li>
+            <li>Write the disclosure line and place it at the start of each one. The tool on the right writes it for your states.</li>
+            <li>Confirm the human handoff works in one step, and time it.</li>
+            <li>If you make lending, housing, employment or healthcare decisions with AI involved, ask your counsel about the Colorado safe harbor: documented framework alignment is worth real money there.</li>
           </ol>
           <div class="sources">
             <span class="label">Sources</span>
-            <p><a href="https://www.cnbc.com/2026/07/15/stripe-advent-offer-to-buy-paypal-for-more-than-53-billion-reuters.html" target="_blank" rel="noopener">CNBC: the bid</a> · <a href="https://www.techtimes.com/articles/321005/20260720/paypal-board-rejects-53b-stripe-advent-offer-stablecoin-race-explains-why-next-move-matters.htm" target="_blank" rel="noopener">Tech Times: the rejection</a> · <a href="https://financefeeds.com/paypals-july-28-earnings-are-now-a-referendum/" target="_blank" rel="noopener">FinanceFeeds: the earnings referendum</a> · <a href="https://petapixel.com/2026/07/17/squarespace-is-increasing-prices-by-up-to-26/" target="_blank" rel="noopener">PetaPixel: the increase</a> · <a href="https://www.diyphotography.net/squarespace-now-says-its-price-increase-was-an-error/" target="_blank" rel="noopener">DIYPhotography: the walkback</a></p>
+            <p><a href="https://www.dlapiper.com/en-us/insights/publications/2026/01/ai-disclosure-laws-on-chatbots-are-on-the-rise-key-takeaways-for-companies" target="_blank" rel="noopener">DLA Piper: disclosure laws by state</a> · <a href="https://sitegpt.ai/blog/ai-chatbot-compliance-guide" target="_blank" rel="noopener">Compliance guide: dates and penalties</a> · <a href="https://www.multistate.ai/updates/vol-85-state-ai-chatbot-regulation-laws" target="_blank" rel="noopener">MultiState: chatbot regulation trend</a> · <a href="https://www.cooley.com/news/insight/2025/2025-10-21-ai-chatbots-at-the-crossroads-navigating-new-laws-and-compliance-risks" target="_blank" rel="noopener">Cooley: compliance risks</a></p>
           </div>
         </div>
         <aside class="deep-aside">
-          <div class="pull"><p>Everyone knows their card volume. Almost nobody knows their effective rate.</p></div>
-          <div class="tool" data-tool="effrate">
-            <span class="tlabel">The instrument · live</span>
-            <span class="tname">The Effective-Rate Check</span>
-            <span class="tsub">Two numbers off last month's processing statement. It tells you what you actually pay.</span>
+          <div class="pull"><p>The fix is a sentence. The exposure is priced per violation.</p></div>
+          <div class="tool" data-tool="disclose">
+            <span class="tlabel">The instrument · writes the line</span>
+            <span class="tname">The Disclosure Line</span>
+            <span class="tsub">Your company and your channel. It writes the sentence and where it has to appear.</span>
             <div class="fieldset">
-              <div>
-                <label class="fl" for="er-vol">Card volume last month ($)</label>
-                <input id="er-vol" type="number" inputmode="numeric" min="0" placeholder="e.g. 60000" data-live="effrate" />
+              <div><label class="fl" for="dc-co">Company name</label><input id="dc-co" type="text" placeholder="Your company" /></div>
+              <div><label class="fl" for="dc-chan">Channel</label>
+                <select id="dc-chan">
+                  <option value="chat">Website chat</option>
+                  <option value="phone">Phone answering</option>
+                  <option value="sms">Text messages</option>
+                  <option value="email">Automated email</option>
+                </select>
               </div>
-              <div>
-                <label class="fl" for="er-fees">Total processing fees last month ($)</label>
-                <input id="er-fees" type="number" inputmode="numeric" min="0" placeholder="e.g. 1900" data-live="effrate" />
-              </div>
+              <div><label class="fl" for="dc-states">States you serve customers in</label><input id="dc-states" type="text" placeholder="e.g. TN, GA, CA" /></div>
             </div>
-            <div class="readout" id="er-readout" style="display:none">
-              <div class="big" id="er-big">0%</div>
-              <div class="cap" id="er-cap"></div>
-            </div>
-            <div class="emailcap" data-emailcap="effrate">
-              <div class="er"><input type="email" placeholder="Email this to me" aria-label="Email" /><button type="button" data-send="effrate">Send</button></div>
-              <div class="microcopy">The number, plus the two-quote script to act on it. One email.</div>
-              <div class="done" data-done="effrate">Sent. Check your inbox.</div>
-            </div>
+            <button class="tbtn" type="button" data-build="disclose">Write the line</button>
+            <div class="out" id="dc-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="dc-out" style="display:none" id="dc-copy">Copy to clipboard</button>
           </div>
         </aside>
       </div>
@@ -743,82 +731,107 @@ document.addEventListener('click',e=>{
 document.addEventListener('input',e=>{
   const el=e.target.closest('[data-live]');
   if(!el) return;
-  if(el.dataset.live==='hike') calcHike();
-  if(el.dataset.live==='refund') calcRefund();
-  if(el.dataset.live==='retention') calcRetention();
-  if(el.dataset.live==='effrate') calcEffrate();
+  if(el.dataset.live==='exposure') calcExposure();
+  if(el.dataset.live==='hours') calcHours();
 });
 
-function calcHike(){
-  const bal=parseFloat($('#hk-bal').value)||0;
-  const hikes=parseInt($('#hk-hikes').value,10)||1;
-  const ro=$('#hk-readout');
-  if(!bal){ ro.style.display='none'; return; }
+function calcExposure(){
+  const acts=parseFloat($('#ex-acts').value)||0;
+  const rev=(parseFloat($('#ex-rev').value)||0)/100;
+  const cost=parseFloat($('#ex-cost').value)||0;
+  const ro=$('#ex-readout');
+  if(!acts||!cost){ ro.style.display='none'; return; }
   ro.style.display='block';
-  const bps=hikes*0.0025;
-  const perYear=bal*bps;
-  $('#hk-big').textContent='+'+money(perYear)+'/yr';
-  $('#hk-cap').innerHTML=hikes+(hikes===1?' hike':' hikes')+' of a quarter point each adds about <b>'+money(perYear/12)+' a month</b>, or <b>'+money(perYear)+' a year</b>, to '+money(bal)+' of floating debt. Interest only, before any principal effect. The question for your lender this week: what does converting to fixed cost, and how long is the quote good for.';
+  const unreviewed=acts*(1-rev);
+  /* directional: assume a low single-digit error rate on unreviewed autonomous actions */
+  const badPerWeek=unreviewed*0.02;
+  const perYear=badPerWeek*cost*52;
+  $('#ex-big').textContent=money(perYear)+'/yr';
+  $('#ex-cap').innerHTML='About <b>'+Math.round(unreviewed)+' actions a week</b> happen with nobody in front of them. At a 2 percent error rate that is roughly <b>'+money(perYear)+' a year</b> in unwinding cost. Directional, not a forecast: the point is the shape. Cutting scope lowers the damage per error, and reading logs weekly lowers how long an error runs. Approval prompts do neither: users approved 93 percent of them.';
 }
 
-function calcRefund(){
-  const val=parseFloat($('#rf-val').value)||0;
-  const rate=(parseFloat($('#rf-rate').value)||0)/100;
-  const months=parseFloat($('#rf-months').value)||0;
-  const ro=$('#rf-readout');
-  if(!val||!rate){ ro.style.display='none'; return; }
+function calcHours(){
+  const min=parseFloat($('#hr-min').value)||0;
+  const freq=parseFloat($('#hr-freq').value)||0;
+  const rate=parseFloat($('#hr-rate').value)||0;
+  const ro=$('#hr-readout');
+  if(!min||!freq){ ro.style.display='none'; return; }
   ro.style.display='block';
-  const principal=val*rate;
-  const interest=months>0?principal*0.065*(months/12):0;
-  const total=principal+interest;
-  $('#rf-big').textContent='~'+money(total);
-  $('#rf-cap').innerHTML='About <b>'+money(principal)+' in duties</b>'+(interest>0?' plus roughly <b>'+money(interest)+' in statutory interest</b>':'')+'. Directional, not a filing: statutory interest runs 6 to 7 percent, compounded daily from the day you paid. The claim starts with one written question to your broker: has a CAPE declaration been filed for every entry.';
-}
-
-function calcRetention(){
-  const sal=parseFloat($('#rt-sal').value)||0;
-  const level=$('#rt-level').value;
-  const ro=$('#rt-readout');
-  if(!sal){ ro.style.display='none'; return; }
-  ro.style.display='block';
-  const factor=level==='senior'?1.5:level==='mid'?0.75:0.4;
-  const replaceCost=sal*factor;
-  const raiseCost=sal*0.08;
-  const mult=raiseCost>0?Math.round(replaceCost/raiseCost):0;
-  $('#rt-big').textContent=money(replaceCost);
-  $('#rt-cap').innerHTML='A realistic all-in cost to replace this person: search, vacancy months, and ramp, in a market where nobody like them is being let go. An 8 percent raise costs <b>'+money(raiseCost)+' a year</b>: roughly <b>'+mult+'x cheaper</b> than the search. It only works before the recruiter calls.';
-}
-
-function calcEffrate(){
-  const vol=parseFloat($('#er-vol').value)||0;
-  const fees=parseFloat($('#er-fees').value)||0;
-  const ro=$('#er-readout');
-  if(!vol||!fees){ ro.style.display='none'; return; }
-  ro.style.display='block';
-  const rate=fees/vol*100;
-  const annual=fees*12;
-  const save25=vol*12*0.0025;
-  $('#er-big').textContent=rate.toFixed(2)+'%';
-  $('#er-cap').innerHTML='Your effective rate: every fee divided by every dollar of volume. At this pace you pay about <b>'+money(annual)+' a year</b> to move money. Winning back just a quarter of a percent is worth <b>'+money(save25)+' a year</b>: that is the number to open with when you ask your processor, and one competitor, for their best all-in price against your written volume.';
+  const hrsYear=min*freq*52/60;
+  const dollars=hrsYear*rate;
+  $('#hr-big').textContent=Math.round(hrsYear).toLocaleString('en-US')+' hrs/yr';
+  $('#hr-cap').innerHTML='This one task costs <b>'+Math.round(hrsYear).toLocaleString('en-US')+' hours a year</b>'+(dollars>0?', about <b>'+money(dollars)+'</b> in loaded labor':'')+'. HubSpot’s published example was 15 to 20 minutes an instance and came to more than 350 hours a year. Check what your existing platforms already do before you buy anything: the feature is often inside the tier you pay for.';
 }
 
 /* generators */
 function build(kind){
-  if(kind==='remarket'){
-    const co=($('#rm-co').value||'[Company]').trim();
-    const month=($('#rm-month').value||'[renewal month]').trim();
-    const lines=($('#rm-lines').value||'all lines').trim();
+  if(kind==='spend'){
+    const v=id=>($('#'+id).value||'').trim();
+    const co=v('sp-co')||'[Company]';
+    const cat=v('sp-cat')||'[the only category it may buy in]';
+    const txRaw=parseFloat($('#sp-tx').value);
+    const moRaw=parseFloat($('#sp-mo').value);
+    const tx=txRaw?money(txRaw):'[per-transaction cap]';
+    const mo=moRaw?money(moRaw):'[monthly ceiling]';
+    const appr=v('sp-appr')||'[named approver]';
     const out=
-'To: our broker\nSubject: '+month+' renewal: full remarketing, line by line\n\n'+
-'Ahead of the '+month+' renewal for '+co+', we are instructing a full remarketing of our program: '+lines+'.\n\n'+
-'Context for the exercise. Marsh’s Q2 index has global commercial rates down 6 percent, the eighth straight quarterly decline, with property down 12 percent and cyber down 4 percent, while US casualty is up 7 percent, and 11 percent excluding workers’ comp. We expect the falling lines to come back cheaper with broader terms, and we expect the casualty increase to be worked, not passed through.\n\n'+
-'Specifically:\n\n'+
-'  1. Quote every line separately. We will not evaluate a single package number.\n'+
-'  2. On property, cyber, and management lines: bring at least two competing markets, and push for broader coverage, higher limits, and lower retentions, not just price.\n'+
-'  3. On liability and auto: show us what retention levels buy the increase down, and tell us what in our risk file would change the underwriting outcome.\n'+
-'  4. A flat renewal in this market is a concession. Treat it as one.\n\n'+
-'Please confirm the remarketing plan and timeline in writing within two weeks.';
-    show('rm-out','rm-copy',out); return;
+'AGENT SPEND AUTHORITY · '+co+'\n\n'+
+'1. SCOPE. Automated systems may initiate payments only for: '+cat+'. Any purchase outside this category requires a human to initiate it, not merely to approve it.\n\n'+
+'2. INSTRUMENT. Agent-initiated payments run on a dedicated virtual card with a hard issuer-side limit of '+mo+' per month. No agent is given credentials to a primary bank account, primary card, or stored payment method used by staff.\n\n'+
+'3. CAPS. Per transaction: '+tx+'. Per month: '+mo+'. The ceiling is enforced at the card, not in the software. If the tool is the only thing stopping an overspend, the control does not exist.\n\n'+
+'4. ESCALATION. Anything above '+tx+' goes to '+appr+' for approval before it is placed. Approval is given on the specific purchase, never as a standing allowance.\n\n'+
+'5. VISIBILITY. Every agent-initiated transaction lands in a log reviewed weekly by a named person. Vendor, amount, and the request that triggered it.\n\n'+
+'6. OFF SWITCH. '+appr+' can revoke the card and disable the integration without vendor assistance. This is tested once, on purpose, before the first live transaction.\n\n'+
+'Adopted for '+co+'. Review this policy whenever a vendor adds or expands autonomous purchasing.';
+    show('sp-out','sp-copy',out); return;
+  }
+  if(kind==='vendor'){
+    const vendor=($('#vn-vendor').value||'your team').trim();
+    const sys=($('#vn-sys').value||'our core systems').trim();
+    const out=
+'To: '+vendor+'\nSubject: MCP 2026-07-28: readiness and date\n\n'+
+'The Model Context Protocol specification dated 2026-07-28 publishes this week. It removes the initialize handshake, drops protocol-level sessions, redesigns Tasks, and hardens authorization onto OAuth 2.0 and OpenID Connect.\n\n'+
+'You connect to '+sys+' for us, so we need three answers in writing:\n\n'+
+'  1. Which specification version does your integration run today, and on what date do you move to 2026-07-28?\n'+
+'  2. Will anything on our side break or need re-authorizing, and if so, what and when?\n'+
+'  3. Who is the named owner of that migration on your side?\n\n'+
+'The release candidate locked on May 21, so this should be a short answer. "We are monitoring it" is not one of the three.';
+    show('vn-out','vn-copy',out); return;
+  }
+  if(kind==='disclose'){
+    const co=($('#dc-co').value||'[Company]').trim();
+    const chan=$('#dc-chan').value;
+    const states=($('#dc-states').value||'[your states]').trim();
+    const lines={
+      chat:'"You’re chatting with '+co+'’s AI assistant, not a person. Type ‘human’ any time and I’ll hand you to someone on our team."',
+      phone:'"Hi, this is '+co+'’s automated assistant. I’m AI, not a person. Say ‘representative’ at any point and I’ll transfer you to our team."',
+      sms:'"'+co+' here. This is an automated AI assistant, not a person. Reply HUMAN to reach our team, STOP to opt out."',
+      email:'"This message was drafted by '+co+'’s AI assistant and sent on our behalf. Reply directly and a person on our team will answer."'
+    };
+    const where={
+      chat:'The first message in the window, before any question is asked and before any information is collected. Not in a tooltip, not in the privacy policy.',
+      phone:'The first thing the caller hears, before any menu or data capture. Repeat it if the call is transferred back to automation.',
+      sms:'The first message of any new thread, and in the first message of a re-engagement after a long gap.',
+      email:'Visible in the body near the top, not only in the footer. If a human reviews and sends it, that is a different disclosure and you should say so accurately.'
+    };
+    const out=
+'AI DISCLOSURE · '+co+'\n\n'+
+'THE LINE\n\n'+lines[chan]+'\n\n'+
+'WHERE IT GOES\n\n'+where[chan]+'\n\n'+
+'WHY THIS WORDING\n\n'+
+'It names the company, states plainly that it is AI, and gives a one-step path to a person. Those three elements are what the strict states ask for, and following the strictest rule across '+states+' is cheaper than tracking which of your states exempt customer service. California expressly excludes customer-service bots. Utah and Maine do not.\n\n'+
+'THE EXPOSURE, FOR CONTEXT\n\n'+
+'  · California SB 243, live since January 1, 2026: from $1,000 per violation.\n'+
+'  · Colorado AI Act, live since June 30, 2026: up to $20,000 per violation, with safe harbor for documented NIST AI RMF or ISO 42001 alignment.\n'+
+'  · Utah: $2,500 per violation, more for repeat offenders, no customer-service exemption.\n'+
+'  · Maine: $1,000 per violation, no customer-service exemption.\n'+
+'  · EU transparency requirements begin enforcement August 2, 2026 if you serve EU customers.\n\n'+
+'ALSO CHECK\n\n'+
+'  1. The human handoff works in one step. Time it yourself.\n'+
+'  2. Your vendor’s default greeting has not overwritten this line.\n'+
+'  3. If AI informs lending, housing, employment or healthcare decisions, ask counsel about the Colorado safe harbor.\n\n'+
+'This is a starting point for '+co+', not legal advice. Have counsel confirm it against the states you actually operate in.';
+    show('dc-out','dc-copy',out); return;
   }
 }
 function show(outId,copyId,text){
@@ -832,8 +845,8 @@ function sendEmail(kind,btn){
   const email=cap.querySelector('input[type=email]').value.trim();
   if(!email) return;
   let result='';
-  if(kind==='refund') result=$('#rf-big').textContent+': '+$('#rf-cap').textContent;
-  if(kind==='effrate') result=$('#er-big').textContent+': '+$('#er-cap').textContent;
+  if(kind==='exposure') result=$('#ex-big').textContent+': '+$('#ex-cap').textContent;
+  if(kind==='hours') result=$('#hr-big').textContent+': '+$('#hr-cap').textContent;
   btn.disabled=true; btn.textContent='...';
   fetch(NEWSLETTER_ENDPOINT,{
     method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
