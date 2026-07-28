@@ -176,8 +176,8 @@ header.masthead{
 .tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
   box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
 .tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
-.tool .tname{font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
-.tool .tsub{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
 .tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
 .tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
 .tool input,.tool textarea,.tool select{
@@ -218,6 +218,23 @@ header.masthead{
 .tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
 .tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
 .tool .done.show{display:block}
+
+/* ---------- ADDED 2026-07-28: tool-promise + partner note ---------- */
+.lede-tag{font-weight:700}
+.contents .subnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:-14px 0 26px;max-width:88ch}
+.contents .subnote b{color:var(--navy);font-weight:700}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
 
 /* ---------- CLOSE ---------- */
 .close-field{padding:118px 6vw 100px}
@@ -276,8 +293,8 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
     <h1>The Brie<span class="kern-fi">f</span>ing.</h1>
     <div class="mast-row">
       <div class="standfirst">
-        <p>Five things moved. Each one changes a decision you are already making: what your software is allowed to do, what you pay for it, what you disclose, what you sign.</p>
-        <p>Read the whole thing in three minutes. Where it touches your business, there is a tool that does the work for you on the spot. We talk about the market here, not about ourselves.</p>
+        <p><span class="lede-tag">This week's news:</span> five things moved. Each one changes a decision you are already making: what your software is allowed to do, what you pay for it, what you disclose, what you sign.</p>
+        <p>Read the whole thing in three minutes. All five come with a working tool that does the job on the spot, free to use and yours to keep, the same as every issue. We talk about the market here, not about ourselves.</p>
       </div>
       <div class="mast-meta">
         No. 002<br>
@@ -292,19 +309,20 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   <div class="readkey-inner">
     <span><b>Headline · 5 seconds</b></span>
     <span><b>The brief · under a minute</b></span>
-    <span><b>Go deeper · the read, plus a working tool</b></span>
+    <span><b>Go deeper · the read, plus a free tool you keep</b></span>
   </div>
 </div>
 
 <section class="contents">
   <div class="contents-inner">
     <span class="label">In this issue</span>
+    <p class="subnote"><b>Every one of the five ends in a working tool.</b> Built for this issue, free, no signup, and yours to keep. That is the standard for every Briefing, not a one-off.</p>
     <div class="toc">
-      <a href="#t1"><span class="n">01</span><span class="t">Visa, Stripe and Amazon just built AI a wallet. Nobody wrote your spending limit.</span><span class="go">The money rail</span></a>
-      <a href="#t2"><span class="n">02</span><span class="t">OpenAI's own model broke out of its box. Your approval button is not a control.</span><span class="go">Containment</span></a>
-      <a href="#t3"><span class="n">03</span><span class="t">You are probably already paying for the agents you are about to buy.</span><span class="go">Your stack</span></a>
-      <a href="#t4"><span class="n">04</span><span class="t">Tomorrow the wiring under your AI tools changes. Ask who owns the migration.</span><span class="go">The plumbing</span></a>
-      <a href="#t5"><span class="n">05</span><span class="t">Five states now fine you for not saying it is a bot. One sentence fixes it.</span><span class="go">Disclosure</span></a>
+      <a href="#t1"><span class="n">01</span><span class="t">Visa, Stripe and Amazon just built AI a wallet. Nobody wrote your spending limit.</span><span class="go">The money rail</span><span class="tk">+ tool</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">OpenAI's own model broke out of its box. Your approval button is not a control.</span><span class="go">Containment</span><span class="tk">+ tool</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">You are probably already paying for the agents you are about to buy.</span><span class="go">Your stack</span><span class="tk">+ tool</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">Tomorrow the wiring under your AI tools changes. Ask who owns the migration.</span><span class="go">The plumbing</span><span class="tk">+ tool</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">Five states now fine you for not saying it is a bot. One sentence fixes it.</span><span class="go">Disclosure</span><span class="tk">+ tool</span></a>
     </div>
   </div>
 </section>
@@ -360,6 +378,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
             <span class="tlabel">The instrument · writes the policy</span>
             <span class="tname">The Agent Spend Authority</span>
             <span class="tsub">Four lines. It writes the spending policy to adopt before any agent touches money.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
             <div class="fieldset">
               <div><label class="fl" for="sp-co">Company name</label><input id="sp-co" type="text" placeholder="Your company" /></div>
               <div><label class="fl" for="sp-cat">What it may buy, exactly</label><input id="sp-cat" type="text" placeholder="e.g. shop supplies from approved vendors only" /></div>
@@ -429,6 +448,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
             <span class="tlabel">The instrument · live</span>
             <span class="tname">The Unreviewed-Action Check</span>
             <span class="tsub">What your agents do without a human in front of it, priced. It updates as you type.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
             <div class="fieldset">
               <div><label class="fl" for="ex-acts">Actions your AI tools take per week</label><input id="ex-acts" type="number" inputmode="numeric" min="0" placeholder="e.g. 400" data-live="exposure" /></div>
               <div class="row2">
@@ -503,6 +523,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
             <span class="tlabel">The instrument · live</span>
             <span class="tname">The Reclaimed-Hours Check</span>
             <span class="tsub">Time one repetitive task honestly. This turns it into a yearly number.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
             <div class="fieldset">
               <div class="row2">
                 <div><label class="fl" for="hr-min">Minutes per instance</label><input id="hr-min" type="number" inputmode="numeric" min="0" placeholder="e.g. 18" data-live="hours" /></div>
@@ -577,6 +598,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
             <span class="tlabel">The instrument · writes the email</span>
             <span class="tname">The Vendor Readiness Note</span>
             <span class="tsub">Name the vendor and what it touches. It writes the email that gets you a version and a date.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
             <div class="fieldset">
               <div><label class="fl" for="vn-vendor">Vendor or tool</label><input id="vn-vendor" type="text" placeholder="e.g. the CRM, the assistant, the connector" /></div>
               <div><label class="fl" for="vn-sys">What it connects to for you</label><input id="vn-sys" type="text" placeholder="e.g. our files, email, and job scheduling" /></div>
@@ -644,6 +666,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
             <span class="tlabel">The instrument · writes the line</span>
             <span class="tname">The Disclosure Line</span>
             <span class="tsub">Your company and your channel. It writes the sentence and where it has to appear.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
             <div class="fieldset">
               <div><label class="fl" for="dc-co">Company name</label><input id="dc-co" type="text" placeholder="Your company" /></div>
               <div><label class="fl" for="dc-chan">Channel</label>
@@ -674,11 +697,17 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
       <h2>The market will not wait for your comfort level.</h2>
     </div>
     <div class="close-copy">
-      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a tool for each. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
       <form class="signup" id="signupForm">
         <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
         <button type="submit">Get the next one</button>
       </form>
+    </div>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
     </div>
   </div>
 </section>
@@ -688,7 +717,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
     <a href="/" class="brand" aria-label="GOUDE group home"><img src="../goude-logo.png" alt="GOUDE group" /></a>
     <div class="foot-meta">
       Brand architecture for the AI-shaped company<br>
-      <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
       © 2026 The Goude Group<br>
       <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
     </div>
