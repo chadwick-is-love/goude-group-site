@@ -13,8 +13,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>The Briefing, No. 002: Goude Group Weekly Intelligence</title>
 <meta name="description" content="Five AI developments that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
-<link rel="icon" type="image/png" href="../favicon.png" />
-<link rel="apple-touch-icon" href="../favicon.png" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://goudegroup.com/briefing/" />
 <meta property="og:title" content="The Briefing, No. 002: Goude Group Weekly Intelligence" />
@@ -283,7 +283,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
 <body>
 
 <nav id="nav">
-  <a href="/" class="brand" aria-label="GOUDE group home"><img src="../goude-logo.png" alt="GOUDE group" /></a>
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
   <span class="nav-tag">Weekly Intelligence · No. 002</span>
 </nav>
 
@@ -706,6 +706,12 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   </div>
   <div class="partner">
     <div class="partner-note">
+      <span class="label">Back issue</span>
+      <p>This is back issue No. 002. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+    </div>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
       <span class="label">One more thing</span>
       <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
     </div>
@@ -714,7 +720,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
 
 <footer>
   <div class="foot-grid">
-    <a href="/" class="brand" aria-label="GOUDE group home"><img src="../goude-logo.png" alt="GOUDE group" /></a>
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
     <div class="foot-meta">
       Brand architecture for the AI-shaped company<br>
       Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
@@ -901,6 +907,9 @@ document.getElementById('signupForm').addEventListener('submit',e=>{
     form.innerHTML='<p style="font-size:14px;line-height:1.5">On the list. No. 003 comes your way next week.</p>';
   });
 });
+</script>
+<script>
+(function(){function o(){var h=(location.hash||'').replace('#','');if(!/^t[1-5]$/.test(h))return;var t=document.getElementById(h);if(!t||t.classList.contains('open'))return;t.classList.add('open');var b=t.querySelector('.deep-toggle');if(b){b.setAttribute('aria-expanded','true');b.firstChild.textContent='Close ';}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},80);}addEventListener('hashchange',o);o();})();
 </script>
 </body>
 </html>

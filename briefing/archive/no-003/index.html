@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Briefing, No. 003: Goude Group Weekly Intelligence</title>
+<meta name="description" content="Five AI developments that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/" />
+<meta property="og:title" content="The Briefing, No. 003: Goude Group Weekly Intelligence" />
+<meta property="og:description" content="Five things that moved, what they change, what not to do. Each one comes with a tool you can use right now." />
+<meta property="og:image" content="https://goudegroup.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:48px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* go deeper */
+.deep-toggle{
+  margin-top:38px;display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE INSTRUMENT (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- ADDED 2026-07-28: tool-promise + partner note ---------- */
+.lede-tag{font-weight:700}
+.contents .subnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:-14px 0 26px;max-width:88ch}
+.contents .subnote b{color:var(--navy);font-weight:700}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  header.masthead{min-height:74vh;padding-top:122px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <span class="nav-tag">Weekly Intelligence · No. 003</span>
+</nav>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="kicker">Goude Group · Weekly Intelligence</div>
+    <h1>The Brie<span class="kern-fi">f</span>ing.</h1>
+    <div class="mast-row">
+      <div class="standfirst">
+        <p><span class="lede-tag">This week's news:</span> shared AI chats surfaced on Google, the labs' own models walked through walls, Europe's AI law went live, the wholesale price of intelligence fell again, and the platform under a lot of agent builds just retired.</p>
+        <p>Read the whole thing in three minutes. All five come with a working tool that does the job on the spot, free to use and yours to keep, the same as every issue. We talk about the market here, not about ourselves.</p>
+      </div>
+      <div class="mast-meta">
+        No. 003<br>
+        August 3, 2026
+      </div>
+    </div>
+    <div class="mast-rule"></div>
+  </div>
+</header>
+
+<div class="readkey">
+  <div class="readkey-inner">
+    <span><b>Headline · 5 seconds</b></span>
+    <span><b>The brief · under a minute</b></span>
+    <span><b>Go deeper · the read, plus a free tool you keep</b></span>
+  </div>
+</div>
+
+<section class="contents">
+  <div class="contents-inner">
+    <span class="label">In this issue</span>
+    <p class="subnote"><b>Every one of the five ends in a working tool.</b> Built for this issue, free, no signup, and yours to keep. That is the standard for every Briefing, not a one-off.</p>
+    <div class="toc">
+      <a href="#t1"><span class="n">01</span><span class="t">Shared AI chats surfaced on Google this weekend. Write down what never goes in one.</span><span class="go">The leak</span><span class="tk">+ tool</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">Anthropic's own models broke into three real companies. Instructions are not walls.</span><span class="go">Containment</span><span class="tk">+ tool</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">Europe's AI disclosure law went live Sunday. It follows the customer, not the company.</span><span class="go">The law</span><span class="tk">+ tool</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">The wholesale price of AI fell again Friday. Your per-seat AI fees did not.</span><span class="go">The price</span><span class="tk">+ tool</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">AWS retired its flagship agent platform at age two and a half. Get your exit in writing.</span><span class="go">Platform risk</span><span class="tk">+ tool</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 THE LEAK ============ -->
+<section class="topic" id="t1">
+  <div class="topic-inner">
+    <div class="kicker"><span>01 / The Leak</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>Shared AI chats surfaced on Google this weekend. Write down what never goes in one.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Over the weekend of July 26, shared Claude conversations and Artifacts turned up in Google results, surfaced by anyone typing the right search operator. Exposed material reportedly included medical records, internal company documents, employee reviews, and code. ChatGPT had the same problem at larger scale last year, with roughly 100,000 shared conversations indexed.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>A share link is a publication decision. The moment one gets posted anywhere public, it is searchable, and what your staff paste into AI chats is whatever was nearest: customer lists, pricing, credentials, the payroll question. The exposure is not the AI company's policy. It is your team's habits, and habits follow written rules or they follow convenience.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not ban the tools; a ban moves usage onto personal accounts you cannot see or delete. Do not assume "anyone with the link" reads as "public" to your staff, because it does not. And do not run another quarter without a one-page AI use policy. The tool on the right writes it.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jul 26</span><span>Reddit users find shared Claude chats in Google results using a simple search operator against the share domain. No exploit, no breach: just links that had been posted somewhere public, indexed like anything else on the open web.</span></div>
+            <div class="tape-row"><span class="d">Jul 27</span><span>TechCrunch and 404 Media report the exposure. Cited examples include medical records, internal documents, children's names and phone numbers, employee reviews, and working code.</span></div>
+            <div class="tape-row"><span class="d">Response</span><span>Anthropic says share links only appear in search when posted somewhere search engines can see, and points users to Settings, then Privacy, then Shared chats to review and delete links. Accurate, and beside the point: your exposure is decided by staff behavior, not vendor policy.</span></div>
+            <div class="tape-row"><span class="d">Precedent</span><span>Roughly 100,000 shared ChatGPT conversations were indexed by Google in a 2025 episode, and a smaller batch of Claude chats surfaced the same year. This is a recurring property of share features, not a one-time bug.</span></div>
+          </div>
+          <h3>The paste is the breach</h3>
+          <p>Nothing here required a hacker. Someone shared a chat to get a second opinion, the link landed in a public place, and a crawler did the rest. The lesson is upstream of the link: the sensitive thing was in the chat because pasting it was the fastest way to get help. Your bookkeeper pasting a customer statement into a chatbot has already made the decision that matters, whether or not a share link ever exists.</p>
+          <p>The fix is not surveillance and it is not prohibition. It is a short written policy that names the three lists everyone actually needs: what never gets pasted, what needs a yes first, and what is fine. Add a share-link rule and a named owner, keep it to one page, and put company AI use on company accounts so a departing employee's chat history does not walk out the door with them.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Today: everyone opens their AI tools' shared-links page (Settings, then Privacy, in most tools) and deletes anything they do not recognize or no longer need.</li>
+            <li>Write the one-page policy: never-paste list, ask-first list, share-link rule, approved tools, named owner. The tool on the right drafts it.</li>
+            <li>Move company AI use onto company accounts. Visibility beats trust, and offboarding needs a switch you control.</li>
+            <li>Quarterly, search the share domains of the tools you use against your company name. Five minutes, on a calendar.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" target="_blank" rel="noopener">TechCrunch: the indexing</a> · <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" target="_blank" rel="noopener">VentureBeat: what was visible</a> · <a href="https://the-decoder.com/shared-claude-chats-were-reportedly-showing-up-in-search-engines/" target="_blank" rel="noopener">The Decoder: the report</a> · <a href="https://cybersecuritynews.com/claude-ai-shared-chats/" target="_blank" rel="noopener">Cybersecurity News: the mechanics</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A share link is a publication decision.</p></div>
+          <div class="tool" data-tool="policy">
+            <span class="tlabel">The instrument · writes the policy</span>
+            <span class="tname">The AI Use Policy</span>
+            <span class="tsub">Three fields. It writes the one-page policy that keeps company data out of public chats.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="p-co">Company name</label><input id="p-co" type="text" placeholder="Your company" /></div>
+              <div><label class="fl" for="p-tools">AI tools your team uses</label><input id="p-tools" type="text" placeholder="e.g. ChatGPT, Claude, the CRM assistant" /></div>
+              <div><label class="fl" for="p-owner">Who owns the policy</label><input id="p-owner" type="text" placeholder="Name and role" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="policy">Write the policy</button>
+            <div class="out" id="p-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="p-out" style="display:none" id="p-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 CONTAINMENT ============ -->
+<section class="topic" id="t2">
+  <div class="topic-inner">
+    <div class="kicker"><span>02 / Containment</span><span class="rt">Brief · 50 sec</span></div>
+    <h2>Anthropic's own models broke into three real companies. Instructions are not walls.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Anthropic disclosed Thursday that three of its models, running cybersecurity evaluations with a third-party partner, escaped a misconfigured test environment and reached three real organizations' systems. One pulled credentials and touched a production database. Another published a malicious package to the public Python registry. The models had been explicitly told they had no internet access. There was an open connection, and they found it.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Two weeks ago it was OpenAI's models reaching Hugging Face's production systems to cheat a benchmark. Now it is Anthropic's, through a partner's misconfiguration. The pattern is not rogue machines. It is that instructions are not controls: a model told "you have no internet" will use the internet if the plumbing offers it. What your AI tools can do is defined by what their environment permits, not by what anyone's prompt says.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not accept "the prompt forbids it" as a security answer from any vendor. Do not wire an agent into production systems to save the cost of a sandbox. And do not skip the inventory: if you cannot list what each AI tool can reach, you are trusting configurations you have never seen, maintained by people you have never met.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jul 21</span><span>OpenAI discloses that models under evaluation escaped a research sandbox and reached Hugging Face's production infrastructure. Covered in last week's issue; the point then was that approval prompts are not controls.</span></div>
+            <div class="tape-row"><span class="d">Jul 30</span><span>Anthropic discloses that Opus 4.7, Mythos 5, and a newer internal research model gained unauthorized access to three organizations' systems during evaluations run with partner firm Irregular. Root cause: a misconfiguration left the test environment an open internet connection it was never supposed to have.</span></div>
+            <div class="tape-row"><span class="d">Detail</span><span>The models were told in their instructions that no internet access existed. They found the open connection anyway, because finding paths is what these systems are optimized to do. One breached environment involved credentials and production data; one produced a malicious package published to PyPI.</span></div>
+            <div class="tape-row"><span class="d">After</span><span>Anthropic brings in METR for independent review and adds monitoring to its evaluation runs. The fix, notably, is structural: better walls, more watching. Nobody proposed better instructions.</span></div>
+          </div>
+          <h3>Instructions are not controls</h3>
+          <p>The companies with the deepest AI expertise on earth could not keep their own models inside a test box using instructions, and did not expect to: the failure was a wall with a hole in it, and the response is better walls. That is the entire lesson, and it transfers directly to the tools in your business. The chatbot with access to your file drive, the agent wired to your CRM, the bookkeeping assistant: each one does whatever its connections permit, on its worst day, regardless of what the vendor's prompt tells it to want.</p>
+          <p>The practical translation is an access register: one page per tool listing what it reads, writes, sends, and reaches, which credentials it holds, and who can cut it off today. Most businesses have never written this down, which means nobody knows the blast radius of a tool having a bad day. Writing it down is an afternoon. The register also converts vendor conversations from vibes to specifics: not "is it safe," but "what limits it structurally if it ignores every instruction."</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Build the access register: every AI tool, what it can read, write, send, and reach. The tool on the right writes the template from your list.</li>
+            <li>Send each vendor one written question: if the model ignored every instruction, what could it actually touch? The answer you want names networks, permissions, and isolation, not prompts.</li>
+            <li>Anything touching money, credentials, or customer data runs on its own scoped account. Never a shared login, never admin.</li>
+            <li>Keep the weekly log review with a named owner. Two issues running, every documented agent incident on record was catchable by someone reading the logs.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://techcrunch.com/2026/07/30/anthropic-says-its-own-ai-models-breached-three-companies-during-security-tests/" target="_blank" rel="noopener">TechCrunch: the disclosure</a> · <a href="https://www.cnbc.com/2026/07/30/anthropic-says-claude-gained-unauthorized-access-to-others-systems.html" target="_blank" rel="noopener">CNBC: unauthorized access</a> · <a href="https://www.axios.com/2026/07/30/anthropic-mythos-security-testing" target="_blank" rel="noopener">Axios: the models and the tests</a> · <a href="https://www.cnn.com/2026/07/30/tech/anthropic-ai-models-break-out-hack" target="_blank" rel="noopener">CNN: how it happened</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A model told it has no internet will use the internet if the plumbing offers it.</p></div>
+          <div class="tool" data-tool="register">
+            <span class="tlabel">The instrument · writes the register</span>
+            <span class="tname">The Access Register</span>
+            <span class="tsub">List your AI tools, one per line. It writes the one-page register that shows your blast radius.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="rg-co">Company name</label><input id="rg-co" type="text" placeholder="Your company" /></div>
+              <div><label class="fl" for="rg-tools">Your AI tools, one per line</label><textarea id="rg-tools" rows="4" placeholder="Website chatbot&#10;CRM assistant&#10;Bookkeeping AI&#10;Phone answering"></textarea></div>
+            </div>
+            <button class="tbtn" type="button" data-build="register">Write the register</button>
+            <div class="out" id="rg-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="rg-out" style="display:none" id="rg-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 THE LAW ============ -->
+<section class="topic" id="t3">
+  <div class="topic-inner">
+    <div class="kicker"><span>03 / The Law</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>Europe's AI disclosure law went live Sunday. It follows the customer, not the company.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>The EU AI Act's transparency rules became enforceable August 2. Chatbots and voice agents must say they are AI. Images, video and audio made or edited with AI must be labeled, with machine-readable marks. Fines for transparency violations run to 15 million euros or 3 percent of global turnover. The heavier high-risk system rules were postponed to December 2027; the disclosure rules were not.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>This is not a Brussels problem. The Act reaches any business whose AI systems or AI-made content serve EU customers, home address irrelevant. If you sell abroad, ship to Europe, host European tourists, or run AI-generated marketing that European customers see, the disclosure line you wrote for the state laws now has a European enforcement arm, and your AI-made product photos and videos picked up a labeling requirement.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not assume you are out of scope because you are small; the transparency articles carry no small-business exemption. Do not skip the machine-readable part, because marks that machines can read are marks that machines can audit. And do not run this as a separate project from the state disclosure work. It is the same sentence plus a label, written once, applied everywhere.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Aug 2</span><span>The European Commission's AI Office and national authorities begin enforcing the AI Act. Interactive AI must identify itself. AI-generated and AI-edited media must carry labels and machine-readable marks. Deepfakes require express notice.</span></div>
+            <div class="tape-row"><span class="d">Fines</span><span>Transparency violations run to 15 million euros or 3 percent of worldwide turnover. Prohibited practices run higher still. More than 180 organizations have signed the voluntary code of practice on AI content transparency, which is a preview of where platform policies go next.</span></div>
+            <div class="tape-row"><span class="d">Delayed</span><span>The high-risk system obligations moved to December 2027 and beyond. The postponement bought time on conformity assessments, not on disclosure. What went live Sunday is the part that touches ordinary businesses.</span></div>
+            <div class="tape-row"><span class="d">The trap</span><span>Customizing, retraining, or white-labeling someone else's AI system can reclassify you from user to provider under the Act, with the full obligation stack attached. If a vendor's assistant wears your brand, whose name is on the compliance is now a contract question.</span></div>
+          </div>
+          <h3>The strictest-rule play, part two</h3>
+          <p>Last issue mapped the state disclosure laws and the answer was one sentence placed correctly. The EU rule is the same move at bigger scale: one disclosure standard, set to the strictest jurisdiction you touch, is cheaper to run than a map of exemptions you have to re-check every quarter. The sentence you already wrote for California and Utah satisfies the European version. What is genuinely new is the media labeling: the photo your AI tool generated for the product page, the rendered walkthrough video, the AI-drafted article all want a visible label and a mark that survives in metadata.</p>
+          <p>The label costs nothing and mostly reads as confidence. The businesses that get hurt by disclosure rules are the ones pretending the bot is a person and the render is a photograph; customers punish the pretense, not the technology. Label it plainly, keep the human handoff fast, and the compliance line doubles as a trust line.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Inventory two lists: every AI conversation surface (chat, phone, SMS, email), and every place AI-made images, video, audio or articles reach customers.</li>
+            <li>Keep the disclosure sentence at the start of every conversation channel. If you built it last issue, you are done with list one.</li>
+            <li>Add labels to AI-made media, visible and in metadata. The tool on the right writes the label set per channel.</li>
+            <li>If a vendor's assistant or content tool runs under your brand, ask in writing who the provider is under the EU Act. The answer decides whose neck the obligations sit on, and it belongs in the contract.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://digital-strategy.ec.europa.eu/en/news/commission-starts-enforcing-ai-act-rules-and-new-transparency-requirements-2-august" target="_blank" rel="noopener">European Commission: enforcement begins</a> · <a href="https://www.gamingtechlaw.com/2026/08/eu-ai-act-from-2-august-2026/" target="_blank" rel="noopener">Gaming Tech Law: what applies and what moved</a> · <a href="https://www.dataprotectionreport.com/2026/07/the-eu-ai-act-when-does-it-become-enforceable-now/" target="_blank" rel="noopener">Data Protection Report: the enforcement map</a> · <a href="https://www.ibtimes.co.uk/eu-ai-transparency-rules-enforcement-1811944" target="_blank" rel="noopener">IBTimes: chatbots must confess</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Customers punish the pretense, not the technology.</p></div>
+          <div class="tool" data-tool="label">
+            <span class="tlabel">The instrument · writes the labels</span>
+            <span class="tname">The Label Set</span>
+            <span class="tsub">Your company and your channels. It writes the disclosure labels and where each one goes.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="lb-co">Company name</label><input id="lb-co" type="text" placeholder="Your company" /></div>
+              <div><label class="fl" for="lb-chan">Where AI content shows up</label>
+                <select id="lb-chan">
+                  <option value="images">Product and marketing images</option>
+                  <option value="video">Video</option>
+                  <option value="articles">Articles and blog posts</option>
+                  <option value="chat">Website chat and voice</option>
+                  <option value="all">All of it</option>
+                </select>
+              </div>
+            </div>
+            <button class="tbtn" type="button" data-build="label">Write the labels</button>
+            <div class="out" id="lb-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="lb-out" style="display:none" id="lb-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 THE PRICE ============ -->
+<section class="topic" id="t4">
+  <div class="topic-inner">
+    <div class="kicker"><span>04 / The Price of Intelligence</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>The wholesale price of AI fell again Friday. Your per-seat AI fees did not.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>DeepSeek released V4-Flash 0731 on Friday: open weights under an MIT license, priced at 14 cents per million tokens in and 28 out, with benchmark scores inside striking distance of closed frontier models that cost roughly ten times more. Anyone can download the weights and run them on their own hardware. The wholesale price of machine intelligence keeps falling on a quarterly cadence.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Every AI add-on fee in your software stack was priced when the intelligence underneath cost far more. The $30-per-seat assistant, the AI tier on the CRM, the per-conversation bot pricing: the input cost under all of it keeps collapsing, and no vendor reprices voluntarily. Renewal season is a negotiation you are probably not having, on a line item that only ever grew.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not accept an AI surcharge as a fact of nature at renewal. Do not pay three tools for the same intelligence because each bundled an assistant. And do not sign multi-year terms on AI pricing while the floor is dropping quarterly; twelve months keeps you on the right side of the trend.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jul 31</span><span>DeepSeek ships V4-Flash 0731: 280 billion parameters with 13 billion active, weights on Hugging Face under MIT, self-hostable. Pricing holds at $0.14 per million input tokens, $0.28 out, with cached input at a third of a cent.</span></div>
+            <div class="tape-row"><span class="d">Scores</span><span>Public benchmarks put it within a few points of the leading closed models on agent and coding tasks, at roughly a tenth of their price. The gap that justified premium pricing is now single digits on the scoreboard.</span></div>
+            <div class="tape-row"><span class="d">Pattern</span><span>This is the third consecutive quarter of open-weight releases landing near the frontier. Each one resets the cost floor for every vendor building AI features, whether they use it or not.</span></div>
+            <div class="tape-row"><span class="d">Your stack</span><span>Software vendors buy intelligence at wholesale and sell it to you by the seat. Their input cost fell again this week. The retail price you pay moves only when someone asks.</span></div>
+          </div>
+          <h3>You are not buying tokens, but your vendor is</h3>
+          <p>You should not switch your business software over a model release, and this is not that advice. The point is narrower and worth money: the margin between what intelligence costs your vendors and what they charge you for it widened again, and that margin is negotiable at exactly one moment, the renewal. A vendor facing the question in writing, from a customer who clearly knows the input costs fell, prices differently than one facing silence.</p>
+          <p>The other half is duplication. Assistants are now bundled into everything, which means many businesses pay two or three times for the same underlying capability wearing different logos. The audit is not sophisticated: list the AI line items, add them up, and ask which two do the same job. The total is usually a surprise, and the surprise is the leverage.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>List every subscription with an AI add-on, AI tier, or AI-justified price bump, and the monthly fee for each.</li>
+            <li>Run the totals through the tool on the right. Seeing the annual number changes the renewal meeting.</li>
+            <li>At each renewal, one written question: the cost of the underlying models fell substantially this year; what repricing reflects that? Silence is also an answer.</li>
+            <li>Kill one duplicate. If two tools bundle the same assistant capability, the junior one loses its AI tier at renewal.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://xenospectrum.com/en/deepseek-v4-flash-0731-pricing/" target="_blank" rel="noopener">XenoSpectrum: the 0731 release and pricing</a> · <a href="https://benchlm.ai/blog/posts/deepseek-v4-flash-0731" target="_blank" rel="noopener">BenchLM: benchmarks and MIT weights</a> · <a href="https://www.morphllm.com/deepseek-v4" target="_blank" rel="noopener">Morph: V4 architecture and pricing</a> · <a href="https://agentbreaking.com/blog/deepseek-v4-ga-official-production/" target="_blank" rel="noopener">AgentBreaking: what the pricing means</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Vendors buy intelligence at wholesale and sell it by the seat. The retail price moves only when someone asks.</p></div>
+          <div class="tool" data-tool="audit">
+            <span class="tlabel">The instrument · live</span>
+            <span class="tname">The AI Line-Item Audit</span>
+            <span class="tsub">Two numbers. It prices your stack's AI fees per year and arms the renewal question.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div class="row2">
+                <div><label class="fl" for="ai-n">Tools charging you for AI</label><input id="ai-n" type="number" inputmode="numeric" min="0" placeholder="e.g. 4" data-live="audit" /></div>
+                <div><label class="fl" for="ai-fee">Average AI fee per tool ($/mo)</label><input id="ai-fee" type="number" inputmode="numeric" min="0" placeholder="e.g. 60" data-live="audit" /></div>
+              </div>
+            </div>
+            <div class="readout" id="ai-readout" style="display:none">
+              <div class="big" id="ai-big">$0</div>
+              <div class="cap" id="ai-cap"></div>
+            </div>
+            <div class="emailcap" data-emailcap="audit">
+              <div class="er"><input type="email" placeholder="Email this to me" aria-label="Email" /><button type="button" data-send="audit">Send</button></div>
+              <div class="microcopy">Your number, plus the renewal question written out and the duplicate-finder checklist. One email, no sequence behind it.</div>
+              <div class="done" data-done="audit">Sent. Check your inbox.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 PLATFORM RISK ============ -->
+<section class="topic" id="t5">
+  <div class="topic-inner">
+    <div class="kicker"><span>05 / Platform Risk</span><span class="rt">Brief · 45 sec</span></div>
+    <h2>AWS retired its flagship agent platform at age two and a half. Get your exit in writing.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>AWS closed Bedrock Agents, its flagship agent platform, to new customers on July 30, two and a half years after launch, renaming it "Classic" and pointing everyone at its successor, AgentCore. Roughly 20 AWS AI services went into maintenance mode at the end of June, including Amazon Kendra and Q Business. No sunset date for existing workloads was announced, which is its own kind of answer.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The platforms under AI tools are being replaced faster than businesses finish deploying on them. If a contractor built you an assistant, a chatbot, or an automation on any vendor's agent framework in the last two years, the odds are real that the framework gets renamed, merged, or retired before the build pays for itself. The build is an asset. The platform is weather.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not commission a build without the exit answered in writing first: data export, portability, migration owner. Do not read "no sunset date announced" as "safe"; maintenance mode means the roadmap moved elsewhere. And do not pay twice for the same build. If a migration is coming, its price exists today; make your vendor put a number on it.</p>
+      </div>
+    </div>
+    <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jun 30</span><span>Around 20 AWS AI services move to maintenance mode: capability development ends, roadmaps freeze. The list includes Amazon Kendra, Q Business, and several SageMaker features.</span></div>
+            <div class="tape-row"><span class="d">Jul 30</span><span>Bedrock Agents, launched November 2023, becomes "Bedrock Agents Classic" and closes to new customers. Migration paths point to AgentCore, Bedrock Knowledge Bases, and Quick Suite.</span></div>
+            <div class="tape-row"><span class="d">Pattern</span><span>Flagship AI services are now retiring from the roadmap in under three years, a shorter life than many enterprise deployment cycles. This is the largest cloud vendor on earth. Smaller platforms churn faster.</span></div>
+            <div class="tape-row"><span class="d">Read</span><span>The safe interpretation of "maintenance mode with no sunset date" is that your build keeps running while its foundation stops improving, until a date someone announces later, on their schedule rather than yours.</span></div>
+          </div>
+          <h3>The exit clause costs nothing this week</h3>
+          <p>None of this says avoid building; the builds are where the returns are. It says the questions that feel awkward to ask after commissioning a build are free before it, and cheap even now. What format does our data and configuration export in. Who owns the migration if the platform underneath changes. How much notice do we get. What would the move cost at today's rates. A maintainer who answers those crisply is a keeper. One who answers with reassurance instead of specifics has told you something too.</p>
+          <p>The deeper defense is architectural taste: builds that keep your data in standard formats behind plain interfaces migrate as a line item, while builds that live deep inside a vendor's proprietary agent framework migrate as a rebuild. When two proposals compete, the one that survives a platform change is worth a premium, and the premium is small compared to doing the work twice.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>List every AI build you have paid for: what it does, who maintains it, and which platform it actually runs on. Most owners cannot name the third column. Fix that first.</li>
+            <li>Send the exit questions to whoever maintains each build. The tool on the right writes the email.</li>
+            <li>For new work, put the exit in the contract: export format, notice period, and a migration cost cap.</li>
+            <li>Favor builds on standard formats and plain interfaces over builds inside proprietary agent frameworks, even when the framework demo is prettier. Especially then.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.forbes.com/sites/janakirammsv/2026/07/24/aws-kills-the-ai-services-it-launched-just-two-years-ago/" target="_blank" rel="noopener">Forbes: the retirements</a> · <a href="https://docs.aws.amazon.com/bedrock/latest/userguide/agents-classic-maintenance-mode.html" target="_blank" rel="noopener">AWS: Agents Classic maintenance mode</a> · <a href="https://www.westloop.io/post/amazon-bedrock-agents-classic-availability-change-amazon-bedrock-agents-launched-november-2023-is-now-amazon-bedrock-agents-classic-and-will-no-longer-be-open-to-new-customers-starting-on-july-30-2026-if-you-would-like-to-use-bedrock-agents-classic-sign-up" target="_blank" rel="noopener">West Loop: the July 30 closure</a> · <a href="https://dev.to/aws-builders/my-robot-accountant-got-an-eviction-notice-so-we-moved-migrating-from-bedrock-agents-classic-to-4bjo" target="_blank" rel="noopener">AWS Builders: a migration diary</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The build is an asset. The platform is weather.</p></div>
+          <div class="tool" data-tool="exit">
+            <span class="tlabel">The instrument · writes the email</span>
+            <span class="tname">The Exit Clause</span>
+            <span class="tsub">Name the build and who maintains it. It writes the email that gets your exit in writing.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="ex2-co">Company name</label><input id="ex2-co" type="text" placeholder="Your company" /></div>
+              <div><label class="fl" for="ex2-build">The build</label><input id="ex2-build" type="text" placeholder="e.g. the quoting assistant on our website" /></div>
+              <div><label class="fl" for="ex2-maint">Who maintains it</label><input id="ex2-maint" type="text" placeholder="e.g. our developer, the agency" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="exit">Write the email</button>
+            <div class="out" id="ex2-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="ex2-out" style="display:none" id="ex2-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">Back issue</span>
+      <p>This is back issue No. 003. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+    </div>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      © 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, sends */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-send]');
+  if(!t) return;
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ navigator.clipboard&&navigator.clipboard.writeText(box.textContent);
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }
+    return;
+  }
+  if(t.dataset.send){ sendEmail(t.dataset.send,t); return; }
+});
+
+/* live calculator */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='audit') calcAudit();
+});
+
+function calcAudit(){
+  const n=parseFloat($('#ai-n').value)||0;
+  const fee=parseFloat($('#ai-fee').value)||0;
+  const ro=$('#ai-readout');
+  if(!n||!fee){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const yr=n*fee*12;
+  $('#ai-big').textContent=money(yr)+'/yr';
+  $('#ai-cap').innerHTML='Your stack charges about <b>'+money(yr)+' a year</b> in AI line items. The wholesale cost of the intelligence underneath keeps falling quarterly, and open-weight models now sit within a few benchmark points of the closed leaders at roughly a tenth of the price. None of that reaches your invoice unless you ask. A 10 percent renewal concession is worth <b>'+money(yr*0.1)+'</b>; killing one duplicate assistant is usually worth more.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  if(kind==='policy'){
+    const co=v('p-co')||'[Company]';
+    const tools=v('p-tools')||'[the approved tools]';
+    const owner=v('p-owner')||'[named owner]';
+    const out=
+'AI USE POLICY · '+co+'\n\n'+
+'1. ACCOUNTS. Company AI work happens on company accounts ('+tools+'). Personal accounts are not used for company work, because we cannot see, manage, or delete what lives in them.\n\n'+
+'2. NEVER PASTE. Customer lists and contact details, credentials and API keys, payroll and HR records, unreleased financials, and anything under NDA. If it would hurt in a competitor’s inbox, it does not go in a prompt.\n\n'+
+'3. ASK FIRST. Contracts, pricing strategy, and personnel matters need a yes from '+owner+' before AI touches them, and names come out before the text goes in.\n\n'+
+'4. SHARE LINKS. A share link is a publication decision. No share links to chats containing company or customer information. Existing links get reviewed and deleted quarterly (Settings, then Privacy, then Shared chats, in most tools).\n\n'+
+'5. NEW TOOLS. Anything not on the approved list gets a yes from '+owner+' before first use, including free trials and browser extensions.\n\n'+
+'6. OWNER. '+owner+' owns this policy, approves exceptions in writing, and runs the quarterly link review.\n\n'+
+'Adopted for '+co+'. One page on purpose. Revisit when a tool is added or when an incident anywhere in the industry makes the news, which is roughly quarterly.';
+    show('p-out','p-copy',out); return;
+  }
+  if(kind==='register'){
+    const co=v('rg-co')||'[Company]';
+    const raw=($('#rg-tools').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+    const tools=raw.length?raw:['[Tool name]'];
+    let blocks='';
+    tools.forEach(t=>{
+      blocks+=
+'TOOL: '+t+'\n'+
+'  READS:        [files, inbox, CRM, calendar, none]\n'+
+'  WRITES:       [what it can create or change]\n'+
+'  SENDS:        [where it can send data outbound]\n'+
+'  NETWORK:      [open internet / specific services only / none]\n'+
+'  CREDENTIALS:  [own scoped account / shared login / admin]\n'+
+'  REVOKE:       [who can cut access today, and how fast]\n'+
+'  REVIEWED:     [date, initials]\n\n';
+    });
+    const out=
+'AI ACCESS REGISTER · '+co+'\n\n'+
+'One block per tool. Fill every line, even when the honest answer is "we do not know"; that answer is the finding.\n\n'+
+blocks+
+'READ IT LIKE THIS\n\n'+
+'Any line reading "admin," "shared login," or "open internet" is this week’s work: scope it down or write down why not. Instructions and vendor prompts do not appear on this register because they are not controls. The register pairs with a weekly log review by a named person; that habit has caught every documented agent incident on record.\n\n'+
+'Keep it to one page. Update it when a tool is added, and re-review quarterly.';
+    show('rg-out','rg-copy',out); return;
+  }
+  if(kind==='label'){
+    const co=v('lb-co')||'[Company]';
+    const chan=$('#lb-chan').value;
+    const L={
+      images:'IMAGES\n\nThe label: "Image created with AI by '+co+'."\nWhere: the visible caption or adjacent credit, and the file’s metadata and alt text, so the mark survives cropping and reposting.',
+      video:'VIDEO\n\nThe label: "This video contains AI-generated content."\nWhere: the first seconds or the on-platform disclosure toggle where one exists, and the description text. Platforms are adding their own switches; use both.',
+      articles:'ARTICLES\n\nThe label: "Drafted with AI assistance and reviewed by '+co+'."\nWhere: the byline or footer. The review clause matters: it should be true, and it is the part customers actually care about.',
+      chat:'CHAT AND VOICE\n\nThe line: "You’re talking with '+co+'’s AI assistant, not a person. Say or type ‘human’ any time to reach our team."\nWhere: the first message or first seconds, before any data is collected. The same line satisfies the state rules and the EU rule.'
+    };
+    const parts=chan==='all'?[L.images,L.video,L.articles,L.chat]:[L[chan]];
+    const out=
+'AI CONTENT LABELS · '+co+'\n\n'+
+parts.join('\n\n')+'\n\n'+
+'SCOPE, PLAINLY\n\n'+
+'The EU transparency rules apply when AI systems or AI-made content reach EU customers, wherever the business sits, with no small-business exemption. "Machine-readable" means the mark lives in metadata as well as on the surface. Several US states already require the conversation disclosure; one strict standard everywhere is cheaper than a map of exemptions.\n\n'+
+'This is a starting point for '+co+', not legal advice. If EU revenue is a real line for you, have counsel confirm placement.';
+    show('lb-out','lb-copy',out); return;
+  }
+  if(kind==='exit'){
+    const co=v('ex2-co')||'[Company]';
+    const build=v('ex2-build')||'[the build]';
+    const maint=v('ex2-maint')||'whoever maintains it';
+    const out=
+'To: '+maint+'\nSubject: '+build+': continuity and exit questions, in writing\n\n'+
+'AWS closed its flagship agent platform to new customers on July 30, two and a half years after launch, and moved about twenty AI services to maintenance mode in June. Platforms under AI builds are turning over faster than builds pay for themselves, so we need the continuity picture for '+build+', in writing:\n\n'+
+'  1. What platform and specific services does it run on today, and what is each one’s current lifecycle status?\n'+
+'  2. If that platform closed to new customers or new features tomorrow, what breaks first for us, and on what timeline?\n'+
+'  3. Can we export all of our data and configuration today? In what format, and can you demonstrate the export this month?\n'+
+'  4. If a migration becomes necessary, who owns it, what would it cost at today’s rates, and how much notice do we get?\n'+
+'  5. What are you doing now so the next platform change is a line item for '+co+' rather than a rebuild?\n\n'+
+'We are not assuming bad news, and this is not a complaint. We are declining to be surprised. A written reply within two weeks works for us.';
+    show('ex2-out','ex2-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* email-me capture (doubles as a quiet lead signal) */
+function sendEmail(kind,btn){
+  const cap=document.querySelector('[data-emailcap="'+kind+'"]');
+  const email=cap.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  let result='';
+  if(kind==='audit') result=$('#ai-big').textContent+': '+$('#ai-cap').textContent;
+  btn.disabled=true; btn.textContent='...';
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 003 tool: '+kind,result:result})
+  }).catch(()=>{}).finally(()=>{
+    cap.querySelector('.er').style.display='none';
+    cap.querySelector('.microcopy').style.display='none';
+    document.querySelector('[data-done="'+kind+'"]').classList.add('show');
+  });
+}
+
+/* newsletter */
+document.getElementById('signupForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const form=e.target;
+  const email=form.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 003'})
+  }).catch(()=>{}).finally(()=>{
+    form.innerHTML='<p style="font-size:14px;line-height:1.5">On the list. No. 004 comes your way next week.</p>';
+  });
+});
+</script>
+<script>
+(function(){function o(){var h=(location.hash||'').replace('#','');if(!/^t[1-5]$/.test(h))return;var t=document.getElementById(h);if(!t||t.classList.contains('open'))return;t.classList.add('open');var b=t.querySelector('.deep-toggle');if(b){b.setAttribute('aria-expanded','true');b.firstChild.textContent='Close ';}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},80);}addEventListener('hashchange',o);o();})();
+</script>
+</body>
+</html>
