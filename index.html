@@ -252,7 +252,10 @@ footer{background:var(--dark-green);color:var(--cream);padding:56px 6vw 44px}
 
 /* ---------- RESPONSIVE ---------- */
 @media(max-width:860px){
-  .page-field{grid-template-columns:1fr;row-gap:38px;align-items:start;padding:120px 7vw 90px}
+  .page-field{grid-template-columns:minmax(0,1fr);row-gap:38px;align-items:start;padding:120px 7vw 90px}
+  .signup{flex-wrap:wrap;max-width:100%}
+  .signup input{flex:1 1 100%;min-width:0}
+  .signup button{width:100%}
   .headline-zone{grid-column:1;max-width:none}
   .copy-zone{grid-column:1;justify-self:start;align-self:start;max-width:560px}
   #hero{justify-content:flex-start;align-items:stretch;padding:116px 7vw 80px}
@@ -360,11 +363,13 @@ footer{background:var(--dark-green);color:var(--cream);padding:56px 6vw 44px}
   <div class="copy-zone">
     <div class="cz-rule"></div>
     <p>Not AI news for people collecting tabs. Operating intelligence for companies trying to understand what is changing, what matters, and what should be inspected before the drag gets expensive.</p>
+    <p style="margin-top:14px"><b>Every article comes with a working tool.</b> It runs right in the page, it is free, and we do not need your information to hand it to you. No signup, no download, nothing to fill in first. The archive keeps every one of them.</p>
     <form class="signup" id="signupForm">
       <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
       <button type="submit">Subscribe</button>
     </form>
-    <a href="/briefing/" style="display:inline-block;margin-top:22px;font-family:var(--system);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);border-bottom:1px solid rgba(216,247,201,.5);padding-bottom:3px;transition:border-color .2s ease" onmouseover="this.style.borderColor='var(--mint)'" onmouseout="this.style.borderColor='rgba(216,247,201,.5)'">Read the current issue</a>
+    <a href="/briefing/" style="display:block;width:max-content;margin-top:22px;font-family:var(--system);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);border-bottom:1px solid rgba(216,247,201,.5);padding-bottom:3px;transition:border-color .2s ease" onmouseover="this.style.borderColor='var(--mint)'" onmouseout="this.style.borderColor='rgba(216,247,201,.5)'">Read the current issue</a>
+    <a href="/briefing/archive/" style="display:block;width:max-content;margin-top:14px;font-family:var(--system);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);border-bottom:1px solid rgba(216,247,201,.5);padding-bottom:3px;transition:border-color .2s ease" onmouseover="this.style.borderColor='var(--mint)'" onmouseout="this.style.borderColor='rgba(216,247,201,.5)'">Every past article and tool</a>
   </div>
 </section>
 
