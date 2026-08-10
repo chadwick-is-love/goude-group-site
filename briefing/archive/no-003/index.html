@@ -277,6 +277,26 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   .foot-meta{font-size:14px;text-align:left}
   .tool .row2{grid-template-columns:1fr}
 }
+
+/* ---------- sharing retrofit (matches the current issue) ---------- */
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.actions .deep-toggle{margin-top:0}
+.share{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+@media(max-width:620px){
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .close-inner{grid-template-columns:minmax(0,1fr)}
+  .signup{flex-wrap:wrap;max-width:100%}
+  .signup input{flex:1 1 100%;min-width:0}
+  .signup button{width:100%}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -284,7 +304,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
 
 <nav id="nav">
   <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
-  <span class="nav-tag">Weekly Intelligence · No. 003</span>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence · No. 003</span></div>
 </nav>
 
 <header class="masthead">
@@ -346,7 +366,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not ban the tools; a ban moves usage onto personal accounts you cannot see or delete. Do not assume "anyone with the link" reads as "public" to your staff, because it does not. And do not run another quarter without a one-page AI use policy. The tool on the right writes it.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t1" data-title="Shared AI chats surfaced on Google this weekend. Write down what never goes in one."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -413,7 +436,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not accept "the prompt forbids it" as a security answer from any vendor. Do not wire an agent into production systems to save the cost of a sandbox. And do not skip the inventory: if you cannot list what each AI tool can reach, you are trusting configurations you have never seen, maintained by people you have never met.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t2" data-title="Anthropic's own models broke into three real companies. Instructions are not walls."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -479,7 +505,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not assume you are out of scope because you are small; the transparency articles carry no small-business exemption. Do not skip the machine-readable part, because marks that machines can read are marks that machines can audit. And do not run this as a separate project from the state disclosure work. It is the same sentence plus a label, written once, applied everywhere.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t3" data-title="Europe's AI disclosure law went live Sunday. It follows the customer, not the company."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -553,7 +582,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not accept an AI surcharge as a fact of nature at renewal. Do not pay three tools for the same intelligence because each bundled an assistant. And do not sign multi-year terms on AI pricing while the floor is dropping quarterly; twelve months keeps you on the right side of the trend.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t4" data-title="The wholesale price of AI fell again Friday. Your per-seat AI fees did not."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -627,7 +659,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not commission a build without the exit answered in writing first: data export, portability, migration owner. Do not read "no sunset date announced" as "safe"; maintenance mode means the roadmap moved elsewhere. And do not pay twice for the same build. If a migration is coming, its price exists today; make your vendor put a number on it.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t5" data-title="AWS retired its flagship agent platform at age two and a half. Get your exit in writing."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -883,6 +918,17 @@ document.getElementById('signupForm').addEventListener('submit',e=>{
 </script>
 <script>
 (function(){function o(){var h=(location.hash||'').replace('#','');if(!/^t[1-5]$/.test(h))return;var t=document.getElementById(h);if(!t||t.classList.contains('open'))return;t.classList.add('open');var b=t.querySelector('.deep-toggle');if(b){b.setAttribute('aria-expanded','true');b.firstChild.textContent='Close ';}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},80);}addEventListener('hashchange',o);o();})();
+</script>
+<script>
+(function(){
+var BASE='https://goudegroup.com/briefing/archive/no-003/';
+function shareLink(id){return id==='issue'?BASE:BASE+'#'+id;}
+function flash(btn,msg){var sl=btn.querySelector('.sl');if(!sl)return;var o=sl.textContent;sl.textContent=msg||'Link copied';setTimeout(function(){sl.textContent=o;},1600);}
+function legacyCopy(text,done){var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(err){}document.body.removeChild(ta);if(done)done();}
+function copyText(text,done){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){legacyCopy(text,done);});}else{legacyCopy(text,done);}}
+function doShare(btn){var url=shareLink(btn.dataset.share);var title=btn.dataset.title||document.title;if(navigator.share){navigator.share({title:title,url:url}).catch(function(){});}else{copyText(url,function(){flash(btn,'Link copied');});}}
+document.addEventListener('click',function(e){var t=e.target.closest('[data-share]');if(t)doShare(t);});
+})();
 </script>
 </body>
 </html>
