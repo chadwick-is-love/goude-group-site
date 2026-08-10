@@ -57,6 +57,9 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Without this the SDK hides the failure reason and you get a bare
+          # "is_error: true" with nothing to act on.
+          show_full_output: true
           prompt: |
             Follow the instructions in scripts/prompts/write-issue.md exactly.
             Produce build/topics.json and nothing else. Do not edit any HTML,
