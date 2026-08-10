@@ -1,6 +1,11 @@
 name: The Briefing
 
 # Publishes the weekly issue at 12:01 AM Eastern every Monday.
+#
+# Runs on Chadwick's Claude subscription via CLAUDE_CODE_OAUTH_TOKEN, not on metered
+# API credit. The commit comes from the GitHub runner, so it never touches the sandbox
+# git proxy that started refusing pushes in August 2026.
+#
 # GitHub cron is UTC only, so both DST offsets are scheduled and a guard drops the wrong one.
 on:
   schedule:
@@ -9,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       dry_run:
-        description: 'Build and run the gates, but do not commit'
+        description: 'Build and run the gates, but do not publish'
         type: boolean
         default: false
 
@@ -20,11 +25,12 @@ concurrency:
 permissions:
   contents: write
   issues: write
+  id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Is it actually 12am Monday in New York
         id: clock
@@ -46,18 +52,36 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Research and write the five articles
+        if: steps.clock.outputs.skip != 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Follow the instructions in scripts/prompts/write-issue.md exactly.
+            Produce build/topics.json and nothing else. Do not edit any HTML,
+            do not run the assembler or the gates, do not commit anything.
+          claude_args: |
+            --max-turns 60
+
+      - name: Did the writing step produce anything
+        if: steps.clock.outputs.skip != 'true'
+        run: |
+          if [ ! -s build/topics.json ]; then
+            echo "::error::build/topics.json was not written. The research and writing step produced nothing, so there is no issue to assemble."
+            exit 1
+          fi
+          node -e "JSON.parse(require('fs').readFileSync('build/topics.json','utf8'))" \
+            || { echo "::error::build/topics.json is not valid JSON."; exit 1; }
+          echo "topics.json is present and parses ($(wc -c < build/topics.json) bytes)"
+
+      - name: Assemble the issue
+        if: steps.clock.outputs.skip != 'true'
+        run: node scripts/assemble-issue.mjs
+
       - name: Install Playwright
         if: steps.clock.outputs.skip != 'true'
         run: npm install --no-save playwright@1.49.0 && npx playwright install --with-deps chromium
-
-      - name: Build the issue
-        if: steps.clock.outputs.skip != 'true'
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          BRIEFING_MODEL: ${{ vars.BRIEFING_MODEL }}
-          BRIEFING_MODEL_PREFIX: ${{ vars.BRIEFING_MODEL_PREFIX }}
-          WEB_SEARCH_TOOL_TYPE: ${{ vars.WEB_SEARCH_TOOL_TYPE }}
-        run: node scripts/build-briefing.mjs
 
       - name: Run the gates
         if: steps.clock.outputs.skip != 'true'
@@ -69,7 +93,7 @@ jobs:
         run: |
           ISSUE=$(node -p "require('./.briefing-build.json').issue")
           SUMMARY=$(node -p "require('./.briefing-build.json').headlines.map(h=>h.domain).join(', ')")
-          rm -f .briefing-build.json
+          rm -rf .briefing-build.json build
           git config user.name "The Briefing"
           git config user.email "actions@users.noreply.github.com"
           # Explicit paths only. "git add -A" would sweep node_modules from the
@@ -93,6 +117,17 @@ jobs:
           done
           echo "::warning::Pushed, but goudegroup.com still served the old issue after 3 minutes. Check the Hostinger deploy."
 
+      - name: Keep the built issue when a dry run finishes
+        if: steps.clock.outputs.skip != 'true' && inputs.dry_run == true
+        uses: actions/upload-artifact@v4
+        with:
+          name: briefing-dry-run
+          path: |
+            briefing/index.html
+            briefing/archive/index.html
+            build/topics.json
+          retention-days: 14
+
       - name: Open an issue if this failed
         if: failure() && steps.clock.outputs.skip != 'true'
         uses: actions/github-script@v7
@@ -108,8 +143,12 @@ jobs:
                 '',
                 `Run log: ${url}`,
                 '',
-                'Common causes, in order: the ANTHROPIC_API_KEY secret is missing or expired; the web search tool version changed (set the WEB_SEARCH_TOOL_TYPE variable); a gate caught a real defect in the generated issue.',
+                'Most likely causes, in order:',
                 '',
-                'To retry after fixing: Actions tab, The Briefing, Run workflow. Tick dry run first to build and test without publishing.'
+                '1. The CLAUDE_CODE_OAUTH_TOKEN secret is missing or expired. The token lasts one year; regenerate with `claude setup-token` and update the secret.',
+                '2. The Claude plan hit its usage limit in the rolling window, so the writing step could not run.',
+                '3. A gate caught a real defect in the generated issue. That is the system working; read which gate failed.',
+                '',
+                'To retry after fixing: Actions tab, The Briefing, Run workflow. Tick dry run first to build and gate without publishing.'
               ].join('\n')
             });
