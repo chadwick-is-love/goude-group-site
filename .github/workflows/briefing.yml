@@ -1,0 +1,115 @@
+name: The Briefing
+
+# Publishes the weekly issue at 12:01 AM Eastern every Monday.
+# GitHub cron is UTC only, so both DST offsets are scheduled and a guard drops the wrong one.
+on:
+  schedule:
+    - cron: '1 4 * * 1'   # 00:01 America/New_York during EDT
+    - cron: '1 5 * * 1'   # 00:01 America/New_York during EST
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Build and run the gates, but do not commit'
+        type: boolean
+        default: false
+
+concurrency:
+  group: briefing
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Is it actually 12am Monday in New York
+        id: clock
+        run: |
+          LOCAL=$(TZ=America/New_York date '+%u %H')
+          echo "New York time: $(TZ=America/New_York date)"
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$LOCAL" != "1 00" ]; then
+            echo "Not Monday 00:xx in New York (got '$LOCAL'). This is the other DST cron; skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.clock.outputs.skip != 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.clock.outputs.skip != 'true'
+        with:
+          node-version: '22'
+
+      - name: Install Playwright
+        if: steps.clock.outputs.skip != 'true'
+        run: npm install --no-save playwright@1.49.0 && npx playwright install --with-deps chromium
+
+      - name: Build the issue
+        if: steps.clock.outputs.skip != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          BRIEFING_MODEL: ${{ vars.BRIEFING_MODEL }}
+          BRIEFING_MODEL_PREFIX: ${{ vars.BRIEFING_MODEL_PREFIX }}
+          WEB_SEARCH_TOOL_TYPE: ${{ vars.WEB_SEARCH_TOOL_TYPE }}
+        run: node scripts/build-briefing.mjs
+
+      - name: Run the gates
+        if: steps.clock.outputs.skip != 'true'
+        run: node scripts/check-briefing.mjs
+
+      - name: Publish
+        id: publish
+        if: steps.clock.outputs.skip != 'true' && inputs.dry_run != true
+        run: |
+          ISSUE=$(node -p "require('./.briefing-build.json').issue")
+          SUMMARY=$(node -p "require('./.briefing-build.json').headlines.map(h=>h.domain).join(', ')")
+          rm -f .briefing-build.json
+          git config user.name "The Briefing"
+          git config user.email "actions@users.noreply.github.com"
+          # Explicit paths only. "git add -A" would sweep node_modules from the
+          # Playwright install into a repo that clean-syncs to the live web root.
+          git add briefing index.html
+          git commit -m "Briefing No. 00${ISSUE}: ${SUMMARY}"
+          git push
+          echo "issue=$ISSUE" >> "$GITHUB_OUTPUT"
+
+      - name: Confirm it went live
+        if: steps.clock.outputs.skip != 'true' && inputs.dry_run != true
+        run: |
+          ISSUE="${{ steps.publish.outputs.issue }}"
+          for i in 1 2 3 4 5 6; do
+            sleep 30
+            if curl -s "https://goudegroup.com/briefing/?cb=$(date +%s)" | grep -q "No. 00${ISSUE}"; then
+              echo "No. 00${ISSUE} is live."
+              exit 0
+            fi
+            echo "attempt $i: Hostinger has not synced yet"
+          done
+          echo "::warning::Pushed, but goudegroup.com still served the old issue after 3 minutes. Check the Hostinger deploy."
+
+      - name: Open an issue if this failed
+        if: failure() && steps.clock.outputs.skip != 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `The Briefing did not publish (${new Date().toISOString().slice(0,10)})`,
+              body: [
+                'The weekly build failed, so nothing was published and the live site is unchanged.',
+                '',
+                `Run log: ${url}`,
+                '',
+                'Common causes, in order: the ANTHROPIC_API_KEY secret is missing or expired; the web search tool version changed (set the WEB_SEARCH_TOOL_TYPE variable); a gate caught a real defect in the generated issue.',
+                '',
+                'To retry after fixing: Actions tab, The Briefing, Run workflow. Tick dry run first to build and test without publishing.'
+              ].join('\n')
+            });
