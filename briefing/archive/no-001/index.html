@@ -260,6 +260,26 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   .foot-meta{font-size:14px;text-align:left}
   .tool .row2{grid-template-columns:1fr}
 }
+
+/* ---------- sharing retrofit (matches the current issue) ---------- */
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.actions .deep-toggle{margin-top:0}
+.share{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+@media(max-width:620px){
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .close-inner{grid-template-columns:minmax(0,1fr)}
+  .signup{flex-wrap:wrap;max-width:100%}
+  .signup input{flex:1 1 100%;min-width:0}
+  .signup button{width:100%}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -267,7 +287,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
 
 <nav id="nav">
   <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
-  <span class="nav-tag">Weekly Intelligence · No. 001</span>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence · No. 001</span></div>
 </nav>
 
 <header class="masthead">
@@ -328,7 +348,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not sign an annual AI contract priced against last quarter's models. Do not compare per-token prices without token efficiency: a cheaper model that burns twice the tokens per task is not cheaper.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t1" data-title="Intelligence got repriced in thirty days. Most AI bills did not."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -409,7 +432,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not run these like chatbots, typing questions at a tool built to finish work. Do not point one at the whole shared drive: scope what it reads and writes first. And do not measure adoption in logins. Measure completed units of work and error rate.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t2" data-title="The biggest AI job is now paperwork, not code."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -473,7 +499,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not pilot on your hardest calls. Angry escalations will fail first and poison the project. Route the status checks and bookings, with a clean handoff to a human. And say it is AI. Callers and regulators both punish the alternative.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t3" data-title="Voice AI stopped sounding like software. Missed calls are now a choice."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -542,7 +571,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not sign an outcome-priced contract without a written definition of the billable event, a monthly cap, and your own baseline volumes. Do not renew a multi-year, hours-billed retainer at legacy rates this year: that locks in the pre-AI cost structure right as it deflates.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t4" data-title="The per-seat license is dying. The billable hour is next."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -601,7 +633,10 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         <p>Do not rubber-stamp this year's renewal. Do not let any payment or banking-detail change above a set threshold move on the strength of a call, video, or message alone. Ferrari's near miss is the lesson: one personal verification question, zero dollars lost.</p>
       </div>
     </div>
-    <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t5" data-title="Two people studied your AI exposure this year: your insurer and your fraudster."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
     <div class="deep">
       <div class="deep-grid">
         <div class="deep-main">
@@ -831,6 +866,17 @@ document.getElementById('signupForm').addEventListener('submit',e=>{
 </script>
 <script>
 (function(){function o(){var h=(location.hash||'').replace('#','');if(!/^t[1-5]$/.test(h))return;var t=document.getElementById(h);if(!t||t.classList.contains('open'))return;t.classList.add('open');var b=t.querySelector('.deep-toggle');if(b){b.setAttribute('aria-expanded','true');b.firstChild.textContent='Close ';}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},80);}addEventListener('hashchange',o);o();})();
+</script>
+<script>
+(function(){
+var BASE='https://goudegroup.com/briefing/archive/no-001/';
+function shareLink(id){return id==='issue'?BASE:BASE+'#'+id;}
+function flash(btn,msg){var sl=btn.querySelector('.sl');if(!sl)return;var o=sl.textContent;sl.textContent=msg||'Link copied';setTimeout(function(){sl.textContent=o;},1600);}
+function legacyCopy(text,done){var ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(err){}document.body.removeChild(ta);if(done)done();}
+function copyText(text,done){if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){legacyCopy(text,done);});}else{legacyCopy(text,done);}}
+function doShare(btn){var url=shareLink(btn.dataset.share);var title=btn.dataset.title||document.title;if(navigator.share){navigator.share({title:title,url:url}).catch(function(){});}else{copyText(url,function(){flash(btn,'Link copied');});}}
+document.addEventListener('click',function(e){var t=e.target.closest('[data-share]');if(t)doShare(t);});
+})();
 </script>
 </body>
 </html>
