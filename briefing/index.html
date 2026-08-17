@@ -132,6 +132,14 @@ header.masthead{
 .arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
   padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
 .arch-link:hover{background:var(--navy);color:var(--mint)}
+.remind{margin-top:26px;border-top:1px solid var(--navy-faint);padding-top:22px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.remind p{font-size:13.5px;line-height:1.55;color:var(--navy-soft);max-width:46ch;margin:0;flex:1 1 300px}
+.remind p b{color:var(--navy);font-weight:700}
+.signup.inline{margin-top:0;flex:1 1 330px;max-width:420px}
+.signup.inline input{padding:12px 14px;font-size:14px}
+.signup.inline button{padding:12px 20px;font-size:11px}
+.signup-done{font-size:14px;line-height:1.55;color:var(--navy)}
 
 /* ---------- TOPIC ---------- */
 .topic{padding:92px 6vw 34px}
@@ -359,6 +367,13 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
     <div class="passrow">
       <button class="share" type="button" data-share="issue" data-title="The Briefing, No. 006: Goude Group Weekly Intelligence"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send the whole issue</span></button>
       <a class="arch-link" href="/briefing/archive/">Open the archive</a>
+    </div>
+    <div class="remind">
+      <p><b>Want a reminder when the next one is up?</b> Leave an email and we send one note a week. That is the whole program. We will not flood your inbox.</p>
+      <form class="signup inline" data-src="reminder row">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email for the weekly reminder" required />
+        <button type="submit">Remind me</button>
+      </form>
     </div>
   </div>
 </section>
@@ -731,7 +746,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
     </div>
     <div class="close-copy">
       <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
-      <form class="signup" id="signupForm">
+      <form class="signup" id="signupForm" data-src="close section">
         <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
         <button type="submit">Get the next one</button>
       </form>
@@ -972,18 +987,19 @@ function sendEmail(kind,btn){
   });
 }
 
-/* newsletter */
-document.getElementById('signupForm').addEventListener('submit',e=>{
-  e.preventDefault();
-  const form=e.target;
-  const email=form.querySelector('input[type=email]').value.trim();
-  if(!email) return;
-  const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
-  fetch(NEWSLETTER_ENDPOINT,{
-    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify({email:email,source:'Briefing No. 006'})
-  }).catch(()=>{}).finally(()=>{
-    form.innerHTML='<p style="font-size:14px;line-height:1.5">On the list. No. 007 comes your way next week.</p>';
+/* newsletter: the reminder row under the contents and the form in the close section */
+document.querySelectorAll('form.signup').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=form.querySelector('input[type=email]').value.trim();
+    if(!email) return;
+    const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+    fetch(NEWSLETTER_ENDPOINT,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:email,source:'Briefing No. 006',placement:form.getAttribute('data-src')||''})
+    }).catch(()=>{}).finally(()=>{
+      form.innerHTML='<p class="signup-done">On the list. No. 007 comes your way next week.</p>';
+    });
   });
 });
 </script>
