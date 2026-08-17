@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Briefing, No. 005: Goude Group Weekly Intelligence</title>
+<meta name="description" content="Five developments that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/archive/no-005/" />
+<meta property="og:title" content="The Briefing, No. 005: Goude Group Weekly Intelligence" />
+<meta property="og:description" content="Five things that moved, what they change, what not to do. Each one comes with a tool you can use right now." />
+<meta property="og:image" content="https://goudegroup.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-promise{margin-top:32px;padding-top:19px;border-top:1px solid var(--navy)}
+.mast-promise p{font-size:15.5px;line-height:1.6;color:var(--navy);max-width:76ch}
+.mast-promise p b{font-weight:700}
+@media(max-width:620px){.mast-promise{margin-top:26px}.mast-promise p{font-size:14.5px}}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:22px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.passnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:26px 0 16px;max-width:80ch}
+.passnote b{color:var(--navy);font-weight:700}
+.passrow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.arch-link:hover{background:var(--navy);color:var(--mint)}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* actions row: go deeper + send */
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.deep-toggle{
+  display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+.share{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE INSTRUMENT (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+.pass-it{max-width:var(--maxw);margin:44px auto 0;border-top:1px solid var(--navy-hair);padding-top:24px}
+.pass-it .label{opacity:.5;display:block;margin-bottom:12px}
+.pass-it p{font-size:13.5px;line-height:1.6;color:var(--navy-soft);max-width:74ch;margin-bottom:18px}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  nav{padding:16px 5vw}
+  nav.scrolled{padding-top:12px;padding-bottom:12px}
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  header.masthead{min-height:74vh;padding-top:112px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .passrow{flex-direction:column;align-items:stretch}
+  .passrow .share,.passrow .arch-link{width:100%;justify-content:center}
+  .signup{flex-wrap:wrap}
+  .signup input{flex:1 1 100%}
+  .signup button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence &middot; No. 005</span></div>
+</nav>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="kicker">Goude Group &middot; Weekly Intelligence</div>
+    <h1>The Brie<span class="kern-fi">f</span>ing.</h1>
+    <div class="mast-row">
+      <div class="standfirst">
+        <p><span class="lede-tag">This week's news:</span> July's payrolls went negative and cooled the September rate hike, QuickBooks repriced its upper tiers by up to 70 percent, $86 billion in tariff refunds went out while the last claim window opened, a 50 percent tariff on Canadian goods got an August 19 date, and insurers filed for 14 percent more on small-group health plans.</p>
+        <p>Read the whole thing in three minutes, or go deeper where it touches your business. We talk about the market here, not about ourselves.</p>
+      </div>
+      <div class="mast-meta">
+        No. 005<br>
+        August 10, 2026
+      </div>
+    </div>
+    <div class="mast-promise"><p><b>Every article comes with a working tool.</b> It runs right here in the page, it is free, and we do not need your information to use it. No signup, no download, nothing to fill in first. That holds for every article in every issue, back issues included.</p></div>
+    <div class="mast-rule"></div>
+  </div>
+</header>
+
+<div class="readkey">
+  <div class="readkey-inner">
+    <span><b>Headline &middot; 5 seconds</b></span>
+    <span><b>The brief &middot; under a minute</b></span>
+    <span><b>Go deeper &middot; the read, plus a free tool you keep</b></span>
+  </div>
+</div>
+
+<section class="contents">
+  <div class="contents-inner">
+    <span class="label">In this issue</span>
+    <div class="toc">
+      <a href="#t1"><span class="n">01</span><span class="t">Payrolls went negative in July. Price both Septembers before the Fed picks one.</span><span class="go">The number</span><span class="tk">+ tool</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">QuickBooks raised its prices again August 1. Audit the tier before you renew it.</span><span class="go">The reprice</span><span class="tk">+ tool</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">Washington has returned $86 billion in tariff refunds. Check whether some of it is yours.</span><span class="go">The refund</span><span class="tk">+ tool</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">A 50 percent tariff on Canadian goods lands August 19. Reprice before it reaches your invoices.</span><span class="go">The deadline</span><span class="tk">+ tool</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">Insurers want 14 percent more for small-group health cover next year. Start the renewal now.</span><span class="go">The filing</span><span class="tk">+ tool</span></a>
+    </div>
+    <p class="passnote"><b>Send it when it hits.</b> Every article here has its own link; the send button next to each one copies it, ready to text or email to the person who needs it. Back issues stay in the archive and their tools keep working, so nothing you forward goes stale.</p>
+    <div class="passrow">
+      <button class="share" type="button" data-share="issue" data-title="The Briefing, No. 005: Goude Group Weekly Intelligence"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send the whole issue</span></button>
+      <a class="arch-link" href="/briefing/archive/">Open the archive</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 THE NUMBER ============ -->
+<section class="topic" id="t1">
+  <div class="topic-inner">
+    <div class="kicker"><span>01 / The Number</span><span class="rt">Brief &middot; 50 sec</span></div>
+    <h2>Payrolls went negative in July. Price both Septembers before the Fed picks one.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>The July jobs report landed Friday: the economy shed 23,000 jobs against forecasts of an 80,000 gain, and May and June were revised down a combined 103,000. Unemployment ticked down to 4.1 percent, and annual wage growth slowed to 3.2 percent. Markets repriced within the hour: the quarter-point rate increase that had been the September base case became the less likely outcome, with the Fed's decision due September 16.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Two operator facts moved at once. Hiring: the market loosened, retail cut 19,400 jobs and private payrolls barely grew, so candidates who were unreachable in spring answer the phone now, and wage pressure is easing. Borrowing: the increase lenders were pricing into September lost its majority, which steadies every floating-rate credit line, SBA loan, and equipment note you carry. Cheaper money is not here; more expensive money got less likely.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not read one negative month as a recession and freeze hiring you already budgeted; a loose market is exactly when good people become reachable. Do not rush to lock a fixed rate out of fear this week, because the pressure pushing rates up just eased. And do not let September 16 pass unwatched: if you carry floating-rate debt, that afternoon prices it either way, and you should know your exposure to the quarter point before the announcement.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t1" data-title="Payrolls went negative in July. Price both Septembers before the Fed picks one."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Aug 7</span><span>The Bureau of Labor Statistics reports July payrolls at minus 23,000 against expectations near plus 80,000. Unemployment falls to 4.1 percent. Average annual earnings growth slows to 3.2 percent, under the 3.5 percent estimate.</span></div>
+            <div class="tape-row"><span class="d">Revisions</span><span>May drops from 129,000 to 63,000 and June from 57,000 to 20,000, a combined 103,000 fewer jobs than previously reported. Against expectations, the total July shortfall runs roughly a quarter million positions.</span></div>
+            <div class="tape-row"><span class="d">Sectors</span><span>Private payrolls add 30,000 against 78,000 expected. Government sheds 53,000, retail 19,400, financial activities 14,000. Healthcare adds 22,000 and manufacturing 5,000. The customer-facing economy is where the cutting is.</span></div>
+            <div class="tape-row"><span class="d">Sept 16</span><span>The fed funds range sits at 3.50 to 3.75 percent. Before the report, futures priced a 55 percent chance of a quarter-point increase at the September meeting; after it, the odds flipped to 56 percent for holding steady. Not a cut. A reprieve.</span></div>
+          </div>
+          <h3>A loose market is a quiet opening</h3>
+          <p>The instinct on a bad jobs number is defensive, and for hiring it should be the opposite. The roles you could not fill in March, when every candidate had three offers, are fillable in a market that just shed retail and office jobs by the tens of thousands. Wage growth at 3.2 percent means the counter-offer math has moved in your favor for the first time in years. None of that requires a prediction about recessions; it only requires noticing who answers the ad this month versus five months ago.</p>
+          <p>The borrowing side is about knowing one number. A quarter point on your floating-rate debt is a specific dollar figure, and most owners have never written it down; they carry the anxiety instead of the arithmetic. Price it once with the instrument on the right and September 16 becomes a calendar entry instead of a cliff. If the Fed holds, nothing changes. If it moves, you already knew the cost to the dollar.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Reopen the one or two roles you shelved in spring. Run the ads for two weeks and count who answers now; the market did the recruiting-budget work for you.</li>
+            <li>List every floating-rate obligation: the credit line, the SBA 7(a), equipment notes, any card balance that rides. Mark which ones reprice with prime.</li>
+            <li>Run the list through the instrument on the right so the quarter point is a dollar figure, not a worry. Put September 16 on the calendar with the number attached.</li>
+            <li>Price planned raises against the 3.2 percent tape, not against January's market. Pay well on purpose, not out of stale fear.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.foxbusiness.com/economy/us-jobs-report-july-2026" target="_blank" rel="noopener">Fox Business: the report</a> &middot; <a href="https://www.forbes.com/sites/eriksherman/2026/08/07/big-jobs-loss-makes-everyone-wonder-what-comes-next/" target="_blank" rel="noopener">Forbes: the jobs loss</a> &middot; <a href="https://www.forbes.com/sites/eriksherman/2026/08/07/july-jobs-loss-fed-interest-rate-expectations/" target="_blank" rel="noopener">Forbes: the rate expectations</a> &middot; <a href="https://www.cnbc.com/2026/08/07/odds-the-fed-hikes-in-september-tumble-following-big-july-jobs-miss.html" target="_blank" rel="noopener">CNBC: the September odds</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Cheaper money is not here. More expensive money got less likely, and that difference is worth a number.</p></div>
+          <div class="tool" data-tool="spread">
+            <span class="tlabel">The instrument &middot; live</span>
+            <span class="tname">The September Spread</span>
+            <span class="tsub">Two numbers. It prices what a quarter-point move on September 16 does to your floating-rate debt, to the dollar.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="sp-bal">Floating-rate debt balance ($)</label><input id="sp-bal" type="number" inputmode="numeric" min="0" placeholder="e.g. 250000" data-live="spread" /></div>
+              <div><label class="fl" for="sp-rate">Current rate on it (%)</label><input id="sp-rate" type="number" inputmode="numeric" min="0" max="30" step="0.1" placeholder="e.g. 9.5" data-live="spread" /></div>
+            </div>
+            <div class="readout" id="sp-readout" style="display:none">
+              <div class="big" id="sp-big">$0</div>
+              <div class="cap" id="sp-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 THE REPRICE ============ -->
+<section class="topic" id="t2">
+  <div class="topic-inner">
+    <div class="kicker"><span>02 / The Reprice</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>QuickBooks raised its prices again August 1. Audit the tier before you renew it.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Intuit repriced QuickBooks Online on August 1, the second increase this year. Simple Start now lists at $38 a month, Essentials at $85, Plus at $140, and Advanced at $340, with trackers putting the upper tiers 40 to 70 percent above where they started the year. The new prices reach existing customers at renewal. One offset: Advanced now bundles Workforce Elite payroll, which used to be a separate subscription.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Bookkeeping software stopped being a rounding error: Plus is now $1,680 a year and Advanced is $4,080 before add-ons. Two increases in a single year is the vendor telling you how it plans to behave, so the renewal stops being automatic and becomes a tier-fit question. Most businesses on Plus use one feature that keeps them there, usually inventory or project tracking; most businesses on Advanced were sold headroom, not features. A downshift is a ten-minute change worth up to four figures a year.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not absorb the increase without opening the feature list; you pay for the tier, not for your usage of it. Do not migrate accounting software in anger in August if your books close in December, because switching costs are real and timing matters more than the vendor. And do not judge the Advanced price without netting the payroll bundle; depending on your payroll tier and headcount, the new $340 can come out close to a wash.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t2" data-title="QuickBooks raised its prices again August 1. Audit the tier before you renew it."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Aug 1</span><span>The new list prices take effect: Simple Start $38, Essentials $85, Plus $140, Advanced $340 a month. They apply to new subscribers after the introductory window and to existing customers at their next renewal. Intuit's own pricing page already reads the new numbers.</span></div>
+            <div class="tape-row"><span class="d">The year</span><span>This is the second 2026 repricing; the tiers already stepped up in the spring. Third-party trackers put Essentials and Plus roughly 40 percent, and Advanced roughly 70 percent, above their January levels. Intuit points to its AI buildout as the driver.</span></div>
+            <div class="tape-row"><span class="d">The offset</span><span>Advanced now includes Workforce Elite payroll at no extra charge. For a business already paying for a mid-tier payroll subscription, the bundled price can land near neutral; for everyone else the increase is the increase.</span></div>
+            <div class="tape-row"><span class="d">Context</span><span>Issue No. 003 covered the other side of this trade: the wholesale price of the intelligence inside these tools keeps falling while the subscription prices on top of it keep rising. No vendor reprices downward voluntarily. Renewal is where you vote.</span></div>
+          </div>
+          <h3>Pay for the tier you use</h3>
+          <p>The tier audit is one plain sentence per feature. Write down what actually keeps you on your plan: if you are on Plus, is it inventory, project profitability, or budgets, and do you open them monthly or did you open them once in onboarding? If you are on Advanced, name the thing Essentials or Plus cannot do that you did last quarter. If the sentence comes out empty, the downshift is free money: Plus to Essentials keeps $660 a year, Advanced to Plus keeps $2,400.</p>
+          <p>If the audit says leave entirely, leave on a schedule instead of a mood. Accounting migrations succeed at fiscal year close with two months of parallel running, and they fail in August with none. Between now and then, export monthly backups and price the alternatives calmly; a rushed migration costs more than a year of the increase you are fleeing.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Pull your current plan and last invoice, and write this year's new annual number next to last year's. The instrument on the right does the arithmetic.</li>
+            <li>Run the tier audit: one sentence per feature that keeps you on the plan. Empty sentence, lower tier. Downshifting at renewal takes minutes inside account settings.</li>
+            <li>On Advanced: price your payroll both ways before judging the $340. Current payroll subscription plus a lower tier, against Advanced with Workforce Elite bundled.</li>
+            <li>If you decide to switch vendors, set the date at your fiscal year close, start monthly exports now, and run the two systems in parallel for one clean close before cutting over.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.certumsolutions.com/library/quickbooks-price-increase-august-2026" target="_blank" rel="noopener">Certum Solutions: the August prices</a> &middot; <a href="https://quickbooks.intuit.com/pricing/" target="_blank" rel="noopener">Intuit: the pricing page</a> &middot; <a href="https://www.business2community.com/small-business/quickbooks-price-increase-2026-cost-breakdown/" target="_blank" rel="noopener">Business2Community: the breakdown</a> &middot; <a href="https://stephsbooks.com/news/quickbooks-online-price-increase-2026" target="_blank" rel="noopener">Steph's Books: the spring step</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Two increases in one year is the vendor telling you how it plans to behave. Renewal is where you vote.</p></div>
+          <div class="tool" data-tool="tier">
+            <span class="tlabel">The instrument &middot; live</span>
+            <span class="tname">The Tier Check</span>
+            <span class="tsub">Two selections. It prices your plan at the new rates and shows what a downshift keeps, this year and over three.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="tc-cur">Your current plan</label>
+                <select id="tc-cur" data-live="tier">
+                  <option value="">Choose a plan</option>
+                  <option value="38">Simple Start ($38/mo)</option>
+                  <option value="85">Essentials ($85/mo)</option>
+                  <option value="140">Plus ($140/mo)</option>
+                  <option value="340">Advanced ($340/mo)</option>
+                </select>
+              </div>
+              <div><label class="fl" for="tc-down">The tier you could live on</label>
+                <select id="tc-down" data-live="tier">
+                  <option value="">Choose a plan</option>
+                  <option value="0">None, I am leaving</option>
+                  <option value="38">Simple Start ($38/mo)</option>
+                  <option value="85">Essentials ($85/mo)</option>
+                  <option value="140">Plus ($140/mo)</option>
+                  <option value="340">Advanced ($340/mo), staying put</option>
+                </select>
+              </div>
+            </div>
+            <div class="readout" id="tc-readout" style="display:none">
+              <div class="big" id="tc-big">$0</div>
+              <div class="cap" id="tc-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ 03 THE REFUND ============ -->
+<section class="topic" id="t3">
+  <div class="topic-inner">
+    <div class="kicker"><span>03 / The Refund</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Washington has returned $86 billion in tariff refunds. Check whether some of it is yours.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>The Supreme Court struck down the IEEPA tariffs in February, and the refund machine built since has now moved $86.3 billion back to importers, $49 billion of it in June alone. Customs opened the third and final phase in late July for the hardest cases, entries already finally liquidated, under a July 15 court order. A progress report landed August 4 and a settlement conference ran August 5. Nearly 10,000 processed refunds sit undelivered because importers never supplied bank details.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>If you imported anything between spring 2025 and this February, components, packaging, finished goods, you may be owed duty money with interest, and nobody will chase you to take it. The refund is not automatic in every case: recent entries flowed through the first two phases, but the oldest, finally liquidated entries currently require having filed at the Court of International Trade, and that door favors the people who act now. Your customs broker can pull your entry history in an afternoon; that report is the whole first step.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not assume your freight forwarder or broker filed claims on your behalf; refund filings were never part of the standard service. Do not ignore small entries, because duties plus interest across a year of shipments add up and the first step costs one email. And do not confuse the refund with relief; money coming back on 2025's duties says nothing about what you pay on next month's containers, which is the subject of the next article.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t3" data-title="Washington has returned $86 billion in tariff refunds. Check whether some of it is yours."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Feb 20</span><span>The Supreme Court rules 6 to 3 that the across-the-board IEEPA tariffs exceeded the statute. Customs stands up the CAPE platform to process more than $100 billion in refunds of invalidated duties.</span></div>
+            <div class="tape-row"><span class="d">Apr to Jun</span><span>Phase one covers unliquidated and recent entries; phase two takes the complex reconciliation claims. By late July, $86.3 billion in duties and interest has been transmitted, with $49 billion moving in June alone.</span></div>
+            <div class="tape-row"><span class="d">Jul 15</span><span>The Court of International Trade orders Customs to reliquidate certain finally liquidated entries across roughly 3,700 pending cases, opening phase three. The unresolved question: whether importers who never filed suit get the same treatment. Trade counsel are telling non-litigants to file now and preserve the claim.</span></div>
+            <div class="tape-row"><span class="d">Aug 4</span><span>CBP files its progress report; a settlement conference follows on the 5th. Inside the numbers: 9,837 processed refunds parked because the importer never submitted ACH banking information. Money, approved, waiting on a form.</span></div>
+          </div>
+          <h3>One email starts the claim</h3>
+          <p>The reason most owed businesses will never collect is not eligibility, it is that nobody owns the question. The duties were paid eighteen months ago, buried inside landed costs and passed along in prices, and the person who signed the customs forms was a broker you hear from twice a year. Reversing that takes one instruction: ask the broker for a report of every entry from March 2025 through February 2026 with duties paid under IEEPA authority flagged, with totals. The instrument on the right writes the email.</p>
+          <p>What comes back sorts itself into three piles. Entries refunded already: reconcile the deposit. Entries in phases one or two: confirm the claim exists and your banking details are on file, because ten thousand approved refunds are sitting on that step. Finally liquidated entries: if the total justifies it, put a trade attorney on a fixed fee and decide about a CIT filing while the door is open. Five figures owed is worth an afternoon of counsel; three figures is worth the broker email and nothing more.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Send the broker email today: all entries March 2025 through February 2026, IEEPA duties flagged, totals by entry status. The tool writes it.</li>
+            <li>Match the refunded entries against your bank statements; interest rides along and the deposits do not announce themselves clearly.</li>
+            <li>Submit ACH details the moment any claim exists. Approved money waits on that form and on nothing else.</li>
+            <li>If finally liquidated entries hold five figures, get a trade attorney's read on a CIT filing now, while phase three's terms are being set, not after they close.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.kiplinger.com/taxes/whats-happening-with-trump-tariffs" target="_blank" rel="noopener">Kiplinger: where the tariffs stand</a> &middot; <a href="https://diaztradelaw.com/ieepa-cape-phase-three-refunds/" target="_blank" rel="noopener">Diaz Trade Law: phase three</a> &middot; <a href="https://www.tariffstool.com/guides/tariff-refunds-86-billion-paid-june-surge-2026" target="_blank" rel="noopener">TariffsTool: the $86 billion</a> &middot; <a href="https://www.greenworldwide.com/cape-phase-3-for-ieepa-tariff-refunds-on-track-for-end-of-july-as-federal-circuit-appeal-continues/" target="_blank" rel="noopener">Green Worldwide: the timeline</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Approved refunds are parked on a missing bank form. Nobody is going to chase you to take your own money.</p></div>
+          <div class="tool" data-tool="refund">
+            <span class="tlabel">The instrument &middot; writes the claim starter</span>
+            <span class="tname">The Refund Screen</span>
+            <span class="tsub">Three fields. It writes the broker email that pulls your entry history and the checklist that sorts what comes back.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="rf-co">Company name</label><input id="rf-co" type="text" placeholder="Your company" /></div>
+              <div><label class="fl" for="rf-goods">What you import</label><input id="rf-goods" type="text" placeholder="e.g. fixtures, packaging, parts from overseas suppliers" /></div>
+              <div><label class="fl" for="rf-broker">Your customs broker or forwarder</label><input id="rf-broker" type="text" placeholder="Name, or 'not sure'" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="refund">Write the claim starter</button>
+            <div class="out" id="rf-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="rf-out" style="display:none" id="rf-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 THE DEADLINE ============ -->
+<section class="topic" id="t4">
+  <div class="topic-inner">
+    <div class="kicker"><span>04 / The Deadline</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>A 50 percent tariff on Canadian goods lands August 19. Reprice before it reaches your invoices.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>The White House invoked Section 338 of the 1930 Tariff Act for the first time in the statute's history: a 50 percent duty on roughly $20 billion of Canadian goods, cement and wine among them, effective midnight Eastern on August 19. Lumber escapes this one only because it is already taxed elsewhere; Canadian softwood carries about 35 percent in combined duties, and framing lumber is up more than 30 percent since December. The homebuilders put the tariff cost of a new American home at ten thousand dollars.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>If your inputs touch Canada, cement, aggregates, food and drink, packaging, components, your landed costs step up in nine days, and the quote you gave three weeks ago may already be underwater. This is a repricing problem before it is a sourcing problem: bids need expiry dates, new contracts need a tariff pass-through line, and signed jobs priced on spring materials need a reread before you order against them. Suppliers will fold their own increases into this window, and the invoice will not tell you which line moved.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not eat a 50 percent input increase to protect a handshake price; reopen the quote and show the customer the tariff line, because they are reading the same headlines you are. Do not stockpile more than you can store and finance to beat one date; this duty is a negotiating position in the USMCA talks and can move again in either direction. And do not take a supplier's word on origin, because the duty follows the country of origin, not the warehouse the truck left.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t4" data-title="A 50 percent tariff on Canadian goods lands August 19. Reprice before it reaches your invoices."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jul 21</span><span>The proclamations issue: Section 338, dormant since 1930, gets its first use. Fifty percent duties on selected Canadian products, framed openly as pressure in the USMCA renegotiation. Trade lawyers call it an opening bid.</span></div>
+            <div class="tape-row"><span class="d">Aug 19</span><span>The duties take effect at midnight Eastern on roughly $20 billion in goods: cement, wine, and a list built around products the administration ties to Canadian treatment of American cars, alcohol, and dairy.</span></div>
+            <div class="tape-row"><span class="d">The stack</span><span>Articles already covered by Section 232 are exempt, which spares lumber the new 50 but leaves softwood at roughly 35.2 percent combined. Framing lumber is up more than 30 percent from December lows and softwood imports are down 28 percent year over year. The exemption is relief on paper only.</span></div>
+            <div class="tape-row"><span class="d">Context</span><span>This lands on top of the new Section 301 baseline of 10 to 12.5 percent announced in late July across dozens of trading partners. The refund story in the previous article is the old regime being unwound; this is the new one being built. Two ledgers, both yours.</span></div>
+          </div>
+          <h3>Nine days is a repricing window</h3>
+          <p>The businesses that get hurt by tariff moves are rarely the ones paying the duty at the dock; they are the ones holding fixed-price commitments made against costs that no longer exist. A bid issued in July against August 19 materials is a donation. The defensive work is clerical and fast: every open quote gets an expiry date, every new contract gets a pass-through line, and every signed job with affected inputs gets priced for exposure so the decision, absorb, split, or reopen, is made deliberately per job instead of discovered at closeout.</p>
+          <p>Customers accept repricing they can see the cause of. A line item that says what the tariff did to the inputs converts better than a silent 8 percent bump, and it positions you as the operator who reads the tape rather than the vendor who pads. The one-line clause for everything you issue from today: prices reflect duties in effect at issue; changes in tariff or duty rates flow through at cost, documented.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Pull your top 20 purchased items and mark anything of Canadian origin or from a Canadian supplier. Ask for origin confirmation in writing; the duty follows origin, not the shipping address.</li>
+            <li>Reprice open quotes and standing bids that carry affected inputs. Add an expiry date and the pass-through clause to everything issued from today.</li>
+            <li>Run signed jobs through the instrument on the right so each one has an exposure number and a decision: absorb, split, or reopen.</li>
+            <li>Buy ahead only what storage and cash comfortably allow through September. Hedging a negotiating position with your working capital is a trade you do not need.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://woodcentral.com.au/section-338-tariffs-canada-lumber/" target="_blank" rel="noopener">Wood Central: the 50 percent and the lumber stack</a> &middot; <a href="https://www.hklaw.com/en/insights/publications/2026/07/50-percent-opening-bid-canadian-imports-subject-to-section-338-tariffs" target="_blank" rel="noopener">Holland &amp; Knight: the opening bid</a> &middot; <a href="https://www.chrobinson.com/en-us/resources/insights-and-advisories/client-advisories/2026q3/7-21-26-new-338-duties-on-select-canadian-products/" target="_blank" rel="noopener">C.H. Robinson: the advisory</a> &middot; <a href="https://globaltradealert.org/blog/section-338-canada-august-2026" target="_blank" rel="noopener">Global Trade Alert: the numbers</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A bid issued in July against August 19 materials is a donation. Reprice while the window is open.</p></div>
+          <div class="tool" data-tool="landed">
+            <span class="tlabel">The instrument &middot; live</span>
+            <span class="tname">The Landed-Cost Reprice</span>
+            <span class="tsub">Three numbers. It prices what the new duty adds to your month, and when your inventory buffer stops protecting you.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="lc-spend">Monthly spend on affected inputs ($)</label><input id="lc-spend" type="number" inputmode="numeric" min="0" placeholder="e.g. 18000" data-live="landed" /></div>
+              <div class="row2">
+                <div><label class="fl" for="lc-rate">Duty rate hitting them (%)</label><input id="lc-rate" type="number" inputmode="numeric" min="0" max="100" placeholder="50" data-live="landed" /></div>
+                <div><label class="fl" for="lc-buffer">Weeks of inventory on hand</label><input id="lc-buffer" type="number" inputmode="numeric" min="0" max="52" placeholder="e.g. 3" data-live="landed" /></div>
+              </div>
+            </div>
+            <div class="readout" id="lc-readout" style="display:none">
+              <div class="big" id="lc-big">$0</div>
+              <div class="cap" id="lc-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ============ 05 THE FILING ============ -->
+<section class="topic" id="t5">
+  <div class="topic-inner">
+    <div class="kicker"><span>05 / The Filing</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Insurers want 14 percent more for small-group health cover next year. Start the renewal now.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>KFF published its read of the 2027 rate filings this week: nearly 300 insurers selling small-group coverage across all fifty states are asking for a median 14 percent increase, with 59 percent of them between 10 and 20 percent and six carriers above 30. The filings cite a 10.8 percent underlying medical cost trend, GLP-1 drug spend, specialty biologics, and behavioral health growing more than 20 percent a year. Regulators approve final rates through the fall; the new prices land January 1.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Fourteen percent on a six-figure annual premium bill is a five-figure increase, stacked on last year's climb. The filings also explain the quote before it arrives: the fully insured small-group pool has shrunk from 17 million covered lives in 2013 to 10 million, and every healthy group that exits to level-funded raises the price on whoever stays. That is the decision on your desk this fall, stay in the pool, restructure the plan, or change how you contribute, and groups that start in August get quoted options that groups opening the envelope in November do not.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not wait for the renewal packet; by the time it arrives, alternatives cannot be quoted and implemented before the deadline. Do not jump to level-funded on price alone, because a bad claims year comes back to you; read the stop-loss terms before you sign, not after. And do not cut the benefit silently to absorb the cost. In the labor market article one describes, the health plan is part of the wage, and staff price it that way even when owners do not.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t5" data-title="Insurers want 14 percent more for small-group health cover next year. Start the renewal now."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Aug 6</span><span>The Peterson-KFF Health System Tracker publishes the analysis: 295 small-group insurers, median proposed increase 14 percent for 2027, the middle half of requests running 10 to 18 percent. Six insurers ask for more than 30.</span></div>
+            <div class="tape-row"><span class="d">Drivers</span><span>The filings themselves name the causes: underlying medical costs trending at 10.8 percent, GLP-1 utilization, new biologics without generic competition, behavioral health claims growing north of 20 percent annually, and dispute-resolution costs from the No Surprises Act adding almost a point at some carriers.</span></div>
+            <div class="tape-row"><span class="d">The pool</span><span>Fully insured small-group enrollment has fallen from 17 million people in 2013 to 10 million. Healthier groups keep leaving for level-funded and self-insured arrangements, which concentrates risk on the groups that remain and feeds the next year's increase. The spiral is structural, not cyclical.</span></div>
+            <div class="tape-row"><span class="d">The calendar</span><span>Filings run May through August, state approvals land October and November, rates go live January 1. Approved rates historically come in near or slightly under the requests. The window where a business can actually shop closes when the approvals publish and brokers flood.</span></div>
+          </div>
+          <h3>August is when the renewal is a negotiation</h3>
+          <p>The renewal packet is designed to be accepted: it arrives late, quotes one option, and prices delay as the default. The counter is to run the process backward. Know your exposure number now, put your broker on notice this month, and require three quotes by October 1: the current plan renewed, one plan-design variation, and a level-funded option with the stop-loss terms attached in writing. Brokers produce alternatives for the clients who ask in August and renewals for the ones who call in November.</p>
+          <p>Separate the plan decision from the contribution decision. A defined-dollar contribution, the business pays a fixed amount per employee and employees choose their trade-off across two plan options, converts an open-ended 14 percent liability into a budgeted line you control, without a silent benefit cut. It also puts the real conversation on the table: here is what we pay, here are the choices, both said out loud before January instead of discovered in a paycheck.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Put your current premium and headcount into the instrument on the right; hold your own number before the packet holds it for you.</li>
+            <li>Email the broker this week: three quotes by October 1, renewal, one design change, one level-funded with stop-loss terms in writing.</li>
+            <li>Decide the contribution structure separately from the plan pick; defined-dollar keeps the budget fixed while employees keep the choice.</li>
+            <li>Whatever you choose, present it with the compensation picture, not as a benefits memo. Article one says who is reachable in this market; the plan is part of why they stay.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.healthsystemtracker.org/brief/how-much-and-why-premiums-are-going-up-for-small-businesses-in-2027/" target="_blank" rel="noopener">Peterson-KFF: the analysis</a> &middot; <a href="https://www.kff.org/affordable-care-act/in-preliminary-rate-filings-aca-marketplace-insurers-largely-propose-double-digit-premium-increase-for-2027-following-a-steep-climb-this-year/" target="_blank" rel="noopener">KFF: the marketplace filings</a> &middot; <a href="https://www.hrdive.com/news/small-business-health-insurance-premiums-2027-kff-rate-filings/827332/" target="_blank" rel="noopener">HR Dive: the 14 percent</a> &middot; <a href="https://www.healthcaredive.com/news/small-business-health-insurance-premiums-2027-kff-rate-filings/827247/" target="_blank" rel="noopener">Healthcare Dive: the coverage</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Brokers produce alternatives for the clients who ask in August and renewals for the ones who call in November.</p></div>
+          <div class="tool" data-tool="renewal">
+            <span class="tlabel">The instrument &middot; live</span>
+            <span class="tname">The Renewal Number</span>
+            <span class="tsub">Three numbers. It prices the proposed increase against your actual bill, per year and per covered employee.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="rn-prem">Current monthly premium, all-in ($)</label><input id="rn-prem" type="number" inputmode="numeric" min="0" placeholder="e.g. 9500" data-live="renewal" /></div>
+              <div class="row2">
+                <div><label class="fl" for="rn-emp">Employees covered</label><input id="rn-emp" type="number" inputmode="numeric" min="1" placeholder="e.g. 12" data-live="renewal" /></div>
+                <div><label class="fl" for="rn-pct">Proposed increase (%)</label><input id="rn-pct" type="number" inputmode="numeric" min="0" max="100" placeholder="14" data-live="renewal" /></div>
+              </div>
+            </div>
+            <div class="readout" id="rn-readout" style="display:none">
+              <div class="big" id="rn-big">$0</div>
+              <div class="cap" id="rn-cap"></div>
+            </div>
+            <div class="emailcap" data-emailcap="renewal">
+              <div class="er"><input type="email" placeholder="Email this to me" aria-label="Email" /><button type="button" data-send="renewal">Send</button></div>
+              <div class="microcopy">Your number, plus the three-quote broker email and the defined-dollar contribution explainer. One email, no sequence behind it.</div>
+              <div class="done" data-done="renewal">Sent. Check your inbox.</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="pass-it">
+    <span class="label">Back issue</span>
+    <p>This is back issue No. 005. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      &copy; 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+const ISSUE_URL='https://goudegroup.com/briefing/archive/no-005/';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, sends, shares */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-send],[data-share]');
+  if(!t) return;
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ copyText(box.textContent,()=>{
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }); }
+    return;
+  }
+  if(t.dataset.send){ sendEmail(t.dataset.send,t); return; }
+  if(t.dataset.share){ doShare(t); return; }
+});
+
+/* ---------- sharing ---------- */
+function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
+function flash(btn,msg){
+  const sl=btn.querySelector('.sl'); if(!sl) return;
+  const o=sl.textContent; sl.textContent=msg||'Link copied';
+  setTimeout(()=>{ sl.textContent=o; },1600);
+}
+function copyText(text,done){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,()=>legacyCopy(text,done));
+  }else{ legacyCopy(text,done); }
+}
+function legacyCopy(text,done){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(err){}
+  document.body.removeChild(ta);
+  if(done) done();
+}
+function doShare(btn){
+  const url=shareLink(btn.dataset.share);
+  const title=btn.dataset.title||document.title;
+  if(navigator.share){
+    navigator.share({title:title,url:url}).catch(()=>{});
+  }else{
+    copyText(url,()=>flash(btn,'Link copied'));
+  }
+}
+/* a link ending in #tN lands with that article's go-deeper open */
+function openFromHash(){
+  const h=(location.hash||'').replace('#','');
+  if(!/^t[1-5]$/.test(h)) return;
+  const topic=document.getElementById(h);
+  if(!topic||topic.classList.contains('open')) return;
+  topic.classList.add('open');
+  const b=topic.querySelector('.deep-toggle');
+  if(b){ b.setAttribute('aria-expanded','true'); b.firstChild.textContent='Close '; }
+  setTimeout(()=>{ topic.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+addEventListener('hashchange',openFromHash);
+openFromHash();
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='spread') calcSpread();
+  if(el.dataset.live==='tier') calcTier();
+  if(el.dataset.live==='landed') calcLanded();
+  if(el.dataset.live==='renewal') calcRenewal();
+});
+document.addEventListener('change',e=>{
+  const el=e.target.closest('select[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='tier') calcTier();
+});
+
+function calcSpread(){
+  const bal=parseFloat($('#sp-bal').value)||0;
+  const rate=parseFloat($('#sp-rate').value)||0;
+  const ro=$('#sp-readout');
+  if(!bal||!rate){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const nowMo=bal*rate/100/12;
+  const hikeYr=bal*0.0025;
+  const hikeMo=hikeYr/12;
+  $('#sp-big').textContent=money(hikeYr)+'/yr';
+  $('#sp-cap').innerHTML='Your balance costs about <b>'+money(nowMo)+' a month</b> in interest today. If the Fed adds a quarter point on September 16 and your rate follows, that becomes <b>'+money(nowMo+hikeMo)+'</b>, which is <b>'+money(hikeYr)+' a year</b> of new cost. If it holds, nothing changes. Either way, this is the number to know before the announcement, not after.';
+}
+
+function calcTier(){
+  const cur=parseFloat($('#tc-cur').value);
+  const downRaw=$('#tc-down').value;
+  const ro=$('#tc-readout');
+  if(!cur||downRaw===''){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const down=parseFloat(downRaw)||0;
+  const curYr=cur*12;
+  if(down>=cur){
+    $('#tc-big').textContent=money(curYr)+'/yr';
+    $('#tc-cap').innerHTML='Staying put costs <b>'+money(curYr)+' a year</b> at the new list price, <b>'+money(curYr*3)+'</b> over three years. If the tier audit found a feature that earns that, done: you decided on purpose, which is the whole point. If the sentence came out empty, pick the tier below and look again.';
+  }else if(down===0){
+    $('#tc-big').textContent=money(curYr)+'/yr';
+    $('#tc-cap').innerHTML='Leaving takes <b>'+money(curYr)+' a year</b> off the software line, minus whatever replaces it. Schedule the migration at fiscal year close with one parallel month, start monthly exports now, and weigh the switching cost against three years of increases: <b>'+money(curYr*3)+'</b> at today’s prices, before the next reprice.';
+  }else{
+    const save=(cur-down)*12;
+    $('#tc-big').textContent=money(save)+'/yr kept';
+    $('#tc-cap').innerHTML='The downshift keeps <b>'+money(save)+' a year</b>, <b>'+money(save*3)+'</b> over three years, and it is a settings change, not a migration. Your current tier runs <b>'+money(curYr)+' a year</b> at the new prices. One sentence per feature: if nothing on the higher tier earns the difference, make the change at renewal.';
+  }
+}
+
+function calcLanded(){
+  const spend=parseFloat($('#lc-spend').value)||0;
+  const rate=parseFloat($('#lc-rate').value)||0;
+  const buffer=parseFloat($('#lc-buffer').value);
+  const ro=$('#lc-readout');
+  if(!spend||!rate){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const addMo=spend*rate/100;
+  const addYr=addMo*12;
+  const bufWeeks=isNaN(buffer)?0:buffer;
+  const bufLine=bufWeeks>0
+    ?'Your <b>'+bufWeeks+' week'+(bufWeeks===1?'':'s')+'</b> of inventory delays the hit past August 19, and then it lands in full.'
+    :'With no inventory buffer, the new cost reaches your first post-deadline order.';
+  $('#lc-big').textContent=money(addMo)+'/mo';
+  $('#lc-cap').innerHTML='At <b>'+rate+' percent</b> on <b>'+money(spend)+'</b> of monthly affected inputs, the duty adds <b>'+money(addMo)+' a month</b>, <b>'+money(addYr)+' a year</b> if nothing changes. '+bufLine+' That figure is what your open quotes are silently absorbing; reprice them, or decide per job to absorb, split, or reopen.';
+}
+
+function calcRenewal(){
+  const prem=parseFloat($('#rn-prem').value)||0;
+  const emp=parseFloat($('#rn-emp').value)||0;
+  const pctRaw=$('#rn-pct').value;
+  const pct=pctRaw===''?14:(parseFloat(pctRaw)||0);
+  const ro=$('#rn-readout');
+  if(!prem||!emp){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const addYr=prem*12*pct/100;
+  const perEmpMo=prem*pct/100/emp;
+  $('#rn-big').textContent='+'+money(addYr)+'/yr';
+  $('#rn-cap').innerHTML='A <b>'+pct+' percent</b> increase on your bill adds <b>'+money(addYr)+' a year</b>, about <b>'+money(perEmpMo)+' per covered employee per month</b>. That is the number to hold when the packet arrives, and the case for the three-quote email this week: renewal as filed, one plan-design change, one level-funded option with stop-loss terms in writing.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  if(kind==='refund'){
+    const co=v('rf-co')||'[Company]';
+    const goods=v('rf-goods')||'[what you import]';
+    const broker=v('rf-broker')||'[broker name]';
+    const out=
+'THE REFUND SCREEN · '+co+'\n\n'+
+'The Supreme Court invalidated the IEEPA tariffs in February 2026. Customs has returned $86.3 billion to importers and opened the final claim phase in late July. Money paid in duties on '+goods+' between March 2025 and February 2026 may be recoverable with interest. Nobody files this for you by default.\n\n'+
+'STEP 1 · THE BROKER EMAIL. Send today:\n\n'+
+'To: '+broker+'\n'+
+'Subject: Entry report, March 2025 through February 2026, IEEPA duties\n\n'+
+'"Please send a report of all customs entries filed for '+co+' from March 1, 2025 through February 28, 2026, flagging every entry where duties were collected under IEEPA authority. For each: entry number, entry date, liquidation status (unliquidated, liquidated, finally liquidated), duties paid under IEEPA, and any refund already issued or claimed through the CAPE process. Totals by status, please. We are confirming our refund position before the phase 3 window settles."\n\n'+
+'STEP 2 · SORT WHAT COMES BACK.\n'+
+'  REFUNDED ALREADY: match deposits against bank statements; interest rides along and the deposits do not announce themselves.\n'+
+'  IN PHASE 1 OR 2 (unliquidated or recently liquidated): confirm the claim exists and ACH banking details are on file. Nearly 10,000 approved refunds are parked on that missing form.\n'+
+'  FINALLY LIQUIDATED: currently tied to Court of International Trade filings. If the total is five figures or more, put a trade attorney on a fixed fee this month, while phase 3 terms are being set.\n\n'+
+'STEP 3 · KEEP THE LEDGERS SEPARATE. This refund covers the old regime. The Section 301 baseline and the August 19 Section 338 duties on Canadian goods are the new one; a refund on 2025 says nothing about next month’s containers.\n\n'+
+'Owner: whoever signs the customs power of attorney owns this screen. Diary the reply for one week out.';
+    show('rf-out','rf-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* email-me capture (doubles as a quiet lead signal) */
+function sendEmail(kind,btn){
+  const cap=document.querySelector('[data-emailcap="'+kind+'"]');
+  const email=cap.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  let result='';
+  if(kind==='renewal') result=$('#rn-big').textContent+': '+$('#rn-cap').textContent;
+  btn.disabled=true; btn.textContent='...';
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 005 tool: The Renewal Number',result:result})
+  }).catch(()=>{}).finally(()=>{
+    cap.querySelector('.er').style.display='none';
+    cap.querySelector('.microcopy').style.display='none';
+    document.querySelector('[data-done="'+kind+'"]').classList.add('show');
+  });
+}
+
+/* newsletter */
+document.getElementById('signupForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const form=e.target;
+  const email=form.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 005'})
+  }).catch(()=>{}).finally(()=>{
+    form.innerHTML='<p style="font-size:14px;line-height:1.5">On the list. No. 006 comes your way next week.</p>';
+  });
+});
+</script>
+</body>
+</html>
