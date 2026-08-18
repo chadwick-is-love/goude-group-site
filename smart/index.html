@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en" id="top"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SmartAccountant &middot; VCS-1 &middot; The Verified Close Standard</title>
+<meta name="description" content="We define how accounting is optimized with artificial intelligence. VCS-1 is the acceptance test: a system reproduces a period the firm already closed, to the penny, or it does not go live.">
+<meta name="theme-color" content="#F6F3EC">
+<meta property="og:title" content="SmartAccountant &middot; VCS-1 &middot; The Verified Close Standard">
+<meta property="og:description" content="We define how accounting is optimized with artificial intelligence. VCS-1 is the acceptance test: a system reproduces a period the firm already closed, to the penny, or it does not go live.">
+<meta property="og:type" content="article">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&family=Public+Sans:wght@400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>/* SmartAccountant — v4 "one document"  (2026-08-17)
+   One page. One ground. One measure. The whole argument on a single scroll,
+   with a standing index in the margin so the shape of the document is visible
+   at every moment. Paper and ink only. Scale does the work colour used to. */
+
+:root{
+  --paper:#F6F3EC;
+  --ink:#12203A;
+  --blue:#0E5A8A;
+
+  --rule:rgba(18,32,58,.16);
+  --rule-soft:rgba(18,32,58,.08);
+  --rule-heavy:rgba(18,32,58,.45);
+  --ink-70:rgba(18,32,58,.68);
+  --ink-48:rgba(18,32,58,.5);
+
+  --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --sans:"Public Sans",system-ui,-apple-system,"Helvetica Neue",sans-serif;
+  --mono:"Courier Prime",ui-monospace,"Courier New",monospace;
+
+  --gut:clamp(20px,4.4vw,64px);
+  --idx:186px;
+  --no:76px;                 /* hanging clause-number column */
+  --maxw:1280px;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--serif);font-size:19px;line-height:1.62;font-weight:400;
+  font-variant-numeric:tabular-nums lining;-webkit-font-smoothing:antialiased;
+}
+svg{display:block;max-width:100%}
+body{overflow-x:clip}
+a{color:inherit}
+::selection{background:#E9DFBE;color:var(--ink)}
+
+/* ---------------- type ---------------- */
+h1,h2,h3{font-family:var(--serif);font-weight:500;margin:0;text-wrap:balance}
+h3{font-weight:600}
+h1{font-size:clamp(34px,4.4vw,60px);line-height:1.04;letter-spacing:-.01em;
+   max-width:21ch;font-variation-settings:"opsz" 60}
+h2{font-size:clamp(27px,2.9vw,38px);line-height:1.1;letter-spacing:-.006em;
+   max-width:20ch;font-variation-settings:"opsz" 32}
+h3{font-size:21px;line-height:1.22;font-variation-settings:"opsz" 20}
+p{margin:0 0 .74em;max-width:33em;text-wrap:pretty}
+p:last-child{margin-bottom:0}
+
+.lead{font-size:clamp(20px,1.75vw,25px);line-height:1.44;letter-spacing:-.005em;max-width:30em;
+      font-variation-settings:"opsz" 24}
+.note{font-family:var(--sans);font-size:15px;line-height:1.52;max-width:42em;color:var(--ink-70)}
+.lbl{font-family:var(--sans);font-size:12px;line-height:1.3;font-weight:600;
+     letter-spacing:.09em;text-transform:uppercase;color:var(--ink-48);margin:0}
+.fig{font-family:var(--mono);font-variant-numeric:tabular-nums lining slashed-zero}
+.tiny{font-family:var(--mono);font-size:12px;line-height:1.5;letter-spacing:.02em;color:var(--ink-48);
+      max-width:44em}
+strong{font-weight:600}
+em{font-style:italic}
+
+/* ---------------- the page ---------------- */
+.doc{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);
+     display:grid;grid-template-columns:var(--idx) minmax(0,1fr);gap:0 clamp(28px,4.4vw,76px);
+     align-items:start}
+.flow{min-width:0;padding-bottom:clamp(48px,6vw,96px)}
+.sec{padding:clamp(48px,5.4vw,92px) 0;border-top:1px solid var(--rule);scroll-margin-top:64px}
+.sec:first-child{border-top:0;padding-top:clamp(28px,3vw,48px)}
+.hang{display:grid;grid-template-columns:var(--no) minmax(0,1fr);gap:0}
+.hang>.n{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--ink-48);padding-top:.3em}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(24px,3vw,48px);align-items:start}
+.hr{height:1px;background:var(--rule);border:0;margin:0}
+.hr-heavy{height:1.5px;background:var(--rule-heavy);border:0;margin:0}
+@media(min-resolution:2dppx){.hr{height:.5px}}
+
+/* ---------------- masthead ---------------- */
+.top{border-bottom:1px solid var(--rule-soft);background:rgba(246,243,236,.92);backdrop-filter:blur(8px);position:sticky;top:0;z-index:60}
+.top-in{max-width:var(--maxw);margin:0 auto;padding:0 var(--gut);
+        display:flex;align-items:center;gap:16px;height:58px;position:relative}
+.lockup{display:flex;align-items:center;gap:10px;text-decoration:none;flex:0 0 auto}
+.lockup .mark{width:24px;color:var(--blue)}
+.lockup .wm{font-family:var(--sans);font-weight:600;font-size:16px;letter-spacing:-.014em;white-space:nowrap}
+.top .id{margin-left:auto;font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--ink-48);
+         white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.top .ct{font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--ink-48);flex:0 0 auto}
+.top .ct b{font-weight:400;color:var(--blue)}
+
+/* ---------------- the standing index ---------------- */
+.idx{position:sticky;top:58px;padding:clamp(28px,3vw,48px) 0 40px;align-self:start}
+.idx .h{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;
+        text-transform:uppercase;color:var(--ink-48);margin:0 0 16px}
+.idx ol{list-style:none;margin:0;padding:0;counter-reset:none}
+.idx li{border-top:1px solid var(--rule-soft)}
+.idx li:last-child{border-bottom:1px solid var(--rule-soft)}
+.idx a{display:grid;grid-template-columns:2.6em minmax(0,1fr);gap:8px;text-decoration:none;
+       padding:8px 0;font-family:var(--sans);font-size:13.5px;line-height:1.3;color:var(--ink-48)}
+.idx a .k{font-family:var(--mono);font-size:12px}
+.idx a:hover{color:var(--ink)}
+.idx li.on a{color:var(--ink);font-weight:600}
+.idx li.on a .k{color:var(--blue)}
+.idx .foot{margin-top:22px;font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--ink-48)}
+
+/* mobile index, as a disclosure in the masthead */
+.mi{margin-left:auto;display:none}
+.mi summary{list-style:none;cursor:pointer;font-family:var(--sans);font-size:12px;font-weight:600;
+            letter-spacing:.09em;text-transform:uppercase;border:1px solid var(--rule);padding:8px 12px}
+.mi summary::-webkit-details-marker{display:none}
+.mi[open] summary span{font-size:0}
+.mi[open] summary span::after{content:"Close";font-size:12px;letter-spacing:.09em}
+.mi .panel{position:fixed;left:0;right:0;top:58px;background:var(--paper);
+           border-bottom:1px solid var(--rule);padding:6px var(--gut) 18px;z-index:70;
+           max-height:70vh;overflow:auto}
+.mi .panel a{display:grid;grid-template-columns:2.6em 1fr;gap:8px;text-decoration:none;
+             font-family:var(--sans);font-size:16px;padding:11px 0;border-bottom:1px solid var(--rule-soft)}
+.mi .panel a .k{font-family:var(--mono);font-size:13px;color:var(--ink-48)}
+
+/* ---------------- clauses ---------------- */
+.cl{display:grid;grid-template-columns:var(--no) minmax(0,1fr) minmax(0,13em);
+    gap:0 clamp(18px,2.4vw,40px);padding:26px 0;border-top:1px solid var(--rule-soft);align-items:start}
+.cl:first-of-type{border-top:1px solid var(--rule)}
+.cl .n{font-family:var(--mono);font-size:13px;letter-spacing:.02em;color:var(--ink-48);
+       padding-top:.3em;position:relative}
+.cl h3{margin-bottom:.22em}
+.cl .sub{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;
+         text-transform:uppercase;color:var(--ink-48);display:block;margin-bottom:9px}
+.cl p{font-size:18px;line-height:1.55;max-width:36em;color:var(--ink-70)}
+.cl .b{font-family:var(--mono);font-size:13px;line-height:1.5;color:var(--ink-48);text-align:right;padding-top:.36em}
+.cl .b .k{display:block;font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;
+          text-transform:uppercase;margin-bottom:5px}
+.cl .b .v{display:block;color:var(--ink);font-size:13.5px}
+.tick{position:absolute;left:0;top:2.5em;width:10px;height:10px;opacity:0}
+.tick i{position:absolute;display:block;background:var(--blue)}
+.tick i:first-child{width:1px;height:5px;left:1px;top:4px;transform:rotate(-45deg)}
+.tick i:last-child{width:1px;height:10px;left:5px;top:0;transform:rotate(34deg)}
+html:not(.js) .tick{opacity:1}
+.js .cl.on .tick{opacity:1;transition:opacity .2s ease}
+
+/* ---------------- the opening ---------------- */
+.zero{padding:clamp(40px,4.6vw,72px) 0 clamp(34px,3.8vw,56px)}
+.hero{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:clamp(28px,4.5vw,80px);align-items:center}
+.hero h1{font-size:clamp(36px,4.4vw,60px);max-width:16ch}
+.zside{text-align:right}
+.zside .lbl{margin-top:2px}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;gap:26px}
+  .zside{text-align:left}
+  .zero .n{font-size:clamp(76px,20vw,130px)}
+}
+.zero .n{font-family:var(--mono);font-weight:400;font-size:clamp(88px,11.5vw,190px);
+         line-height:.82;letter-spacing:-.035em;display:block;margin:0 0 16px;color:rgba(18,32,58,.9)}
+.zero .n .pt{display:inline-block;margin:0 -.14em}
+.zero .cap{max-width:30em}
+
+/* ---------------- tables ---------------- */
+.t{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:14.5px;max-width:46em}
+.t th{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+      color:var(--ink-48);text-align:left;padding:0 22px 9px 0;border-bottom:1px solid var(--rule)}
+.t td{padding:10px 22px 10px 0;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+.t th:last-child,.t td:last-child{padding-right:0}
+.t .r{text-align:right;white-space:nowrap;font-family:var(--mono);font-size:13.5px}
+.t .nw{white-space:nowrap}
+.t tr:last-child td{border-bottom:0}
+.t .tot td{border-top:1px solid var(--rule);font-weight:700;padding-top:12px}
+.t .src{font-family:var(--sans);font-size:12.5px;color:var(--ink-48);border-bottom:0;
+        border-top:1px solid var(--rule-soft);padding-top:12px}
+.t .ttl{font-family:var(--serif);font-size:17px;font-weight:600;letter-spacing:-.004em}
+.t .amt .dec{display:inline-block;width:3.6ch;text-align:left}
+.t.wide{max-width:56em}
+.t.wide th:first-child,.t.wide td:first-child{width:36%}
+
+/* the register: a dense two-column list */
+.reg{border-top:1px solid var(--rule)}
+.reg .grp{display:grid;grid-template-columns:var(--no) minmax(0,1fr);gap:0;
+          padding:20px 0;border-bottom:1px solid var(--rule-soft)}
+.reg .grp:last-child{border-bottom:1px solid var(--rule)}
+.reg .grp .n{font-family:var(--mono);font-size:13px;color:var(--ink-48);padding-top:.3em}
+.reg h3{margin-bottom:.25em}
+.reg .gn{font-family:var(--sans);font-size:14px;color:var(--ink-70);margin:0 0 12px;max-width:40em}
+.reg .it{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,9em);gap:0 20px;
+         padding:7px 0;border-top:1px solid var(--rule-soft);align-items:baseline}
+.reg .it .nm{font-size:17px;line-height:1.3}
+.reg .it .g{font-family:var(--mono);font-size:12.5px;color:var(--ink-48);text-align:right;white-space:nowrap}
+
+/* the specimen, set as type not as a card */
+.spec{max-width:29em;border-top:1.5px solid var(--rule-heavy);padding-top:14px}
+.spec .h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:12px}
+.spec .h .t1{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.006em}
+.spec .h .t2{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
+             color:var(--ink-48)}
+.spec table{width:100%;border-collapse:collapse;font-family:var(--sans);font-size:13.5px}
+.spec td{padding:7px 0;border-bottom:1px solid var(--rule-soft)}
+.spec td:last-child{text-align:right;font-family:var(--mono);font-size:13px}
+.spec tr:last-child td{border-bottom:0;border-top:1px solid var(--rule);font-weight:700;padding-top:11px}
+.spec .s{font-family:var(--mono);font-size:12px;color:var(--ink-48);margin:12px 0 0;
+         display:flex;justify-content:space-between;gap:12px}
+
+/* the credential register */
+.cr{border-top:1.5px solid var(--rule-heavy);max-width:46em;margin-top:30px}
+.cr div{display:grid;grid-template-columns:9em minmax(0,1fr);gap:0 18px;padding:11px 0;
+        border-bottom:1px solid var(--rule-soft);align-items:baseline}
+.cr div:last-child{border-bottom:1px solid var(--rule)}
+.cr .k{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;
+       text-transform:uppercase;color:var(--ink-48)}
+.cr .v{font-size:17px;line-height:1.3}
+.cr .s{font-family:var(--mono);font-size:12.5px;color:var(--ink-48);text-align:right;white-space:nowrap}
+
+/* ---------------- actions and forms ---------------- */
+.btn{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--sans);
+     font-size:15px;font-weight:600;letter-spacing:.02em;padding:15px 26px;border-radius:0;
+     border:1px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
+.btn:hover{background:transparent;color:var(--ink)}
+.lnk{font-family:var(--sans);font-size:15px;font-weight:600;text-decoration:none;
+     border-bottom:1px solid var(--rule);padding-bottom:2px;display:inline-flex;gap:8px;align-items:baseline}
+.lnk:hover{border-bottom-color:var(--ink)}
+.ar{font-family:var(--mono);font-size:13px}
+.acts{display:flex;flex-wrap:wrap;gap:14px 30px;align-items:baseline;margin-top:26px}
+
+.cap-form{display:flex;flex-wrap:wrap;gap:16px 24px;max-width:42em;align-items:flex-end}
+.f{display:flex;flex-direction:column;gap:6px;flex:1 1 175px;min-width:0}
+.f.a{flex:0 0 auto}
+.f label{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;
+         text-transform:uppercase;color:var(--ink-48)}
+.f input,.f select{font-family:var(--serif);font-size:17px;padding:8px 0;background:transparent;
+                   color:inherit;border:0;border-bottom:1px solid var(--rule);border-radius:0}
+.f input:focus,.f select:focus{outline:0;border-bottom-color:var(--ink)}
+.f input::placeholder{color:var(--ink-48)}
+
+/* ---------------- signature and colophon ---------------- */
+.sig{margin-top:32px}
+.sig .line{width:200px;height:1px;background:var(--ink);margin-bottom:10px}
+.sig .who{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase}
+.sig .role{font-family:var(--sans);font-size:15px;color:var(--ink-70);margin-top:3px}
+.sig .ctl{font-family:var(--mono);font-size:12px;color:var(--ink-48);margin-top:14px;letter-spacing:.02em}
+.colo{border-top:1px solid var(--rule);margin-top:clamp(36px,4vw,60px);padding:22px 0 40px;
+      display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px;
+      font-family:var(--mono);font-size:12px;line-height:1.6;color:var(--ink-48);letter-spacing:.02em}
+.colo p{max-width:none;margin:0}
+
+/* ---------------- responsive ---------------- */
+@media(max-width:1080px){
+  :root{--idx:0px}
+  .top .ct{display:none}
+  .doc{grid-template-columns:minmax(0,1fr)}
+  .idx{display:none}
+  .mi{display:block}
+  .top-in{position:relative}
+  .top .id{display:none}
+  .colo{grid-template-columns:1fr 1fr}
+}
+@media(max-width:820px){
+  body{font-size:18px}
+  :root{--no:0px}
+  .hang,.reg .grp{grid-template-columns:1fr}
+  .hang>.n,.reg .grp>.n{padding-top:0;margin-bottom:6px}
+  .two{grid-template-columns:1fr}
+  .cl{grid-template-columns:1fr}
+  .cl .n{margin-bottom:6px;padding-top:0}
+  .cl .b{text-align:left;padding-top:12px;display:flex;gap:10px;align-items:baseline}
+  .cl .b .k,.cl .b .v{display:inline;margin:0}
+  .tick{display:none}
+  .colo{grid-template-columns:1fr}
+  .t.wide th:first-child,.t.wide td:first-child{width:auto}
+}
+@media(max-width:560px){
+  .zero .n{font-size:clamp(84px,26vw,140px)}
+  .t th:nth-child(3),.t td:nth-child(3){display:none}
+  .t.keep3 th:nth-child(3),.t.keep3 td:nth-child(3){display:table-cell}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .cl .tick{opacity:1;transition:none}}
+@media print{.top,.idx,.mi{display:none}.doc{display:block}body{background:#fff;font-size:10.5pt}}
+</style>
+</head><body>
+<header class="top"><div class="top-in"><a class="lockup" href="#top"><svg class="mark" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><clipPath id="d"><circle cx="100" cy="100" r="100"/></clipPath><mask id="c"><circle cx="100" cy="100" r="100" fill="#fff"/><g clip-path="url(#d)"><path d="M100 -30A50 50 0 0 1 100 100A50 50 0 0 0 100 230" fill="none" stroke="#000" stroke-width="29"/></g></mask></defs><circle cx="100" cy="100" r="100" fill="currentColor" mask="url(#c)"/></svg><span class="wm">SmartAccountant</span></a><span class="id">THE VERIFIED CLOSE STANDARD</span><span class="ct">READ <b id="ctr">00</b>/<b id="ctt">00</b></span><details class="mi"><summary><span>Contents</span></summary><div class="panel"><a href="#zero"><span class="k">0.00</span><span>Prove it</span></a><a href="#s1"><span class="k">&sect;1</span><span>The definition</span></a><a href="#s2"><span class="k">&sect;2</span><span>The standard</span></a><a href="#s3"><span class="k">&sect;3</span><span>The register</span></a><a href="#s4"><span class="k">&sect;4</span><span>Fees</span></a><a href="#s5"><span class="k">&sect;5</span><span>Appearances</span></a><a href="#s6"><span class="k">&sect;6</span><span>The weekly letter</span></a><a href="#s7"><span class="k">&sect;7</span><span>Author</span></a><a href="#s8"><span class="k">&sect;8</span><span>The record</span></a></div></details></div></header>
+<div class="doc"><nav class="idx" aria-label="Contents"><p class="h">Contents</p><ol><li data-t="zero"><a href="#zero"><span class="k">0.00</span><span>Prove it</span></a></li><li data-t="s1"><a href="#s1"><span class="k">&sect;1</span><span>The definition</span></a></li><li data-t="s2"><a href="#s2"><span class="k">&sect;2</span><span>The standard</span></a></li><li data-t="s3"><a href="#s3"><span class="k">&sect;3</span><span>The register</span></a></li><li data-t="s4"><a href="#s4"><span class="k">&sect;4</span><span>Fees</span></a></li><li data-t="s5"><a href="#s5"><span class="k">&sect;5</span><span>Appearances</span></a></li><li data-t="s6"><a href="#s6"><span class="k">&sect;6</span><span>The weekly letter</span></a></li><li data-t="s7"><a href="#s7"><span class="k">&sect;7</span><span>Author</span></a></li><li data-t="s8"><a href="#s8"><span class="k">&sect;8</span><span>The record</span></a></li></ol><p class="foot">VCS-1 &middot; ed 2026.1<br>Effective 2026-09-01<br>Free to reproduce<br>with attribution</p></nav><main class="flow"><section class="sec zero" id="zero"><div class="hero"><div><p class="lbl" style="margin-bottom:18px">VCS-1 &middot; The Verified Close Standard</p><h1 style="margin-bottom:22px">Prove it on a month you already closed.</h1><p class="lead" style="margin-bottom:26px">Before artificial intelligence touches a live period, it reproduces one your firm already verified. To the penny, signed, or it does not go live.</p><div class="acts" style="margin-top:0"><a class="btn" href="#s2">The standard <span class="ar">&rarr;</span></a><a class="lnk" href="#s4">Fees <span class="ar">&rarr;</span></a></div></div><div class="zside"><span class="fig n">0<span class="pt">.</span>00</span><p class="lbl">Check figure &middot; the only number that decides it</p></div></div></section><section class="sec" id="s1"><div class="hang"><div class="n">&sect;1</div><div><h1 style="margin-bottom:24px">Accounting is not optimized by tools. It is optimized by proof.</h1><div class="two"><div><p class="lead" style="margin-bottom:18px">Every firm is being sold software. None of it answers the only question a partner has: is the output right, and who says so.</p><p>The market sells effort. Workshops that end in applause, prompt libraries, project fees with no acceptance test, and nobody&rsquo;s name on whether the numbers are right.</p><p>A tie-out is the answer this profession already trusts: a claim about a period, made against figures the firm produced before anyone arrived. It is the form we chose to be measured in, and a firm may measure us with it.</p></div><div><div class="spec"><div class="h"><span class="t1">The Tie-Out</span><span class="t2">Reconciled</span></div><table><tr><td>Period</td><td>2026-07</td></tr><tr><td>Source reports</td><td>8</td></tr><tr><td>Rows processed</td><td>53,114</td></tr><tr><td>Exceptions raised, resolved</td><td>6, 6</td></tr><tr><td>Check figure</td><td>0.00</td></tr></table><p class="s"><span>Prepared and signed</span><span>2026-08-06</span></p></div></div></div></div></div></section><section class="sec" id="s2"><div class="hang"><div class="n">&sect;2</div><div><h2 style="margin-bottom:16px">The Verified Close Standard.</h2><p class="note" style="margin-bottom:28px">VCS-1, edition 2026.1, effective 2026-09-01. Open, free to reproduce with attribution, written to be run against any vendor. This one included.</p><div class="cl"><div class="n">&sect;2.1<span class="tick"><i></i><i></i></span></div><div><h3>The Known-Good Month</h3><p>The firm picks a closed period it trusts. The system runs it cold. The output ties to the penny or the build does not go live. No partial pass.</p></div><div class="b"><span class="k">Basis</span><span class="v">Client-selected</span></div></div><div class="cl"><div class="n">&sect;2.2<span class="tick"><i></i><i></i></span></div><div><h3>Payment follows the proof</h3><p>Half at complete intake, half when the period ties. The balance is never paid against a promise.</p></div><div class="b"><span class="k">Split</span><span class="v">50 / 50</span></div></div><div class="cl"><div class="n">&sect;2.3<span class="tick"><i></i><i></i></span></div><div><h3>The Tie-Out</h3><p>One signed document per period: reconciled, every exception listed and resolved. Firms send it to clients. Clients send it to auditors.</p></div><div class="b"><span class="k">Basis</span><span class="v">Signed artifact</span></div></div><div class="cl"><div class="n">&sect;2.4<span class="tick"><i></i><i></i></span></div><div><h3>The period is kept</h3><p>When a major model version ships, every covered build is re-run against its known-good period. A model change becomes a letter to the client, not a discovery inside a close.</p></div><div class="b"><span class="k">Basis</span><span class="v">Retained, re-run</span></div></div><div class="cl"><div class="n">&sect;2.5<span class="tick"><i></i><i></i></span></div><div><h3>Certification</h3><p>Firms that pass carry the mark, annually, naming the systems covered. Vendors whose exports hold their shape carry verified status. The mark asserts one thing: tested against a period somebody had already closed.</p></div><div class="b"><span class="k">Term</span><span class="v">12 months</span></div></div><div class="cl"><div class="n">&sect;2.6<span class="tick"><i></i><i></i></span></div><div><h3>Stated limits</h3><p>No claim of silent monitoring, because that promise cannot be kept. The client flags a change or the period review catches it, and the artifact records which.</p></div><div class="b"><span class="k">Scope</span><span class="v">Stated</span></div></div><div class="acts"><a class="lnk" href="#s8">Cite this standard <span class="ar">&rarr;</span></a><a class="lnk" href="mailto:hello@smartaccountant.ai?subject=Verification%20for%20our%20product">If you build accounting software <span class="ar">&rarr;</span></a></div></div></div></section><section class="sec" id="s3"><div class="hang"><div class="n">&sect;3</div><div><h2 style="margin-bottom:16px">The register.</h2><p class="note" style="margin-bottom:28px">Instruments filed by the job they do, not by a product number. Anything touching a general ledger carries the acceptance test.</p><div class="reg"><div class="grp"><div class="n">&sect;3.1</div><div><h3>Close and reconcile</h3><div class="it"><span class="nm">Reconciliation and Cleanup Engine</span><span class="g">Built for you</span></div><div class="it"><span class="nm">Payroll Reconciliation Engine</span><span class="g">Built for you</span></div><div class="it"><span class="nm">Trust Reconciliation, three-way</span><span class="g">Built for you</span></div><div class="it"><span class="nm">Month-End Close Review</span><span class="g">With training</span></div><div class="it"><span class="nm">Transaction Exception Reviewer</span><span class="g">Library</span></div><div class="it"><span class="nm">P&amp;L Anomaly Detector</span><span class="g">Library</span></div></div></div><div class="grp"><div class="n">&sect;3.2</div><div><h3>Firm standards</h3><div class="it"><span class="nm">Brand Guardian</span><span class="g">Library</span></div><div class="it"><span class="nm">SOPs and Workflow Documentation</span><span class="g">Library</span></div><div class="it"><span class="nm">Quality Control and Peer Review</span><span class="g">Library</span></div><div class="it"><span class="nm">Weekly Skills Audit</span><span class="g">Library</span></div><div class="it"><span class="nm">Company Brain</span><span class="g">With training</span></div></div></div><div class="grp"><div class="n">&sect;3.3</div><div><h3>Clients and intake</h3><div class="it"><span class="nm">Client Onboarding and Intake</span><span class="g">With training</span></div><div class="it"><span class="nm">Client Communication and Reporting</span><span class="g">Library</span></div><div class="it"><span class="nm">Customer Service</span><span class="g">Library</span></div><div class="it"><span class="nm">Sales Wizard</span><span class="g">Library</span></div></div></div><div class="grp"><div class="n">&sect;3.4</div><div><h3>Advisory and the firm&rsquo;s own book</h3><div class="it"><span class="nm">Money Coach and Internal CFO</span><span class="g">Library</span></div><div class="it"><span class="nm">GL Advisory Narrative Generator</span><span class="g">Library</span></div><div class="it"><span class="nm">AI Pricing and Proposals Builder</span><span class="g">Library</span></div><div class="it"><span class="nm">Leadership and Development</span><span class="g">Library</span></div></div></div></div><form class="cap-form" style="margin-top:26px" onsubmit="return false"><div class="f"><label for="e1">Email</label><input id="e1" type="email" placeholder="you@firm.com" required></div><div class="f"><label for="f1">Firm</label><input id="f1" type="text" placeholder="Firm name"></div><div class="f a"><label>&nbsp;</label><button class="btn" type="submit">Send the free four</button></div></form><p class="tiny" style="margin-top:12px">The Quick-Start, the prompt sheet, VCS-1 &sect;2 as a standalone specification, and a blank Tie-Out. No card.</p></div></div></section><section class="sec" id="s4"><div class="hang"><div class="n">&sect;4</div><div><h2 style="margin-bottom:16px">Fees, published in full.</h2><p class="note" style="margin-bottom:28px">A firm weighing a fifty thousand dollar decision should not have to book a call to learn the shape of it. Nothing below requires the line above it.</p><div class="cl"><div class="n">&sect;4.1<span class="tick"><i></i><i></i></span></div><div><h3>Firm readiness check</h3><p>Eleven questions, ten minutes. The intake that runs before a paid cohort, returned as a written read on where the drag sits and what to build first.</p></div><div class="b"><span class="k">Fee</span><span class="v"><span class="amt">$0<span class="dec">.00</span></span></span></div></div><div class="cl"><div class="n">&sect;4.2<span class="tick"><i></i><i></i></span></div><div><h3>The Library</h3><p>Every instrument, every seat, revised each time a model changes underneath them.</p></div><div class="b"><span class="k">Per firm, per year</span><span class="v"><span class="amt">$1,200<span class="dec">.00</span></span></span></div></div><div class="cl"><div class="n">&sect;4.3<span class="tick"><i></i><i></i></span></div><div><h3>Team training</h3><p>Private cohort of up to twenty, built from the team&rsquo;s intake poll. Ends with a ranked, priced list of what to build, honored for ninety days.</p></div><div class="b"><span class="k">Per cohort</span><span class="v"><span class="amt">$4,500<span class="dec">.00</span></span></span></div></div><div class="cl"><div class="n">&sect;4.4<span class="tick"><i></i><i></i></span></div><div><h3>The build</h3><p>Light $3,000, standard $6,000, heavy from $12,000. Priced on complexity, never on seats. Every build carries &sect;2.1 and a thirty day warranty.</p></div><div class="b"><span class="k">Per build</span><span class="v"><span class="amt">$3,000<span class="dec">.00</span></span> +</span></div></div><div class="cl"><div class="n">&sect;4.5<span class="tick"><i></i><i></i></span></div><div><h3>The Care Plan</h3><p>Pure maintenance: format remaps, model compatibility, break-fix. Essential $750, Priority $1,500 with the monthly Tie-Out, Partner $3,000 covering the whole book. New capability is always quoted as a build, flagged in the artifact in one line.</p></div><div class="b"><span class="k">Per month</span><span class="v"><span class="amt">$750<span class="dec">.00</span></span> +</span></div></div><table class="t wide" style="margin-top:30px"><thead><tr><th>What a heavy build recovers</th><th>Value</th><th>Basis</th></tr></thead><tbody><tr><td>Hours returned per month</td><td class="r">20 to 40</td><td>Measured against the firm&rsquo;s prior close</td></tr><tr><td>Annual value</td><td class="r">$18,000 to $48,000</td><td>Loaded rate $75 to $100 per hour</td></tr><tr><td>Payback</td><td class="r">3 to 8 months</td><td>Against a $12,000 build</td></tr><tr><td class="src" colspan="3">Heavy-class figures only. A light build returns a few hours a month and is priced to match.</td></tr></tbody></table><form class="cap-form" style="margin-top:28px" onsubmit="return false"><div class="f"><label for="e2">Email</label><input id="e2" type="email" placeholder="you@firm.com" required></div><div class="f"><label for="b2">Client businesses</label><select id="b2"><option>Under 20</option><option>20 to 50</option><option>50 to 200</option><option>Over 200</option></select></div><div class="f a"><label>&nbsp;</label><button class="btn" type="submit">Price an engagement</button></div></form><p class="tiny" style="margin-top:12px">Two answers price a whole book: how many client businesses, and which close costs the most hours.</p></div></div></section><section class="sec" id="s5"><div class="hang"><div class="n">&sect;5</div><div><h2 style="margin-bottom:16px">On the road. Advisory Amplified 2026.</h2><p class="note" style="margin-bottom:26px">Six working sessions for firm owners, six CPE credits each. Bring one month-end close you would like to stop doing by hand; leave with a ranked list of what to build, yours either way.</p><table class="t keep3" style="max-width:36em"><tbody><tr><td class="r" style="text-align:left">2026-09-22</td><td class="ttl">Raleigh</td><td>North Carolina</td></tr><tr><td class="r" style="text-align:left">2026-09-25</td><td class="ttl">Nashville</td><td>Tennessee</td></tr><tr><td class="r" style="text-align:left">2026-09-29</td><td class="ttl">Minneapolis</td><td>Minnesota</td></tr><tr><td class="r" style="text-align:left">2026-10-02</td><td class="ttl">Boulder</td><td>Colorado</td></tr><tr><td class="r" style="text-align:left">2026-10-06</td><td class="ttl">Phoenix</td><td>Arizona</td></tr><tr><td class="r" style="text-align:left">2026-10-09</td><td class="ttl">Seattle</td><td>Washington</td></tr><tr><td class="src" colspan="3">Hosted by Fearless Foundry. Tickets $199 to $1,499 on the tour site.</td></tr></tbody></table><form class="cap-form" style="margin-top:26px" onsubmit="return false"><div class="f"><label for="e3">Email</label><input id="e3" type="email" placeholder="you@firm.com" required></div><div class="f"><label for="c3">City</label><select id="c3"><option>Raleigh, 2026-09-22</option><option>Nashville, 2026-09-25</option><option>Minneapolis, 2026-09-29</option><option>Boulder, 2026-10-02</option><option>Phoenix, 2026-10-06</option><option>Seattle, 2026-10-09</option></select></div><div class="f a"><label>&nbsp;</label><button class="btn" type="submit">Notify me</button></div></form><p class="tiny" style="margin-top:12px">One note, two weeks before your city. It stops after that unless you ask it to continue.</p></div></div></section><section class="sec" id="s6"><div class="hang"><div class="n">&sect;6</div><div><h2 style="margin-bottom:16px">The Tie-Out, weekly.</h2><p class="note" style="margin-bottom:26px">One letter a week for people who have to be right. An instrument you can run that week, one thing that broke in a real firm and what it cost, one figure that had to reconcile, and one line of what is open. Never two. Issue 01 is dated 2026-09-15.</p><form class="cap-form" onsubmit="return false"><div class="f"><label for="e4">Email</label><input id="e4" type="email" placeholder="you@firm.com" required></div><div class="f"><label for="r4">Role</label><select id="r4"><option>Firm owner or partner</option><option>Controller or bookkeeper</option><option>Software vendor</option><option>Other</option></select></div><div class="f a"><label>&nbsp;</label><button class="btn" type="submit">Subscribe</button></div></form><p class="tiny" style="margin-top:12px">No roundups, no model news. Every issue keeps a permanent address.</p></div></div></section><section class="sec" id="s7"><div class="hang"><div class="n">&sect;7</div><div><h2 style="margin-bottom:24px">Jan Haugo. Accountant first.</h2><div class="two"><div><p>The standard came out of closing books, not out of a product roadmap. She is co-developing Intuit&rsquo;s official AI Certification course, so the curriculum this profession will be trained on is being written in the same room as the acceptance test published here.</p><p>Client files stay in the firm&rsquo;s own Google or Microsoft environment, sanitized there, then handed to the model. Nothing bypasses the firm&rsquo;s controls; the build reads exports and replaces nothing. Every build ships with an owner&rsquo;s manual and a trained backup owner, because firms have watched a close walk out the door with a resignation letter.</p></div><div><div class="cr"><div><span class="k">Intuit</span><span class="v">Co-developing the official AI Certification course</span></div><div><span class="k">Recognition</span><span class="v">Top 50 Women in Accounting</span></div><div><span class="k">Channel</span><span class="v">Gusto partner network</span></div><div><span class="k">On the road</span><span class="v">Advisory Amplified 2026, six cities</span></div><div><span class="k">Acceptance tests</span><span class="v">Signed on every build</span></div></div></div></div></div></div></section><section class="sec" id="s8"><div class="hang"><div class="n">&sect;8</div><div><h2 style="margin-bottom:22px">The record.</h2><table class="t" style="max-width:50em"><tbody><tr><td class="nw" style="width:10em">Citation</td><td>Haugo, J. (2026). The Verified Close Standard, edition 2026.1. SmartAccountant. smartaccountant.ai</td></tr><tr><td>Permitted</td><td>Tested against the Verified Close Standard (VCS 2026.1) on a client-selected known-good period.</td></tr><tr><td>Not permitted</td><td>Certified, approved, or endorsed, unless a current certificate names the system and the scope.</td></tr><tr><td>Amendments</td><td>2026-08-17, &sect;2.6 added and silent-monitoring language removed. 2026-09-01, edition 2026.1 issued.</td></tr><tr><td>Corrections</td><td>errata@smartaccountant.ai. Exceptions are published here.</td></tr></tbody></table><div class="sig"><div class="line"></div><p class="who">Jan Haugo</p><p class="role">Author, The Verified Close Standard</p><p class="ctl">VCS-1 &middot; EDITION 2026.1 &middot; EFFECTIVE 2026-09-01 &middot; SUPERSEDES: NONE</p></div></div></div></section></main></div>
+<script>
+(function(){
+  var h=document.documentElement; h.className+=' js';
+  var cl=document.querySelectorAll('.cl'),
+      r=document.getElementById('ctr'), t=document.getElementById('ctt'),
+      li=document.querySelectorAll('.idx li');
+  var pad=function(n){return (n<10?'0':'')+n};
+  if(t) t.textContent=pad(cl.length);
+  if(!('IntersectionObserver' in window)){
+    for(var i=0;i<cl.length;i++) cl[i].className+=' on';
+    if(r) r.textContent=pad(cl.length); return;
+  }
+  var seen=0;
+  var io=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){
+      var e=es[i];
+      if(e.isIntersecting && e.target.className.indexOf(' on')<0){
+        e.target.className+=' on'; seen++;
+        if(r) r.textContent=pad(seen);
+        io.unobserve(e.target);
+      }
+    }
+  },{threshold:0.4,rootMargin:'0px 0px -14% 0px'});
+  for(var j=0;j<cl.length;j++) io.observe(cl[j]);
+
+  var secs=document.querySelectorAll('.sec[id]');
+  var spy=new IntersectionObserver(function(es){
+    for(var i=0;i<es.length;i++){
+      if(!es[i].isIntersecting) continue;
+      var id=es[i].target.id;
+      for(var k=0;k<li.length;k++)
+        li[k].className = (li[k].getAttribute('data-t')===id)?'on':'';
+    }
+  },{rootMargin:'-45% 0px -50% 0px'});
+  for(var m=0;m<secs.length;m++) spy.observe(secs[m]);
+})();
+</script>
+</body></html>
