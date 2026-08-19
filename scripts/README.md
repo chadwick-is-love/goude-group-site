@@ -32,8 +32,9 @@ never touches that proxy. It also removes the dependency on anyone's laptop bein
 
 1. **Guard.** GitHub cron is UTC only, so both DST offsets are scheduled and the run that is
    not actually Monday 00:xx in New York exits immediately.
-2. **Research and write** (`scripts/prompts/write-issue.md`, which points at
-   `research.md` for the selection rule and `topic.md` for voice and the tool contract).
+2. **Research and write** (`scripts/prompts/write-issue.md`, which points at `theme.md` for a
+   one-issue theme if one is in force, `research.md` for the selection rule and `topic.md` for
+   voice and the tool contract).
    Claude Code searches, verifies, writes five articles with five working instruments, and
    writes one file: `build/topics.json`. It touches nothing else.
 3. **Assemble** (`scripts/assemble-issue.mjs`). Deterministic, no network. It validates every
@@ -80,6 +81,10 @@ model in the loop. If you touch `lib/assemble.mjs` or `lib/templates.mjs`, run i
 - **What it covers**: `scripts/prompts/research.md`, the selection rule. The Briefing has no
   assigned subject; it ranks the week by consequence to an operator. Read the two failure
   modes at the top of that file before editing it.
+- **The theme for one issue**: `scripts/prompts/theme.md`. It names the single issue number it
+  applies to and governs selection for that issue only. Any other issue number and the builder
+  ignores it, which is what stops a theme becoming a standing beat. Nothing enforces this in
+  code; the scope line at the top of the file is the mechanism, so keep it accurate.
 - **How it reads**: `scripts/prompts/topic.md`, the voice rules and the tool contract.
 - **How it looks**: `scripts/lib/templates.mjs`. The only place page structure lives.
 - **What blocks a publish**: `scripts/check-briefing.mjs` and the validator at the top of
