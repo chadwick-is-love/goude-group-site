@@ -60,6 +60,35 @@ header.mast h1{font-size:clamp(40px,6vw,86px);letter-spacing:-.03em}
 .panel h2{font-size:26px;margin-bottom:6px}
 .panel .sub{font-size:14px;color:var(--navy-soft);line-height:1.45;margin-bottom:18px;max-width:60ch}
 
+/* ---------- issue picker ---------- */
+.issues{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px}
+.issue-tile{
+  text-align:left;padding:13px 14px 12px;border-radius:11px;background:var(--cream);
+  box-shadow:inset 0 0 0 1.5px var(--navy-hair);transition:box-shadow .13s ease,transform .13s ease;min-width:0;
+}
+.issue-tile:hover{box-shadow:inset 0 0 0 1.5px var(--navy);transform:translateY(-1px)}
+.issue-tile.on{background:var(--navy);box-shadow:none}
+.issue-tile .ino{display:block;font-family:var(--display);font-size:22px;line-height:1.05;letter-spacing:-.02em}
+.issue-tile .idate{display:block;font-size:11px;font-weight:600;color:var(--navy-soft);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.issue-tile .itag{
+  display:inline-block;margin-top:9px;font-size:8.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;
+  padding:3px 7px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--navy-hair);color:var(--navy-soft);
+}
+.issue-tile.on .ino{color:var(--mint)}
+.issue-tile.on .idate{color:rgba(216,247,201,.72)}
+.issue-tile.on .itag{color:var(--navy);background:var(--mint);box-shadow:none}
+.issue-tile.busy{opacity:.55}
+.issues-empty{font-size:13px;color:var(--navy-soft)}
+
+/* ---------- advanced disclosure ---------- */
+.adv{margin-top:16px;border-top:1px solid var(--navy-faint);padding-top:14px}
+.adv-toggle{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--navy-soft);display:flex;align-items:center;gap:7px}
+.adv-toggle:hover{color:var(--navy)}
+.adv-toggle .chev{transition:transform .15s ease;display:inline-block;font-size:9px}
+.adv.open .adv-toggle .chev{transform:rotate(90deg)}
+.adv-body{display:none;margin-top:14px}
+.adv.open .adv-body{display:block}
+
 /* ---------- source row ---------- */
 .srcrow{display:flex;gap:10px;flex-wrap:wrap}
 .srcrow input[type=text]{
@@ -184,7 +213,7 @@ footer.foot{max-width:1560px;margin:0 auto;padding:0 30px 60px}
   <div class="mast-kicker">Goude Group &middot; Internal Tool</div>
   <h1>The Social Engine.</h1>
   <div class="mast-row">
-    <p>Paste a Briefing issue. It reads the five stories and returns ten branded posts, two a day for the week, each one a statement built to stop the scroll and send the reader to the article. Edit anything. Export the card, copy the caption, post.</p>
+    <p>Pick a Briefing issue. It reads the five stories and returns ten branded posts, two a day for the week, each one a statement built to stop the scroll and send the reader to the article. Edit anything. Export the card, copy the caption, post.</p>
     <div class="mast-meta">Not indexed<br>Internal use</div>
   </div>
   <div class="mast-rule"></div>
@@ -198,19 +227,28 @@ footer.foot{max-width:1560px;margin:0 auto;padding:0 30px 60px}
   <!-- 01 SOURCE -->
   <section class="panel">
     <span class="label">01 &middot; The source</span>
-    <h2>Load an issue.</h2>
-    <p class="sub">The current issue, or any back issue from the archive. Leave it blank and it loads whatever is live.</p>
-    <div class="srcrow">
-      <input id="srcUrl" type="text" value="/briefing/" placeholder="/briefing/ or /briefing/archive/no-005/" spellcheck="false" />
-      <button class="btn" id="loadBtn">Read it</button>
-      <button class="btn ghost" id="pasteBtn">Paste instead</button>
-    </div>
+    <h2>Pick an issue.</h2>
+    <p class="sub">Every issue ever published. The current one is already loaded.</p>
+    <div class="issues" id="issues"><span class="issues-empty">Reading the archive ...</span></div>
     <div class="status" id="status"></div>
-    <div class="pastebox" id="pastebox">
-      <textarea id="pasteArea" placeholder="Open the issue, select all, copy, paste here. Then press Read it."></textarea>
+    <div class="stagebar" style="margin-top:16px">
+      <button class="btn ghost small" id="blankBtn">Start from scratch</button>
+      <button class="btn ghost small" id="refreshBtn">Refresh the list</button>
     </div>
-    <p class="hint"><b>Blank card:</b> skip this and press <b>Start from scratch</b> below to build a post that has nothing to do with the Briefing.</p>
-    <div class="stagebar"><button class="btn ghost small" id="blankBtn">Start from scratch</button></div>
+    <div class="adv" id="adv">
+      <button class="adv-toggle" type="button" id="advToggle"><span class="chev">&#9656;</span> If it will not load</button>
+      <div class="adv-body">
+        <p class="hint" style="margin-top:0">Type a path yourself, or open the issue in another tab, select all, copy, and paste the page in below.</p>
+        <div class="srcrow">
+          <input id="srcUrl" type="text" value="/briefing/" placeholder="/briefing/ or /briefing/archive/no-005/" spellcheck="false" />
+          <button class="btn" id="loadBtn">Read it</button>
+          <button class="btn ghost" id="pasteBtn">Paste instead</button>
+        </div>
+        <div class="pastebox" id="pastebox">
+          <textarea id="pasteArea" placeholder="Open the issue, select all, copy, paste here. Then press Read it."></textarea>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- 02 QUEUE -->
@@ -392,6 +430,7 @@ var PAIRS = [
 /* ================= STATE ================= */
 
 var S = {
+  issues:[], issueIndex:-1, busy:false,
   issue:{no:'', date:'', url:'', title:''},
   stories:[],
   queue:[],
@@ -520,6 +559,68 @@ function setStatus(msg, isErr){
   if(!msg) el.className = 'status';
 }
 
+function loadArchive(){
+  var box = document.getElementById('issues');
+  box.innerHTML = '<span class="issues-empty">Reading the archive ...</span>';
+  return fetch(absoluteUrl('/briefing/archive/'), {credentials:'same-origin'}).then(function(r){
+    if(!r.ok) throw new Error('the archive returned ' + r.status);
+    return r.text();
+  }).then(function(html){
+    var doc = new DOMParser().parseFromString(html, 'text/html');
+    var heads = doc.querySelectorAll('.ghead');
+    var out = [];
+    for(var i=0;i<heads.length;i++){
+      var h = heads[i];
+      var no = h.querySelector('.gno'), dt = h.querySelector('.gdate'), lk = h.querySelector('a.glink');
+      if(!lk) continue;
+      out.push({
+        no: no ? clean(no.textContent) : ('No. ' + (heads.length - i)),
+        date: dt ? clean(dt.textContent) : '',
+        url: lk.getAttribute('href'),
+        current: (i === 0)
+      });
+    }
+    if(!out.length) throw new Error('no issues listed');
+    S.issues = out;
+    renderIssues();
+    return selectIssue(0);
+  }).catch(function(e){
+    box.innerHTML = '<span class="issues-empty">Could not read the archive: ' + e.message + '. Falling back to the current issue.</span>';
+    document.getElementById('adv').classList.add('open');
+    return loadFromUrl('/briefing/');
+  });
+}
+
+function renderIssues(){
+  var box = document.getElementById('issues');
+  box.innerHTML = '';
+  S.issues.forEach(function(it, i){
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'issue-tile' + (i === S.issueIndex ? ' on' : '') + (S.busy ? ' busy' : '');
+    b.setAttribute('data-issue', i);
+    b.innerHTML = '<span class="ino"></span><span class="idate"></span>'
+      + (it.current ? '<span class="itag">Current</span>' : '');
+    b.querySelector('.ino').textContent = it.no;
+    b.querySelector('.idate').textContent = it.date;
+    box.appendChild(b);
+  });
+}
+
+function selectIssue(i){
+  if(S.busy) return Promise.resolve();
+  var it = S.issues[i];
+  if(!it) return Promise.resolve();
+  S.issueIndex = i; S.busy = true;
+  renderIssues();
+  document.getElementById('srcUrl').value = it.url;
+  return loadFromUrl(it.url).then(function(){
+    S.busy = false; renderIssues();
+  }, function(){
+    S.busy = false; renderIssues();
+  });
+}
+
 function loadFromUrl(raw){
   var u = (raw || '/briefing/').trim();
   if(!u) u = '/briefing/';
@@ -533,7 +634,7 @@ function loadFromUrl(raw){
     var out = parseDoc(doc, abs.split('#')[0]);
     if(!out.stories.length) throw new Error('No stories found on that page.');
     adopt(out);
-    setStatus('Loaded ' + (out.issue.no || 'the issue') + ': ' + out.stories.length + ' stories, ' + out.queue_len + ' posts.', false);
+    setStatus('Loaded ' + (out.issue.no || 'the issue') + (out.issue.date ? ', ' + out.issue.date : '') + ': ' + out.stories.length + ' stories, ' + out.queue_len + ' posts ready.', false);
   }).catch(function(e){
     setStatus('Could not read it: ' + e.message + ' Use Paste instead.', true);
     document.getElementById('pastebox').classList.add('on');
@@ -1133,6 +1234,14 @@ function bind(){
     document.getElementById('pastebox').classList.toggle('on');
   });
   document.getElementById('blankBtn').addEventListener('click', function(){ blankCard(true); });
+  document.getElementById('refreshBtn').addEventListener('click', function(){ loadArchive(); });
+  document.getElementById('advToggle').addEventListener('click', function(){
+    document.getElementById('adv').classList.toggle('open');
+  });
+  document.getElementById('issues').addEventListener('click', function(e){
+    var t = e.target.closest('[data-issue]');
+    if(t) selectIssue(parseInt(t.getAttribute('data-issue'), 10));
+  });
 
   document.getElementById('qgrid').addEventListener('click', function(e){
     var row = e.target.closest('[data-q]');
@@ -1200,7 +1309,7 @@ function boot(){
   bind();
   renderAngles();
   blankCard(false);
-  loadFromUrl('/briefing/');
+  loadArchive();
 }
 
 if(document.fonts && document.fonts.ready){
