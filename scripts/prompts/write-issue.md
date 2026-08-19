@@ -4,8 +4,9 @@ Your entire job this run is to produce ONE file: `build/topics.json`. You write 
 
 ## Step 1: read the standing instructions
 
-Read these two files in the repo and follow them exactly:
+Read these files in the repo and follow them exactly:
 
+- `scripts/prompts/theme.md` is the theme, if one is in force. It names the single issue number it applies to. If that number is the issue you are building, it governs selection and overrides `research.md` wherever the two differ. If it names any other issue, it is spent: ignore it.
 - `scripts/prompts/research.md` is the selection rule: how to choose the five topics.
 - `scripts/prompts/topic.md` is the voice, the structure of an article, and the tool contract.
 
@@ -13,7 +14,7 @@ Then read `briefing/index.html`, the current live issue. It is the design and vo
 
 ## Step 2: research
 
-Use web search, heavily. Search across every domain named in the selection rule, not just the one that produced last week's issue. Verify every fact against at least two independent sources before you use it. Never cite a page you did not open. Prefer developments with a date the reader can still act before.
+Use web search, heavily. Search across every domain named in the selection rule, not just the one that produced last week's issue. If a theme is in force for this issue, apply its threshold and slot shape to what you find; it narrows what qualifies, never the range of domains you search. Verify every fact against at least two independent sources before you use it. Never cite a page you did not open. Prefer developments with a date the reader can still act before.
 
 Rank what you find by consequence to a small operator, in money, time, or avoided risk, and take the top five.
 
