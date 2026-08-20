@@ -35,16 +35,74 @@ html[data-brand="goude"]{
   --ontag:var(--gd-mint);
 }
 html[data-brand="gabes"]{
-  --bg:var(--gb-ground); --panel:#101013; --ink:var(--gb-figure);
-  --soft:rgba(236,232,224,.60); --hair:rgba(236,232,224,.22); --faint:rgba(236,232,224,.10);
-  --field:#17171b; --sel:#1c1c21;
+  /* --g-lit / --g-mid / --g-deep / --figure / --acc / --dim / --line / --field
+     / --acc-text are painted live from the current trio by paintTheme(). */
+  --g-lit:#f9edef; --g-mid:#ffb7cd; --g-deep:#e79aae;
+  --figure:#2a0a14; --acc:#ef5725; --acc-text:#fdf2f4;
+  --dim:rgba(42,10,20,.62); --line:rgba(42,10,20,.16); --field:rgba(255,255,255,.30);
+  --logo-mark:#03b0c0;
+  --bg:var(--g-deep); --panel:var(--field); --ink:var(--figure);
+  --soft:var(--dim); --hair:var(--line); --faint:var(--line);
+  --sel:var(--field);
   --display:'Outfit',ui-sans-serif,system-ui,sans-serif;
-  --system:'Space Mono',ui-monospace,SFMono-Regular,monospace;
+  --system:'Outfit',ui-sans-serif,system-ui,sans-serif;
   --label:'Space Mono',ui-monospace,monospace;
-  --radius:0px; --radius-sm:0px; --case:lowercase; --lsp:-.01em;
-  --shadow:inset 0 0 0 1px rgba(236,232,224,.13);
-  --ontag:#0b0b0d;
+  --radius:14px; --radius-sm:9px; --case:lowercase; --lsp:-.01em;
+  --shadow:none;
+  --ontag:var(--acc-text);
 }
+html[data-brand="gabes"] body{
+  background:
+    radial-gradient(140% 110% at 16% 0%, var(--g-lit) 0%, var(--g-mid) 46%, var(--g-deep) 100%) fixed,
+    var(--g-deep);
+  color:var(--figure);
+  font-weight:400;
+  text-transform:lowercase;
+}
+html[data-brand="gabes"] body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:radial-gradient(120% 100% at 50% 40%, transparent 55%, rgba(0,0,0,.30) 100%);
+}
+html[data-brand="gabes"] header.mast,
+html[data-brand="gabes"] .shell,
+html[data-brand="gabes"] footer.foot{position:relative;z-index:1}
+html[data-brand="gabes"] .panel{border:1px solid var(--line);background:var(--field)}
+html[data-brand="gabes"] .mast-rule,
+html[data-brand="gabes"] .foot-rule{background:var(--line);height:1px;opacity:1}
+html[data-brand="gabes"] .qgrid{border-top:1px solid var(--line)}
+html[data-brand="gabes"] input,
+html[data-brand="gabes"] textarea{text-transform:none;font-family:var(--label);font-size:13px}
+/* the charge: every live state is the accent, never a slab of figure colour */
+html[data-brand="gabes"] .bswitch.on,
+html[data-brand="gabes"] .chip.on,
+html[data-brand="gabes"] .seg.on,
+html[data-brand="gabes"] .btn,
+html[data-brand="gabes"] .tile.on,
+html[data-brand="gabes"] .qangle.on{background:var(--acc);color:var(--acc-text);box-shadow:none}
+html[data-brand="gabes"] .btn.ghost{background:transparent;color:var(--figure);box-shadow:inset 0 0 0 1px var(--line)}
+html[data-brand="gabes"] .btn.ghost:hover{box-shadow:inset 0 0 0 1px var(--acc)}
+html[data-brand="gabes"] .tile.on .tno,
+html[data-brand="gabes"] .tile.on .tdate{color:var(--acc-text)}
+html[data-brand="gabes"] .tile.on .ttag{background:var(--acc-text);color:var(--acc)}
+html[data-brand="gabes"] .qrow:hover,
+html[data-brand="gabes"] .qrow.active{background:var(--field)}
+html[data-brand="gabes"] .qrow.active .qtext{color:var(--acc)}
+html[data-brand="gabes"] .qrow:hover .qangle,
+html[data-brand="gabes"] .qrow.active .qangle{background:var(--acc);color:var(--acc-text)}
+html[data-brand="gabes"] .mast-kicker,
+html[data-brand="gabes"] .brandbar .bsep{}
+html[data-brand="gabes"] h1 .chev,
+html[data-brand="gabes"] .chev-mark{color:var(--logo-mark)}
+html[data-brand="gabes"] .trio.on,
+html[data-brand="gabes"] .world.on{box-shadow:inset 0 0 0 2.5px var(--figure)}
+html[data-brand="gabes"] .canvasRow{display:flex;gap:7px}
+/* the card is the one deliberate object on the page: it sits on its own
+   field so a bright room never swallows a bright card */
+html[data-brand="gabes"] .canvaswrap{background:rgba(0,0,0,.35);border:1px solid var(--line)}
+html[data-brand="gabes"] canvas#card{border-radius:4px;box-shadow:0 12px 34px rgba(0,0,0,.45)}
+.canvasRow{display:none}
+html[data-brand="gabes"] .canvasRow .cvs{width:26px;height:26px;border-radius:6px;box-shadow:inset 0 0 0 1px var(--line)}
+html[data-brand="gabes"] .canvasRow .cvs.on{box-shadow:inset 0 0 0 2.5px var(--figure)}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-text-size-adjust:100%}
 body{
@@ -138,7 +196,10 @@ html[data-brand="gabes"] .f > label{text-transform:lowercase;font-weight:400}
 .f input[type=text],.f textarea,.f select{background:var(--field);border:1.5px solid var(--hair);border-radius:var(--radius-sm);padding:10px 12px;font-size:13.5px;width:100%}
 .f textarea{resize:vertical;line-height:1.35}
 .f input:focus,.f textarea:focus,.f select:focus{outline:none;border-color:var(--ink)}
-.f input[type=range]{width:100%}
+.f input[type=range]{width:100%;accent-color:var(--ink)}
+.sw input{accent-color:var(--ink)}
+html[data-brand="gabes"] .f input[type=range],
+html[data-brand="gabes"] .sw input{accent-color:var(--acc)}
 .segs{display:flex;gap:6px;flex-wrap:wrap}
 .seg{flex:1 1 auto;padding:9px 10px;border-radius:var(--radius-sm);font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;box-shadow:inset 0 0 0 1.5px var(--hair);color:var(--soft);white-space:nowrap;font-family:var(--label)}
 .seg:hover{box-shadow:inset 0 0 0 1.5px var(--ink);color:var(--ink)}
@@ -273,10 +334,10 @@ html[data-brand="gabes"] .gdOnly{display:none}
     <div class="ctl one">
       <div class="f"><label for="fKicker">Kicker</label><input id="fKicker" type="text" spellcheck="false" /></div>
       <div class="f"><label for="fStatement">The statement</label><textarea id="fStatement" rows="3"></textarea></div>
-      <div class="f gdOnly"><label for="fFigure">Figure (Figure layout only)</label><input id="fFigure" type="text" /></div>
+      <div class="f"><label for="fFigure" id="lFigure">Figure (Figure layout only)</label><input id="fFigure" type="text" /></div>
       <div class="f"><label for="fSupport">Support line</label><textarea id="fSupport" rows="2"></textarea></div>
       <div class="f"><label for="fFoot">Footer left</label><input id="fFoot" type="text" /></div>
-      <div class="f gdOnly"><label for="fFootR">Footer right</label><input id="fFootR" type="text" /></div>
+      <div class="f"><label for="fFootR" id="lFootR">Footer right</label><input id="fFootR" type="text" /></div>
     </div>
   </section>
 
@@ -297,7 +358,6 @@ html[data-brand="gabes"] .gdOnly{display:none}
       <div class="f"><label>Format</label><div class="segs" id="formats"></div></div>
       <div class="f"><label>Layout</label><div class="segs" id="layouts"></div></div>
       <div class="f gdOnly"><label>Alignment</label><div class="segs" id="aligns"></div></div>
-      <div class="f gbOnly"><label>Texture</label><div class="segs" id="textures"></div></div>
       <div class="f"><label>Statement size <span id="scaleVal" style="letter-spacing:normal;text-transform:none"></span></label><input id="fScale" type="range" min="60" max="150" step="2" value="100" /></div>
       <div class="f"><label>Support size <span id="supVal" style="letter-spacing:normal;text-transform:none"></span></label><input id="fSupScale" type="range" min="70" max="150" step="2" value="100" /></div>
       <div class="f"><label>Weight</label><div class="segs" id="weights"></div></div>
@@ -310,6 +370,8 @@ html[data-brand="gabes"] .gdOnly{display:none}
         <button class="btn ghost small" id="shuffleBtn">Shuffle</button>
         <button class="btn ghost small" id="surpriseBtn">Surprise me</button>
       </div>
+      <label style="margin-top:16px">room canvas</label>
+      <div class="canvasRow" id="canvases"></div>
     </div>
     <div class="rowline" id="toggles"></div>
   </section>
@@ -334,7 +396,7 @@ html[data-brand="gabes"] .gdOnly{display:none}
     <h2 style="font-size:21px;margin-bottom:11px" id="capTitle">Paste this under it.</h2>
     <textarea id="capText" spellcheck="true"></textarea>
     <div class="capmeta">
-      <span><b id="capCount">0</b> characters &middot; the fold sits at 210</span>
+      <span><b id="capCount">0</b> characters<span id="capLimit"></span></span>
       <span id="capFold"></span>
     </div>
     <div class="stagebar">
@@ -364,6 +426,36 @@ html[data-brand="gabes"] .gdOnly{display:none}
    naming any three of them "the palette" is not.
    ============================================================ */
 var TRIOS = {
+  'core': [
+    ['core 01','#2E0327','#FF8C00','#39FF14'],
+    ['core 02','#4B0082','#FFFF00','#00FF88'],
+    ['core 03','#DC143C','#FFFF00','#00FFFF'],
+    ['core 04','#CCFF00','#1A0033','#FF1493'],
+    ['core 05','#00FFFF','#1A0033','#D6008F'],
+    ['core 06','#FFA500','#1A0033','#C2007A'],
+    ['core 07','#9400D3','#39FF14','#00FFFF'],
+    ['core 08','#00CED1','#1A0033','#FF3A00'],
+    ['core 09','#FFD700','#1A0033','#C2007A'],
+    ['core 10','#4169E1','#00FFFF','#FFD700'],
+    ['core 11','#FF4500','#1A0033','#39FF14'],
+    ['core 12','#DA70D6','#0A7D3A','#1A0033'],
+    ['core 13','#FF6B35','#1A0033','#006D7A'],
+    ['core 14','#FF1493','#00FFFF','#1A0033'],
+    ['core 15','#20B2AA','#1A0033','#C2007A'],
+    ['core 16','#8A2BE2','#FFFF00','#00FFFF'],
+    ['core 17','#8B0000','#FFD700','#39FF14'],
+    ['core 18','#FF69B4','#1A0033','#0A4D8F'],
+  ],
+  'canvas': [
+    ['paper','#F1ECE1','#211E18','#B25A3C'],
+    ['bone','#EAE8E1','#23231F','#5C7A70'],
+    ['ink','#17181B','#E7E4DC','#C39A57'],
+    ['graphite','#191C1E','#DCE0DF','#7C9AA3'],
+    ['sage','#C6D0C3','#232E27','#A0574A'],
+    ['clay','#D9C6B6','#2B231C','#5E7565'],
+    ['mist','#C0CBD0','#202A2E','#98685B'],
+    ['lilac','#C8C2D4','#262233','#9A7A50'],
+  ],
   'neon': [
     ['neon district','#080906','#F9DC28','#11FDC0'],
     ['afterglow','#0C0E0F','#FE335D','#1EF69A'],
@@ -487,7 +579,16 @@ var TRIOS = {
     ['paper','#F5F1E6','#FF00FF','#101010'],
   ]
 };
-var TRIO_MOODS = ['neon','soft','earthy','whack','mystery','brand'];
+var TRIO_MOODS = ['core','neon','soft','earthy','whack','mystery','brand'];
+/* Room canvases. The default is the cotton set from the node cluster build
+   (ref_cotton: cotton ground, teal prompt mark, gabes orange charge). It is
+   one instance drawn from the open set, not "the >gabes colours". */
+var CANVASES = [
+  {id:'cotton', name:'cotton', A:'#ffb7cd', B:'#2a0a14', C:'#ef5725', lit:'#f9edef', deep:'#e79aae', mark:'#03b0c0'},
+  {id:'colour', name:'the trio'},
+  {id:'paper',  name:'paper',  A:'#F1ECE1', B:'#211E18', C:'#B25A3C'},
+  {id:'ink',    name:'ink',    A:'#17181B', B:'#E7E4DC', C:'#C39A57', mark:'#FF1493'}
+];
 
 /* ============================================================
    1. SHARED SCAFFOLDING
@@ -508,11 +609,11 @@ var GD_WORLDS = [
 ];
 
 var GD_LAYOUTS = [{id:'statement',name:'Statement'},{id:'figure',name:'Figure'},{id:'quote',name:'Quote'}];
-var GB_LAYOUTS = [{id:'prompt',name:'prompt'},{id:'statement',name:'statement'},{id:'terminal',name:'terminal'},{id:'stack',name:'stack'}];
+var GB_LAYOUTS = [{id:'card',name:'card'},{id:'week',name:'the week'}];
 
 var ALIGNS     = [{id:'left',name:'Left'},{id:'center',name:'Centred'}];
 var GD_WEIGHTS = [{id:'400',name:'Light'},{id:'500',name:'Book'},{id:'600',name:'Bold'}];
-var GB_WEIGHTS = [{id:'200',name:'thin'},{id:'300',name:'light'},{id:'400',name:'regular'},{id:'500',name:'medium'}];
+var GB_WEIGHTS = [{id:'300',name:'light'},{id:'400',name:'regular'},{id:'500',name:'medium'}];
 var TEXTURES   = [{id:'none',name:'none'},{id:'dots',name:'dots'},{id:'scan',name:'scan'}];
 
 var DAYS    = ['Mon','Tue','Wed','Thu','Fri'];
@@ -532,7 +633,7 @@ var S = {
   format:'portrait',
   layout:'statement',
   world:'mint',
-  trioMood:'neon', trioIndex:0,
+  trioMood:'core', trioIndex:0, canvas:'cotton',
   texture:'none',
   align:'left',
   weight:'500',
@@ -626,14 +727,95 @@ function fitBlock(ctx,fontFn,text,maxW,maxH,minPx,maxPx,lh,trackEm){
   ctx.font = fontFn(size);
   return {size:size, lines:wrap(ctx,text,maxW,size*trackEm)};
 }
-function fmtNow(){ return FORMATS.filter(function(f){return f.id===S.format;})[0] || FORMATS[0]; }
-function trioList(){ return TRIOS[S.trioMood] || TRIOS.neon; }
+var GB_FORMATS = [
+  {id:'linkedin', w:1080, h:1350, ratio:'4:5',  name:'linkedin',  maxChars:1300},
+  {id:'ig_feed',  w:1080, h:1350, ratio:'4:5',  name:'ig feed',   maxChars:900},
+  {id:'x',        w:1600, h:900,  ratio:'16:9', name:'x',         maxChars:280},
+  {id:'ig_story', w:1080, h:1920, ratio:'9:16', name:'ig story',  maxChars:140},
+  {id:'facebook', w:1080, h:1080, ratio:'1:1',  name:'facebook',  maxChars:1000}
+];
+function formatsNow(){ return (S.brand === 'gabes') ? GB_FORMATS : FORMATS; }
+function fmtNow(){ var L = formatsNow(); return L.filter(function(f){return f.id===S.format;})[0] || L[0]; }
+function trioList(){ return TRIOS[S.trioMood] || TRIOS.core; }
 function trioNow(){
   var l = trioList();
   var t = l[Math.min(S.trioIndex, l.length-1)] || l[0];
   return {name:t[0], A:t[1], B:t[2], C:t[3]};
 }
 function worldNow(){ return GD_WORLDS.filter(function(w){return w.id===S.world;})[0] || GD_WORLDS[0]; }
+
+/* ---------- the >gabes ground system ----------
+   Ported from the signal studio: three stops of the trio's ground hue as a
+   radial gradient with a vignette, the trio's head as figure, its accent as
+   the charge. Exactly three colours on screen. */
+function hexRgb(hex){ var h=String(hex).replace('#',''); return [parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)]; }
+function rgbHex(r,g,b){ function c(v){ return Math.max(0,Math.min(255,Math.round(v))).toString(16).padStart(2,'0'); } return '#'+c(r)+c(g)+c(b); }
+function rgbHsl(r,g,b){
+  r/=255; g/=255; b/=255;
+  var mx=Math.max(r,g,b), mn=Math.min(r,g,b), h=0, sa=0, l=(mx+mn)/2;
+  if(mx!==mn){ var d=mx-mn; sa = l>0.5 ? d/(2-mx-mn) : d/(mx+mn);
+    if(mx===r) h=((g-b)/d+(g<b?6:0))/6; else if(mx===g) h=((b-r)/d+2)/6; else h=((r-g)/d+4)/6; }
+  return [h,sa,l];
+}
+function hslRgb(h,sa,l){
+  if(sa===0){ var v=l*255; return [v,v,v]; }
+  var q = l<0.5 ? l*(1+sa) : l+sa-l*sa, pp = 2*l-q;
+  function f(t){ if(t<0)t+=1; if(t>1)t-=1;
+    if(t<1/6) return pp+(q-pp)*6*t;
+    if(t<1/2) return q;
+    if(t<2/3) return pp+(q-pp)*(2/3-t)*6;
+    return pp; }
+  return [f(h+1/3)*255, f(h)*255, f(h-1/3)*255];
+}
+function shade(hex,dl,ds){
+  var c=hexRgb(hex), hsl=rgbHsl(c[0],c[1],c[2]);
+  var l=Math.max(0.02,Math.min(0.95,hsl[2]+dl));
+  var sa=Math.max(0,Math.min(1,hsl[1]+(ds||0)));
+  var o=hslRgb(hsl[0],sa,l);
+  return rgbHex(o[0],o[1],o[2]);
+}
+function luminance(hex){ var c=hexRgb(hex); return (0.2126*c[0]+0.7152*c[1]+0.0722*c[2])/255; }
+/* proper relative luminance, so a charge always gets legible type on it */
+function relLum(hex){
+  var c = hexRgb(hex).map(function(v){ v/=255; return v <= 0.03928 ? v/12.92 : Math.pow((v+0.055)/1.055, 2.4); });
+  return 0.2126*c[0] + 0.7152*c[1] + 0.0722*c[2];
+}
+function contrastRatio(a,b){
+  var la = relLum(a), lb = relLum(b);
+  return (Math.max(la,lb) + 0.05) / (Math.min(la,lb) + 0.05);
+}
+function alphaOf(hex,a){ var c=hexRgb(hex); return 'rgba('+c[0]+','+c[1]+','+c[2]+','+a+')'; }
+
+function canvasDef(){
+  return CANVASES.filter(function(c){ return c.id === S.canvas; })[0] || CANVASES[0];
+}
+function canvasTrio(){
+  var c = canvasDef();
+  if(c.id === 'colour'){ var t = trioNow(); return {name:t.name, A:t.A, B:t.B, C:t.C}; }
+  return c;
+}
+function paintTheme(){
+  var r = document.documentElement.style;
+  if(S.brand !== 'gabes'){
+    ['--g-lit','--g-mid','--g-deep','--figure','--acc','--dim','--line','--field','--acc-text','--logo-mark']
+      .forEach(function(k){ r.removeProperty(k); });
+    return;
+  }
+  var t = canvasTrio();
+  var lightGround = luminance(t.A) > 0.5;
+  r.setProperty('--g-lit',  t.lit  || shade(t.A, lightGround ? 0.08 : 0.14, -0.02));
+  r.setProperty('--g-mid',  t.A);
+  r.setProperty('--g-deep', t.deep || shade(t.A, lightGround ? -0.14 : -0.10, 0.02));
+  r.setProperty('--figure', t.B);
+  r.setProperty('--acc',    t.C);
+  r.setProperty('--dim',    alphaOf(t.B, 0.62));
+  r.setProperty('--line',   alphaOf(t.B, 0.16));
+  r.setProperty('--field',  alphaOf(lightGround ? '#ffffff' : '#000000', lightGround ? 0.30 : 0.22));
+  /* type on the charge stays inside the ground hue; pick the stop that reads */
+  var darkT = shade(t.A,-0.55), liteT = shade(t.A,0.62);
+  r.setProperty('--acc-text', contrastRatio(t.C,darkT) >= contrastRatio(t.C,liteT) ? darkT : liteT);
+  r.setProperty('--logo-mark', t.mark || t.C);
+}
 
 /* ============================================================
    2. THE GOUDE GROUP ENGINE
@@ -967,8 +1149,8 @@ var GABES = {
     {id:'lede',  name:'the lede'}
   ],
   pairs:[['hook','lane'],['knife','pair'],['hook','knife'],['lane','hook'],['pair','knife']],
-  toggles:[['mark','the mark',true],['wordmark','wordmark',true],['support','the line',true],['footer','footer',true],['cursor','cursor',false]],
-  defaults:{layout:'prompt', weight:'300', track:-12, texture:'none'},
+  toggles:[['mark','the mark',true],['kicker','kicker',true],['site','gabes.ai',true],['support','the line',true],['subOn916','line on 9:16',false]],
+  defaults:{layout:'card', weight:'500', track:-10, texture:'none'},
   dayLabel:function(i){ return GB_DAYS[i % GB_DAYS.length]; },
   slotLabel:function(s){ return s.toLowerCase(); },
 
@@ -1046,30 +1228,30 @@ var GABES = {
     var p = {
       angle:angle, item:it, figure:'', stack:[], layout:'prompt',
       kicker: lower('> ' + (it.lane || 'the signal') + ' · ' + (it.day || '')),
-      foot:'gabes.ai/letter', footR:''
+      foot:'gabes.ai/letter', footR:(S.card && S.card.footR) || ''
     };
     var hk = sentencesLoose(it.hook), ln = sentencesLoose(it.line);
     var h1 = hk[0] || it.hook, h2 = hk.slice(1).join(' ');
     var l1 = ln[0] || it.line, l2 = ln.slice(1).join(' ');
     if(angle === 'hook'){
-      p.statement = lower(h1); p.support = lower(h2 || it.line); p.layout = 'prompt';
+      p.statement = lower(h1); p.support = lower(h2 || it.line); p.layout = 'card';
     } else if(angle === 'knife'){
-      p.statement = lower(l1); p.support = lower(l2 || h1); p.layout = 'statement';
+      p.statement = lower(l1); p.support = lower(l2 || h1); p.layout = 'card';
     } else if(angle === 'pair'){
-      p.statement = lower(h1); p.support = lower(h2 || l1); p.layout = 'terminal';
+      p.statement = lower(h1); p.support = lower(h2 || l1); p.layout = 'card';
     } else if(angle === 'lane'){
       p.statement = lower(h1); p.support = '';
-      p.kicker = lower('> ' + (it.lane || 'the signal')); p.layout = 'statement';
+      p.kicker = lower('> ' + (it.lane || 'the signal')); p.layout = 'card';
     } else if(angle === 'week'){
       p.statement = lower(S.meta.title || S.meta.no || 'the week');
       p.stack = all.map(function(x){ return lower(x.short || firstLoose(x.hook,1) || x.hook); }).slice(0,5);
       p.support = ''; p.kicker = lower('> ' + (S.meta.no || 'the week'));
-      p.layout = 'stack';
+      p.layout = 'week';
     } else if(angle === 'lede'){
       p.statement = lower(firstLoose(S.meta.lede,1) || S.meta.title || it.hook);
       p.support = lower(S.meta.title || it.line);
       p.kicker = lower('> the letter · ' + (S.meta.no || ''));
-      p.layout = 'prompt';
+      p.layout = 'card';
     }
     p.caption = GABES.caption(it, angle, p);
     return p;
@@ -1094,180 +1276,188 @@ var GABES = {
     return 'gabes-' + slug((it ? it.date : (S.meta.no||'signal')) + '-' + (q ? q.angle : S.angle)) + '.png';
   },
 
-  /* ---------- the card ---------- */
+  /* ---------- the card ----------
+     A canvas port of the signal studio's renderCardEl. Same anatomy:
+     kicker and gabes.ai on the top rule in the accent, the hook set in
+     medium Outfit and anchored to the foot of the frame (centred only on
+     9:16), the knife line prompted in Space Mono, the > mark and the
+     handle on the bottom rule. The accent phrase inside the hook takes
+     the third colour. Nothing here is invented. */
 
-  lockup:function(ctx,x,y,size,B,C,wt,showMark,showWord){
-    ctx.textBaseline='alphabetic'; ctx.textAlign='left';
-    var gw = 0;
-    if(showMark){
-      ctx.font='400 '+size+'px '+MONO; ctx.fillStyle=B;
-      ctx.fillText('>',x,y);
-      gw = ctx.measureText('>').width * 1.12;
-    }
-    if(showWord){
-      ctx.font=(wt||300)+' '+(size*1.16)+'px '+OUTFIT; ctx.fillStyle=C;
-      ctx.fillText('gabes', x+gw, y);
-    }
+  headlinePx:function(text, w, ratio){
+    var base = ({'16:9':w*0.058, '4:5':w*0.092, '9:16':w*0.10, '1:1':w*0.082})[ratio] || w*0.085;
+    var ref  = ({'16:9':44, '4:5':60, '9:16':44, '1:1':52})[ratio] || 60;
+    var n = Math.max((text||'').length, 1);
+    var px = base;
+    if(n > ref) px *= Math.sqrt(ref/n);
+    return Math.max(px, w*0.035);
   },
-  dots:function(ctx,W,H,col,step){
-    ctx.save(); ctx.globalAlpha=0.16; ctx.fillStyle=col;
-    for(var y=step;y<H;y+=step) for(var x=step;x<W;x+=step){
-      ctx.beginPath(); ctx.arc(x,y,Math.max(1,step*0.045),0,Math.PI*2); ctx.fill();
+
+  /* words carry their own colour so the accent phrase survives wrapping */
+  tokens:function(headline, phrase){
+    var words = String(headline||'').split(/\s+/).filter(Boolean);
+    var out = words.map(function(w){ return {t:w, a:false}; });
+    var ph = String(phrase||'').trim().toLowerCase();
+    if(!ph) return out;
+    var lowJoin = words.map(function(w){ return w.toLowerCase(); }).join(' ');
+    var at = lowJoin.indexOf(ph);
+    if(at === -1) return out;
+    var pos = 0;
+    for(var i=0;i<words.length;i++){
+      var st = pos, en = pos + words[i].length;
+      if(en > at && st < at + ph.length) out[i].a = true;
+      pos = en + 1;
     }
-    ctx.restore();
+    return out;
   },
-  scan:function(ctx,W,H,col,step){
-    ctx.save(); ctx.globalAlpha=0.09; ctx.fillStyle=col;
-    for(var y=0;y<H;y+=step) ctx.fillRect(0,y,W,Math.max(1,step*0.34));
-    ctx.restore();
+
+  wrapTokens:function(ctx, toks, maxW, trackPx){
+    var lines = [], line = [], wsp = mw(ctx,' ',trackPx);
+    var wide = 0;
+    for(var i=0;i<toks.length;i++){
+      var w = mw(ctx, toks[i].t, trackPx);
+      var add = line.length ? wsp + w : w;
+      if(wide + add > maxW && line.length){ lines.push(line); line = [toks[i]]; wide = w; }
+      else { line.push(toks[i]); wide += add; }
+    }
+    if(line.length) lines.push(line);
+    return lines.length ? lines : [[]];
   },
-  texture:function(ctx,W,H,t){
-    var u=Math.min(W,H);
-    if(S.texture==='dots') GABES.dots(ctx,W,H,t.B,u*0.07);
-    else if(S.texture==='scan') GABES.scan(ctx,W,H,t.C,Math.max(3,u*0.018));
+
+  drawTokenLine:function(ctx, line, x, y, trackPx, head, accent){
+    var cx = x, wsp = mw(ctx,' ',trackPx);
+    for(var i=0;i<line.length;i++){
+      ctx.fillStyle = line[i].a ? accent : head;
+      dt(ctx, line[i].t, cx, y, trackPx);
+      cx += mw(ctx, line[i].t, trackPx) + wsp;
+    }
   },
 
   draw:function(ctx, f){
-    var W=f.w, H=f.h, u=Math.min(W,H), t=trioNow();
-    var wide=(f.id==='wide'), tall=(H > W*1.2);
-    ctx.clearRect(0,0,W,H); ctx.fillStyle=t.A; ctx.fillRect(0,0,W,H);
-    GABES.texture(ctx,W,H,t);
-    ctx.textBaseline='alphabetic'; ctx.textAlign='left'; setLS(ctx,0);
+    var W = f.w, H = f.h, ratio = f.ratio || '4:5';
+    var t = trioNow();
+    var bg = t.A, head = t.B, accent = t.C;
 
-    var m = Math.round(u * (wide ? 0.070 : 0.085));
-    var maxW = W - m*2;
-    var trackEm = S.track/1000, scale = S.scale/100;
-    var wt = S.weight;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+    ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left'; setLS(ctx,0);
 
-    /* footer sits first so the body knows its floor */
-    var footY = H - m*0.72, footSize = Math.max(11, u*0.026);
-    if(S.toggles.footer && S.card.foot){
-      ctx.font='400 '+footSize+'px '+MONO; ctx.fillStyle=t.C; ctx.globalAlpha=0.8;
-      ctx.fillText(lower(S.card.foot), m, footY); ctx.globalAlpha=1;
+    var pad    = W*0.075;
+    var kickPx = Math.max(W*0.026, 13);
+    var footPx = Math.max(W*0.022, 12);
+    var subPx  = Math.max(W*0.030, 15) * (S.supScale/100);
+    var maxW   = W - pad*2;
+    var trackEm = S.track/1000;
+
+    /* top rule: kicker left, gabes.ai right, both in the charge */
+    var topBase = pad + kickPx;
+    ctx.font = '400 ' + kickPx + 'px ' + MONO;
+    ctx.fillStyle = accent;
+    if(S.toggles.kicker !== false && S.card.kicker){
+      dt(ctx, lower(S.card.kicker), pad, topBase, kickPx*0.02);
     }
-    var floor = H - m - (S.toggles.footer ? footSize*1.9 : 0);
-    var ceil  = m;
+    if(S.toggles.site !== false){
+      var site = 'gabes.ai';
+      dt(ctx, site, W - pad - mw(ctx, site, kickPx*0.02), topBase, kickPx*0.02);
+    }
+    setLS(ctx,0);
 
-    /* kicker */
-    var kSize = Math.max(11, u*0.030);
-    var y = ceil + kSize;
-    var showKicker = (S.layout !== 'prompt') && S.card.kicker;
-    if(showKicker){
-      ctx.font='400 '+kSize+'px '+MONO; ctx.fillStyle=t.B;
-      var kx = lower(S.card.kicker);
-      ctx.fillText(kx, m, y);
-      y += kSize*2.2;
+    /* bottom rule: the mark left, the handle right */
+    var footBase = H - pad;
+    if(S.toggles.mark !== false){
+      ctx.font = '400 ' + footPx + 'px ' + MONO; ctx.fillStyle = accent;
+      ctx.fillText('>', pad, footBase);
+    }
+    if(S.card.footR){
+      ctx.font = '400 ' + footPx + 'px ' + MONO;
+      ctx.fillStyle = head; ctx.globalAlpha = 0.7;
+      var hd = lower(S.card.footR);
+      ctx.fillText(hd, W - pad - ctx.measureText(hd).width, footBase);
+      ctx.globalAlpha = 1;
     }
 
-    /* lockup */
-    var lkSize = Math.min(H*(tall?0.062:0.11), W*0.085);
-    if(S.layout==='prompt' && (S.toggles.mark || S.toggles.wordmark)){
-      y += lkSize*0.2;
-      GABES.lockup(ctx, m, y, lkSize, t.B, t.C, wt, S.toggles.mark, S.toggles.wordmark);
-      y += lkSize*1.5;
-    }
+    var zoneTop = pad + kickPx*2.2;
+    var zoneBot = H - pad - footPx*1.7;
+    var zoneH   = Math.max(40, zoneBot - zoneTop);
 
-    /* support measured up front so the headline gets the rest */
-    var supSize = Math.max(12, u*0.032*(S.supScale/100));
-    var supLines = [];
-    var showSup = S.toggles.support && S.card.support && S.layout !== 'stack';
-    if(showSup){
-      ctx.font='400 '+supSize+'px '+MONO;
-      var promptW = ctx.measureText('> ').width;
-      supLines = wrap(ctx, lower(S.card.support), maxW - promptW, 0);
-      if(supLines.length > (wide?2:4)) supLines = supLines.slice(0, wide?2:4);
-    }
-    var supH = supLines.length ? supLines.length*supSize*1.5 + supSize*1.2 : 0;
-
-    if(S.layout === 'stack'){
+    /* the week: five hooks, one prompt each, same frame */
+    if(S.layout === 'week'){
       var rows = (S.card.stack && S.card.stack.length) ? S.card.stack : [S.card.statement];
-      var avail = Math.max(40, floor - y - u*0.02);
-      function packStack(size){
+      function packWeek(size){
         ctx.font = '400 ' + size + 'px ' + MONO;
         var pw = ctx.measureText('> ').width;
         var packed = [], total = 0;
         for(var r=0;r<rows.length;r++){
-          ctx.font = wt + ' ' + (size*1.12) + 'px ' + OUTFIT;
+          ctx.font = '500 ' + (size*1.12) + 'px ' + OUTFIT;
           var rl = wrap(ctx, lower(rows[r]), maxW - pw, size*trackEm);
           packed.push(rl);
-          total += rl.length*size*1.3 + size*0.85;
+          total += rl.length*size*1.32 + size*0.9;
         }
         setLS(ctx,0);
         return {packed:packed, total:total, pw:pw};
       }
-      var lo2 = 10, hi2 = Math.max(12, u*0.075*scale), bestSize = 10, best2 = null;
-      for(var it2=0; it2<22; it2++){
-        var mid2 = (lo2+hi2)/2;
-        var got = packStack(mid2);
-        if(got.total <= avail){ bestSize = mid2; best2 = got; lo2 = mid2; } else { hi2 = mid2; }
+      var lo=10, hi=Math.max(12, W*0.062*(S.scale/100)), best=10;
+      for(var i2=0;i2<22;i2++){
+        var mid=(lo+hi)/2;
+        if(packWeek(mid).total <= zoneH){ best=mid; lo=mid; } else { hi=mid; }
       }
-      if(!best2) best2 = packStack(bestSize);
-      var rowSize = Math.round(bestSize);
-      var res = packStack(rowSize);
-      var ry = y + rowSize;
+      var rs = Math.round(best), res = packWeek(rs);
+      var ry = zoneBot - res.total + rs;
       for(var r2=0;r2<rows.length;r2++){
-        ctx.font='400 '+rowSize+'px '+MONO; ctx.fillStyle=t.B;
-        ctx.fillText('> ', m, ry);
-        ctx.font=wt+' '+(rowSize*1.12)+'px '+OUTFIT; ctx.fillStyle=t.C;
+        ctx.font='400 '+rs+'px '+MONO; ctx.fillStyle=accent;
+        ctx.fillText('> ', pad, ry);
+        ctx.font='500 '+(rs*1.12)+'px '+OUTFIT; ctx.fillStyle=head;
         var rl2 = res.packed[r2];
-        for(var q2=0;q2<rl2.length;q2++){
-          dt(ctx, rl2[q2], m+res.pw, ry + q2*rowSize*1.3, rowSize*trackEm);
-        }
-        ry += rl2.length*rowSize*1.3 + rowSize*0.85;
+        for(var q=0;q<rl2.length;q++) dt(ctx, rl2[q], pad+res.pw, ry + q*rs*1.32, rs*trackEm);
+        ry += rl2.length*rs*1.32 + rs*0.9;
         setLS(ctx,0);
       }
       return;
     }
 
-    /* headline */
-    var zoneTop = y;
-    var zoneBot = floor - supH;
-    var zoneH = Math.max(30, zoneBot - zoneTop);
-    var maxPx = Math.round(u * (wide ? 0.10 : (tall ? 0.128 : 0.155)) * scale);
-    var minPx = Math.round(u * 0.030);
-    var lh = 1.08;
-    function hFont(px){ return wt + ' ' + px + 'px ' + OUTFIT; }
-    var fit = fitBlock(ctx, hFont, lower(S.card.statement), maxW, zoneH, minPx, maxPx, lh, trackEm);
-    var hs = fit.size, lines = fit.lines;
+    /* the hook */
+    var wt = S.weight || '500';
+    var lhF = 1.04;
+    var headline = lower(S.card.statement);
+    var toks = GABES.tokens(headline, S.card.figure);
+    var hpx = GABES.headlinePx(headline, W, ratio) * (S.scale/100);
 
-    var blockH = lines.length*hs*lh;
-    var top = (S.layout === 'statement')
+    /* the knife line, measured first so the hook knows its ceiling */
+    var showSub = (S.toggles.support !== false) && !!S.card.support && (ratio !== '9:16' || S.toggles.subOn916);
+    var subLines = [], subGap = W*0.032, pw2 = 0;
+    if(showSub){
+      ctx.font = '400 ' + subPx + 'px ' + MONO;
+      pw2 = ctx.measureText('> ').width;
+      subLines = wrap(ctx, lower(S.card.support), maxW*0.94 - pw2, 0);
+    }
+    var subH = subLines.length ? (subGap + subLines.length*subPx*1.35) : 0;
+
+    /* shrink the hook until the block clears the frame */
+    var lines;
+    for(var guard=0; guard<40; guard++){
+      ctx.font = wt + ' ' + hpx + 'px ' + OUTFIT;
+      lines = GABES.wrapTokens(ctx, toks, maxW, hpx*trackEm);
+      if(lines.length*hpx*lhF + subH <= zoneH || hpx <= W*0.030) break;
+      hpx *= 0.94;
+    }
+    var blockH = lines.length*hpx*lhF + subH;
+    var top = (ratio === '9:16')
       ? zoneTop + Math.max(0,(zoneH - blockH)/2)
-      : zoneTop;
+      : Math.max(zoneTop, zoneBot - blockH);
 
-    ctx.fillStyle = t.C;
+    ctx.font = wt + ' ' + hpx + 'px ' + OUTFIT;
     for(var i=0;i<lines.length;i++){
-      ctx.font = hFont(hs);
-      dt(ctx, lines[i], m, top + hs*0.82 + i*hs*lh, hs*trackEm);
+      GABES.drawTokenLine(ctx, lines[i], pad, top + hpx*0.82 + i*hpx*lhF, hpx*trackEm, head, accent);
     }
     setLS(ctx,0);
-    var endY = top + (lines.length-1)*hs*lh + hs*0.82;
 
-    /* the line, prompted */
-    if(supLines.length){
-      var sy = Math.max(endY + hs*0.9, floor - supH + supSize);
-      ctx.font='400 '+supSize+'px '+MONO;
-      var pw2 = ctx.measureText('> ').width;
-      ctx.fillStyle=t.B; ctx.fillText('> ', m, sy);
-      ctx.fillStyle=t.C; ctx.globalAlpha=0.86;
-      for(var k=0;k<supLines.length;k++){
-        ctx.fillText(supLines[k], m+pw2, sy + k*supSize*1.5);
-      }
-      ctx.globalAlpha=1;
-      if(S.toggles.cursor){
-        var lastW = ctx.measureText(supLines[supLines.length-1]).width;
-        ctx.fillStyle=t.B;
-        ctx.fillRect(m+pw2+lastW+supSize*0.2, sy+(supLines.length-1)*supSize*1.5-supSize*0.78, supSize*0.55, supSize*0.92);
-      }
-    }
-
-    /* the mark, when the lockup is not carrying it */
-    if(S.layout !== 'prompt' && S.toggles.mark){
-      var ms = Math.max(16, u*0.055);
-      ctx.font='400 '+ms+'px '+MONO; ctx.fillStyle=t.B;
-      ctx.textAlign='right';
-      ctx.fillText('>', W-m, footY);
-      ctx.textAlign='left';
+    if(subLines.length){
+      var sy = top + lines.length*hpx*lhF + subGap + subPx*0.82;
+      ctx.font = '400 ' + subPx + 'px ' + MONO;
+      ctx.fillStyle = accent; ctx.fillText('> ', pad, sy);
+      ctx.fillStyle = head; ctx.globalAlpha = 0.92;
+      for(var k=0;k<subLines.length;k++) ctx.fillText(subLines[k], pad+pw2, sy + k*subPx*1.35);
+      ctx.globalAlpha = 1;
     }
   }
 };
@@ -1443,12 +1633,22 @@ function segGroup(elId, list, current, attr){
 
 function renderSegs(){
   var eng = E();
-  segGroup('formats', FORMATS, S.format, 'data-format');
+  segGroup('formats', formatsNow(), S.format, 'data-format');
   segGroup('layouts', eng.layouts, S.layout, 'data-layout');
   segGroup('aligns',  ALIGNS, S.align, 'data-align');
   segGroup('weights', eng.weights, S.weight, 'data-weight');
-  segGroup('textures', TEXTURES, S.texture, 'data-texture');
   segGroup('moods', TRIO_MOODS.map(function(m){return {id:m, name:m};}), S.trioMood, 'data-mood');
+  var cvw = $('canvases');
+  if(cvw){
+    cvw.innerHTML = '';
+    CANVASES.forEach(function(c){
+      var b = document.createElement('button');
+      b.type='button'; b.className='cvs' + (c.id===S.canvas?' on':'');
+      b.title = c.name; b.setAttribute('data-canvas', c.id);
+      b.style.background = (c.id === 'colour') ? trioNow().A : c.A;
+      cvw.appendChild(b);
+    });
+  }
 
   var w = $('worlds'); w.innerHTML = '';
   GD_WORLDS.forEach(function(o){
@@ -1468,6 +1668,7 @@ function renderSegs(){
     tg.appendChild(b);
   });
   $('trioName').textContent = trioNow().name;
+  paintTheme();
   $('scaleVal').textContent = S.scale + '%';
   $('supVal').textContent = S.supScale + '%';
   $('trkVal').textContent = (S.track/1000).toFixed(3) + 'em';
@@ -1490,6 +1691,13 @@ function renderToggles(){
 function updateCapMeta(){
   var t = $('capText').value;
   $('capCount').textContent = t.length;
+  var f = fmtNow();
+  var cap = f.maxChars || 0;
+  var label = $('capLimit');
+  if(cap){
+    label.textContent = ' / ' + cap + ' on ' + f.name + (t.length > cap ? '  ·  over' : '');
+    label.style.opacity = (t.length > cap) ? '1' : '.7';
+  } else { label.textContent = '  ·  the fold sits at 210'; label.style.opacity = '.7'; }
   var fold = t.slice(0,210), cut = fold.lastIndexOf(' ');
   if(cut > 60) fold = fold.slice(0,cut);
   var tail = fold.split(/\s+/).slice(-5).join(' ');
@@ -1584,7 +1792,7 @@ function blankCard(scroll){
 /* ---------- the brand switch ---------- */
 
 var CARRY = ['sources','sourceIndex','sourceTab','items','meta','queue','qIndex','angle','format',
-             'layout','world','trioMood','trioIndex','texture','align','weight','scale','supScale',
+             'layout','world','trioMood','trioIndex','canvas','align','weight','scale','supScale',
              'track','toggles','card'];
 
 function snapshot(){
@@ -1616,6 +1824,12 @@ function applyBrand(brand, first){
   $('fieldSub').textContent  = eng.fieldSub;
   $('postSub').textContent   = eng.postSub;
   $('footNote').innerHTML    = eng.footNote;
+  var gb = (brand === 'gabes');
+  $('lFigure').textContent = gb ? 'accent phrase (inside the hook)' : 'Figure (Figure layout only)';
+  $('lFootR').textContent  = gb ? 'handle, bottom right' : 'Footer right';
+  $('fFoot').parentNode.style.display = gb ? 'none' : '';
+  $('capTitle').textContent = gb ? 'paste this under it.' : 'Paste this under it.';
+  $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
   document.title = (brand === 'goude') ? 'The Studio: Goude Group' : 'the studio: >gabes';
 
   var tabs = $('srcTabs'); tabs.innerHTML = '';
@@ -1632,7 +1846,7 @@ function applyBrand(brand, first){
   if(mem){
     restore(mem);
     renderTiles(); renderQueue(); renderAngles(); renderSegs(); renderToggles();
-    syncFields(); updateCapMeta(); draw();
+    syncFields(); updateCapMeta(); paintTheme(); draw();
     $('queue').classList.toggle('on', S.queue.length > 0);
     $('issueStamp').textContent = (S.meta.no || '') + (S.meta.date ? '  ·  ' + S.meta.date : '');
     setStatus('', false);
@@ -1643,8 +1857,8 @@ function applyBrand(brand, first){
   S.sourceTab = eng.tabs[0].id;
   S.sources = []; S.sourceIndex = -1; S.items = []; S.meta = {}; S.queue = []; S.qIndex = -1;
   S.layout = d.layout; S.weight = d.weight; S.track = d.track;
-  S.align = d.align || 'left'; S.world = d.world || 'mint'; S.texture = d.texture || 'none';
-  S.format = 'portrait'; S.scale = 100; S.supScale = 100;
+  S.align = d.align || 'left'; S.world = d.world || 'mint'; S.canvas = 'cotton';
+  S.format = formatsNow()[0].id; S.scale = 100; S.supScale = 100;
   S.toggles = {};
   eng.toggles.forEach(function(t){ S.toggles[t[0]] = t[2]; });
   $('fScale').value = 100; $('fSupScale').value = 100; $('fTrack').value = S.track;
@@ -1725,16 +1939,16 @@ function bind(){
     renderAngles();
   });
 
-  ['formats','layouts','aligns','weights','worlds','textures','moods','trios'].forEach(function(id){
+  ['formats','layouts','aligns','weights','worlds','moods','trios','canvases'].forEach(function(id){
     var el = $(id); if(!el) return;
     el.addEventListener('click', function(e){
       var b = e.target.closest('button'); if(!b) return;
-      if(b.hasAttribute('data-format'))  S.format  = b.getAttribute('data-format');
+      if(b.hasAttribute('data-format')){ S.format = b.getAttribute('data-format'); setTimeout(updateCapMeta,0); }
       if(b.hasAttribute('data-layout'))  S.layout  = b.getAttribute('data-layout');
       if(b.hasAttribute('data-align'))   S.align   = b.getAttribute('data-align');
       if(b.hasAttribute('data-weight'))  S.weight  = b.getAttribute('data-weight');
       if(b.hasAttribute('data-world'))   S.world   = b.getAttribute('data-world');
-      if(b.hasAttribute('data-texture')) S.texture = b.getAttribute('data-texture');
+      if(b.hasAttribute('data-canvas'))  S.canvas  = b.getAttribute('data-canvas');
       if(b.hasAttribute('data-mood')){   S.trioMood = b.getAttribute('data-mood'); S.trioIndex = 0; }
       if(b.hasAttribute('data-trio'))    S.trioIndex = parseInt(b.getAttribute('data-trio'),10);
       renderSegs(); draw();
@@ -1758,7 +1972,6 @@ function bind(){
     S.trioMood = TRIO_MOODS[Math.floor(Math.random()*TRIO_MOODS.length)];
     var l = trioList();
     S.trioIndex = Math.floor(Math.random()*l.length);
-    S.layout = GB_LAYOUTS[Math.floor(Math.random()*GB_LAYOUTS.length)].id;
     renderSegs(); draw(); toast(S.trioMood + ' · ' + trioNow().name);
   });
 
