@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Briefing, No. 006: Goude Group Weekly Intelligence</title>
+<meta name="description" content="Five developments that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/archive/no-006/" />
+<meta property="og:title" content="The Briefing, No. 006: Goude Group Weekly Intelligence" />
+<meta property="og:description" content="Five things that moved, what they change, what not to do. Each one comes with a tool you can use right now." />
+<meta property="og:image" content="https://goudegroup.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-promise{margin-top:32px;padding-top:19px;border-top:1px solid var(--navy)}
+.mast-promise p{font-size:15.5px;line-height:1.6;color:var(--navy);max-width:76ch}
+.mast-promise p b{font-weight:700}
+@media(max-width:620px){.mast-promise{margin-top:26px}.mast-promise p{font-size:14.5px}}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:22px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.passnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:26px 0 16px;max-width:80ch}
+.passnote b{color:var(--navy);font-weight:700}
+.passrow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.arch-link:hover{background:var(--navy);color:var(--mint)}
+.remind{margin-top:26px;border-top:1px solid var(--navy-faint);padding-top:22px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.remind p{font-size:13.5px;line-height:1.55;color:var(--navy-soft);max-width:46ch;margin:0;flex:1 1 300px}
+.remind p b{color:var(--navy);font-weight:700}
+.signup.inline{margin-top:0;flex:1 1 330px;max-width:420px}
+.signup.inline input{padding:12px 14px;font-size:14px}
+.signup.inline button{padding:12px 20px;font-size:11px}
+.signup-done{font-size:14px;line-height:1.55;color:var(--navy)}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* actions row: go deeper + send */
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.deep-toggle{
+  display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+.share{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE INSTRUMENT (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+.pass-it{max-width:var(--maxw);margin:44px auto 0;border-top:1px solid var(--navy-hair);padding-top:24px}
+.pass-it .label{opacity:.5;display:block;margin-bottom:12px}
+.pass-it p{font-size:13.5px;line-height:1.6;color:var(--navy-soft);max-width:74ch;margin-bottom:18px}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  nav{padding:16px 5vw}
+  nav.scrolled{padding-top:12px;padding-bottom:12px}
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  header.masthead{min-height:74vh;padding-top:112px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .passrow{flex-direction:column;align-items:stretch}
+  .passrow .share,.passrow .arch-link{width:100%;justify-content:center}
+  .signup{flex-wrap:wrap}
+  .signup input{flex:1 1 100%}
+  .signup button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence &middot; No. 006</span></div>
+</nav>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="kicker">Goude Group &middot; Weekly Intelligence</div>
+    <h1>The Brie<span class="kern-fi">f</span>ing.</h1>
+    <div class="mast-row">
+      <div class="standfirst">
+        <p><span class="lede-tag">This week's news:</span> A 50 percent Canadian tariff lands Wednesday with a deal still on the table; wholesale inflation ran to 4.7 percent while consumer prices held at 3.4; shoppers cut July spending as owners planned expansion; markets priced the September hike out; and the wholesale price of AI fell again.</p>
+        <p>Read the whole thing in three minutes, or go deeper where it touches your business. We talk about the market here, not about ourselves.</p>
+      </div>
+      <div class="mast-meta">
+        No. 006<br>
+        August 17, 2026
+      </div>
+    </div>
+    <div class="mast-promise"><p><b>Every article comes with a working tool.</b> It runs right here in the page, it is free, and we do not need your information to use it. No signup, no download, nothing to fill in first. That holds for every article in every issue, back issues included.</p></div>
+    <div class="mast-rule"></div>
+  </div>
+</header>
+
+<div class="readkey">
+  <div class="readkey-inner">
+    <span><b>Headline &middot; 5 seconds</b></span>
+    <span><b>The brief &middot; under a minute</b></span>
+    <span><b>Go deeper &middot; the read, plus a free tool you keep</b></span>
+  </div>
+</div>
+
+<section class="contents">
+  <div class="contents-inner">
+    <span class="label">In this issue</span>
+    <div class="toc">
+      <a href="#t1"><span class="n">01</span><span class="t">The 50 percent Canadian tariff lands 12:01 a.m. Wednesday, deal or no deal. Route this week's arrivals by the entry date, not the ship date.</span><span class="go">The clock</span><span class="tk">+ tool</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">Wholesale prices are up 4.7 percent on the year; consumer prices 3.4. The difference comes out of somebody's margin. Decide whose.</span><span class="go">The math</span><span class="tk">+ tool</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">Shoppers cut back in July while owners planned expansion. Only one of them spends money at your register; order for that one.</span><span class="go">The pullback</span><span class="tk">+ tool</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">Two inflation reads moved September to a hold, priced near two to one. Test any fixed-rate offer against that before you sign it.</span><span class="go">The odds</span><span class="tk">+ tool</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">Anthropic canceled September's 50 percent AI price increase and OpenAI cut up to 80. The floor under your AI line items just moved. Ask for it.</span><span class="go">The new floor</span><span class="tk">+ tool</span></a>
+    </div>
+    <p class="passnote"><b>Send it when it hits.</b> Every article here has its own link; the send button next to each one copies it, ready to text or email to the person who needs it. Back issues stay in the archive and their tools keep working, so nothing you forward goes stale.</p>
+    <div class="passrow">
+      <button class="share" type="button" data-share="issue" data-title="The Briefing, No. 006: Goude Group Weekly Intelligence"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send the whole issue</span></button>
+      <a class="arch-link" href="/briefing/archive/">Open the archive</a>
+    </div>
+    <div class="remind">
+      <p><b>Want a reminder when the next one is up?</b> Leave an email and we send one note a week. That is the whole program. We will not flood your inbox.</p>
+      <form class="signup inline" data-src="reminder row">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email for the weekly reminder" required />
+        <button type="submit">Remind me</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 THE CUTOFF ============ -->
+<section class="topic" id="t1">
+  <div class="topic-inner">
+    <div class="kicker"><span>01 / The Cutoff</span><span class="rt">Brief &middot; 50 sec</span></div>
+    <h2>The 50 percent Canadian tariff lands 12:01 a.m. Wednesday, deal or no deal. Route this week's arrivals by the entry date, not the ship date.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Negotiators met August 12, the third session in three weeks, and a Canadian government source says both capitals want a deal before the Section 338 duty takes effect August 19 at 12:01 a.m. Eastern. No agreement has been announced. The duty is 50 percent on roughly 20 billion dollars of Canadian goods, dairy, alcohol, motor vehicles, cement and wine among them, and USMCA status exempts nothing on the list.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The duty follows the entry date, when goods clear U.S. customs, not the date they shipped. A covered container that clears Thursday pays 50 percent even if it left Ontario two weeks ago. Anything that can clear before Wednesday midnight is worth clearing; anything that cannot should be priced as if the duty sticks, because no announced framework promises to refund entries that clear after the deadline.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not gamble a six-figure shipment on headlines about progress; talks have run three weeks without a deal and the proclamation stands until it is withdrawn. Do not take a supplier's word that your product is off the list; check the covered categories against your own entry records. And do not quote past Wednesday at today's landed cost without a tariff line; last week's issue built the reprice, this week is the clock.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t1" data-title="The 50 percent Canadian tariff lands 12:01 a.m. Wednesday, deal or no deal. Route this week's arrivals by the entry date, not the ship date."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jul 20</span><span>The White House announces the first-ever Section 338 action: 50 percent on roughly 20 billion dollars of Canadian goods effective August 19, citing Canadian counter-tariffs on U.S. autos and steel and provincial alcohol restrictions. USMCA compliance exempts nothing covered.</span></div>
+            <div class="tape-row"><span class="d">Aug 11</span><span>Canadian officials confirm another negotiating round in Washington as the deadline holds. Ottawa signals it may offer concessions on selected trade files in exchange for the new duties being dropped.</span></div>
+            <div class="tape-row"><span class="d">Aug 12</span><span>Trade minister Dominic LeBlanc and chief negotiator Janice Charette meet U.S. Trade Representative Jamieson Greer, the third session in three weeks. LeBlanc: committed at the table, defending Canadian interests. No deal is announced.</span></div>
+            <div class="tape-row"><span class="d">Aug 13</span><span>A Canadian government source tells reporters Washington also wants an agreement before August 19. Neither side publishes terms, and the proclamation's effective date does not move.</span></div>
+            <div class="tape-row"><span class="d">Aug 19</span><span>The duty takes effect at 12:01 a.m. Eastern, applied by entry date. What clears customs before that hour enters at today's rate; what clears after pays 50 percent, deal talks notwithstanding.</span></div>
+          </div>
+          <h3>Entry date is the whole game</h3>
+          <p>The proclamation, signed July 20, is the first use of Section 338 of the 1930 tariff act in its 96-year history, framed as retaliation for Canadian counter-tariffs on U.S. autos and steel and for provincial restrictions on American alcohol. The mechanics are the trap: customs applies the rate in force at the moment of entry. Shipment date is irrelevant, USMCA paperwork is irrelevant for covered goods, and a truck sitting in a queue at 12:02 a.m. Wednesday is a 50 percent truck. The scope is about 5 percent of U.S. imports from Canada, but inside cement, dairy, drink and vehicles it is the invoice.</p>
+          <p>So the week splits into two decisions. For loads already moving, call your broker today and buy speed where it pays: an expedite fee is trivial against half the invoice value, and brokers can often re-sequence clearance if they know by Monday. For everything after the deadline, price both outcomes now. Holland and Knight reads the 50 percent as an opening bid in the USMCA talks, which cuts both ways: it can vanish in a Wednesday announcement or harden into the fall. A quote with a visible tariff line and an expiry date survives either outcome; a handshake price survives neither.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Pull the in-transit list today: every covered Canadian shipment, its invoice value, and its expected entry date. Your customs broker can turn that report around in an afternoon.</li>
+            <li>Where a covered load can clear before Wednesday midnight, buy the expedite. Price the fee against 50 percent of the invoice; the math will decide in seconds.</li>
+            <li>For anything entering after the deadline, reopen the quote it feeds. Use the rider from the tool on the right so the customer sees a tariff line, not a price grab.</li>
+            <li>Set a Wednesday-morning check: if a deal lands, confirm which duties actually came off in the customs instructions before you unwind any repricing. Announcements and entry documents are not the same paper.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.ghy.com/trade-compliance/section-338-tariffs-how-canadian-exporters-should-prepare-before-august-19" target="_blank" rel="noopener">GHY International: entry-date mechanics before August 19</a> &middot; <a href="https://www.econotimes.com/Canada-US-Hold-Fresh-Trade-Talks-as-August-19-Tariff-Deadline-Nears-1749250" target="_blank" rel="noopener">EconoTimes: the August 12 negotiating session</a> &middot; <a href="https://www.chrobinson.com/en-us/resources/insights-and-advisories/client-advisories/2026q3/7-21-26-new-338-duties-on-select-canadian-products/" target="_blank" rel="noopener">C.H. Robinson: client advisory on the Section 338 duties</a> &middot; <a href="https://www.hklaw.com/en/insights/publications/2026/07/50-percent-opening-bid-canadian-imports-subject-to-section-338-tariffs" target="_blank" rel="noopener">Holland and Knight: the 50 percent as a USMCA opening bid</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A container that clears Thursday pays the duty even if it left Ontario two weeks ago.</p></div>
+          <div class="tool" data-tool="wc">
+            <span class="tlabel">The instrument · writes the clause</span>
+            <span class="tname">The Wednesday Clause</span>
+            <span class="tsub">Four fields. It writes the tariff rider for your open quotes and the expedite note for your broker, both sides of Wednesday covered.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="wc-co">Your company</label><input id="wc-co" type="text" placeholder="e.g. Hartwell Building Supply" /></div>
+              <div><label class="fl" for="wc-gd">The covered goods</label><input id="wc-gd" type="text" placeholder="e.g. cement, packaging, components" /></div>
+              <div><label class="fl" for="wc-qd">Days your quotes stay valid</label><input id="wc-qd" type="number" inputmode="numeric" min="0" placeholder="e.g. 30" /></div>
+              <div><label class="fl" for="wc-ct">Customer or job name (optional)</label><input id="wc-ct" type="text" placeholder="e.g. Riverside project" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="wc">Write the rider</button>
+            <div class="out" id="wc-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="wc-out" style="display:none" id="wc-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 THE SQUEEZE ============ -->
+<section class="topic" id="t2">
+  <div class="topic-inner">
+    <div class="kicker"><span>02 / The Squeeze</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Wholesale prices are up 4.7 percent on the year; consumer prices 3.4. The difference comes out of somebody's margin. Decide whose.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Thursday's producer price index came in flat for July on the headline, but the core reading, which strips food, energy and trade margins, rose 0.4 percent in the month and is up 4.7 percent on the year. Consumer prices, reported Wednesday, rose 3.4 percent over the same twelve months. Construction costs climbed 2.2 percent in July alone; lumber rose 5.0 percent; gasoline fell 5.7.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Your suppliers' prices are compounding faster than the prices you charge, and the 1.3-point wedge does not arrive as an event; it leaks, invoice by invoice, until the year-end statement explains where the margin went. NFIB's July survey says a net 31 percent of owners are raising prices, down seven points, which means the average operator started absorbing the fastest wholesale inflation of the year at the exact moment they stopped passing it on.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not wait for one dramatic invoice to reprice; the wedge is a drip, and a drip never triggers the meeting. Do not save it all for one apologetic jump in January when three small scheduled moves would pass unremarked. And do not price long jobs off last year's cost sheet; construction inputs moved 2.2 percent in a single month, so a bid built on spring materials is already stale.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t2" data-title="Wholesale prices are up 4.7 percent on the year; consumer prices 3.4. The difference comes out of somebody's margin. Decide whose."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Aug 11</span><span>NFIB's July survey: optimism at 99.8, an 11-month high, but a net 31 percent of owners raising average selling prices, down seven points from June. Plans to raise prices fall to 28 percent.</span></div>
+            <div class="tape-row"><span class="d">Aug 12</span><span>Consumer prices rise 0.1 percent in July, 3.4 percent on the year, with core at 2.5. Shelter accounts for nearly two-thirds of the monthly increase; energy falls on the month but sits 14.7 percent above last year.</span></div>
+            <div class="tape-row"><span class="d">Aug 13</span><span>Producer prices: headline unchanged in July, core up 0.4 in the month and 4.7 on the year. Construction up 2.2 percent in the month, lumber up 5.0, gasoline down 5.7, truck freight down 1.8.</span></div>
+            <div class="tape-row"><span class="d">Ahead</span><span>The Fed's preferred inflation gauge lands late August, then the September 16 decision. Your next quote decides whether August's wedge is yours or the customer's; the index has no opinion on that.</span></div>
+          </div>
+          <h3>The wedge leaks, it does not announce</h3>
+          <p>Producer prices are what your suppliers charge; consumer prices are what their customers will bear. When the first runs at 4.7 and the second at 3.4, the difference lands on whoever sits in the middle, and in most supply chains the middle is a small operator with a price list they have not touched since winter. July's detail sharpens it: goods prices fell 0.7 percent while services rose, and construction and lumber jumped; the squeeze is not evenly spread. It concentrates in trades, fabrication, food service, anyone who buys materials and sells finished work. The NFIB numbers say those owners are currently choosing, mostly by inaction, to eat it.</p>
+          <p>The fix is cadence, not courage. A repricing calendar, quarterly for most operators, monthly for materials-heavy work, converts an awkward annual confrontation into routine housekeeping that customers barely register. On contracts longer than a quarter, tie the materials portion to a named index so the adjustment is arithmetic, not argument. The trade-off is real: every increase risks a customer conversation, and some churn. But the alternative is measurable now; the tool on the right prices your wedge to the dollar, and for most operators the number it returns is larger than any customer they would lose by closing it.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Pull two numbers from your last P&amp;L: materials and goods as a share of revenue, and the price increase you have actually taken this year. Run both through the tool on the right.</li>
+            <li>Put a reprice date on the calendar every quarter, and honor it with small moves; three one-point adjustments beat one four-point apology.</li>
+            <li>On any job running past a quarter, add an escalation clause tied to a named index for the materials portion, so the adjustment is arithmetic on an invoice, not a renegotiation.</li>
+            <li>Ask your top three suppliers for 90-day written price protection. The ones who refuse have just told you which inputs need a second source quoted this month.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.bls.gov/news.release/archives/ppi_08132026.htm" target="_blank" rel="noopener">Bureau of Labor Statistics: the July producer price index</a> &middot; <a href="https://www.bls.gov/news.release/archives/cpi_08122026.htm" target="_blank" rel="noopener">Bureau of Labor Statistics: the July consumer price index</a> &middot; <a href="https://www.nfib.com/news/press-release/new-nfib-survey-small-business-optimism-continues-to-rise-11/" target="_blank" rel="noopener">NFIB: the July small-business survey</a> &middot; <a href="https://qz.com/producer-price-index-july-2026-wholesale-inflation-081326" target="_blank" rel="noopener">Quartz: wholesale inflation at 4.7 percent</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A 1.3-point wedge never calls a meeting; it shows up at year end dressed as a mystery.</p></div>
+          <div class="tool" data-tool="wg">
+            <span class="tlabel">The instrument · live</span>
+            <span class="tname">The Wedge</span>
+            <span class="tsub">Three numbers. It prices the gap between your cost inflation and your price increases, to the dollar per year.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="wg-rev">Annual revenue</label><input id="wg-rev" type="number" inputmode="numeric" min="0" placeholder="e.g. 900000" data-live="wg" /></div>
+              <div><label class="fl" for="wg-cg">Materials and goods, percent of revenue</label><input id="wg-cg" type="number" inputmode="numeric" min="0" placeholder="e.g. 45" data-live="wg" /></div>
+              <div><label class="fl" for="wg-pr">Your price increase this year, percent</label><input id="wg-pr" type="number" inputmode="numeric" min="0" placeholder="e.g. 2" data-live="wg" /></div>
+            </div>
+            <div class="readout" id="wg-readout" style="display:none">
+              <div class="big" id="wg-big">$0</div>
+              <div class="cap" id="wg-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 THE CUSTOMER ============ -->
+<section class="topic" id="t3">
+  <div class="topic-inner">
+    <div class="kicker"><span>03 / The Customer</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Shoppers cut back in July while owners planned expansion. Only one of them spends money at your register; order for that one.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>July retail sales fell 0.6 percent against expectations of a small gain, the weakest month in more than a year, and May and June were revised down. Auto dealers fell 2 percent, online 2.2. Friday's Michigan survey put consumer sentiment at 51.0, down from 55.2, the first drop in three months, with one-year inflation expectations at 4.3 percent. Days earlier, NFIB owner optimism hit an 11-month high.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Fourth-quarter commitments get signed in the next six weeks: inventory, seasonal staff, ad budgets. The register data says the customer is trimming; the survey data says your competitors are gearing up anyway, with hiring plans at their highest since October 2022. When operators expand into a softening consumer, the ones who sized orders to their own sales keep their margin, and the ones who sized to the mood of the room carry the markdowns into February.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not read one soft month as a cliff; Prime Day moved into June and the World Cup pulled spending forward, so July borrowed some weakness from the calendar. Do not copy last year's Q4 order plus a growth assumption; build it from this year's trailing sales. And do not zero the marketing line the same month customers get pickier; when fewer people are buying, being findable is worth more, not less.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t3" data-title="Shoppers cut back in July while owners planned expansion. Only one of them spends money at your register; order for that one."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Aug 11</span><span>NFIB optimism rises 2.4 points to 99.8, the highest since August 2025. A net 20 percent of owners plan to hire in the next three months, the strongest hiring plans since October 2022; 25 percent plan capital outlays.</span></div>
+            <div class="tape-row"><span class="d">Aug 14</span><span>Census: July retail sales fall 0.6 percent against expectations near plus 0.1, with the core control group down 0.4. Auto dealers fall 2 percent, online 2.2, gas stations 0.9; May and June are revised lower.</span></div>
+            <div class="tape-row"><span class="d">Aug 14</span><span>Michigan's preliminary August read: sentiment 51.0 from July's 55.2, expectations 50.6 from 55.4. One-year inflation expectations tick up to 4.3 percent; 8 percent expect income to outrun inflation.</span></div>
+            <div class="tape-row"><span class="d">Detail</span><span>Restaurants hold, clothing and personal care rise, back-to-school baskets shrink. Analysts describe smaller, need-driven trips, spending edited rather than stopped, concentrated on immediate use.</span></div>
+            <div class="tape-row"><span class="d">Ahead</span><span>Q4 orders are being signed across the next six weeks. The August retail read lands mid-September, after most of those commitments close; whoever waits for confirmation orders late.</span></div>
+          </div>
+          <h3>Order for the register, not the mood</h3>
+          <p>The interesting part is what did not fall. Restaurant spending held, clothing and personal care rose, and analysts at Circana describe smaller baskets built around immediate needs. The customer is not gone; the customer is editing. Michigan's detail explains why: only 8 percent of consumers expect their income to beat inflation in the year ahead, down from 18 percent in late 2024, so purchases are being triaged toward the near and the necessary. That is not a demand collapse, it is a reshuffle, and it punishes big-ticket, postponable, top-of-funnel offers while sparing small, frequent, immediate ones. Map your own catalog against that split before you order anything.</p>
+          <p>Then split the commitment itself. Place 60 to 70 percent of the Q4 buy now, hold the rest for a re-read after Labor Day, and pay for the option with supplier terms rather than price: cancel windows, return rights, staged delivery. Suppliers courting orders in a nervous season will paper flexibility they would never discount in cash. The trade-off is stockout risk on a strong November, and it is real; but in a trimming market a stockout costs you one sale while a markdown costs you margin on every unit in the stack. The tool on the right prices your exposure so the split is a number, not a feeling.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Pull your own trailing eight weeks against the same weeks last year before signing any Q4 commitment; that comparison outranks every national number in this article.</li>
+            <li>Run the tool on the right with your monthly revenue and your discretionary share; the number it returns is the buffer your Q4 plan has to survive.</li>
+            <li>Split the buy: commit 60 to 70 percent now, hold the rest for a Labor Day re-read, and get cancel windows and staged delivery in writing while suppliers are courting orders.</li>
+            <li>Keep the marketing line but move it down-funnel; the buyers still out there are searching with intent, not browsing, and intent is the cheapest click you will buy this quarter.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.axios.com/2026/08/14/retail-sales-amazon-world-cup" target="_blank" rel="noopener">Axios: the July retail sales miss</a> &middot; <a href="https://www.marketplace.org/story/2026/08/14/retail-sales-dropped-sharply-in-july-as-consumers-tighten-spending" target="_blank" rel="noopener">Marketplace: where the pullback landed, category by category</a> &middot; <a href="https://www.nfib.com/news/press-release/new-nfib-survey-small-business-optimism-continues-to-rise-11/" target="_blank" rel="noopener">NFIB: the July optimism survey</a> &middot; <a href="https://www.sca.isr.umich.edu/" target="_blank" rel="noopener">Surveys of Consumers: the August preliminary sentiment read</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Your competitors are ordering for the year they want; your register is telling you the year you have.</p></div>
+          <div class="tool" data-tool="sq">
+            <span class="tlabel">The instrument · live</span>
+            <span class="tname">The Soft Quarter</span>
+            <span class="tsub">Three inputs. It prices what a consumer pullback does to your next quarter, and sizes the buffer that covers it.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="sq-mr">Monthly revenue</label><input id="sq-mr" type="number" inputmode="numeric" min="0" placeholder="e.g. 60000" data-live="sq" /></div>
+              <div><label class="fl" for="sq-ds">Share that is household discretionary, percent</label><input id="sq-ds" type="number" inputmode="numeric" min="0" placeholder="e.g. 70" data-live="sq" /></div>
+              <div><label class="fl" for="sq-sc">Scenario</label>
+                <select id="sq-sc" data-live="sq"><option value="0.6">A July repeat, 0.6 percent</option><option value="2">A soft quarter, 2 percent</option><option value="5">A hard pullback, 5 percent</option></select>
+              </div>
+            </div>
+            <div class="readout" id="sq-readout" style="display:none">
+              <div class="big" id="sq-big">$0</div>
+              <div class="cap" id="sq-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 THE HOLD ============ -->
+<section class="topic" id="t4">
+  <div class="topic-inner">
+    <div class="kicker"><span>04 / The Hold</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Two inflation reads moved September to a hold, priced near two to one. Test any fixed-rate offer against that before you sign it.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Wednesday's consumer price report put July inflation at 3.4 percent with core at 2.5, and futures moved to about a 64 percent chance the Fed holds at 3.50 to 3.75 percent on September 16, up from 52 the day before. Thursday's producer report ran hot underneath, core wholesale up 0.4 in the month and 4.7 on the year, which argues against cuts even as the hike fades.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>No. 005 covered the jobs report knocking the September increase off base case; this week's consumer read kept it off, and that is the update. Every floating-rate instrument you carry, credit line, SBA loan, equipment note, prices off that meeting. Lenders sell fixed-rate conversions hardest when owners are nervous, and the premium on those offers is exactly what the lock test measures: how many hikes must land before the safety you bought pays for itself.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not sign a fixed conversion because the pitch mentions uncertainty; price it first. Do not treat a hold as a cut; nothing this week made money cheaper, it made more expensive money less likely, which is a different fact. And do not let September 16 arrive without your exposure written down: if the decision surprises in either direction, your floating balances reprice within the billing cycle, not next quarter.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t4" data-title="Two inflation reads moved September to a hold, priced near two to one. Test any fixed-rate offer against that before you sign it."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Aug 7</span><span>July payrolls land at minus 23,000 against forecasts near plus 80,000, and the quarter-point September increase loses its majority in futures pricing. Covered as the lead of issue No. 005.</span></div>
+            <div class="tape-row"><span class="d">Aug 12</span><span>Consumer prices: 0.1 percent on the month, 3.4 on the year, core 2.5. Futures move to roughly 64 percent for a September hold at 3.50 to 3.75, from 52 percent the day before.</span></div>
+            <div class="tape-row"><span class="d">Aug 13</span><span>Producer prices complicate the picture: headline flat, but core up 0.4 in the month and 4.7 on the year. The wholesale read argues against easing even as the hike case weakens.</span></div>
+            <div class="tape-row"><span class="d">Sep 16</span><span>The decision. The target range sits at 3.50 to 3.75 percent going in; the afternoon prices every floating-rate balance you carry, in either direction, whatever the base case says today.</span></div>
+          </div>
+          <h3>What the lock actually costs</h3>
+          <p>A fixed-rate conversion is insurance, and insurance has a price: the spread between the fixed rate offered and the floating rate you pay today. When hike odds fade, the risk being insured gets smaller while the premium usually does not move, which quietly makes the same offer a worse deal than it was in July. The wholesale side is why this is a hold-versus-hike argument rather than a cut story: producers' core prices rose 0.4 percent in one month, and a central bank staring at 4.7 percent wholesale inflation does not ease into it. Both directions are priced weekly; your lender's pitch deck is not.</p>
+          <p>So run the arithmetic before the meeting rather than after. Get the fixed offer in writing, with rate and every fee, and count the quarter-point hikes required before the lock beats floating; the tool does it in seconds. If the answer is two or more inside two years, floating with a written trigger plan usually wins: a one-page note saying what you refinance, cut, or reprice the afternoon a hike actually lands. The trade-off is sleep. Some owners pay the spread happily to stop watching the Fed, and that is a legitimate purchase; the mistake is not buying insurance, it is buying it unpriced.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Put every floating balance on one sheet: lender, balance, rate, and what a quarter point adds. That page is your September 16 exposure, and it takes twenty minutes.</li>
+            <li>Get any fixed-rate conversion offer in writing with rate and fees, then run it through the tool on the right before you respond to the pitch.</li>
+            <li>If break-even needs two or more hikes, keep floating and write the trigger plan: the specific action you take the afternoon an increase actually lands.</li>
+            <li>Recheck the odds the morning of September 16, not the week a lender calls; the number moves weekly and the pitch does not.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.kiplinger.com/investing/economy/cpi-report-july-2026-what-to-expect" target="_blank" rel="noopener">Kiplinger: the CPI report and the September odds</a> &middot; <a href="https://www.bls.gov/news.release/archives/cpi_08122026.htm" target="_blank" rel="noopener">Bureau of Labor Statistics: the July consumer price index</a> &middot; <a href="https://www.bls.gov/news.release/archives/ppi_08132026.htm" target="_blank" rel="noopener">Bureau of Labor Statistics: the July producer price index</a> &middot; <a href="https://centralbank.watch/federal-reserve/" target="_blank" rel="noopener">CentralBank.watch: the September 16 meeting and the current range</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The fixed rate is insurance; this week the risk it insures got smaller and the premium did not.</p></div>
+          <div class="tool" data-tool="lt">
+            <span class="tlabel">The instrument · live</span>
+            <span class="tname">The Lock Test</span>
+            <span class="tsub">Three numbers. It prices a fixed-rate offer against your floating rate and counts the hikes needed before the lock pays.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="lt-bal">Floating balance</label><input id="lt-bal" type="number" inputmode="numeric" min="0" placeholder="e.g. 250000" data-live="lt" /></div>
+              <div><label class="fl" for="lt-fr">Your floating rate, percent</label><input id="lt-fr" type="number" inputmode="numeric" min="0" placeholder="e.g. 8.5" data-live="lt" /></div>
+              <div><label class="fl" for="lt-fo">The fixed rate offered, percent</label><input id="lt-fo" type="number" inputmode="numeric" min="0" placeholder="e.g. 9.25" data-live="lt" /></div>
+            </div>
+            <div class="readout" id="lt-readout" style="display:none">
+              <div class="big" id="lt-big">$0</div>
+              <div class="cap" id="lt-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 THE FLOOR ============ -->
+<section class="topic" id="t5">
+  <div class="topic-inner">
+    <div class="kicker"><span>05 / The Floor</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Anthropic canceled September's 50 percent AI price increase and OpenAI cut up to 80. The floor under your AI line items just moved. Ask for it.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>OpenAI cut GPT-5.6 prices on July 30: its fastest model by 80 percent, to 20 cents per million input tokens, and its mid-tier by 20 percent. On August 10, Anthropic made Claude Sonnet 5's introductory rate of 2 and 10 dollars per million tokens permanent, canceling the 50 percent increase scheduled for September 1. Financial coverage on August 14 tied the round to competition with cheaper Chinese models.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Issue No. 003 flagged the gap between falling model prices and your flat per-seat fees. This week it widened: a scheduled 50 percent wholesale increase simply vanished, and the cost curve under every AI feature you rent bent downward again. A vendor whose input costs fell in July has room in the renewal, and the only customers who see that room are the ones who name the public numbers when they ask.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not accept an AI surcharge or an AI-tier increase this quarter without asking which model runs the feature and what happened to that model's price since July. Do not switch tools on list price alone; Anthropic reports its newer models tokenize text into roughly 30 percent more billable units, a vendor figure worth checking against your own bill. And do not sign multi-year AI pricing while the input is deflating; keep those renewals annual.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t5" data-title="Anthropic canceled September's 50 percent AI price increase and OpenAI cut up to 80. The floor under your AI line items just moved. Ask for it."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jul 30</span><span>OpenAI cuts GPT-5.6 Luna by 80 percent to 20 cents input and 1.20 output per million tokens, and Terra by 20 percent to 2 and 12 dollars. The CFO credits serving-cost gains of 20 percent.</span></div>
+            <div class="tape-row"><span class="d">Aug 10</span><span>Anthropic makes Sonnet 5's 2 and 10 dollar introductory rate the standard price. The scheduled September 1 move to 3 and 15 dollars, a 50 percent increase, will not occur.</span></div>
+            <div class="tape-row"><span class="d">Aug 14</span><span>Trade coverage ties the cuts to competition with cheaper Chinese models. DeepSeek signals an increase with no date attached, the one wholesale price in the tape moving the other way.</span></div>
+            <div class="tape-row"><span class="d">Ahead</span><span>Fall renewal season. Every AI surcharge, AI tier, and per-seat increase negotiated this quarter is negotiated against this tape, by whoever brings it to the call.</span></div>
+          </div>
+          <h3>The floor moved; the invoices did not</h3>
+          <p>Model tokens are the wholesale input under nearly every AI feature in your software stack, and the wholesale market keeps repricing downward. OpenAI attributed its July 30 cuts to serving efficiency, its CFO citing a 20 percent drop in serving costs, and framed the move as utility pricing. Anthropic went further in kind: a pre-announced 50 percent increase, already on customers' fall budgets, was withdrawn in a sentence on August 10. The retail layer above it, the per-seat tools you actually pay for, reprices on a different clock, which is to say it reprices when customers make it. The spread between those two clocks is currently being kept by your vendors.</p>
+          <p>The move is an inventory and a letter. List every subscription carrying an AI feature or surcharge with its renewal date; thirty minutes against a card statement finds them. Then send the two biggest ones the note from the tool: which model powers the feature, what happened to its price since July, and what usage-based option exists. Expect deflection; list prices rarely move on request. But renewals are where the room is; doubled usage limits, a waived surcharge, or a dropped tier is the same money by another name. The trade-off is an awkward email. Against a repriced renewal, that is the cheapest negotiation you will run this year.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>List every subscription with an AI feature, surcharge, or tier, its monthly cost and renewal date. Thirty minutes with the card statement gets it done.</li>
+            <li>For each, ask in writing which model powers the feature and whether a usage-based option exists; the answer tells you whose costs just fell.</li>
+            <li>Send the note from the tool on the right to your two biggest AI line items before their renewals lock.</li>
+            <li>Keep AI-priced renewals annual while the input is deflating; a two-year lock in a falling wholesale market is a gift to the vendor.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.digitalapplied.com/blog/ai-api-pricing-august-2026-cuts-promos-tracker" target="_blank" rel="noopener">Digital Applied: the August pricing tracker, cuts and traps</a> &middot; <a href="https://enterprisedna.co/resources/news/anthropic-claude-sonnet-5-pricing-permanent-reversal-august-2026/" target="_blank" rel="noopener">Enterprise DNA: the Sonnet 5 increase that will not happen</a> &middot; <a href="https://www.startuphub.ai/ai-news/artificial-intelligence/2026/openai-slashes-gpt-5-6-prices-in-efficiency-push" target="_blank" rel="noopener">StartupHub.ai: the July 30 OpenAI cuts and the stated reasons</a> &middot; <a href="https://techjournal.org/claude-sonnet-5-pricing-now-permanent" target="_blank" rel="noopener">TechJournal: Sonnet 5 pricing confirmed permanent</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A scheduled 50 percent increase disappeared in one sentence; ask your vendors why theirs cannot.</p></div>
+          <div class="tool" data-tool="vn">
+            <span class="tlabel">The instrument · writes the note</span>
+            <span class="tname">The Vendor Note</span>
+            <span class="tsub">Four fields. It writes the renewal email that names the public price cuts and asks for your share of them.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="vn-vd">Vendor</label><input id="vn-vd" type="text" placeholder="e.g. Acme CRM" /></div>
+              <div><label class="fl" for="vn-tl">The tool or plan</label><input id="vn-tl" type="text" placeholder="e.g. Pro plan, 8 seats" /></div>
+              <div><label class="fl" for="vn-sp">Monthly spend, dollars</label><input id="vn-sp" type="number" inputmode="numeric" min="0" placeholder="e.g. 400" /></div>
+              <div><label class="fl" for="vn-rn">Renewal month</label><input id="vn-rn" type="text" placeholder="e.g. November" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="vn">Write the note</button>
+            <div class="out" id="vn-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="vn-out" style="display:none" id="vn-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm" data-src="close section">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="pass-it">
+    <span class="label">Back issue</span>
+    <p>This is back issue No. 006. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      &copy; 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+const ISSUE_URL='https://goudegroup.com/briefing/archive/no-006/';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, sends, shares */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-send],[data-share]');
+  if(!t) return;
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ copyText(box.textContent,()=>{
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }); }
+    return;
+  }
+  if(t.dataset.send){ sendEmail(t.dataset.send,t); return; }
+  if(t.dataset.share){ doShare(t); return; }
+});
+
+/* ---------- sharing ---------- */
+function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
+function flash(btn,msg){
+  const sl=btn.querySelector('.sl'); if(!sl) return;
+  const o=sl.textContent; sl.textContent=msg||'Link copied';
+  setTimeout(()=>{ sl.textContent=o; },1600);
+}
+function copyText(text,done){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,()=>legacyCopy(text,done));
+  }else{ legacyCopy(text,done); }
+}
+function legacyCopy(text,done){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(err){}
+  document.body.removeChild(ta);
+  if(done) done();
+}
+function doShare(btn){
+  const url=shareLink(btn.dataset.share);
+  const title=btn.dataset.title||document.title;
+  if(navigator.share){
+    navigator.share({title:title,url:url}).catch(()=>{});
+  }else{
+    copyText(url,()=>flash(btn,'Link copied'));
+  }
+}
+/* a link ending in #tN lands with that article's go-deeper open */
+function openFromHash(){
+  const h=(location.hash||'').replace('#','');
+  if(!/^t[1-5]$/.test(h)) return;
+  const topic=document.getElementById(h);
+  if(!topic||topic.classList.contains('open')) return;
+  topic.classList.add('open');
+  const b=topic.querySelector('.deep-toggle');
+  if(b){ b.setAttribute('aria-expanded','true'); b.firstChild.textContent='Close '; }
+  setTimeout(()=>{ topic.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+addEventListener('hashchange',openFromHash);
+openFromHash();
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='wg') calc_wg();
+  if(el.dataset.live==='sq') calc_sq();
+  if(el.dataset.live==='lt') calc_lt();
+});
+document.addEventListener('change',e=>{
+  const el=e.target.closest('select[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='wg') calc_wg();
+  if(el.dataset.live==='sq') calc_sq();
+  if(el.dataset.live==='lt') calc_lt();
+});
+
+function calc_wg(){
+  const rev=parseFloat($('#wg-rev').value)||0;
+  const cg=parseFloat($('#wg-cg').value)||0;
+  const pr=parseFloat($('#wg-pr').value)||0;
+  const ro=$('#wg-readout');
+  if(!rev||!cg){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const drift=rev*(cg/100)*0.047;
+  const gain=rev*(pr/100);
+  const wedge=drift-gain;
+  if(wedge>0){
+    $('#wg-big').textContent=money(wedge)+'/yr';
+    $('#wg-cap').innerHTML='At wholesale inflation of 4.7 percent, your inputs are adding about <b>'+money(drift)+' a year</b> in cost. Your pricing has recovered <b>'+money(gain)+'</b>. The gap, <b>'+money(wedge)+' a year</b>, is leaving your margin at roughly <b>'+money(wedge/12)+' a month</b>, and it compounds quietly. Three scheduled one-point increases close most wedges without a single dramatic customer conversation.';
+  }else{
+    $('#wg-big').textContent='Covered';
+    $('#wg-cap').innerHTML='Your pricing has recovered about <b>'+money(gain)+'</b> against roughly <b>'+money(drift)+'</b> of input drift, so the wedge is closed for now, with about <b>'+money(gain-drift)+'</b> of headroom. Keep the quarterly reprice date anyway; this number is a snapshot of one year, not a policy, and wholesale is still running at 4.7 percent underneath you.';
+  }
+}
+
+function calc_sq(){
+  const mr=parseFloat($('#sq-mr').value)||0;
+  const ds=parseFloat($('#sq-ds').value)||0;
+  const sc=parseFloat($('#sq-sc').value)||0;
+  const ro=$('#sq-readout');
+  if(!mr||!ds||!sc){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const hit=mr*3*(ds/100)*(sc/100);
+  const monthly=hit/3;
+  $('#sq-big').textContent=money(hit)+'/qtr';
+  $('#sq-cap').innerHTML='If your discretionary customers trim at that pace, the quarter gives up about <b>'+money(hit)+'</b>, roughly <b>'+money(monthly)+' a month</b>, while your fixed costs give up nothing. That number is the buffer your Q4 plan has to survive: hold at least that much of the season buy uncommitted, or hold it in cash, before you sign for inventory the register has not confirmed.';
+}
+
+function calc_lt(){
+  const bal=parseFloat($('#lt-bal').value)||0;
+  const fr=parseFloat($('#lt-fr').value)||0;
+  const fo=parseFloat($('#lt-fo').value)||0;
+  const ro=$('#lt-readout');
+  if(!bal||!fr||!fo){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const spread=fo-fr;
+  if(spread<=0){
+    $('#lt-big').textContent='$0 premium';
+    $('#lt-cap').innerHTML='The fixed offer is at or below your floating rate, so the insurance is free or better: locking saves about <b>'+money(bal*(0-spread)/100)+' a year</b> from day one. Get it in writing with every fee listed, read the prepayment terms twice, and ask what the catch is, because in this market a below-float fixed rate usually has one.';
+    return;
+  }
+  const prem=bal*spread/100;
+  const hikes=Math.ceil(spread/0.25);
+  $('#lt-big').textContent=money(prem)+'/yr';
+  $('#lt-cap').innerHTML='Taking the lock costs about <b>'+money(prem)+' a year</b> over floating, roughly <b>'+money(prem/12)+' a month</b>, starting now. It breaks even only after <b>'+hikes+' quarter-point increase'+(hikes>1?'s':'')+'</b> land and stay. Futures currently price a September hold as the base case, so know that count before the pitch call, not after.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  if(kind==='wc'){
+const co=v('wc-co')||'[Company]';
+const gd=v('wc-gd')||'[covered goods]';
+const qd=v('wc-qd')||'14';
+const ct=v('wc-ct')||'[Customer]';
+const out=
+'TARIFF RIDER · '+co+'\n'+
+'For quotes and orders involving: '+gd+'\n\n'+
+'1. QUOTE VALIDITY. This quote is valid for '+qd+' days from the date issued. Pricing reflects duties in force on the date of the quote.\n\n'+
+'2. TARIFF PASS-THROUGH. Effective 12:01 a.m. ET on August 19, 2026, a 50 percent U.S. duty applies to certain Canadian-origin goods by entry date. If any tariff, duty, or import fee on the goods above changes between quote and customs entry, the change will be added to or removed from the invoice as a separate line item, at cost, with the customs entry documentation available on request.\n\n'+
+'3. TIMING. Where '+co+' controls shipment timing, we will route entries to the lower-duty side of the deadline when practical. Where the customer requests a specific delivery date, duties in force at entry apply.\n\n'+
+'For: '+ct+'   Signed: [name]   Date: [date]\n\n'+
+'---\n\n'+
+'BROKER NOTE · send today\n\n'+
+'Subject: Entries before 12:01 a.m. ET Aug 19\n\n'+
+'Please pull our in-transit list for all Canadian-origin entries covered by the Section 338 proclamation. For any load that can clear before 12:01 a.m. ET Wednesday August 19, quote the expedite. For the rest, confirm expected entry dates and the duty as it will apply. If a deal is announced, hold for the written customs instructions before changing anything.\n\n'+
+'[Your name], '+co;
+    show('wc-out','wc-copy',out); return;
+  }
+  if(kind==='vn'){
+const vd=v('vn-vd')||'[Vendor]';
+const tl=v('vn-tl')||'[plan]';
+const sp=v('vn-sp')||'[amount]';
+const rn=v('vn-rn')||'[month]';
+const out=
+'Subject: '+tl+' renewal · pricing question before '+rn+'\n\n'+
+'Hi,\n\n'+
+'We pay about $'+sp+' a month for '+tl+', renewing in '+rn+'. Before we commit, three questions.\n\n'+
+'1. Which AI model or provider powers the AI features in our plan?\n\n'+
+'2. Wholesale AI prices moved down again this quarter. OpenAI cut GPT-5.6 prices on July 30, its fastest model by 80 percent, and on August 10 Anthropic canceled a scheduled 50 percent increase, making its 2 and 10 dollar per-million-token rate permanent. How is that reflected in our renewal price?\n\n'+
+'3. Is there a usage-based option or a tier without the AI features? We would like to see both quoted next to the current plan.\n\n'+
+'We like the product and would rather renew than shop. A renewal that acknowledges the direction of your input costs makes that easy; happy to get on a call before '+rn+'.\n\n'+
+'Thanks,\n[Name]\n[Company]';
+    show('vn-out','vn-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* email-me capture (doubles as a quiet lead signal) */
+function sendEmail(kind,btn){
+  const cap=document.querySelector('[data-emailcap="'+kind+'"]');
+  const email=cap.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  let result='';
+  if(kind==='renewal') result=$('#rn-big').textContent+': '+$('#rn-cap').textContent;
+  btn.disabled=true; btn.textContent='...';
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 006 tool: The Wedge',result:result})
+  }).catch(()=>{}).finally(()=>{
+    cap.querySelector('.er').style.display='none';
+    cap.querySelector('.microcopy').style.display='none';
+    document.querySelector('[data-done="'+kind+'"]').classList.add('show');
+  });
+}
+
+/* newsletter: the reminder row under the contents and the form in the close section */
+document.querySelectorAll('form.signup').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=form.querySelector('input[type=email]').value.trim();
+    if(!email) return;
+    const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+    fetch(NEWSLETTER_ENDPOINT,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:email,source:'Briefing No. 006',placement:form.getAttribute('data-src')||''})
+    }).catch(()=>{}).finally(()=>{
+      form.innerHTML='<p class="signup-done">On the list. No. 007 comes your way next week.</p>';
+    });
+  });
+});
+</script>
+</body>
+</html>
