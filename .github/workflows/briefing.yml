@@ -52,11 +52,31 @@ jobs:
         with:
           node-version: '22'
 
+      # setup-token prints a 110-character token and terminals wrap it, so a copy can
+      # carry a newline into the repository secret. The API then rejects the
+      # Authorization header before any work starts and the run dies in under 30
+      # seconds with a bare is_error:true that says nothing. Runs 2 through 8 all died
+      # this way. Strip line breaks here so how the token was pasted stops mattering.
+      - name: Normalize the OAuth token
+        id: tok
+        if: steps.clock.outputs.skip != 'true'
+        env:
+          RAW: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        run: |
+          CLEAN=$(printf '%s' "$RAW" | tr -d '\r\n')
+          if [ -z "$CLEAN" ]; then
+            echo "::error::CLAUDE_CODE_OAUTH_TOKEN is empty or unset. Set the repository secret."
+            exit 1
+          fi
+          echo "::add-mask::$CLEAN"
+          echo "value=$CLEAN" >> "$GITHUB_OUTPUT"
+          echo "Token normalized: ${#CLEAN} characters, no line breaks."
+
       - name: Research and write the five articles
         if: steps.clock.outputs.skip != 'true'
         uses: anthropics/claude-code-action@v1
         with:
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_code_oauth_token: ${{ steps.tok.outputs.value }}
           # Without this the SDK hides the failure reason and you get a bare
           # "is_error: true" with nothing to act on.
           show_full_output: true
