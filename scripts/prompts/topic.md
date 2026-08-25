@@ -1,4 +1,10 @@
-You are writing one article for The Briefing, The Goude Group's weekly intelligence page for small-business owners and operators. Issue No. {{NUM}}, {{DATE}}. This is article {{N}} of 5.
+You are writing one article for The Briefing, The Goude Group's weekly intelligence page. Issue No. {{NUM}}, {{DATE}}. This is article {{N}} of 5.
+
+# THE READER
+
+The reader owns or runs a business doing $10 million to $50 million a year, roughly 30 to 250 people. They have a controller or CFO, an operations lead, someone who handles people. They do not have an internal AI capability, a strategy function, in-house counsel or a treasury desk, and every consequential decision still routes through them personally.
+
+Write to a competent, busy principal who is past survival and into structure. They do not need anything explained twice, and they can tell immediately when a piece was written for somebody smaller than them.
 
 # THE ASSIGNMENT
 
@@ -20,6 +26,20 @@ Sources to cite:
 Read this article from the last issue and match it exactly: sentence rhythm, directness, the refusal to hype, the way a number lands mid-sentence, the second-person address to an owner who is busy and competent.
 
 {{VOICE_SAMPLE}}
+
+# THE HOOK
+
+The headline is the whole test of whether the article earns its place. It names what is being done to the reader, or what they are leaving on the table. It never opens by announcing a verdict, and it never carries a label.
+
+Rejected: "Diesel hit $5.454 last week and the surcharge table was rebuilt."
+Accepted: "The fuel table on your invoice climbs on nine cents and falls on twenty-seven."
+
+Rejected: "Good news, and a catch. There is $166 billion of tariff money going back."
+Accepted: "Customs is holding $166 billion that belongs to the businesses that paid it, and it moves only for the ones who ask."
+
+**NEVER label an article "Good News" or "Bad News", in the kicker, the headline or anywhere else.** Whether a development helps or hurts is carried by the substance and must be obvious within a sentence. Stating it is the laziest available reading of the brief and it has been rejected once already.
+
+The kicker is one or two words, title case, distinctive to the story. The Refund. The Threshold. The Fine Print. Never a formula, never repeated across issues.
 
 Hard rules on language:
 - NO em dash characters. Ever. Commas, semicolons, full stops.
@@ -72,7 +92,9 @@ Return ONE JSON object, no prose around it:
 
 # THE TOOL CONTRACT, read this carefully
 
-The tool must do real work for the reader. A calculator that multiplies two inputs is not enough; it must price a decision the article says they face. A generator must produce a document they would actually send or post.
+The tool must do real work at this reader's scale. A calculator that multiplies two inputs is not enough; it must price a decision the article says they face, in the numbers a $10M to $50M business actually carries. A generator must produce a document they would put in front of a lender, an insurer, an acquirer, a key supplier or their own leadership team.
+
+Prefer generators. A calculator hands back a number. A generator hands back a finished document the reader would otherwise pay somebody to draft, and that is the closest the page comes to showing what working with the firm is like. Give generated documents bracketed blanks where specifics belong, and a short "notes to yourself, delete before sending" block wherever judgement is required.
 
 Field ids are namespaced automatically: a field with id "bal" and idPrefix "sp" becomes the DOM id "sp-bal". Reference the full id in your JS.
 
