@@ -389,6 +389,9 @@ html[data-brand="gabes"] .gdOnly{display:none}
       <button class="btn ghost" id="copyImgBtn">Copy image</button>
       <button class="btn ghost small" id="dlAllBtn">Download all ten</button>
     </div>
+    <div class="stagebar" id="postOmniRow">
+      <button class="btn ghost small" id="postOmniBtn">Post to OmniSocials (draft)</button>
+    </div>
   </section>
 
   <section class="panel cap">
@@ -1767,6 +1770,33 @@ function copyImage(){
   });
 }
 
+function postOmniSocials(){
+  if(S.brand !== 'gabes'){ setStatus('omnisocials posting is gabes-only for now.', true); return; }
+  var f = fmtNow();
+  var caption = ($('capText').value || '').trim();
+  if(!caption){ setStatus('write a caption first.', true); return; }
+  if(f.maxChars && caption.length > f.maxChars){
+    setStatus('caption is ' + caption.length + ' characters, over the ' + f.maxChars + ' limit for ' + f.name + ' - shorten it before posting.', true);
+    return;
+  }
+  setStatus('rendering the card ...', false);
+  renderToBlob(f, function(blob){
+    var reader = new FileReader();
+    reader.onload = function(){
+      setStatus('posting to omnisocials (draft) ...', false);
+      fetch('push.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ platform: f.id, caption: caption, image: reader.result })
+      }).then(function(r){ return r.json(); }).then(function(r){
+        if(!r.ok){ setStatus('failed: ' + (r.error || 'unknown error'), true); return; }
+        setStatus(r.label + ': drafted (post ' + r.post_id + '). release it from your OmniSocials calendar - nothing is public yet.', false);
+      }).catch(function(e){ setStatus('request failed: ' + e, true); });
+    };
+    reader.readAsDataURL(blob);
+  });
+}
+
 /* ---------- blank card ---------- */
 
 function blankCard(scroll){
@@ -1830,6 +1860,7 @@ function applyBrand(brand, first){
   $('fFoot').parentNode.style.display = gb ? 'none' : '';
   $('capTitle').textContent = gb ? 'paste this under it.' : 'Paste this under it.';
   $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
+  $('postOmniRow').style.display = gb ? '' : 'none';
   document.title = (brand === 'goude') ? 'The Studio: Goude Group' : 'the studio: >gabes';
 
   var tabs = $('srcTabs'); tabs.innerHTML = '';
@@ -1987,6 +2018,7 @@ function bind(){
   $('dlBtn').addEventListener('click', download);
   $('dlAllBtn').addEventListener('click', downloadAll);
   $('copyImgBtn').addEventListener('click', copyImage);
+  $('postOmniBtn').addEventListener('click', postOmniSocials);
   $('capText').addEventListener('input', updateCapMeta);
   $('copyCapBtn').addEventListener('click', function(){
     var t = $('capText');
