@@ -390,7 +390,7 @@ html[data-brand="gabes"] .gdOnly{display:none}
       <button class="btn ghost small" id="dlAllBtn">Download all ten</button>
     </div>
     <div class="stagebar" id="postOmniRow">
-      <button class="btn ghost small" id="postOmniBtn">Post to OmniSocials (draft)</button>
+      <button class="btn ghost small" id="postOmniBtn">Post to OmniSocials (~30 min)</button>
     </div>
   </section>
 
@@ -1790,7 +1790,8 @@ function postOmniSocials(){
         body: JSON.stringify({ platform: f.id, caption: caption, image: reader.result })
       }).then(function(r){ return r.json(); }).then(function(r){
         if(!r.ok){ setStatus('failed: ' + (r.error || 'unknown error'), true); return; }
-        setStatus(r.label + ': drafted (post ' + r.post_id + '). release it from your OmniSocials calendar - nothing is public yet.', false);
+        var when = new Date(r.scheduled_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        setStatus(r.label + ': scheduled for ' + when + ' (post ' + r.post_id + '). it WILL go live then unless you cancel it from your OmniSocials calendar first.', false);
       }).catch(function(e){ setStatus('request failed: ' + e, true); });
     };
     reader.readAsDataURL(blob);
