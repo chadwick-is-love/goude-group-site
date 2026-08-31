@@ -389,6 +389,9 @@ html[data-brand="gabes"] .gdOnly{display:none}
       <button class="btn ghost" id="copyImgBtn">Copy image</button>
       <button class="btn ghost small" id="dlAllBtn">Download all ten</button>
     </div>
+    <div class="stagebar" id="postOmniRow">
+      <button class="btn ghost small" id="postOmniBtn">Post to OmniSocials (~30 min)</button>
+    </div>
   </section>
 
   <section class="panel cap">
@@ -594,11 +597,17 @@ var CANVASES = [
    1. SHARED SCAFFOLDING
    ============================================================ */
 
-var FORMATS = [
-  {id:'portrait', w:1080, h:1350, name:'4:5 feed'},
-  {id:'square',   w:1200, h:1200, name:'1:1 feed'},
-  {id:'wide',     w:1200, h:628,  name:'Link card'},
-  {id:'story',    w:1080, h:1920, name:'9:16 story'}
+/* The Goude side's formats. Mirrors GB_FORMATS exactly in shape and, on the
+   first five, in dimensions - one card system across both brands - so
+   updateCapMeta(), push.php and channels.json all key off the same ids.
+   Threads reuses the 4:5 card; Threads renders 4:5 without cropping. */
+var GD_FORMATS = [
+  {id:'linkedin', w:1080, h:1350, ratio:'4:5',  name:'LinkedIn',  maxChars:1300},
+  {id:'ig_feed',  w:1080, h:1350, ratio:'4:5',  name:'IG feed',   maxChars:900},
+  {id:'x',        w:1600, h:900,  ratio:'16:9', name:'X',         maxChars:280},
+  {id:'ig_story', w:1080, h:1920, ratio:'9:16', name:'IG story',  maxChars:140},
+  {id:'facebook', w:1080, h:1080, ratio:'1:1',  name:'Facebook',  maxChars:1000},
+  {id:'threads',  w:1080, h:1350, ratio:'4:5',  name:'Threads',   maxChars:500}
 ];
 
 var GD_WORLDS = [
@@ -630,7 +639,7 @@ var S = {
   items:[], meta:{},
   queue:[], qIndex:-1,
   angle:'',
-  format:'portrait',
+  format:'linkedin',
   layout:'statement',
   world:'mint',
   trioMood:'core', trioIndex:0, canvas:'cotton',
@@ -734,7 +743,7 @@ var GB_FORMATS = [
   {id:'ig_story', w:1080, h:1920, ratio:'9:16', name:'ig story',  maxChars:140},
   {id:'facebook', w:1080, h:1080, ratio:'1:1',  name:'facebook',  maxChars:1000}
 ];
-function formatsNow(){ return (S.brand === 'gabes') ? GB_FORMATS : FORMATS; }
+function formatsNow(){ return (S.brand === 'gabes') ? GB_FORMATS : GD_FORMATS; }
 function fmtNow(){ var L = formatsNow(); return L.filter(function(f){return f.id===S.format;})[0] || L[0]; }
 function trioList(){ return TRIOS[S.trioMood] || TRIOS.core; }
 function trioNow(){
@@ -961,7 +970,8 @@ var GOUDE = {
       p.kicker = caps(GOUDE.issueTag() + ' · The instrument');
       p.foot = 'Free in the article. No signup.'; p.footR = 'goudegroup.com/briefing';
     }
-    p.caption = GOUDE.caption(it, angle, p);
+    p.caption  = GOUDE.caption(it, angle, p);
+    p.captionX = GOUDE.captionX(it, angle, p);
     return p;
   },
 
@@ -991,12 +1001,36 @@ var GOUDE = {
              .join('\n\n').replace(/\n{3,}/g,'\n\n');
   },
 
+  /* X-only caption. The standing Briefing close alone is ~150 characters
+     before the hook or the URL, so the full caption can never fit 280.
+     This keeps the hook and the link and drops everything else. X charges
+     23 characters for any link regardless of its real length (t.co), plus
+     the two newlines before it - budget accordingly, not off url.length. */
+  captionX:function(it, angle, post){
+    var url = it.url || (S.meta.url || 'https://goudegroup.com/briefing/');
+    var hook;
+    if(angle === 'instrument')   hook = clean(it.toolName || '') + '. ' + clean(it.toolSub || '');
+    else if(angle === 'mistake') hook = clean(firstDoNot(it.notdo) || '');
+    else if(angle === 'line')    hook = clean(it.pull || '');
+    else if(angle === 'figure')  hook = (post.figure ? post.figure + '. ' : '') + clean(firstSentences(it.headline,1));
+    else                         hook = clean(firstSentences(it.headline,1));
+    hook = String(hook || '').replace(/\s+/g,' ').trim();
+    var room = 280 - 25;
+    if(hook.length > room){
+      hook = hook.slice(0, room);
+      var cut = hook.lastIndexOf(' ');
+      if(cut > 40) hook = hook.slice(0, cut);
+      hook = hook.replace(/[,;:\u2013\u2014\-\s]+$/,'') + '.';
+    }
+    return hook + '\n\n' + url;
+  },
+
   fileName:function(q){
     return 'goude-' + slug((S.meta.no||'briefing') + '-' + (q ? q.day+'-'+q.slot+'-'+q.angle : S.angle)) + '.png';
   },
 
   draw:function(ctx, f){
-    var W=f.w, H=f.h, s=W/1080, wd=worldNow(), wide=(f.id==='wide');
+    var W=f.w, H=f.h, s=W/1080, wd=worldNow(), wide=(f.id==='x');
     ctx.clearRect(0,0,W,H); ctx.fillStyle=wd.bg; ctx.fillRect(0,0,W,H);
     ctx.textBaseline='alphabetic'; setLS(ctx,0);
     var M=Math.round(76*s), Mv=Math.round((wide?52:76)*s), maxW=W-M*2, left=M;
@@ -1045,7 +1079,7 @@ var GOUDE = {
       supSize=Math.round(26*s*(S.supScale/100));
       ctx.font='400 '+supSize+'px '+INTER;
       supLines=wrap(ctx,S.card.support,maxW,0);
-      var supCap = wide?2:(f.id==='story'?5:4);
+      var supCap = wide?2:(f.id==='ig_story'?5:4);
       if(supLines.length>supCap) supLines=supLines.slice(0,supCap);
       supTop=footRuleY-Math.round((wide?26:40)*s)-(supLines.length*supSize*supLh);
     }
@@ -1587,6 +1621,13 @@ function currentItem(){
   return S.items[S.queue[S.qIndex].itemIndex];
 }
 
+/* Which of the post's two captions belongs in the box. Only the Goude side
+   carries a second one; gabes has a single shared caption by design. */
+function captionFor(post){
+  if(!post) return '';
+  return (S.brand === 'goude' && S.format === 'x' && post.captionX) ? post.captionX : (post.caption || '');
+}
+
 function applyPost(post){
   S.card.kicker = post.kicker; S.card.statement = post.statement;
   S.card.figure = post.figure || ''; S.card.support = post.support || '';
@@ -1594,7 +1635,7 @@ function applyPost(post){
   S.card.stack = post.stack || [];
   S.layout = post.layout;
   syncFields();
-  $('capText').value = post.caption || '';
+  $('capText').value = captionFor(post);
   updateCapMeta();
   renderSegs(); draw();
 }
@@ -1767,6 +1808,33 @@ function copyImage(){
   });
 }
 
+function postOmniSocials(){
+  var f = fmtNow();
+  var caption = ($('capText').value || '').trim();
+  if(!caption){ setStatus('write a caption first.', true); return; }
+  if(f.maxChars && caption.length > f.maxChars){
+    setStatus('caption is ' + caption.length + ' characters, over the ' + f.maxChars + ' limit for ' + f.name + ' - shorten it before posting.', true);
+    return;
+  }
+  setStatus('rendering the card ...', false);
+  renderToBlob(f, function(blob){
+    var reader = new FileReader();
+    reader.onload = function(){
+      setStatus('posting to omnisocials ...', false);
+      fetch('push.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ brand: S.brand, platform: f.id, caption: caption, image: reader.result })
+      }).then(function(r){ return r.json(); }).then(function(r){
+        if(!r.ok){ setStatus('failed: ' + (r.error || 'unknown error'), true); return; }
+        var when = new Date(r.scheduled_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+        setStatus(r.label + ': scheduled for ' + when + ' (post ' + r.post_id + '). it WILL go live then unless you cancel it from your OmniSocials calendar first.', false);
+      }).catch(function(e){ setStatus('request failed: ' + e, true); });
+    };
+    reader.readAsDataURL(blob);
+  });
+}
+
 /* ---------- blank card ---------- */
 
 function blankCard(scroll){
@@ -1830,6 +1898,7 @@ function applyBrand(brand, first){
   $('fFoot').parentNode.style.display = gb ? 'none' : '';
   $('capTitle').textContent = gb ? 'paste this under it.' : 'Paste this under it.';
   $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
+  $('postOmniRow').style.display = '';  // both brands; gabes fails loudly server-side until its channels exist
   document.title = (brand === 'goude') ? 'The Studio: Goude Group' : 'the studio: >gabes';
 
   var tabs = $('srcTabs'); tabs.innerHTML = '';
@@ -1844,7 +1913,11 @@ function applyBrand(brand, first){
 
   var mem = MEM[brand];
   if(mem){
+    // Saved state predating the platform-named formats carries ids like
+    // 'portrait'. fmtNow() falls back safely, but the chip row would show
+    // nothing selected - snap it to a real id.
     restore(mem);
+    if(!formatsNow().some(function(f){ return f.id === S.format; })) S.format = formatsNow()[0].id;
     renderTiles(); renderQueue(); renderAngles(); renderSegs(); renderToggles();
     syncFields(); updateCapMeta(); paintTheme(); draw();
     $('queue').classList.toggle('on', S.queue.length > 0);
@@ -1943,7 +2016,19 @@ function bind(){
     var el = $(id); if(!el) return;
     el.addEventListener('click', function(e){
       var b = e.target.closest('button'); if(!b) return;
-      if(b.hasAttribute('data-format')){ S.format = b.getAttribute('data-format'); setTimeout(updateCapMeta,0); }
+      if(b.hasAttribute('data-format')){
+        var prevFmt = S.format;
+        S.format = b.getAttribute('data-format');
+        // Crossing into or out of X swaps the caption - but only while the box
+        // still holds untouched generated text. Hand edits are never clobbered.
+        if(S.brand === 'goude' && (prevFmt === 'x') !== (S.format === 'x')){
+          var cit = currentItem();
+          var cp = cit ? E().buildPost(cit, S.angle) : null;
+          var box = $('capText');
+          if(cp && (box.value === cp.caption || box.value === cp.captionX)) box.value = captionFor(cp);
+        }
+        setTimeout(updateCapMeta,0);
+      }
       if(b.hasAttribute('data-layout'))  S.layout  = b.getAttribute('data-layout');
       if(b.hasAttribute('data-align'))   S.align   = b.getAttribute('data-align');
       if(b.hasAttribute('data-weight'))  S.weight  = b.getAttribute('data-weight');
@@ -1987,6 +2072,7 @@ function bind(){
   $('dlBtn').addEventListener('click', download);
   $('dlAllBtn').addEventListener('click', downloadAll);
   $('copyImgBtn').addEventListener('click', copyImage);
+  $('postOmniBtn').addEventListener('click', postOmniSocials);
   $('capText').addEventListener('input', updateCapMeta);
   $('copyCapBtn').addEventListener('click', function(){
     var t = $('capText');
@@ -1996,7 +2082,7 @@ function bind(){
   $('regenBtn').addEventListener('click', function(){
     var it = currentItem();
     if(!it){ toast('load a source first'); return; }
-    $('capText').value = E().buildPost(it, S.angle).caption;
+    $('capText').value = captionFor(E().buildPost(it, S.angle));
     updateCapMeta(); toast('caption rebuilt');
   });
 }

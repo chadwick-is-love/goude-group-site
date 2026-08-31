@@ -1,0 +1,45 @@
+# ---------------------------------------------------------------------------
+# 1. The studio is a publishing console. Everything under this folder - the UI
+#    and push.php, which schedules real posts to The Goude Group's live social
+#    accounts - requires a login.
+#
+#    This repository is PUBLIC, so push.php's exact request shape is readable
+#    by anyone. Without this block, an unauthenticated POST to
+#    goudegroup.com/studio/push.php schedules a real post to a real account.
+#
+#    The password file lives OUTSIDE the web root and is already in place:
+#      /home/u644675766/studio.htpasswd   (users: chadwick, kemmet, gabrielle)
+#
+#    It must be mode 644, not 640. Apache runs as a different user than the
+#    account, so owner-only read makes every login fail with a 401 that looks
+#    exactly like a wrong password. The home directory is --x for others, so
+#    644 does not expose it. Verified live 2026-08-31.
+#
+#    To add or change a user (htpasswd is not installed on this host):
+#      openssl passwd -apr1 'thepassword'
+#      then edit /home/u644675766/studio.htpasswd as name:hash
+#
+#    Verify after any deploy:
+#      curl -o /dev/null -w "%{http_code}\n" https://goudegroup.com/studio/
+#      401 is correct. 200 means this block is not being applied - stop.
+# ---------------------------------------------------------------------------
+AuthType Basic
+AuthName "The Studio"
+AuthUserFile "/home/u644675766/studio.htpasswd"
+Require valid-user
+
+# ---------------------------------------------------------------------------
+# 2. Block the OmniSocials key file from ever being served over the web.
+#    (PHP still reads it from disk; this only stops browser access.)
+#    Kept as a second line of defence - it must hold even if the auth block
+#    above is ever removed or misconfigured.
+# ---------------------------------------------------------------------------
+<FilesMatch "(omnisocials-key\.txt|\.htpasswd)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
