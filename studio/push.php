@@ -42,6 +42,22 @@ require __DIR__ . '/omnisocials.php';
 
 header('Content-Type: application/json');
 
+/*
+ * This endpoint schedules posts to live social accounts and takes no
+ * credential of its own - it relies entirely on the Basic auth block in
+ * studio/.htaccess covering this whole folder. goude-group-site is a PUBLIC
+ * repository, so the request shape below is readable by anyone; without that
+ * auth block an anonymous POST here puts something on The Goude Group's real
+ * feeds 30 minutes later. If REMOTE_USER is empty, the auth block is missing
+ * or not being applied, and this must not run.
+ */
+$remoteUser = $_SERVER['REMOTE_USER'] ?? ($_SERVER['REDIRECT_REMOTE_USER'] ?? '');
+if ($remoteUser === '') {
+    http_response_code(401);
+    echo json_encode(['ok' => false, 'error' => 'this endpoint is not authenticated - the studio .htaccess auth block is missing or not being applied. refusing to post.']);
+    exit;
+}
+
 // Superset of GB_FORMATS and GD_FORMATS in index.html - keep these in sync
 // if either list ever changes. 'threads' is Goude-side only for now; gabes
 // has no Threads format, which is harmless, the maps are supersets.
@@ -153,6 +169,7 @@ if (!$create['ok'] || !isset($create['data']['data']['id'])) {
 
 echo json_encode([
     'ok' => true,
+    'by' => $remoteUser,
     'brand' => $brand,
     'label' => $label,
     'post_id' => $create['data']['data']['id'],

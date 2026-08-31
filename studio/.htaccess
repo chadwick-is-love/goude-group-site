@@ -1,6 +1,38 @@
-# Block the OmniSocials key file from ever being served over the web.
-# (PHP still reads it from disk; this only stops browser access.)
-<FilesMatch "(omnisocials-key\.txt)$">
+# ---------------------------------------------------------------------------
+# 1. The studio is a publishing console. Everything under this folder - the UI
+#    and push.php, which schedules real posts to The Goude Group's live social
+#    accounts - requires a login.
+#
+#    This repository is PUBLIC, so push.php's exact request shape is readable
+#    by anyone. Without this block, an unauthenticated POST to
+#    goudegroup.com/studio/push.php schedules a real post to a real account.
+#
+#    DEPLOY ORDER MATTERS. The password file must exist on the server BEFORE
+#    this file reaches it, or the studio returns 500 for everyone.
+#
+#      1) On the Hostinger server, one level ABOVE public_html (outside the
+#         web root, same idea as the key file):
+#           htpasswd -c /home/<user>/studio.htpasswd chadwick
+#           htpasswd    /home/<user>/studio.htpasswd kemmet
+#           htpasswd    /home/<user>/studio.htpasswd gabrielle
+#      2) Point AuthUserFile below at that absolute path.
+#      3) Then merge and push.
+#
+#    Verify after deploy: `curl -sS -o /dev/null -w "%{http_code}\n" -X POST
+#    https://goudegroup.com/studio/push.php` must return 401, not 200.
+# ---------------------------------------------------------------------------
+AuthType Basic
+AuthName "The Studio"
+AuthUserFile "/home/REPLACE_WITH_ABSOLUTE_PATH/studio.htpasswd"
+Require valid-user
+
+# ---------------------------------------------------------------------------
+# 2. Block the OmniSocials key file from ever being served over the web.
+#    (PHP still reads it from disk; this only stops browser access.)
+#    Kept as a second line of defence - it must hold even if the auth block
+#    above is ever removed or misconfigured.
+# ---------------------------------------------------------------------------
+<FilesMatch "(omnisocials-key\.txt|\.htpasswd)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>
