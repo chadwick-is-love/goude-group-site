@@ -8,10 +8,15 @@
  *   2) omnisocials-key.txt one level ABOVE this folder (outside the web folder)
  *   3) omnisocials-key.txt in this folder (blocked from the web by .htaccess)
  *
- * channels.json maps a platform key (matching GB_FORMATS ids in
- * index.html) to the OmniSocials channel/account id it should post to. It
- * is NOT secret - committed to the repo. Workspace: "Goude Group / Gabes"
- * (id 1000120), confirmed live 2026-08-28.
+ * channels.json maps brand -> platform key (matching GB_FORMATS and
+ * GD_FORMATS ids in index.html) -> the OmniSocials channel/account id it
+ * should post to. It is NOT secret - committed to the repo. Workspace:
+ * "Goude Group / Gabes" (id 1000120), confirmed live 2026-08-28.
+ *
+ * All six connected accounts in that workspace are The Goude Group's
+ * (instagram, facebook, linkedin_page, x, threads, pinterest - verified
+ * against GET /accounts 2026-08-31). There is no gabes.ai account yet, so
+ * the "gabes" map is empty on purpose.
  *
  * Base API shape proven live in production, first by Brother Holiday's
  * card_upload.py, then again directly against this workspace 2026-08-28

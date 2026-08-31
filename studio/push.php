@@ -17,8 +17,10 @@
  * on-screen "N / max on <platform>" counter before switching formats. So
  * this endpoint posts ONE platform at a time, mirroring the existing
  * download() button (not downloadAll(), which iterates the queue, not
- * formats). Gabes-only for now - GD_FORMATS (the Goude/Briefing side) are
- * generic image shapes with no OmniSocials channel mapping.
+ * formats). Both brands now: GD_FORMATS (the Goude/Briefing side) carries
+ * the same platform-named ids as GB_FORMATS plus threads, so one endpoint
+ * serves both. The Goude side's X caption is a separate short-close variant
+ * (GOUDE.captionX) - the full Briefing caption cannot fit 280.
  *
  * PROVEN 2026-08-28 against the real Goude Group / Gabes workspace:
  * - draft posts 100010052 (x) / 100010053 (ig_story), fired via a
@@ -40,15 +42,17 @@ require __DIR__ . '/omnisocials.php';
 
 header('Content-Type: application/json');
 
-// matches GB_FORMATS in index.html exactly - keep these two in sync if that
-// list ever changes.
+// Superset of GB_FORMATS and GD_FORMATS in index.html - keep these in sync
+// if either list ever changes. 'threads' is Goude-side only for now; gabes
+// has no Threads format, which is harmless, the maps are supersets.
 const PLATFORM_LABELS = [
     'x' => 'X', 'linkedin' => 'LinkedIn', 'ig_feed' => 'Instagram feed',
     'ig_story' => 'Instagram story', 'facebook' => 'Facebook',
+    'threads' => 'Threads',
 ];
 const PLATFORM_MAX_CHARS = [
     'x' => 280, 'linkedin' => 1300, 'ig_feed' => 900,
-    'ig_story' => 140, 'facebook' => 1000,
+    'ig_story' => 140, 'facebook' => 1000, 'threads' => 500,
 ];
 // ig_feed and ig_story share ONE Instagram channel id (confirmed live: GET
 // /accounts returns a single instagram account carrying
@@ -56,8 +60,9 @@ const PLATFORM_MAX_CHARS = [
 // them apart, so the post TYPE does. Both values PROVEN 2026-08-28.
 const PLATFORM_POST_TYPE = [
     'x' => 'post', 'linkedin' => 'post', 'ig_feed' => 'post',
-    'ig_story' => 'story', 'facebook' => 'post',
+    'ig_story' => 'story', 'facebook' => 'post', 'threads' => 'post',
 ];
+const BRANDS = ['goude', 'gabes'];
 
 function fail($msg, $code = 200) {
     http_response_code($code);
@@ -73,25 +78,40 @@ $channels = omnisocials_channels();
 
 $in = json_decode(file_get_contents('php://input'), true);
 if (!is_array($in)) $in = [];
+$brand = $in['brand'] ?? '';
 $k = $in['platform'] ?? '';
 $label = PLATFORM_LABELS[$k] ?? $k;
 $caption = trim($in['caption'] ?? '');
 $dataUrl = $in['image'] ?? '';
 
 // ---- server-side checks gate. Never trust the client-side pass alone.
+if (!in_array($brand, BRANDS, true)) {
+    fail('unknown brand: ' . $brand);
+}
 if (!array_key_exists($k, PLATFORM_LABELS)) {
     fail('unknown platform: ' . $k);
 }
-$channelId = trim($channels[$k] ?? '');
+// channels.json is brand-scoped: brand -> platform key -> channel id. Every
+// account in workspace 1000120 belongs to The Goude Group; the gabes map is
+// deliberately empty until gabes.ai's own accounts are connected, so the
+// gabes button fails here with a specific message rather than silently
+// posting gabes work to Goude Group's feeds.
+$channelId = trim($channels[$brand][$k] ?? '');
 if ($channelId === '') {
-    fail('no channel id configured for ' . $label . ' in channels.json');
+    fail('no channel id configured for ' . $label . ' on the ' . $brand . ' side in channels.json');
 }
 if ($caption === '') {
     fail('empty caption');
 }
+// Count CHARACTERS, not bytes. strlen() counted bytes, so a caption using
+// the Briefing's typographic punctuation (- and the middot in every kicker
+// are multi-byte in UTF-8) could pass the client's character count and then
+// be rejected here for a length the user cannot see. mb_strlen matches what
+// the on-screen counter shows.
 $max = PLATFORM_MAX_CHARS[$k];
-if (strlen($caption) > $max) {
-    fail('caption is ' . strlen($caption) . ' characters, over the ' . $max . ' limit for ' . $label . ' - shorten it before posting.');
+$len = function_exists('mb_strlen') ? mb_strlen($caption, 'UTF-8') : strlen($caption);
+if ($len > $max) {
+    fail('caption is ' . $len . ' characters, over the ' . $max . ' limit for ' . $label . ' - shorten it before posting.');
 }
 if (!is_string($dataUrl) || strpos($dataUrl, 'data:image/png;base64,') !== 0) {
     fail('no rendered card image');
@@ -133,6 +153,7 @@ if (!$create['ok'] || !isset($create['data']['data']['id'])) {
 
 echo json_encode([
     'ok' => true,
+    'brand' => $brand,
     'label' => $label,
     'post_id' => $create['data']['data']['id'],
     'media_id' => $mediaId,
