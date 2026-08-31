@@ -7,23 +7,25 @@
 #    by anyone. Without this block, an unauthenticated POST to
 #    goudegroup.com/studio/push.php schedules a real post to a real account.
 #
-#    DEPLOY ORDER MATTERS. The password file must exist on the server BEFORE
-#    this file reaches it, or the studio returns 500 for everyone.
+#    The password file lives OUTSIDE the web root and is already in place:
+#      /home/u644675766/studio.htpasswd   (users: chadwick, kemmet, gabrielle)
 #
-#      1) On the Hostinger server, one level ABOVE public_html (outside the
-#         web root, same idea as the key file):
-#           htpasswd -c /home/<user>/studio.htpasswd chadwick
-#           htpasswd    /home/<user>/studio.htpasswd kemmet
-#           htpasswd    /home/<user>/studio.htpasswd gabrielle
-#      2) Point AuthUserFile below at that absolute path.
-#      3) Then merge and push.
+#    It must be mode 644, not 640. Apache runs as a different user than the
+#    account, so owner-only read makes every login fail with a 401 that looks
+#    exactly like a wrong password. The home directory is --x for others, so
+#    644 does not expose it. Verified live 2026-08-31.
 #
-#    Verify after deploy: `curl -sS -o /dev/null -w "%{http_code}\n" -X POST
-#    https://goudegroup.com/studio/push.php` must return 401, not 200.
+#    To add or change a user (htpasswd is not installed on this host):
+#      openssl passwd -apr1 'thepassword'
+#      then edit /home/u644675766/studio.htpasswd as name:hash
+#
+#    Verify after any deploy:
+#      curl -o /dev/null -w "%{http_code}\n" https://goudegroup.com/studio/
+#      401 is correct. 200 means this block is not being applied - stop.
 # ---------------------------------------------------------------------------
 AuthType Basic
 AuthName "The Studio"
-AuthUserFile "/home/REPLACE_WITH_ABSOLUTE_PATH/studio.htpasswd"
+AuthUserFile "/home/u644675766/studio.htpasswd"
 Require valid-user
 
 # ---------------------------------------------------------------------------
