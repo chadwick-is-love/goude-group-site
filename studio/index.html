@@ -1739,6 +1739,17 @@ function updateCapMeta(){
     label.textContent = ' / ' + cap + ' on ' + f.name + (t.length > cap ? '  ·  over' : '');
     label.style.opacity = (t.length > cap) ? '1' : '.7';
   } else { label.textContent = '  ·  the fold sits at 210'; label.style.opacity = '.7'; }
+  /* STUDIO_FEEDBACK_PATCH: the button must not look clickable when the caption
+     cannot pass the length gate - the refusal message renders far above
+     this point on the page and is missed. */
+  var pb = $('postOmniBtn');
+  if(pb){
+    var over = Boolean(cap) && t.length > cap;
+    pb.disabled = over;
+    pb.textContent = over
+      ? ('Too long for ' + f.name + ' (' + t.length + '/' + cap + ')')
+      : 'Post to OmniSocials (~30 min)';
+  }
   var fold = t.slice(0,210), cut = fold.lastIndexOf(' ');
   if(cut > 60) fold = fold.slice(0,cut);
   var tail = fold.split(/\s+/).slice(-5).join(' ');
@@ -1811,9 +1822,11 @@ function copyImage(){
 function postOmniSocials(){
   var f = fmtNow();
   var caption = ($('capText').value || '').trim();
-  if(!caption){ setStatus('write a caption first.', true); return; }
+  if(!caption){ setStatus('write a caption first.', true);
+    toast('write a caption first'); return; }   /* STUDIO_FEEDBACK_PATCH */
   if(f.maxChars && caption.length > f.maxChars){
     setStatus('caption is ' + caption.length + ' characters, over the ' + f.maxChars + ' limit for ' + f.name + ' - shorten it before posting.', true);
+    toast('too long for ' + f.name + ': ' + caption.length + '/' + f.maxChars);
     return;
   }
   setStatus('rendering the card ...', false);
@@ -1826,10 +1839,13 @@ function postOmniSocials(){
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ brand: S.brand, platform: f.id, caption: caption, image: reader.result })
       }).then(function(r){ return r.json(); }).then(function(r){
-        if(!r.ok){ setStatus('failed: ' + (r.error || 'unknown error'), true); return; }
+        if(!r.ok){ setStatus('failed: ' + (r.error || 'unknown error'), true);
+          toast('post failed'); return; }
         var when = new Date(r.scheduled_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
         setStatus(r.label + ': scheduled for ' + when + ' (post ' + r.post_id + '). it WILL go live then unless you cancel it from your OmniSocials calendar first.', false);
-      }).catch(function(e){ setStatus('request failed: ' + e, true); });
+        toast('scheduled on ' + r.label + ' for ' + when);
+      }).catch(function(e){ setStatus('request failed: ' + e, true);
+        toast('request failed'); });
     };
     reader.readAsDataURL(blob);
   });
