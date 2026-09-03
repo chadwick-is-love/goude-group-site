@@ -355,10 +355,11 @@ html:not(.js) .mact{display:none}
         padding-top:.5em}
 .pr .pz .dec{display:inline-block;width:3.6ch;text-align:left}
 .pr .dz{position:relative;width:13px;height:13px;margin-top:.75em}
-.pr .dz i{position:absolute;display:block;background:var(--ink-48);transition:transform .16s ease}
+.pr .dz i{position:absolute;display:block;background:var(--ink-48)}
+.pr .dz{transition:transform .16s ease}
 .pr .dz i:first-child{width:13px;height:1px;top:6px;left:0}
 .pr .dz i:last-child{width:1px;height:13px;left:6px;top:0}
-.pr[open] .dz i:last-child{transform:scaleY(0)}
+.pr[open] .dz{transform:rotate(45deg)}
 .pr[open] .nm{border-bottom-color:transparent}
 
 .pd{padding:0 0 26px;margin-left:calc(3.4em + 16px)}
@@ -381,21 +382,33 @@ html:not(.js) .mact{display:none}
      color:var(--ink-70)}
 .dv summary:hover .dvl{color:var(--ink)}
 .dvm{position:relative;width:11px;height:11px;flex:0 0 auto}
-.dvm i{position:absolute;display:block;background:var(--ink-48);transition:transform .16s ease}
+.dvm i{position:absolute;display:block;background:var(--ink-48)}
+.dvm{transition:transform .16s ease}
 .dvm i:first-child{width:11px;height:1px;top:5px;left:0}
 .dvm i:last-child{width:1px;height:11px;left:5px;top:0}
-.dv[open] .dvm i:last-child{transform:scaleY(0)}
+.dv[open] .dvm{transform:rotate(45deg)}
 .dvb{padding:2px 0 22px}
 .dd{display:grid;grid-template-columns:minmax(0,13em) minmax(0,1fr);gap:0 20px;
     padding:14px 0;border-top:1px solid var(--rule-soft)}
 .dd>.k{font-family:var(--sans);font-size:12px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;
        color:var(--ink-48);padding-top:.28em}
 .dd .v p{font-size:16.5px;line-height:1.56;color:var(--ink-70);max-width:34em;margin:0}
-.dl{margin:0;padding:0;list-style:none;max-width:34em}
-.dl li{position:relative;padding-left:26px;font-size:16.5px;line-height:1.56;color:var(--ink-70);
-       margin-bottom:9px}
-.dl li:last-child{margin-bottom:0}
-.dl li::before{content:"";position:absolute;left:0;top:.72em;width:14px;height:1px;background:var(--rule-heavy)}
+/* How it runs: numbered, because it is a sequence. Nothing here carries a
+   leading dash: a hairline bullet reads as an em dash and the house rule is
+   about what the reader sees, not about the character. */
+.ds{margin:0;padding:0;list-style:none;max-width:34em;counter-reset:none}
+.ds li{display:grid;grid-template-columns:2.4em minmax(0,1fr);gap:0 4px;align-items:baseline;
+       margin-bottom:11px}
+.ds li:last-child{margin-bottom:0}
+.ds .i{font-family:var(--mono);font-size:12.5px;color:var(--ink-48)}
+.ds .s{font-size:16.5px;line-height:1.56;color:var(--ink-70)}
+
+/* What it hands back: a set, so ruled lines and no marker at all. */
+.dn{margin:0;padding:0;list-style:none;max-width:34em}
+.dn li{font-size:16.5px;line-height:1.56;color:var(--ink-70);padding:7px 0;
+       border-bottom:1px solid var(--rule-soft)}
+.dn li:first-child{padding-top:0}
+.dn li:last-child{border-bottom:0;padding-bottom:0}
 
 /* what surrounds a build */
 .fee{border-top:1.5px solid var(--rule-heavy);max-width:52em}
@@ -434,7 +447,7 @@ html:not(.js) .mact{display:none}
   .fee .z{grid-column:1;grid-row:4;text-align:left;margin-top:12px}
   .fee .z .u{display:inline;margin-left:10px}
 }
-@media(prefers-reduced-motion:reduce){.pr .dz i,.dvm i{transition:none}}
+@media(prefers-reduced-motion:reduce){.pr .dz,.dvm{transition:none}}
 @media print{.mact,.xnav{display:none}}
 </style>
 </head><body>
