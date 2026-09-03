@@ -137,6 +137,35 @@ if ($bin === false || strlen($bin) === 0) {
     fail('card image failed to decode');
 }
 
+/*
+ * STUDIO_DUP_GUARD_PATCH - refuse an identical card to the same platform
+ * inside a short window.
+ *
+ * The client-side in-flight lock added the same day is the first line of
+ * defence, but it lives in one page's memory: a reload, a second tab, or a
+ * second person clears it. On 2026-09-03 six identical LinkedIn posts were
+ * created in 11 seconds and NOTHING refused them, because this endpoint had
+ * no concept of having just done the same thing.
+ *
+ * Ten minutes, because the real failure mode is not a double-click - it is
+ * someone pressing again several minutes later since the post still is not
+ * visible on the platform, which is exactly what scheduling 30 minutes out
+ * guarantees. The refusal names the existing post id and is phrased as
+ * "already queued", because that is what it is.
+ */
+$dupWindow = 600;
+$dupFile = sys_get_temp_dir() . '/studio-post-' . md5($brand . '|' . $k . '|' . $caption) . '.json';
+if (is_readable($dupFile)) {
+    $prev = json_decode(@file_get_contents($dupFile), true);
+    if (is_array($prev) && isset($prev['at']) && (time() - (int)$prev['at']) < $dupWindow) {
+        $ago = time() - (int)$prev['at'];
+        fail('this exact card was already queued to ' . $label . ' ' . $ago . ' seconds ago as post '
+            . ($prev['post_id'] ?? '?') . '. It is scheduled and will publish on time - it does not appear on '
+            . $label . ' until then, so nothing is wrong. If you really want a second copy, cancel that one '
+            . 'in your OmniSocials calendar first.');
+    }
+}
+
 // ---- 1) upload the card image
 $tmp = tempnam(sys_get_temp_dir(), 'card') . '.png';
 file_put_contents($tmp, $bin);
@@ -166,6 +195,12 @@ if (!$create['ok'] || !isset($create['data']['data']['id'])) {
     fail('post create failed (media uploaded, id ' . $mediaId . '): '
         . ($create['data']['error']['message'] ?? ($create['error'] ?? 'unknown error')));
 }
+
+// STUDIO_DUP_GUARD_PATCH: remember this one so an immediate repeat is refused.
+@file_put_contents($dupFile, json_encode([
+    'at' => time(),
+    'post_id' => $create['data']['data']['id'],
+]));
 
 echo json_encode([
     'ok' => true,

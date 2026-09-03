@@ -648,6 +648,7 @@ var S = {
   weight:'500',
   scale:100, supScale:100, track:-20,
   toggles:{},
+  posting:false,   /* STUDIO_POST_LOCK_PATCH: true while a post is in flight */
   card:{kicker:'',statement:'',figure:'',support:'',foot:'',footR:'',stack:[]}
 };
 
@@ -1507,9 +1508,12 @@ function E(){ return ENGINES[S.brand]; }
    ============================================================ */
 
 function $(id){ return document.getElementById(id); }
-function toast(msg){
+function toast(msg, ms){
+  /* STUDIO_POST_LOCK_PATCH: ms is optional. The scheduled-post confirmation
+     carries the one fact people miss - that it is NOT live yet - and 1.8s
+     was not long enough to read it. */
   var t = $('toast'); t.textContent = msg; t.classList.add('on');
-  clearTimeout(t._t); t._t = setTimeout(function(){ t.classList.remove('on'); }, 1800);
+  clearTimeout(t._t); t._t = setTimeout(function(){ t.classList.remove('on'); }, ms || 1800);
 }
 function setStatus(msg, isErr){
   var el = $('status');
@@ -1743,7 +1747,11 @@ function updateCapMeta(){
      cannot pass the length gate - the refusal message renders far above
      this point on the page and is missed. */
   var pb = $('postOmniBtn');
-  if(pb){
+  /* STUDIO_POST_LOCK_PATCH: skip entirely while a post is in flight. This
+     runs on every keystroke and on format change, and it used to rewrite
+     .disabled unconditionally - which re-enabled the button mid-post and
+     re-opened the duplicate window the lock exists to close. */
+  if(pb && !S.posting){
     var over = Boolean(cap) && t.length > cap;
     pb.disabled = over;
     pb.textContent = over
@@ -1819,7 +1827,39 @@ function copyImage(){
   });
 }
 
+/* STUDIO_POST_LOCK_PATCH -------------------------------------------------
+   postingOn/postingOff bracket the whole run. S.posting is the single
+   source of truth and updateCapMeta() defers to it, so the button cannot
+   be re-enabled underneath us by a keystroke or a format change.
+
+   The watchdog matters: renderToBlob() takes a callback and has no failure
+   path of its own, so if it ever fails to call back the button would stay
+   locked for the rest of the session with no way out but a reload. 90s is
+   far beyond a real run (a measured run is a few seconds) and only ever
+   fires on something genuinely wrong. */
+function postingOn(f){
+  S.posting = true;
+  var pb = $('postOmniBtn');
+  if(pb){ pb.disabled = true; pb.textContent = 'Posting to ' + f.name + ' ...'; }
+  clearTimeout(S._postWatchdog);
+  S._postWatchdog = setTimeout(function(){
+    if(!S.posting) return;
+    postingOff();
+    setStatus('the post never came back. Nothing was confirmed - check your OmniSocials calendar before pressing again, so you do not create a second copy.', true);
+    toast('timed out - check OmniSocials before retrying', 7000);
+  }, 90000);
+}
+function postingOff(){
+  S.posting = false;
+  clearTimeout(S._postWatchdog);
+  updateCapMeta();   /* restores the real label and disabled state */
+}
+
 function postOmniSocials(){
+  /* The duplicate guard. Chadwick's six identical LinkedIn posts on
+     2026-09-03 were four clicks inside one second plus two more nine
+     seconds later, because nothing on screen changed when he pressed. */
+  if(S.posting){ toast('already posting, hold on'); return; }
   var f = fmtNow();
   var caption = ($('capText').value || '').trim();
   if(!caption){ setStatus('write a caption first.', true);
@@ -1829,24 +1869,51 @@ function postOmniSocials(){
     toast('too long for ' + f.name + ': ' + caption.length + '/' + f.maxChars);
     return;
   }
+  postingOn(f);
   setStatus('rendering the card ...', false);
+  toast('rendering the card ...');          /* #status is above the fold; the button is not */
   renderToBlob(f, function(blob){
     var reader = new FileReader();
     reader.onload = function(){
-      setStatus('posting to omnisocials ...', false);
+      setStatus('uploading to omnisocials ...', false);
+      toast('uploading to omnisocials ...');
       fetch('push.php', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ brand: S.brand, platform: f.id, caption: caption, image: reader.result })
-      }).then(function(r){ return r.json(); }).then(function(r){
-        if(!r.ok){ setStatus('failed: ' + (r.error || 'unknown error'), true);
-          toast('post failed'); return; }
+      }).then(function(res){
+        /* Read the body as TEXT first and parse by hand. r.json() on a 502
+           or a PHP error page rejects with "Unexpected token <", which is
+           what puts an unreadable error on screen and tells the operator
+           nothing about what actually happened. Reporting the real HTTP
+           status is the difference between "it threw an error" and "the
+           server returned 503". */
+        return res.text().then(function(body){
+          var data = null;
+          try { data = JSON.parse(body); } catch(e){}
+          if(!data){
+            throw new Error('the server returned ' + res.status + ' ' +
+              (res.statusText || '') + ' instead of a result. It may still have posted - ' +
+              'CHECK YOUR OMNISOCIALS CALENDAR before pressing again. Response began: ' +
+              body.slice(0,140).replace(/\s+/g,' '));
+          }
+          return data;
+        });
+      }).then(function(r){
+        postingOff();
+        if(!r.ok){ setStatus('did not post: ' + (r.error || 'unknown error'), true);
+          toast('did not post: ' + (r.error || 'unknown error'), 7000); return; }
         var when = new Date(r.scheduled_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-        setStatus(r.label + ': scheduled for ' + when + ' (post ' + r.post_id + '). it WILL go live then unless you cancel it from your OmniSocials calendar first.', false);
-        toast('scheduled on ' + r.label + ' for ' + when);
-      }).catch(function(e){ setStatus('request failed: ' + e, true);
-        toast('request failed'); });
+        setStatus(r.label + ': queued for ' + when + ' (post ' + r.post_id + '). It is NOT on ' + r.label + ' yet and will not appear there until ' + when + '. It WILL go live then unless you cancel it from your OmniSocials calendar first.', false);
+        toast('queued for ' + when + ' - NOT live yet, do not press again', 7000);
+      }).catch(function(e){ postingOff();
+        var m = (e && e.message) ? e.message : String(e);
+        setStatus(m, true);
+        toast(m.slice(0,90), 7000); });
     };
+    reader.onerror = function(){ postingOff();
+      setStatus('could not read the rendered card.', true);
+      toast('could not read the card'); };
     reader.readAsDataURL(blob);
   });
 }
