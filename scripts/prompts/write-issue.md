@@ -16,6 +16,7 @@ Read these files in the repo and follow them exactly:
 
 - `scripts/prompts/theme.md` is the theme, if one is in force. It names the single issue number it applies to. If that number is the issue you are building, it governs selection and overrides `research.md` wherever the two differ. If it names any other issue, it is spent: ignore it.
 - `scripts/prompts/research.md` is the selection rule: the test a story must pass, the three failure modes, and the two shapes that always qualify.
+- `scripts/prompts/hooks.md` is the hook canon: the register every headline is written in, the six tests, the approved lines and the spiked ones they replaced. Read it before you write a single headline.
 - `scripts/prompts/topic.md` is the voice, the structure of an article, and the tool contract.
 
 Then read `briefing/index.html`, the current live issue. It is the design and voice canon. Note its issue number from the masthead; yours is the next one. Read the archive index at `briefing/archive/index.html` to see the headlines of recent issues, which you must not repeat.
@@ -51,6 +52,9 @@ Every article object must carry the keys `topic.md` specifies: `kicker`, `readTi
 
 The assembler validates before it builds, and the run dies rather than publishing anything that fails:
 
+- A headline outside 8 to 28 words, or running to more than two sentences. The register is one sentence, or two where the second is short.
+- A headline whose sharpest phrase is repeated in the pull quote. The headline is the hook, the pull is the mechanism, and they must do different jobs.
+- A pull quote outside 15 to 32 words.
 - Any brief column outside 35 to 110 words.
 - Fewer than 3 tape rows, 2 prose paragraphs, 3 play steps, or 2 sources.
 - A source URL that is not a real http(s) URL.

@@ -42,6 +42,23 @@ function validateTopic(t, n) {
   const errs = [];
   const need = (c, m) => { if (!c) errs.push(`topic ${n}: ${m}`); };
   need(t.headline && t.headline.length > 20, 'headline missing or too short');
+  // The hook canon, scripts/prompts/hooks.md. One sentence, or two where the second
+  // is short and turns. A three-sentence headline is the "what moved" column in a
+  // bigger font, which is the exact failure No. 009 shipped with.
+  const hw = (t.headline || '').trim().split(/\s+/).filter(Boolean).length;
+  need(hw >= 8 && hw <= 28, `headline is ${hw} words, want 8 to 28 (target 12 to 22)`);
+  const hs = (t.headline || '').split(/(?<=[.!?])\s+/).filter((x) => x.trim().length > 1);
+  need(hs.length <= 2, `headline is ${hs.length} sentences, want 1 or 2`);
+  // The headline is the hook and the pull is the mechanism. The Studio pairs them on
+  // one card, so two competing one-liners cancel each other out.
+  if (t.headline && t.pull) {
+    const norm = (x) => x.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+    const hset = norm(t.headline).split(' ');
+    const pn = norm(t.pull);
+    let run = 0, worst = 0;
+    for (const w of hset) { if (pn.includes(w)) { run++; worst = Math.max(worst, run); } else run = 0; }
+    need(worst < 6, `headline and pull share a run of ${worst} words; they must do different jobs`);
+  }
   need(t.briefs && t.briefs.moved && t.briefs.changes && t.briefs.avoid, 'a brief column is missing');
   for (const k of ['moved', 'changes', 'avoid']) {
     const w = (t.briefs?.[k] || '').split(/\s+/).length;
@@ -52,7 +69,8 @@ function validateTopic(t, n) {
   need(Array.isArray(t.play) && t.play.length >= 3, 'the play needs at least 3 steps');
   need(Array.isArray(t.sources) && t.sources.length >= 2, 'needs at least 2 sources');
   (t.sources || []).forEach((s) => need(/^https?:\/\//.test(s.url || ''), `bad source url: ${s.url}`));
-  need(t.pull && t.pull.split(/\s+/).length <= 35, 'pull quote missing or too long');
+  const pw = (t.pull || '').trim().split(/\s+/).filter(Boolean).length;
+  need(t.pull && pw >= 15 && pw <= 32, `pull quote is ${pw} words, want 15 to 32 (the mechanism line, not a second headline)`);
   const tool = t.tool || {};
   need(['calc', 'gen'].includes(tool.kind), 'tool.kind must be calc or gen');
   need(/^[a-z]{2,4}$/.test(tool.idPrefix || ''), `tool.idPrefix "${tool.idPrefix}" must be 2 to 4 lowercase letters`);

@@ -29,10 +29,19 @@ Read this article from the last issue and match it exactly: sentence rhythm, dir
 
 # THE HOOK
 
-The headline is the whole test of whether the article earns its place. It names what is being done to the reader, or what they are leaving on the table. It never opens by announcing a verdict, and it never carries a label.
+`scripts/prompts/hooks.md` is the hook canon and it governs every headline. Read it before you write one. What follows is the short form; the canon has the six tests, the approved lines and the spiked ones they replaced.
+
+The headline is the argument compressed until it has a spine, not a summary of the article. It is also what the Studio turns into the social card, because the card reads the `<h2>` directly. It has to survive being read alone.
+
+One sentence, or two where the second is short and turns. Twelve to twenty-two words. The number arrives late or not at all. Second person, present tense, something being done to them. The joke is carried by the fact and never by a construction. End on the hard word.
+
+Two or three of the five headlines carry the dry wit. The other two are flat and hard, usually the money story and the risk story. Five headlines all doing a bit reads as a personality, and this page sells judgment.
 
 Rejected: "Diesel hit $5.454 last week and the surcharge table was rebuilt."
 Accepted: "The fuel table on your invoice climbs on nine cents and falls on twenty-seven."
+
+Rejected: "1.28 percent of the products that rank in Google search appear in AI Mode for the same query on the same day. The ones that do are priced 21.6 percent higher."
+Accepted: "There are two shelves now. You are stocked on the one people are leaving."
 
 Rejected: "Good news, and a catch. There is $166 billion of tariff money going back."
 Accepted: "Customs is holding $166 billion that belongs to the businesses that paid it, and it moves only for the ones who ask."
@@ -73,7 +82,7 @@ Return ONE JSON object, no prose around it:
   "play": [
     "Four numbered actions. Each one specific enough to do this week: who does it, what they touch, what the output is. One of them refers to the tool on the right."
   ],
-  "pull": "One sentence, 12 to 25 words, the sharpest line in the article. It appears as a pull quote. It must not be copied verbatim from the brief.",
+  "pull": "The mechanism line: one or two sentences, 15 to 32 words, explaining WHY the headline is true. Not a second headline. The headline is the hook and the pull is the reason it holds, so the two must do different jobs and must not share their sharpest phrase. The Studio pairs these on one card, and two competing one-liners cancel each other out. Example, against the headline 'There are two shelves now, you are stocked on the one people are leaving': 'The surface that is growing does not rank on price, which is the first good news in this category in two years.' Must not be copied verbatim from the brief or the prose.",
   "sources": [{"label": "Publication: what it covers", "url": "https://..."}],
   "tool": {
     "kind": "calc" or "gen",

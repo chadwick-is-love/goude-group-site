@@ -14,6 +14,10 @@ Where their head is: they are years past survival and squarely into structure. M
 
 Today is {{DATE}}. You are choosing the five articles for issue No. {{NUM}}.
 
+# THE HOOK CANON, READ IT BEFORE YOU WRITE A HEADLINE
+
+Read `scripts/prompts/hooks.md`. It governs every headline: the register, the six tests, the approved lines and the spiked ones they replaced, and the ratio of dry to flat across the five. A headline that does not pass it does not ship, and the assembler now rejects the obvious failures automatically.
+
 # THE THEME FILE, READ IT FIRST
 
 Read `scripts/prompts/theme.md`. If it names the issue number you are building, it is in force and overrides the selection rule below wherever the two differ. If it names any other issue number, it is spent: ignore it entirely. A theme applies to one issue and never becomes a standing beat.
@@ -63,7 +67,7 @@ Search thoroughly and widely. Then return ONE JSON object, no prose around it:
       "rank": 1,
       "domain": "one of: costs | rates | tariffs | labor | insurance | tax-regulation | software | payments-fraud | demand | platform | technology",
       "kicker": "One or two words, title case, the section label. Distinctive, never a formula. e.g. The Refund, The Threshold, The Fine Print. NEVER 'Good News' or 'Bad News'.",
-      "headline": "The 5-second read. One or two sentences that name what is being done to them or what they are leaving on the table. Not what happened. No em dashes.",
+      "headline": "The 5-second read, written to scripts/prompts/hooks.md. One sentence, or two where the second is short and turns. Twelve to twenty-two words, twenty-eight absolute maximum. The number arrives late or not at all. Second person, present tense, something being done to them. Ends on the hard word. Not what happened. No em dashes.",
       "go": "Two or three words for the contents row. e.g. The clause, The threshold",
       "why_it_ranks": "One sentence: the person who acts, the decision it changes, and what that decision is worth at $10M to $50M. For your ranking; not printed.",
       "facts": [
