@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Briefing, No. 008: Goude Group Weekly Intelligence</title>
+<meta name="description" content="Five developments that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/archive/no-008/" />
+<meta property="og:title" content="The Briefing, No. 008: Goude Group Weekly Intelligence" />
+<meta property="og:description" content="Five things that moved, what they change, what not to do. Each one comes with a tool you can use right now." />
+<meta property="og:image" content="https://goudegroup.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-promise{margin-top:32px;padding-top:19px;border-top:1px solid var(--navy)}
+.mast-promise p{font-size:15.5px;line-height:1.6;color:var(--navy);max-width:76ch}
+.mast-promise p b{font-weight:700}
+@media(max-width:620px){.mast-promise{margin-top:26px}.mast-promise p{font-size:14.5px}}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:22px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.passnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:26px 0 16px;max-width:80ch}
+.passnote b{color:var(--navy);font-weight:700}
+.passrow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.arch-link:hover{background:var(--navy);color:var(--mint)}
+.remind{margin-top:26px;border-top:1px solid var(--navy-faint);padding-top:22px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.remind p{font-size:13.5px;line-height:1.55;color:var(--navy-soft);max-width:46ch;margin:0;flex:1 1 300px}
+.remind p b{color:var(--navy);font-weight:700}
+.signup.inline{margin-top:0;flex:1 1 330px;max-width:420px}
+.signup.inline input{padding:12px 14px;font-size:14px}
+.signup.inline button{padding:12px 20px;font-size:11px}
+.signup-done{font-size:14px;line-height:1.55;color:var(--navy)}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* actions row: go deeper + send */
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.deep-toggle{
+  display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+.share{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE INSTRUMENT (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+.pass-it{max-width:var(--maxw);margin:44px auto 0;border-top:1px solid var(--navy-hair);padding-top:24px}
+.pass-it .label{opacity:.5;display:block;margin-bottom:12px}
+.pass-it p{font-size:13.5px;line-height:1.6;color:var(--navy-soft);max-width:74ch;margin-bottom:18px}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  nav{padding:16px 5vw}
+  nav.scrolled{padding-top:12px;padding-bottom:12px}
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  header.masthead{min-height:74vh;padding-top:112px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .passrow{flex-direction:column;align-items:stretch}
+  .passrow .share,.passrow .arch-link{width:100%;justify-content:center}
+  .signup{flex-wrap:wrap}
+  .signup input{flex:1 1 100%}
+  .signup button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence &middot; No. 008</span></div>
+</nav>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="kicker">Goude Group &middot; Weekly Intelligence</div>
+    <h1>The Brie<span class="kern-fi">f</span>ing.</h1>
+    <div class="mast-row">
+      <div class="standfirst">
+        <p><span class="lede-tag">This week's news:</span> Seventy four percent of customer facing agents already pulled back out, ninety five percent of organizations getting nothing measurable back, ten courses teaching people how to sell you a build, a hiring bar still screening for tools, and a wire that clears before lunch on a voice that never existed.</p>
+        <p>Read the whole thing in three minutes, or go deeper where it touches your business. We talk about the market here, not about ourselves.</p>
+      </div>
+      <div class="mast-meta">
+        No. 008<br>
+        September 8, 2026
+      </div>
+    </div>
+    <div class="mast-promise"><p><b>Every article comes with a working tool.</b> It runs right here in the page, it is free, and we do not need your information to use it. No signup, no download, nothing to fill in first. That holds for every article in every issue, back issues included.</p></div>
+    <div class="mast-rule"></div>
+  </div>
+</header>
+
+<div class="readkey">
+  <div class="readkey-inner">
+    <span><b>Headline &middot; 5 seconds</b></span>
+    <span><b>The brief &middot; under a minute</b></span>
+    <span><b>Go deeper &middot; the read, plus a free tool you keep</b></span>
+  </div>
+</div>
+
+<section class="contents">
+  <div class="contents-inner">
+    <span class="label">In this issue</span>
+    <div class="toc">
+      <a href="#t1"><span class="n">01</span><span class="t">74 percent of the companies that got an agent in front of customers have already pulled it back out. At the ones with fully mature guardrails the rate is 81 percent.</span><span class="go">The rollback</span><span class="tk">+ tool</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">95 percent of the organizations that put money into generative AI got nothing measurable back. The demo was the product, and the vendor booked revenue either way.</span><span class="go">The scoreboard</span><span class="tk">+ tool</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">There is a ranked list of the ten best courses for starting an AI agency, updated six days ago. The man who ranks them closes the page explaining why he prefers a different business model.</span><span class="go">The masterclass</span><span class="tk">+ tool</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">The work AI added to your most exposed roles is 2.5 times more likely to need judgment than the work it took away. Your job posting still leads with a tool list.</span><span class="go">The bar</span><span class="tk">+ tool</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">87 percent of finance staff say they would move money on a call from the chief executive. 57 percent can send it with nobody else's approval. One of those calls is not going to be you.</span><span class="go">The callback</span><span class="tk">+ tool</span></a>
+    </div>
+    <p class="passnote"><b>Send it when it hits.</b> Every article here has its own link; the send button next to each one copies it, ready to text or email to the person who needs it. Back issues stay in the archive and their tools keep working, so nothing you forward goes stale.</p>
+    <div class="passrow">
+      <button class="share" type="button" data-share="issue" data-title="The Briefing, No. 008: Goude Group Weekly Intelligence"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send the whole issue</span></button>
+      <a class="arch-link" href="/briefing/archive/">Open the archive</a>
+    </div>
+    <div class="remind">
+      <p><b>Want a reminder when the next one is up?</b> Leave an email and we send one note a week. That is the whole program. We will not flood your inbox.</p>
+      <form class="signup inline" data-src="reminder row">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email for the weekly reminder" required />
+        <button type="submit">Remind me</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 THE TRAP ============ -->
+<section class="topic" id="t1">
+  <div class="topic-inner">
+    <div class="kicker"><span>01 / The Trap</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>74 percent of the companies that got an agent in front of customers have already pulled it back out. At the ones with fully mature guardrails the rate is 81 percent.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Sinch surveyed 2,527 senior decision makers across ten countries in January and February and published in May. Of the enterprises that got an AI customer communications agent into production, 74 percent have already rolled it back or shut it down. Among those describing their guardrails as fully mature the rate is 81 percent. 62 percent have agents live and 98 percent are still increasing spend. Gartner separately predicts 50 percent of companies that credited AI for headcount cuts will rehire those functions by 2027 under different titles.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The cost is not the license. It is the cut you made in month one. Severance, a rehire twelve months later at whatever the market charges by then, the recruiting, the ramp, and every customer who spent the gap talking to something that could not help them and could not say so. The saving was booked the day you cut. The bill arrives as a rollback, in a different quarter, which is exactly why nobody in the room connects the two.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not answer a rollback with a bigger model. The ones getting pulled are not failing at language, they are failing at governance. Do not cut headcount until the thing has run a full quarter in production without an incident. Do not read a low rollback rate as good news, because the number goes up at the companies with the best guardrails. They are not failing less. They are catching failures sooner.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t1" data-title="74 percent of the companies that got an agent in front of customers have already pulled it back out. At the ones with fully mature guardrails the rate is 81 percent."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Oct 2025</span><span>Gartner fielded 321 customer service and support leaders. Roughly 20 percent had actually cut agent headcount because of AI. Most reported headcount steady while supporting more customers than before.</span></div>
+            <div class="tape-row"><span class="d">Jan to Feb</span><span>Sinch fielded 2,527 senior decision makers across ten countries and six industries, asking what happened after the agent went live rather than what they planned to deploy next.</span></div>
+            <div class="tape-row"><span class="d">Feb 3</span><span>Gartner published the prediction: by 2027, 50 percent of companies that attributed headcount reduction to AI will rehire staff for similar functions under different job titles.</span></div>
+            <div class="tape-row"><span class="d">May 13</span><span>Sinch published. 74 percent of production deployments rolled back, 81 percent among fully mature guardrails, 62 percent with agents live, and 84 percent of engineering teams spending half their time on guardrails rather than the customer.</span></div>
+            <div class="tape-row"><span class="d">Now</span><span>What is open is whether anybody read your own transcripts this month. 91 percent of the organizations that rolled one back went shopping for a different provider, which is the wrong lesson learned expensively.</span></div>
+          </div>
+          <h3>Better guardrails, higher rollback rate</h3>
+          <p>Read the 81 percent again. The rollback rate is higher at the companies with the most mature controls, which looks like a paradox and is not one. Those companies are not failing more often. They are seeing the failure while it is still a rollback rather than a lawsuit. The organizations with weak controls are running agents that have already said something they should not have, and nobody has read the transcript yet. A low rollback rate is not evidence that yours is working. It is evidence that nobody is checking.</p>
+          <p>Before anything goes live, write three things the agent may never do without a person: move money, make a commitment, or take any action you cannot reverse. Then write the trigger that hands the conversation to a human, name the person who reads its transcripts every week, and hold headcount flat until it has run one full quarter with no rollback. The trade-off is that you carry the cost twice for a quarter. Against a severance and a rehire at market, one quarter of double running is the cheap version.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Owner: write the three things the agent may never do without a person. Money out, commitments, anything you cannot reverse. One page, today, before the next release ships.</li>
+            <li>Name the handoff trigger in writing, and name the person who reads transcripts every week. An unread transcript is not a control, it is a recording.</li>
+            <li>Hold headcount flat until it has run a full quarter with no rollback. The saving is not real until the thing survives a quarter it did not rehearse for.</li>
+            <li>Price the cut against the rehire with the tool on the right, before anybody signs a severance agreement.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://sinch.com/news/sinch-releases-ai-production-paradox/" target="_blank" rel="noopener">Sinch, The AI Production Paradox: a 2,527 person enterprise survey on why live AI agents get pulled back out</a> &middot; <a href="https://sinch.com/ai-production-paradox/chapter/ai-production-challenges/" target="_blank" rel="noopener">Sinch: the chapter carrying the production base rate and the fully mature guardrail number</a> &middot; <a href="https://www.gartner.com/en/newsroom/press-releases/2026-02-03-gartner-predicts-half-of-companies-that-cut-customer-service-staff-due-to-ai-will-rehire-by-2027" target="_blank" rel="noopener">Gartner: the February prediction, from 321 service leaders, that half of AI attributed cuts get rehired by 2027</a> &middot; <a href="https://www.uctoday.com/productivity-automation/new-sinch-data-reveals-74-of-enterprises-have-rolled-back-ai-agents/" target="_blank" rel="noopener">UC Today: independent reporting on the rollback finding</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>They are not failing less. They are seeing the failure sooner. A low rollback rate is not proof it works, it is proof nobody is checking.</p></div>
+          <div class="tool" data-tool="rb">
+            <span class="tlabel">The instrument &amp;middot; live</span>
+            <span class="tname">The Rollback Bill</span>
+            <span class="tsub">Three numbers. It prices what the cut saves against what the rollback costs, before anybody signs a severance agreement.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="rb-cut">ROLES YOU CUT, OR ARE ABOUT TO</label><input id="rb-cut" type="number" inputmode="numeric" min="0" placeholder="e.g. 6" data-live="rb" /></div>
+              <div><label class="fl" for="rb-loaded">FULLY LOADED ANNUAL COST PER ROLE, IN DOLLARS</label><input id="rb-loaded" type="number" inputmode="numeric" min="0" placeholder="e.g. 78000" data-live="rb" /></div>
+              <div><label class="fl" for="rb-months">MONTHS YOU EXPECT TO RUN BEFORE REHIRING</label><input id="rb-months" type="number" inputmode="numeric" min="0" placeholder="e.g. 12" data-live="rb" /></div>
+            </div>
+            <div class="readout" id="rb-readout" style="display:none">
+              <div class="big" id="rb-big">$0</div>
+              <div class="cap" id="rb-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 THE TRUTH ============ -->
+<section class="topic" id="t2">
+  <div class="topic-inner">
+    <div class="kicker"><span>02 / The Truth</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>95 percent of the organizations that put money into generative AI got nothing measurable back. The demo was the product, and the vendor booked revenue either way.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>MIT's Project NANDA published The GenAI Divide in July 2025, built on 52 structured interviews, 153 survey responses from senior leaders and a review of more than 300 publicly disclosed initiatives. Against 30 to 40 billion dollars of enterprise investment it found 95 percent of organizations getting zero return and 5 percent extracting real value. Of organizations evaluating enterprise systems, 60 percent evaluated, 20 percent reached a pilot and 5 percent reached production. Tools bought from specialist vendors succeeded about 67 percent of the time. Tools built internally succeeded about a third as often.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The cost is not the pilot budget. It is two quarters of calendar, the integration hours your own people burned instead of doing their jobs, and the internal credibility the next attempt now has to buy back at a premium. Pilots get designed to impress the room rather than to move a number, so they end the only way they can, in a deck about learnings. The number was never defined, which means the pilot could not fail and could not succeed.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not run a second pilot on a newer model. That is the same clock restarted with the same missing scoreboard. Do not accept a demo as evidence, because the demo is the part they have actually finished. Do not build it internally because it looks cheaper, when the research puts internally built tools at roughly a third of the success rate of bought ones and your people are not sitting idle waiting for the work.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t2" data-title="95 percent of the organizations that put money into generative AI got nothing measurable back. The demo was the product, and the vendor booked revenue either way."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jan to Jun 2025</span><span>The research period: 52 structured interviews with organizational representatives, 153 survey responses from senior leaders gathered at four industry conferences, and a review of more than 300 publicly disclosed initiatives.</span></div>
+            <div class="tape-row"><span class="d">Jul 2025</span><span>The report was dated and circulated as a version 0.1 preprint through a gated form rather than posted publicly. Every openable copy today is a mirror, which is worth knowing before you quote it at a board.</span></div>
+            <div class="tape-row"><span class="d">Aug 18 2025</span><span>The 95 percent figure reached the business press and became the most repeated number in enterprise AI, usually restated as pilots rather than organizations, which is not what was measured.</span></div>
+            <div class="tape-row"><span class="d">2026</span><span>It kept circulating as a current finding. There has been no follow up study, only commentary recycling the same 2025 preprint under newer dates.</span></div>
+            <div class="tape-row"><span class="d">Next</span><span>What is open is whether your own pilot has a number and a date attached to it. That is answerable this afternoon and does not require anybody's research.</span></div>
+          </div>
+          <h3>The number nobody wrote down</h3>
+          <p>Handle this figure carefully, because it is famous and thinner than its fame. It is a version 0.1 preprint, the sample is 52 interviews and 153 responses, the unit is organizations rather than pilots, and it has been challenged in print. None of that rescues the pilot sitting in your business, because the mechanism it describes takes about four minutes to check yourself. Ask what number the pilot was supposed to move and by when. If nobody can answer, you are inside the 95 percent whatever the sample size was.</p>
+          <p>Before anything starts, write the one number the pilot has to move and the date it has to move by, and put both in the same document as the invoice. Then ask the vendor for a customer who has been in production for twelve months, and call that customer yourself. A vendor with real deployments hands you a name by the end of the day. A vendor selling demos schedules another demo. The reference call takes twenty minutes and it is the only part of diligence nobody can rehearse on your behalf.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Owner: for every pilot running right now, ask one question in writing. What number is this supposed to move, and by when.</li>
+            <li>Where there is no answer, either stop the pilot or give it one. Both are fine. Leaving it running without one is the expensive option.</li>
+            <li>Ask every vendor for a customer twelve months into production, and place that call yourself rather than accepting a case study.</li>
+            <li>Use the tool on the right to write the charter and the reference call script, then keep both in the same folder as the invoice.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://mlq.ai/media/quarterly_decks/v0.1_State_of_AI_in_Business_2025_Report.pdf" target="_blank" rel="noopener">MIT Project NANDA, The GenAI Divide: the July 2025 preprint behind the 95 percent figure, and its actual method</a> &middot; <a href="https://virtualizationreview.com/articles/2025/08/19/mit-report-finds-most-ai-business-investments-fail-reveals-genai-divide.aspx" target="_blank" rel="noopener">Virtualization Review: independent reporting carrying the correct sample sizes</a> &middot; <a href="https://dc.fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo" target="_blank" rel="noopener">Fortune: the coverage that put the number into general circulation, and the narrower claim it made</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The pilot was never designed to fail, which is another way of saying it was never designed to succeed.</p></div>
+          <div class="tool" data-tool="pc">
+            <span class="tlabel">The instrument &amp;middot; writes the charter</span>
+            <span class="tname">The Pilot Charter</span>
+            <span class="tsub">Four fields. It writes the one page that gives a pilot a number and a date, with the reference call script underneath it.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="pc-co">YOUR COMPANY</label><input id="pc-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+              <div><label class="fl" for="pc-pilot">WHAT THE PILOT IS</label><input id="pc-pilot" type="text" placeholder="e.g. quoting assistant for inside sales" /></div>
+              <div><label class="fl" for="pc-num">THE ONE NUMBER IT HAS TO MOVE</label><input id="pc-num" type="text" placeholder="e.g. quote turnaround, 3 days to 1" /></div>
+              <div><label class="fl" for="pc-by">THE DATE IT HAS TO MOVE BY</label><input id="pc-by" type="text" placeholder="e.g. December 15" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="pc">Write the charter</button>
+            <div class="out" id="pc-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="pc-out" style="display:none" id="pc-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 THE ABSURD ============ -->
+<section class="topic" id="t3">
+  <div class="topic-inner">
+    <div class="kicker"><span>03 / The Absurd</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>There is a ranked list of the ten best courses for starting an AI agency, updated six days ago. The man who ranks them closes the page explaining why he prefers a different business model.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>A ranked roundup of paid programs teaching people to start an AI automation agency was updated on September 6. It lists ten, each with a named operator behind it. The page closes with a section on why its author prefers a different business model entirely, and carries no affiliate disclosure. Search engines still index the same address under an older title claiming 34. There is no independent, editorially governed ranking of these programs anywhere, and no credible measure of the market's size, because the category is too new and too informal to have been measured.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The cost is not the course. It is who shows up in your office. The person pitching you a build may be six weeks out of a program that taught them to put a retainer on somebody else's tool, and the pitch sounds good because the pitch is what the course actually sold. What you get is a build that works in the demo, breaks on your real data, and cannot be repaired by the person who sold it, because they never wrote it.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not ask whether they have done this before. That was module three and the answer was written for them. Do not accept a case study in place of a client you can telephone. Do not let price be the test, because a build nobody can maintain is expensive at any number, and the cheap quote is usually the one with the shortest distance between the course and your invoice.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t3" data-title="There is a ranked list of the ten best courses for starting an AI agency, updated six days ago. The man who ranks them closes the page explaining why he prefers a different business model."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Sep 6</span><span>The roundup was last updated, listing ten paid programs by name and operator, closing with the author's case for a different business model. No affiliate disclosure appears anywhere on the page.</span></div>
+            <div class="tape-row"><span class="d">Sep 8</span><span>Search engines still return that same address under a stale title claiming 34 programs, which is a fair picture of how fast this supply expands and contracts.</span></div>
+            <div class="tape-row"><span class="d">Ongoing</span><span>Comparable pages exist across the web in the same genre, affiliate driven, no disclosed method, ranking the same operators in different orders. None of them is an independent evaluation.</span></div>
+            <div class="tape-row"><span class="d">Next</span><span>What is open is who is on your calendar this month. The supply side of this market is visible and countable. The demand side is you.</span></div>
+          </div>
+          <h3>Built sounds different from bought</h3>
+          <p>The tell is the shape of the answer, not its content. Ask what the system does when the data is messy. Somebody who built it answers in a sentence, because they have watched it happen and it ruined a week. Somebody who bought the answer sends a deck. Ask them to name the underlying tool their work sits on, and what happens to you if that tool changes its pricing or its interface. A builder names it immediately and has already thought about the second half. A reseller treats the question as rude.</p>
+          <p>Three questions and one phone call, in that order. What does it do when the data is messy. What is it built on, and what happens to me if that changes. Who is the last client still running it, and may I call them today. Then make the call yourself rather than having it arranged for you. The trade-off is that this adds a week, and good vendors will not mind, which is itself the test. Anybody who treats a reference call as an obstacle has already told you what the reference would say.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Owner: ask every prospective vendor what the system does when the data is messy. An answer in a sentence means built. An answer in a deck means bought.</li>
+            <li>Make them name the underlying tool and say plainly what happens to you if its pricing or interface changes. Get that in the proposal, not the meeting.</li>
+            <li>Ask for the last client still running their work, and place that call yourself. A vendor with real deployments gives you a name the same day.</li>
+            <li>Use the tool on the right to write the four questions and send them before the second meeting, so the answers arrive in writing rather than in a room.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://ippei.com/best-ai-agency-courses/" target="_blank" rel="noopener">Ippei.com: a ten entry ranked roundup of paid AI agency programs, by an operator who sells a competing model at the foot of the page</a> &middot; <a href="https://aiprofitboardroom.com/blog/ai-automation-agency-course/" target="_blank" rel="noopener">AI Profit Boardroom: another roundup in the same genre, with no disclosed method</a> &middot; <a href="https://thepivotwave.com/blog/best-ai-automation-courses/" target="_blank" rel="noopener">The Pivot Wave: a third, ranking many of the same programs in a different order</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Built sounds like a sentence. Bought sounds like a deck. The tell is the shape of the answer, not its content.</p></div>
+          <div class="tool" data-tool="bt">
+            <span class="tlabel">The instrument &amp;middot; writes the questions</span>
+            <span class="tname">The Builder Test</span>
+            <span class="tsub">Three fields. It writes the four questions that separate somebody who built it from somebody who bought the answer, and tells you how to read what comes back.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="bt-co">YOUR COMPANY</label><input id="bt-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+              <div><label class="fl" for="bt-vendor">WHO IS PITCHING YOU</label><input id="bt-vendor" type="text" placeholder="e.g. Northbeam Systems" /></div>
+              <div><label class="fl" for="bt-work">WHAT THE BUILD WOULD TOUCH</label><textarea id="bt-work" rows="3" placeholder="quoting
+customer records
+the scheduling board"></textarea></div>
+            </div>
+            <button class="tbtn" type="button" data-build="bt">Write the questions</button>
+            <div class="out" id="bt-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="bt-out" style="display:none" id="bt-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 THE SHIFT ============ -->
+<section class="topic" id="t4">
+  <div class="topic-inner">
+    <div class="kicker"><span>04 / The Shift</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>The work AI added to your most exposed roles is 2.5 times more likely to need judgment than the work it took away. Your job posting still leads with a tool list.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>PwC's 2026 Global AI Jobs Barometer, published June 15, analyzed more than a billion job advertisements across 27 countries. Roles being professionalised by AI are growing twice as fast as roles being democratised by it, with 42 percent faster wage growth since 2021. New tasks added to AI exposed roles are 2.5 times more likely to depend on judgment, empathy and creativity. The AI skills wage premium reached 61.9 percent, up from 57. Entry level roles most exposed are seven times more likely to demand senior skills, and grew 35 percent since 2019 while other entry level roles fell 10.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The cost is not the salary. It is month five. You automated the documented, repeatable work, so what stays with a person is the exception, the judgment call and the conversation nobody wants to have. Then you hire against a bar you never updated, screening for tool proficiency and output volume, and the role fails on the parts you never tested for. You do not find out at the offer. You find out after the ramp, and you pay for the search twice.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not add an AI skills line to the job post. It selects for people who can name tools over people who can decide. Do not interview from the resume when the resume describes work the software now does. Do not price the offer against the tool list, because the tools are a week of training and the judgment is the entire hire.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t4" data-title="The work AI added to your most exposed roles is 2.5 times more likely to need judgment than the work it took away. Your job posting still leads with a tool list."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">2019 to 2025</span><span>Entry level roles most exposed to AI grew 35 percent while other entry level roles fell 10 percent, and the exposed ones became seven times more likely to ask for traditionally senior skills.</span></div>
+            <div class="tape-row"><span class="d">2021 to 2025</span><span>Wage growth in AI professionalised roles ran 42 percent faster than in democratised ones. The AI skills wage premium reached 61.9 percent, up from 57 the year before.</span></div>
+            <div class="tape-row"><span class="d">Dec 3 2025</span><span>A survey of 1,005 hiring managers ranked communication first among the soft skills they screen for. Collaboration ranked ninth, which is worth knowing before you write both into the same sentence.</span></div>
+            <div class="tape-row"><span class="d">Jun 15</span><span>PwC published across more than a billion advertisements in 27 countries: 52 percent of jobs being democratised by AI, 22 percent professionalised, 26 percent barely exposed at all.</span></div>
+            <div class="tape-row"><span class="d">Next</span><span>What is open is your next posting. The split is already inside your payroll. The question is only whether the job description catches up before the offer goes out.</span></div>
+          </div>
+          <h3>You already changed the job</h3>
+          <p>The market split and your posting did not. PwC is reading a billion advertisements rather than asking anybody their opinion, and what those advertisements show is two tracks moving apart: work being professionalised by AI, where wages climb faster, and work being democratised by it, where they do not. The same split runs through your own payroll and it happened without a decision. Every task you automated moved a person up a track. Nobody rewrote the job description, so the hiring bar is still measuring the half you gave away.</p>
+          <p>Take your two hardest open roles and write down the three decisions that person will actually own. Not responsibilities. Decisions: the calls they make alone, with money or a customer on the other side. Build the interview around those three, ask for one they got wrong and what it cost, and price the offer against the judgment rather than the tool list. The trade-off is an afternoon per role and a posting that is harder to write. It also makes the fifth month survivable, which the posting currently does not.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Owner: take the two hardest open roles and write the three decisions each one actually owns. Decisions with money or a customer on the other side, not responsibilities.</li>
+            <li>Rebuild the interview around those three. Ask for a decision they got wrong, what it cost, and what they changed. Resumes describe work the software now does.</li>
+            <li>Strike the tool list from the posting, or move it to the bottom where it belongs. It is a week of training and it is currently selecting against you.</li>
+            <li>Use the tool on the right to write the three decisions and the interview built on them, then hand it to whoever runs the loop.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.pwc.com/gx/en/issues/artificial-intelligence/job-barometer/2026/2026-global-ai-jobs-barometer-global-findings.pdf" target="_blank" rel="noopener">PwC 2026 Global AI Jobs Barometer: a billion job advertisements across 27 countries, and the two tracks it found</a> &middot; <a href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html" target="_blank" rel="noopener">PwC newsroom: the headline findings and the wage premium in one page</a> &middot; <a href="https://www.resumetemplates.com/hiring-managers-reveal-the-most-important-hard-and-soft-skills-for-2026/" target="_blank" rel="noopener">Resume Templates: 1,005 hiring managers on the skills they screen for, and where collaboration actually ranks</a> &middot; <a href="https://www.hrdive.com/news/hiring-managers-name-top-hard-skills-soft-skills-for-2026/807270/" target="_blank" rel="noopener">HR Dive: independent reporting on the same hiring manager survey</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The tools are a week of training. The judgment is the hire, and your posting is still screening for the half you already automated.</p></div>
+          <div class="tool" data-tool="ji">
+            <span class="tlabel">The instrument &amp;middot; writes the interview</span>
+            <span class="tname">The Judgment Interview</span>
+            <span class="tsub">Three fields. It turns the three decisions a role owns into the interview, the scoring note and the offer argument.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="ji-co">YOUR COMPANY</label><input id="ji-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+              <div><label class="fl" for="ji-role">THE ROLE</label><input id="ji-role" type="text" placeholder="e.g. operations manager" /></div>
+              <div><label class="fl" for="ji-dec">THE THREE DECISIONS THIS ROLE OWNS, ONE PER LINE</label><textarea id="ji-dec" rows="4" placeholder="when to hold a shipment
+when to credit a customer
+when to escalate to me"></textarea></div>
+            </div>
+            <button class="tbtn" type="button" data-build="ji">Write the interview</button>
+            <div class="out" id="ji-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="ji-out" style="display:none" id="ji-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 THE WARNING ============ -->
+<section class="topic" id="t5">
+  <div class="topic-inner">
+    <div class="kicker"><span>05 / The Warning</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>87 percent of finance staff say they would move money on a call from the chief executive. 57 percent can send it with nobody else's approval. One of those calls is not going to be you.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>A survey of 1,533 corporate finance professionals in the United States and United Kingdom found 53 percent had been targeted by a deepfake financial scam and 43 percent fell victim. 87 percent said they would make a payment if called by their chief executive or finance chief. 57 percent can execute a transaction with no second approval. A separate five country survey put the average loss at 450,000 dollars, above 603,000 in financial services. The FBI logged 24,768 business email compromise complaints in 2025 at just over three billion dollars, and more than 22,000 complaints citing AI at 893 million.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The cost is not the wire. It is the control you never wrote, and the quarter that follows. A familiar voice has always worked as identity inside your business, so an urgent request in that voice skips every control you own, because your controls were written for documents and logins. The money leaves the same day and your bank cannot recall it after the cutoff. Then you have a controller who spends three months second guessing every legitimate request, which costs you in a currency nobody invoices.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not train people to hear the fake. That stopped being a human skill about a year ago, and telling your staff otherwise moves the liability onto the person least able to carry it. Do not verify on a number supplied during the call. Do not let the rule apply to everyone except you, because you are the voice being cloned, and the exception is the entire attack.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t5" data-title="87 percent of finance staff say they would move money on a call from the chief executive. 57 percent can send it with nobody else's approval. One of those calls is not going to be you."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Feb 2024</span><span>An engineering firm lost 25 million dollars when a finance employee in Hong Kong joined a video call populated by convincing fakes of the finance chief and colleagues, and released the payments.</span></div>
+            <div class="tape-row"><span class="d">Sep 2024</span><span>A survey of 1,533 finance professionals reported 53 percent targeted and 43 percent victimized, with 87 percent saying they would pay on a call from the chief executive and 57 percent able to send money alone.</span></div>
+            <div class="tape-row"><span class="d">Oct 31 2024</span><span>A five country survey of 575 business decision makers put the average loss at 450,000 dollars, above 603,000 in financial services, with 10 percent of organizations losing more than a million.</span></div>
+            <div class="tape-row"><span class="d">Jun 2025</span><span>Analysis of 1.2 billion calls reported deepfake fraud attempts up thirteen hundred percent, from about one a month to seven a day, with contact center fraud attempts arriving every 46 seconds.</span></div>
+            <div class="tape-row"><span class="d">2025 report</span><span>The FBI counted 24,768 business email compromise complaints at 3.05 billion dollars, more than 22,000 complaints citing AI at 893 million, and named voice cloning as a method used to request a wire.</span></div>
+          </div>
+          <h3>One rule, written down, applied to you</h3>
+          <p>Put the two numbers side by side. 87 percent would pay on a call from the boss, and 57 percent can send the money with nobody else's approval. That is not a technology problem. It is an authority problem with a microphone pointed at it. The attack does not have to beat your systems. It has to reach one person who is allowed to act alone and who has been trained their entire career to treat urgency from leadership as the thing you do not question. Every control you own was written for a document.</p>
+          <p>Write one rule and date it. Any request to move money, change bank details or send payroll data gets verified by calling back on a number already in your records, never a number offered during the call. Add a second approval above a threshold you set yourself. Say in writing that nobody is penalized for making you wait ten minutes, and mean it the first time it happens to you. The trade-off is ten minutes on a genuine payment. Against a same day wire your bank cannot recall, that is not a trade-off.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Owner: write the callback rule today. Any money movement, bank detail change or payroll data request gets verified on a number already in your records. Two pages is too long.</li>
+            <li>Set the second approval threshold yourself, and separate the person who edits the vendor record from the person who releases the payment.</li>
+            <li>Put in writing that nobody is penalized for making you wait ten minutes, then prove it the first time somebody makes you wait.</li>
+            <li>Have someone send accounts payable a plausible bank change request from a lookalike domain and watch what happens. One afternoon tells you whether the rule is real.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" target="_blank" rel="noopener">FBI IC3 2025 Annual Report: the federal tally, including business email compromise and the first sizable count of AI enabled fraud</a> &middot; <a href="https://www.cfodive.com/news/deepfake-scams-escalate-hitting-53-percent-of-businesses/725836/" target="_blank" rel="noopener">CFO Dive: the survey of 1,533 finance staff on how often these scams reach the people who can actually send money</a> &middot; <a href="https://www.globenewswire.com/news-release/2024/10/31/2972565/0/en/Deepfake-Fraud-Costs-the-Financial-Sector-an-Average-of-600-000-for-Each-Company-Regula-s-Survey-Shows.html" target="_blank" rel="noopener">Regula: a five country survey putting an average dollar figure on deepfake fraud losses</a> &middot; <a href="https://www.prnewswire.com/news-releases/pindrops-2025-voice-intelligence--security-report-reveals-1-300-surge-in-deepfake-fraud-302479482.html" target="_blank" rel="noopener">Pindrop: 1.2 billion analyzed calls and the rate at which fraud attempts now arrive</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>It is not a technology problem. It is one person allowed to act alone, trained their whole career not to question urgency from you.</p></div>
+          <div class="tool" data-tool="cb">
+            <span class="tlabel">The instrument &amp;middot; writes the policy</span>
+            <span class="tname">The Callback Rule</span>
+            <span class="tsub">Three fields. It writes the one page policy that stops a cloned voice from moving your money, and the test that tells you whether it is real.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="cb-co">YOUR COMPANY</label><input id="cb-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+              <div><label class="fl" for="cb-thresh">THE DOLLAR THRESHOLD ABOVE WHICH TWO PEOPLE APPROVE</label><input id="cb-thresh" type="text" placeholder="e.g. 5,000" /></div>
+              <div><label class="fl" for="cb-who">WHO RELEASES PAYMENTS TODAY</label><input id="cb-who" type="text" placeholder="e.g. the controller and one AP clerk" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="cb">Write the policy</button>
+            <div class="out" id="cb-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="cb-out" style="display:none" id="cb-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm" data-src="close section">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="pass-it">
+    <span class="label">Back issue</span>
+    <p>This is back issue No. 008. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      &copy; 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+const ISSUE_URL='https://goudegroup.com/briefing/archive/no-008/';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, sends, shares */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-send],[data-share]');
+  if(!t) return;
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ copyText(box.textContent,()=>{
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }); }
+    return;
+  }
+  if(t.dataset.send){ sendEmail(t.dataset.send,t); return; }
+  if(t.dataset.share){ doShare(t); return; }
+});
+
+/* ---------- sharing ---------- */
+function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
+function flash(btn,msg){
+  const sl=btn.querySelector('.sl'); if(!sl) return;
+  const o=sl.textContent; sl.textContent=msg||'Link copied';
+  setTimeout(()=>{ sl.textContent=o; },1600);
+}
+function copyText(text,done){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,()=>legacyCopy(text,done));
+  }else{ legacyCopy(text,done); }
+}
+function legacyCopy(text,done){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(err){}
+  document.body.removeChild(ta);
+  if(done) done();
+}
+function doShare(btn){
+  const url=shareLink(btn.dataset.share);
+  const title=btn.dataset.title||document.title;
+  if(navigator.share){
+    navigator.share({title:title,url:url}).catch(()=>{});
+  }else{
+    copyText(url,()=>flash(btn,'Link copied'));
+  }
+}
+/* a link ending in #tN lands with that article's go-deeper open */
+function openFromHash(){
+  const h=(location.hash||'').replace('#','');
+  if(!/^t[1-5]$/.test(h)) return;
+  const topic=document.getElementById(h);
+  if(!topic||topic.classList.contains('open')) return;
+  topic.classList.add('open');
+  const b=topic.querySelector('.deep-toggle');
+  if(b){ b.setAttribute('aria-expanded','true'); b.firstChild.textContent='Close '; }
+  setTimeout(()=>{ topic.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+addEventListener('hashchange',openFromHash);
+openFromHash();
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='rb') calc_rb();
+});
+document.addEventListener('change',e=>{
+  const el=e.target.closest('select[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='rb') calc_rb();
+});
+
+function calc_rb(){
+  const cut=parseFloat($('#rb-cut').value)||0;
+  const loaded=parseFloat($('#rb-loaded').value)||0;
+  const months=parseFloat($('#rb-months').value)||0;
+  const ro=$('#rb-readout');
+  if(!cut||!loaded||!months){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const saved=cut*loaded*(months/12);
+  const sev=cut*loaded*0.25;
+  const prem=cut*loaded*0.15;
+  const ramp=cut*loaded*0.20;
+  const bill=sev+prem+ramp;
+  $('#rb-big').textContent=money(bill);
+  $('#rb-cap').innerHTML='The cut books <b>'+money(saved)+'</b> over '+months+' months. The rollback costs <b>'+money(bill)+'</b>: <b>'+money(sev)+'</b> in severance, <b>'+money(prem)+'</b> to rehire at what the market charges by then, and <b>'+money(ramp)+'</b> in recruiting and ramp. Three in four production deployments have already been through this. Run the quarter before you run the cut.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  if(kind==='pc'){
+const co=v('pc-co')||'[Company]';
+const pl=v('pc-pilot')||'[the pilot]';
+const nm=v('pc-num')||'[the number]';
+const by=v('pc-by')||'[the date]';
+const out=
+'PILOT CHARTER '+String.fromCharCode(183)+' '+co+'\n\n'+
+'PILOT: '+pl+'\n'+
+'THE ONE NUMBER: '+nm+'\n'+
+'THE DATE: '+by+'\n'+
+'OWNER: [name, one person, not a committee]\n'+
+'BUDGET: [amount] '+String.fromCharCode(183)+' INVOICE FILED WITH THIS PAGE\n\n'+
+'1. WHAT SUCCESS IS\n'+
+'   On '+by+', '+nm+' has moved, measured the same way it is measured today, from the same report. If it has not moved, the pilot ended and we say so in one sentence rather than a deck.\n\n'+
+'2. WHAT WE ARE NOT MEASURING\n'+
+'   Enthusiasm. Time saved in the abstract. Anything nobody was tracking before this started. [add any vanity metric somebody will reach for]\n\n'+
+'3. THE STOP RULE\n'+
+'   If we reach [midpoint date] with no movement on '+nm+', we stop. We do not extend, and we do not restart on a newer model, which is the same clock with the same missing scoreboard.\n\n'+
+'4. THE REFERENCE CALL, BEFORE WE SIGN\n'+
+'   Ask the vendor for one customer twelve months into production. Then call that customer yourself and ask:\n'+
+'   a. What broke in month three that the demo did not show you.\n'+
+'   b. What did your own people have to do that nobody scoped.\n'+
+'   c. What number moved, and can you see it on a report.\n'+
+'   d. If you were signing again today, what would you put in the contract.\n\n'+
+'   A vendor with real deployments sends a name by end of day. A vendor selling demos schedules another demo. That answer is itself the finding.\n\n'+
+'Signed: [owner]   Date: [today]   Review: '+by+'\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'  If you cannot fill in the one number in a sentence, the pilot is not ready to start.\n'+
+'  Keep this page in the same folder as the invoice. That is the entire discipline.';
+    show('pc-out','pc-copy',out); return;
+  }
+  if(kind==='bt'){
+const co=v('bt-co')||'[Company]';
+const vn=v('bt-vendor')||'[Vendor]';
+const raw=($('#bt-work').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+const items=raw.length?raw:['[what it touches]'];
+let rows='';
+items.forEach(s=>{ rows+='  '+s+'\n'; });
+const out=
+'FOUR QUESTIONS '+String.fromCharCode(183)+' '+co+' to '+vn+'\n\n'+
+vn+',\n\n'+
+'Before the next meeting I need four answers in writing. These are the same four we ask everybody, and short answers are welcome.\n\n'+
+'1. What does the system do when the data is messy. Give me an actual case, not the happy path.\n\n'+
+'2. Name the underlying tool or model this sits on. If its pricing or its interface changes, what happens to us, who pays for the migration, and how long are we down.\n\n'+
+'3. Who owns what you write. Say plainly whether we hold the prompts, the workflows and the configuration, and what we are left holding if we part company.\n\n'+
+'4. Who is the last client still running your work, and may I call them this week.\n\n'+
+'For context, this would touch:\n\n'+
+rows+'\n'+
+'Thanks,\n[your name]\n'+co+'\n\n'+
+'HOW TO READ THE ANSWERS, DELETE BEFORE SENDING\n'+
+'  Q1: a sentence means they have watched it happen. A deck means they have not.\n'+
+'  Q2: a builder names the tool instantly and has already thought about the change. Hesitation here is the whole story.\n'+
+'  Q3: if ownership is vague in the answer, it will be vague in the contract.\n'+
+'  Q4: a name by end of day is the good outcome. A case study instead of a name is the answer.\n'+
+'  Make the call yourself. A reference that has to be arranged has been arranged.';
+    show('bt-out','bt-copy',out); return;
+  }
+  if(kind==='ji'){
+const co=v('ji-co')||'[Company]';
+const rl=v('ji-role')||'[the role]';
+const raw=($('#ji-dec').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+const items=raw.length?raw:['[decision one]','[decision two]','[decision three]'];
+let rows='';
+let qs='';
+let n=0;
+items.forEach(s=>{ n=n+1; rows+='  '+n+'. '+s+'\n'; qs+='  Q'+n+'. Walk me through the last time you made a call like '+s.toLowerCase()+'. What did you know, what did you not know, and what did you decide. Then: what would have had to be true for you to decide the other way.\n\n'; });
+const out=
+'THE JUDGMENT INTERVIEW '+String.fromCharCode(183)+' '+co+'\n'+
+'ROLE: '+rl+'\n\n'+
+'1. WHAT THIS ROLE ACTUALLY OWNS\n'+
+rows+'\n'+
+'   Everything else in the job description is a task, and most of the tasks are now done by software. Hire against the list above.\n\n'+
+'2. THE INTERVIEW, BUILT ON THOSE DECISIONS\n'+
+qs+
+'  Q'+(n+1)+'. Tell me about a decision in this territory you got wrong. What did it cost, and what do you do differently now.\n\n'+
+'   The wrong-decision answer is the one that matters. Somebody who cannot produce one has either not owned a decision or is not going to tell you the truth in month five either.\n\n'+
+'3. HOW TO SCORE IT\n'+
+'   Strong: names the trade-off unprompted, says what they would need to change their mind, owns the cost of the miss.\n'+
+'   Weak: describes a process, names tools, or reaches for what the team decided.\n\n'+
+'4. THE OFFER\n'+
+'   Price this against the judgment, not the tool list. Band: [range]. The tools are a week of training. [add anything only this business needs]\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'  Give every interviewer the same three decisions. Different questions on the same decisions is fine. Different decisions is not.\n'+
+'  Move the tool list to the bottom of the posting, or take it out.';
+    show('ji-out','ji-copy',out); return;
+  }
+  if(kind==='cb'){
+const co=v('cb-co')||'[Company]';
+const th=v('cb-thresh')||'[amount]';
+const wh=v('cb-who')||'[names]';
+const out=
+'THE CALLBACK RULE '+String.fromCharCode(183)+' '+co+'\n'+
+'Effective [today]. Owner: [name]. Review: [twelve months from today].\n\n'+
+'WHY THIS EXISTS\n'+
+'A familiar voice is no longer proof of identity. Cloning a voice from a recorded call or a podcast takes minutes, and the request will be urgent, plausible and addressed to somebody who can act alone. This page removes that possibility. It is not about trust.\n\n'+
+'1. THE RULE\n'+
+'   Any request to move money, change bank or payment details, or send payroll or tax data is verified by calling back on a number already in our records. Never a number given during the request. Never a number in the email signature. This applies whatever the amount and whoever appears to be asking.\n\n'+
+'2. TWO PEOPLE ABOVE '+th+'\n'+
+'   Payments above '+th+' need a second approval. The person who edits a vendor record is never the person who releases the payment to it. Today that work sits with: '+wh+'. [name the second approver here]\n\n'+
+'3. NOBODY IS PENALIZED FOR THE DELAY\n'+
+'   No one at '+co+' is criticized for making a request wait ten minutes while they verify it. That includes requests that appear to come from me. Especially those. [owner signs this line]\n\n'+
+'4. WHAT TO DO WHEN IT HAPPENS\n'+
+'   Stop. Do not reply on the same channel. Call back on the number in our records. Tell [name] the same day, whether or not money moved. Nothing is embarrassing here except silence.\n\n'+
+'5. THE TEST, ONCE A QUARTER\n'+
+'   Somebody sends accounts payable a plausible bank change request from a lookalike domain. We watch what happens and we fix what we learn. First test: [date].\n\n'+
+'Signed: [owner]\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'  Read section three out loud in a meeting. A rule the owner exempts himself from is not a rule.\n'+
+'  Ask your bank in writing what its recall window actually is. Most people assume it is longer than it is.\n'+
+'  Keep the verification numbers somewhere the person releasing payments can reach in fifteen seconds.';
+    show('cb-out','cb-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* email-me capture (doubles as a quiet lead signal) */
+function sendEmail(kind,btn){
+  const cap=document.querySelector('[data-emailcap="'+kind+'"]');
+  const email=cap.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  let result='';
+  if(kind==='renewal') result=$('#rn-big').textContent+': '+$('#rn-cap').textContent;
+  btn.disabled=true; btn.textContent='...';
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 008 tool: The Rollback Bill',result:result})
+  }).catch(()=>{}).finally(()=>{
+    cap.querySelector('.er').style.display='none';
+    cap.querySelector('.microcopy').style.display='none';
+    document.querySelector('[data-done="'+kind+'"]').classList.add('show');
+  });
+}
+
+/* newsletter: the reminder row under the contents and the form in the close section */
+document.querySelectorAll('form.signup').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=form.querySelector('input[type=email]').value.trim();
+    if(!email) return;
+    const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+    fetch(NEWSLETTER_ENDPOINT,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:email,source:'Briefing No. 008',placement:form.getAttribute('data-src')||''})
+    }).catch(()=>{}).finally(()=>{
+      form.innerHTML='<p class="signup-done">On the list. No. 009 comes your way next week.</p>';
+    });
+  });
+});
+</script>
+</body>
+</html>

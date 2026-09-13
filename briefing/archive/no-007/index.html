@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Briefing, No. 007: Goude Group Weekly Intelligence</title>
+<meta name="description" content="Five developments that moved, what they change, and what not to do. Read it in three minutes. Each one comes with a tool you can use right now." />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/archive/no-007/" />
+<meta property="og:title" content="The Briefing, No. 007: Goude Group Weekly Intelligence" />
+<meta property="og:description" content="Five things that moved, what they change, what not to do. Each one comes with a tool you can use right now." />
+<meta property="og:image" content="https://goudegroup.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-promise{margin-top:32px;padding-top:19px;border-top:1px solid var(--navy)}
+.mast-promise p{font-size:15.5px;line-height:1.6;color:var(--navy);max-width:76ch}
+.mast-promise p b{font-weight:700}
+@media(max-width:620px){.mast-promise{margin-top:26px}.mast-promise p{font-size:14.5px}}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:22px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.passnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:26px 0 16px;max-width:80ch}
+.passnote b{color:var(--navy);font-weight:700}
+.passrow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.arch-link:hover{background:var(--navy);color:var(--mint)}
+.remind{margin-top:26px;border-top:1px solid var(--navy-faint);padding-top:22px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.remind p{font-size:13.5px;line-height:1.55;color:var(--navy-soft);max-width:46ch;margin:0;flex:1 1 300px}
+.remind p b{color:var(--navy);font-weight:700}
+.signup.inline{margin-top:0;flex:1 1 330px;max-width:420px}
+.signup.inline input{padding:12px 14px;font-size:14px}
+.signup.inline button{padding:12px 20px;font-size:11px}
+.signup-done{font-size:14px;line-height:1.55;color:var(--navy)}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* actions row: go deeper + send */
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.deep-toggle{
+  display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+.share{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE INSTRUMENT (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+.pass-it{max-width:var(--maxw);margin:44px auto 0;border-top:1px solid var(--navy-hair);padding-top:24px}
+.pass-it .label{opacity:.5;display:block;margin-bottom:12px}
+.pass-it p{font-size:13.5px;line-height:1.6;color:var(--navy-soft);max-width:74ch;margin-bottom:18px}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  nav{padding:16px 5vw}
+  nav.scrolled{padding-top:12px;padding-bottom:12px}
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  header.masthead{min-height:74vh;padding-top:112px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .passrow{flex-direction:column;align-items:stretch}
+  .passrow .share,.passrow .arch-link{width:100%;justify-content:center}
+  .signup{flex-wrap:wrap}
+  .signup input{flex:1 1 100%}
+  .signup button{width:100%}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence &middot; No. 007</span></div>
+</nav>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="kicker">Goude Group &middot; Weekly Intelligence</div>
+    <h1>The Brie<span class="kern-fi">f</span>ing.</h1>
+    <div class="mast-row">
+      <div class="standfirst">
+        <p><span class="lede-tag">This week's news:</span> Banks cut spreads harder for the tier above you, a deduction from 2022 comes back in full on next month's return, small group health filed a 14 percent median increase, the overtime box on your 2026 payroll has to be mapped before year end, and lending rules tighten on October 1.</p>
+        <p>Read the whole thing in three minutes, or go deeper where it touches your business. We talk about the market here, not about ourselves.</p>
+      </div>
+      <div class="mast-meta">
+        No. 007<br>
+        August 24, 2026
+      </div>
+    </div>
+    <div class="mast-promise"><p><b>Every article comes with a working tool.</b> It runs right here in the page, it is free, and we do not need your information to use it. No signup, no download, nothing to fill in first. That holds for every article in every issue, back issues included.</p></div>
+    <div class="mast-rule"></div>
+  </div>
+</header>
+
+<div class="readkey">
+  <div class="readkey-inner">
+    <span><b>Headline &middot; 5 seconds</b></span>
+    <span><b>The brief &middot; under a minute</b></span>
+    <span><b>Go deeper &middot; the read, plus a free tool you keep</b></span>
+  </div>
+</div>
+
+<section class="contents">
+  <div class="contents-inner">
+    <span class="label">In this issue</span>
+    <div class="toc">
+      <a href="#t1"><span class="n">01</span><span class="t">Banks cut their loan spreads almost twice as hard for the company one size up from you last quarter. Your renewal letter will not mention it.</span><span class="go">The renewal</span><span class="tk">+ tool</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">There is a deduction buried in your 2022 to 2024 returns that comes back in full on the return you file next month, and the version where nobody claims it is the one that takes no work from anybody.</span><span class="go">The election</span><span class="tk">+ tool</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">Your broker is paid a percentage of a premium that just went up fourteen percent. The healthy groups already left the risk pool you are still buying in.</span><span class="go">The renewal</span><span class="tk">+ tool</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">Your payroll system built the box. Nobody told it which of your overtime is the kind that counts, and the bill for guessing is $680 an employee.</span><span class="go">The mapping</span><span class="tk">+ tool</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">On October 1 the same deal supports about eight percent less debt. The clock runs on a number your lender has not told you whether you will get.</span><span class="go">The cliff</span><span class="tk">+ tool</span></a>
+    </div>
+    <p class="passnote"><b>Send it when it hits.</b> Every article here has its own link; the send button next to each one copies it, ready to text or email to the person who needs it. Back issues stay in the archive and their tools keep working, so nothing you forward goes stale.</p>
+    <div class="passrow">
+      <button class="share" type="button" data-share="issue" data-title="The Briefing, No. 007: Goude Group Weekly Intelligence"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send the whole issue</span></button>
+      <a class="arch-link" href="/briefing/archive/">Open the archive</a>
+    </div>
+    <div class="remind">
+      <p><b>Want a reminder when the next one is up?</b> Leave an email and we send one note a week. That is the whole program. We will not flood your inbox.</p>
+      <form class="signup inline" data-src="reminder row">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email for the weekly reminder" required />
+        <button type="submit">Remind me</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 THE SPREAD ============ -->
+<section class="topic" id="t1">
+  <div class="topic-inner">
+    <div class="kicker"><span>01 / The Spread</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Banks cut their loan spreads almost twice as hard for the company one size up from you last quarter. Your renewal letter will not mention it.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>In the July senior loan officer survey, a net 25.0 percent of banks reported narrowing spreads on business loans to firms above $50 million in sales. For firms below $50 million the figure was 14.5 percent. Standards themselves barely moved. Three months earlier both groups were tightening. This is the first quarter of broad price easing after two quarters going the other way.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Nothing in that came from the Fed. Prime has sat at 6.75 percent since December and the target range has not moved. The easing is bank competition, and it is being handed out unevenly by size. On $8 million of floating debt, a line plus a term loan, fifty basis points is $40,000 a year. On a $3 million revolver alone it is $15,000. The window is your renewal date.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not read the survey as a forecast, because it is a record of what banks already did last quarter. Do not open the conversation by asking for a better rate, which invites a no. Do not assume your banker will raise it, because on the conventional side the spread is their margin and there is no version where volunteering it helps them.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t1" data-title="Banks cut their loan spreads almost twice as hard for the company one size up from you last quarter. Your renewal letter will not mention it."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Apr 2026</span><span>The prior quarterly survey shows banks tightening: standards up a net 8.1 percent for larger firms and 6.6 percent for smaller, with covenants tightening on both.</span></div>
+            <div class="tape-row"><span class="d">Jul 2 2026</span><span>Responses are due for the July survey, drawn from 56 domestic banks and 18 US branches of foreign banks. The turn shows up in the pricing lines rather than the standards lines.</span></div>
+            <div class="tape-row"><span class="d">Jul 2026</span><span>Spreads narrow on net for both groups, but 25.0 percent for firms above $50 million against 14.5 percent below. Costs of credit lines fall 12.7 against 7.3. Covenants ease 7.1 against 5.5.</span></div>
+            <div class="tape-row"><span class="d">Aug 14 2026</span><span>Commercial and industrial balances stand at $2.92 trillion and contract 1.1 percent annualised in July, the first decline all year, after 14.2 percent growth the prior quarter.</span></div>
+            <div class="tape-row"><span class="d">Your renewal</span><span>The only date that matters. The survey describes a market that has already moved; the question is whether your paper moves with it.</span></div>
+          </div>
+          <h3>What the gap between two numbers is actually measuring</h3>
+          <p>A company doing $60 million has a treasurer who reads that survey and knows the market cleared 25 percent net easing on spreads. A company doing $25 million has a controller who receives a renewal letter and signs it. The 10.5 point gap between those two figures is not a quirk of the data. It is the price of not asking, and it is charged again at every renewal, to the same borrower, for as long as nobody opens the file. Banks are not doing anything improper here. They are quoting to the level of scrutiny they expect from the borrower in front of them.</p>
+          <p>There is a second fact worth carrying into the room. Commercial and industrial balances contracted in July for the first time all year, down 1.1 percent annualised, after growing at double digits through the spring. Banks need earning assets. Meanwhile the same week, two mid-market revolvers repriced publicly at SOFR plus 137.5 to 212.5 and SOFR plus 112.5 to 212.5, with unused fees in the teens and covenants at 3.0 times leverage and 1.25 times fixed charge coverage. Those are comparables. Walking into a renewal with a published survey and two named deals is a different conversation from walking in with a request.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Have the controller pull the credit agreement and the last two renewal letters, and write down the current spread over the index, the unused line fee and every covenant level.</li>
+            <li>Price the gap with the tool on the right so the conversation starts from a number rather than a feeling.</li>
+            <li>Take three things to the banker before the renewal date: the survey split by firm size, one named comparable repricing, and your own coverage and leverage trend.</li>
+            <li>Ask for the covenant as well as the rate. Covenants eased on net last quarter too, and a headroom change is worth more than basis points in a soft year.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.federalreserve.gov/data/sloos/sloos-202607-table-1.htm" target="_blank" rel="noopener">Federal Reserve: the July 2026 senior loan officer survey, with net percentages split by firm size</a> &middot; <a href="https://www.federalreserve.gov/data/sloos/sloos-202604-table-1.htm" target="_blank" rel="noopener">Federal Reserve: the April 2026 survey, showing the tightening quarter that preceded the turn</a> &middot; <a href="https://www.abfjournal.com/middle-market-debt-weekly-ci-balances-contract-for-the-first-time-all-year/" target="_blank" rel="noopener">ABF Journal: the July contraction in commercial balances and named mid-market repricings with full spread grids</a> &middot; <a href="https://primerates.com/primerate/fed-prime-rate/" target="_blank" rel="noopener">Prime Rate: the current prime of 6.75 percent, unchanged since December 11, 2025</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The gap between those two numbers is not a quirk of the data. It is the price of not asking, charged again at every renewal.</p></div>
+          <div class="tool" data-tool="ask">
+            <span class="tlabel">The way to act · writes the letter</span>
+            <span class="tname">The Renewal Letter</span>
+            <span class="tsub">Four fields. It writes the note that goes to your banker before the renewal, with the survey split and the ask in it.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="ask-co">YOUR BUSINESS NAME</label><input id="ask-co" type="text" placeholder="e.g. Harbor Industrial" /></div>
+              <div><label class="fl" for="ask-bank">YOUR BANKER'S NAME</label><input id="ask-bank" type="text" placeholder="e.g. Ellen at First Regional" /></div>
+              <div><label class="fl" for="ask-bal">FLOATING RATE DEBT OUTSTANDING</label><input id="ask-bal" type="number" inputmode="numeric" min="0" placeholder="e.g. 8000000" /></div>
+              <div><label class="fl" for="ask-date">YOUR RENEWAL DATE</label><input id="ask-date" type="text" placeholder="e.g. 30 November" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="ask">Write the letter</button>
+            <div class="out" id="ask-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="ask-out" style="display:none" id="ask-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 THE CATCH-UP ============ -->
+<section class="topic" id="t2">
+  <div class="topic-inner">
+    <div class="kicker"><span>02 / The Catch-Up</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>There is a deduction buried in your 2022 to 2024 returns that comes back in full on the return you file next month, and the version where nobody claims it is the one that takes no work from anybody.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Tax law forced businesses to capitalise and amortise domestic research and development costs over five years starting in 2022. That was repealed. Revenue Procedure 2025-28 lets any taxpayer, at any revenue size, recover the entire remaining unamortised 2022 to 2024 balance on the 2025 return, either all at once or spread across 2025 and 2026. The separate route for amending old years closed on July 6.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The definition is wider than owners think. It is not lab coats. It is software development, engineering, prototyping, and wages for product and process development. A $25 million manufacturer with $1.2 million a year of qualifying spend carries roughly $2.0 to $2.4 million unamortised into 2025, which is $420,000 to $500,000 of federal cash tax at 21 percent before state. The election is a statement attached to the return. No Form 3115.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not assume this does not apply because you do not have a research department, since the costs are ordinary engineering and software wages. Do not leave it to be raised at filing time, because by then the return is going out the door. Do not take the full acceleration without asking what it does to your loss carryforward and your interest deduction limit first.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t2" data-title="There is a deduction buried in your 2022 to 2024 returns that comes back in full on the return you file next month, and the version where nobody claims it is the one that takes no work from anybody."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">2022</span><span>Capitalisation begins. Domestic research and experimental costs must be spread over five years rather than deducted, which quietly builds an unamortised balance on the books of anyone doing engineering or software work.</span></div>
+            <div class="tape-row"><span class="d">Aug 28 2025</span><span>Revenue Procedure 2025-28 is released, setting the procedures for recovering the balance under the repeal.</span></div>
+            <div class="tape-row"><span class="d">Jul 6 2026</span><span>The separate small-business route closes. Businesses averaging under $31 million in gross receipts could have amended 2022, 2023 and 2024 outright. That door is shut.</span></div>
+            <div class="tape-row"><span class="d">Sep 15 2026</span><span>Extended partnership and S corporation returns are due. The election is made by attaching a statement, so it is a filing-time decision with no later fix.</span></div>
+            <div class="tape-row"><span class="d">Oct 15 2026</span><span>Extended C corporation returns are due. After that the year is closed and the remaining balance keeps amortising on the old schedule.</span></div>
+          </div>
+          <h3>Why the default wins unless the owner speaks</h3>
+          <p>Continuing the existing amortisation schedule requires no statement, no analysis, no client conversation and no exposure for the person preparing your return. Accelerating requires them to compute the balance, model what a large deduction does to your loss position and your interest limitation, coordinate it with the research credit and the related election, and attach a statement, all in the fortnight before an extended return is filed. At $10 million to $50 million your return is prepared by a good regional firm treating this as a compliance line. The silent option is free for everyone except you, and once the return is filed the choice is made.</p>
+          <p>So make it a question rather than a hope. Three sentences to your CPA this week. What is our unamortised domestic balance carried into 2025. Are we taking it fully in 2025, splitting it across 2025 and 2026, or defaulting to continued amortisation, and why. Does full acceleration create a loss we can only use against 80 percent of future income, or collide with the interest deduction limit. There is a real answer where continuing to amortise is correct, usually when the deduction would strand. But it should be an answer, not an omission.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Send the three questions to your CPA this week, in writing, so the answer arrives before the return is being assembled rather than during.</li>
+            <li>Ask specifically for the unamortised domestic balance as a number. If nobody can produce it quickly, that is the finding.</li>
+            <li>Use the tool on the right to size the cash at stake before the call, so you know whether this is worth pushing on.</li>
+            <li>Confirm the treatment coordinates with your research credit election, since the two interact and getting one right in isolation can cost you the other.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.grantthornton.com/insights/alerts/tax/2025/flash/irs-issues-procedural-guidance" target="_blank" rel="noopener">Grant Thornton: that all taxpayers regardless of size may recover the balance in 2025 or across 2025 and 2026</a> &middot; <a href="https://www.bdo.com/insights/tax/irs-issues-procedural-guidance-on-obbba-treatment-of-r-and-e-expenditures" target="_blank" rel="noopener">BDO: the full mechanics, election statements, deemed elections and the absence of audit protection</a> &middot; <a href="https://kahnlitwin.com/blogs/tax-blog/section-174-fixed-what-businesses-need-to-know-about-r-e-expensing-changes" target="_blank" rel="noopener">KLR: the three options in plain language and the interest limitation interaction</a> &middot; <a href="https://www.kbkg.com/news/july-6th-amended-return-deadline-for-174-costs" target="_blank" rel="noopener">KBKG: the July 6 amended return deadline and the gross receipts test that governed it</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The silent option is free for everyone except you, and once the return is filed the choice has been made.</p></div>
+          <div class="tool" data-tool="cpa">
+            <span class="tlabel">The way to act · writes the email</span>
+            <span class="tname">The Three Questions</span>
+            <span class="tsub">Two fields. It writes the note to your CPA that turns a silent default into an answer on the record.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="cpa-co">YOUR BUSINESS NAME</label><input id="cpa-co" type="text" placeholder="e.g. Harbor Industrial" /></div>
+              <div><label class="fl" for="cpa-work">WORK THAT MIGHT QUALIFY, ONE PER LINE</label><textarea id="cpa-work" rows="4" placeholder="software development
+product engineering
+process and tooling development"></textarea></div>
+            </div>
+            <button class="tbtn" type="button" data-build="cpa">Write the email</button>
+            <div class="out" id="cpa-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="cpa-out" style="display:none" id="cpa-copy">Copy to clipboard</button>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 THE POOL ============ -->
+<section class="topic" id="t3">
+  <div class="topic-inner">
+    <div class="kicker"><span>03 / The Pool</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Your broker is paid a percentage of a premium that just went up fourteen percent. The healthy groups already left the risk pool you are still buying in.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Small group insurers have filed a 14 percent median rate increase for 2027, up from 11 percent for 2026, across 295 insurers in all fifty states. A quarter filed at 10 percent or below and a quarter at 18 percent or above. The medical trend underneath is 10.8 percent, so roughly three points of the increase is not care cost at all. It is the pool getting worse.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>On a hundred-life group carrying around $1.6 million of annual premium, the difference between accepting 14 percent and landing at 8 percent is about $96,000. Level funded arrangements went from 2 percent of small group enrolment in 2021 to over 11 percent in 2025, and fully insured small group enrolment fell 41 percent between 2013 and 2024. The healthy groups left. You are paying for the ones who could not.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not treat the renewal as arithmetic to be approved, because it is the largest controllable line you touch all year. Do not ask your broker whether self funding makes sense without knowing they are paid on premium. Do not cross fifty full-time equivalents without checking what it does, since in most states it moves you out of community rating and into the employer mandate in the same month.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t3" data-title="Your broker is paid a percentage of a premium that just went up fourteen percent. The healthy groups already left the risk pool you are still buying in."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">2021 to 2025</span><span>Level funded arrangements climb from 2 percent of small group enrolment to over 11 percent, pulling the better risks out of the community rated pool.</span></div>
+            <div class="tape-row"><span class="d">Jul 2026</span><span>Individual market insurers file a 15 percent median increase for 2027 across 276 insurers, which worsens the individual coverage arrangement alternative at the same time.</span></div>
+            <div class="tape-row"><span class="d">Aug 6 2026</span><span>Small group filings publish: 14 percent median across 295 insurers, up from 11 percent, with 59 percent of insurers filing between 10 and 20 percent.</span></div>
+            <div class="tape-row"><span class="d">Autumn 2026</span><span>Renewals land. Two thirds of large employers are already raising employee contributions for 2027 and 48 percent are raising deductibles or copays.</span></div>
+            <div class="tape-row"><span class="d">Jan 1 2027</span><span>New rates take effect. The affordability threshold rises to 10.22 percent, the first time above ten, which gives back a little headroom on the employee contribution.</span></div>
+          </div>
+          <h3>The conflict is structural, not personal</h3>
+          <p>A 14 percent renewal pays a percentage-of-premium broker 14 percent more. That is not an accusation, it is an arithmetic fact about how the person advising you is compensated, and it means the file that would shrink your premium is the one file they have no reason to open. Below fifty employees this barely matters, because the rate is community rated and there is nothing to negotiate. Above fifty it matters enormously, because you have entered an underwriting conversation you have never had to have, against a counterparty who does this every day, advised by someone paid on the number going up.</p>
+          <p>So change what you ask for. Not a better rate, which is a request. Ask for three quotes side by side: fully insured, level funded, and self funded with stop loss, each with the broker's compensation disclosed in dollars rather than percent. Ask what your own claims experience actually looks like, because at a hundred lives you have credible data and the pool average is no longer your best estimate. And if you are near fifty full-time equivalents, get the count nailed down before the renewal rather than after, because crossing it changes which market you buy in and switches on employer mandate penalties of $3,780 and $5,670 in the same stroke.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Ask for three quotes side by side, fully insured, level funded and self funded with stop loss, with broker compensation shown in dollars on each.</li>
+            <li>Get your own claims experience in front of you. At a hundred lives the data is credible and the pool average stops being your best estimate.</li>
+            <li>Count your full-time equivalents properly before the renewal if you are anywhere near fifty, because crossing it changes the market and switches on the mandate.</li>
+            <li>Use the tool on the right to price the gap between the renewal as offered and where you think it should land, so the number frames the meeting.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.healthsystemtracker.org/brief/how-much-and-why-premiums-are-going-up-for-small-businesses-in-2027/" target="_blank" rel="noopener">Peterson-KFF Health System Tracker: the 2027 small group filings, quartiles and the level funding migration</a> &middot; <a href="https://www.beckerspayer.com/financial/5-forces-driving-health-insurance-costs-up-in-2027/" target="_blank" rel="noopener">Becker's Payer Issues: independent confirmation plus the commercial trend and pharmacy cost figures</a> &middot; <a href="https://www.kff.org/affordable-care-act/how-much-and-why-aca-marketplace-premiums-are-going-up-in-2027/" target="_blank" rel="noopener">KFF: the 2027 individual market filings that set the alternative, and the employer survey baseline</a> &middot; <a href="https://trusaic.com/blog/irs-announces-2027-aca-penalty-increases-what-ales-need-to-know/" target="_blank" rel="noopener">Trusaic: the 2027 employer mandate penalty amounts that switch on above fifty</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A fourteen percent renewal pays a percentage-of-premium broker fourteen percent more. The file that shrinks your premium is the one nobody is paid to open.</p></div>
+          <div class="tool" data-tool="pool">
+            <span class="tlabel">The way to act · live</span>
+            <span class="tname">The Renewal Gap</span>
+            <span class="tsub">Three numbers. It prices the distance between the renewal as offered and where you intend to land.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="pool-lives">COVERED EMPLOYEES</label><input id="pool-lives" type="number" inputmode="numeric" min="0" placeholder="e.g. 100" data-live="pool" /></div>
+              <div><label class="fl" for="pool-prem">CURRENT ANNUAL PREMIUM PER EMPLOYEE</label><input id="pool-prem" type="number" inputmode="numeric" min="0" placeholder="e.g. 16000" data-live="pool" /></div>
+              <div><label class="fl" for="pool-target">INCREASE YOU INTEND TO LAND AT, PERCENT</label><input id="pool-target" type="number" inputmode="numeric" min="0" placeholder="e.g. 8" data-live="pool" /></div>
+            </div>
+            <div class="readout" id="pool-readout" style="display:none">
+              <div class="big" id="pool-big">$0</div>
+              <div class="cap" id="pool-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 BOX 12 ============ -->
+<section class="topic" id="t4">
+  <div class="topic-inner">
+    <div class="kicker"><span>04 / Box 12</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Your payroll system built the box. Nobody told it which of your overtime is the kind that counts, and the bill for guessing is $680 an employee.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>An August fact sheet confirmed the 2025 transition relief on overtime reporting does not extend. For tax year 2026, employers must report the overtime premium separately in Box 12 using code TT, and an employee may not claim the deduction on any amount the employer fails to report there. Pay stubs do not substitute. The substitute W-2 form is not a workaround.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Only the federal premium qualifies, the extra half above the regular rate. State daily overtime, seventh day rules, double time, contractual overtime and shift differentials do not. Get the mapping wrong and the penalty is charged twice, once for the agency copy and once for the employee copy, at $340 each. At 150 employees that is $102,000. Above $5 million of receipts you do not get the small business cap.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not assume your payroll provider handled it, because they built the field and cannot know which of your earning codes are federally required premium. Do not leave non-discretionary bonuses out of the regular rate, which under-reports the box and creates a separate wage claim. Do not wait until February, when the same error costs five times more to fix.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t4" data-title="Your payroll system built the box. Nobody told it which of your overtime is the kind that counts, and the bill for guessing is $680 an employee."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jan 23 2026</span><span>The first guidance on the new overtime deduction is published, with transition relief for the 2025 tax year that many employers read as ongoing.</span></div>
+            <div class="tape-row"><span class="d">Aug 2026</span><span>An updated fact sheet supersedes it and states plainly that no relief is available for tax years after 2025, and that employees may not claim more than what appears in the box.</span></div>
+            <div class="tape-row"><span class="d">Now to Dec 31</span><span>The configuration window. Calendar year 2026 is already eight months gone, so the mapping has to be right and any earlier months reconciled before the final payroll run.</span></div>
+            <div class="tape-row"><span class="d">Feb 1 2027</span><span>2026 forms are due to be filed and furnished. Errors found here cost $60 a return if fixed inside thirty days.</span></div>
+            <div class="tape-row"><span class="d">After Aug 1 2027</span><span>The same error costs $340 a return, charged twice. The window between those two numbers is the whole story.</span></div>
+          </div>
+          <h3>Nobody in the building owns this</h3>
+          <p>At thirty to two hundred and fifty people the payroll runs on a mid-market provider who ships the code TT field and announces it in a release note. What they cannot know is which of your earning codes represent federally required premium and which are state law, contractual or discretionary. That mapping is a judgment about your own pay practices, and in most companies this size nobody owns it. The controller assumes payroll handled it. The person handling people assumes the controller checked. The owner never sees it. The failure surfaces in February 2027 when employees who were told their overtime would not be taxed find a blank or wrong box and cannot claim it.</p>
+          <p>The correction economics are the reason to look now rather than then. Fixed within thirty days it is $60 a return. Corrected by the following August it is $130. After that it is $340, doubled because the same wrong form is penalised on both copies. That is a 5.7 times swing decided entirely by whether somebody opens the payroll configuration in September instead of February. And there is a version where it cannot be fixed at all: if your timekeeping kept only gross overtime dollars rather than hours over forty and the regular rate inputs, the year cannot be cleanly rebuilt. Check that first, because it determines whether this is a configuration job or a bigger one.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Ask payroll one question in writing: which of our earning codes are mapped to code TT, and who made that decision. If the answer is the provider's default, that is the finding.</li>
+            <li>Confirm non-discretionary bonuses, attendance, production, longevity and safety, are folded into the regular rate before the premium is computed, including when paid on a separate cheque.</li>
+            <li>Check what your timekeeping retained for January through August: hours over forty and regular rate inputs, or only gross overtime dollars. That determines whether the year can be rebuilt.</li>
+            <li>Price the exposure with the tool on the right, then decide whether this is a September task or a February problem.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://www.irs.gov/pub/taxpros/fs-2026-13.pdf" target="_blank" rel="noopener">IRS Fact Sheet 2026-13: the controlling guidance on code TT, the end of relief and the federal-premium-only definition</a> &middot; <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" target="_blank" rel="noopener">IRS Revenue Procedure 2025-32: the penalty tiers and caps for returns filed in 2027</a> &middot; <a href="https://www.experian.com/blogs/employer-services/irs-final-2026-w-2-w-3-instructions/" target="_blank" rel="noopener">Experian Employer Services: what changed on the 2026 form, including the new codes and the box 14 split</a> &middot; <a href="https://www.barnesdennig.com/preparing-for-2026-qualified-overtime-reporting/" target="_blank" rel="noopener">Barnes Dennig: the regular rate and non-discretionary bonus mechanics with a worked calculation</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A 5.7 times swing in the penalty, decided entirely by whether somebody opens the payroll configuration in September instead of February.</p></div>
+          <div class="tool" data-tool="box">
+            <span class="tlabel">The way to act · live</span>
+            <span class="tname">The Correction Window</span>
+            <span class="tsub">Two numbers. It prices the same mistake at three different moments, which is the whole argument for doing it in September.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="box-emp">EMPLOYEES WHO WORKED ANY OVERTIME IN 2026</label><input id="box-emp" type="number" inputmode="numeric" min="0" placeholder="e.g. 150" data-live="box" /></div>
+              <div><label class="fl" for="box-pct">PERCENT YOU BELIEVE ARE MAPPED CORRECTLY</label><input id="box-pct" type="number" inputmode="numeric" min="0" placeholder="e.g. 60" data-live="box" /></div>
+            </div>
+            <div class="readout" id="box-readout" style="display:none">
+              <div class="big" id="box-big">$0</div>
+              <div class="cap" id="box-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 05 THE LOAN NUMBER ============ -->
+<section class="topic" id="t5">
+  <div class="topic-inner">
+    <div class="kicker"><span>05 / The Loan Number</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>On October 1 the same deal supports about eight percent less debt. The clock runs on a number your lender has not told you whether you will get.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>New lending rules were issued on August 14 and take effect for any 7(a) loan that receives its agency loan number on or after October 1. The coverage floor on acquisitions and partner buyouts rises from 1.15 times to 1.25 times. Projections no longer count toward the test, which must be proved on historical results. Any purchase price at or above $3 million now requires a lender-commissioned quality of earnings report.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>At $1.2 million of adjusted cash flow, 1.15 times supports about $1,043,000 of annual debt service and 1.25 times supports $960,000. That is 8 percent less loan, roughly $400,000 on a $5 million deal, which becomes equity the buyer has to find. It runs the other way too: if you are the seller, every buyer closing after October 1 supports less debt, and that lands on your price.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not assume signing an application locks the old rules, because the cliff is keyed to the date the agency issues the loan number, not the date you applied. Do not leave the question implied, since a file sitting in a queue can drift across the date with nobody telling you. Do not read this as only affecting buyers, because at this size the most common use is a partner buyout.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t5" data-title="On October 1 the same deal supports about eight percent less debt. The clock runs on a number your lender has not told you whether you will get."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jun 1 2025</span><span>The prior rules take effect, setting the general coverage standard at 1.15 times for most business purchases with no quality of earnings requirement.</span></div>
+            <div class="tape-row"><span class="d">Aug 14 2026</span><span>The revised rules are issued. Coverage on acquisitions and buyouts rises to 1.25 times, projections stop counting, and a quality of earnings report becomes mandatory at $3 million and above.</span></div>
+            <div class="tape-row"><span class="d">Sep 30 2026</span><span>The last day a file can receive an agency loan number under the old rules. Applications issued a number by this date stay under the prior standard.</span></div>
+            <div class="tape-row"><span class="d">Oct 1 2026</span><span>The new test applies. Seller notes must now stay current for 36 months before refinancing rather than 24, and the seller consulting window doubles to 24 months.</span></div>
+          </div>
+          <h3>The date is not the one you think it is</h3>
+          <p>Everything written about this change is aimed at search funds and lenders, so it reads like it belongs to somebody buying a small trades business. The mechanism that actually bites at $10 million to $50 million is the partner buyout, which is the most common use of this financing at your size and is explicitly one of the categories moving to the higher historical coverage test. The second trap is the trigger. It is not the application date, not the term sheet, not the credit approval. It is the date the agency issues a loan number, which sits with your lender's processing queue and is invisible to you unless you ask.</p>
+          <p>Your lender has no obligation to tell you your file is at risk of slipping, and with a full pipeline in the last five weeks of the fiscal year, no particular incentive either. That is not a scandal. It is why the question has to come from you, in writing, this week, in one sentence: will my file have an agency loan number before September 30. If the answer is anything other than yes, you are structuring against the new test and should reprice now rather than in October. A quality of earnings report at this deal size runs roughly $6,000 to $25,000 and takes weeks, so on a $3 million or larger purchase it is also a scheduling problem, not just a cost.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Send your lender one sentence in writing today: will my file have an agency loan number before September 30. Anything short of yes means plan for the new test.</li>
+            <li>Recompute the deal at 1.25 times on historical results with no projections. The tool on the right does it in two numbers.</li>
+            <li>If the purchase price is at or above $3 million, start the quality of earnings work now regardless, because it runs weeks and the lender commissions it, not you.</li>
+            <li>If you are the seller rather than the buyer, model what a buyer supports after October 1, because eight percent less debt lands on your price rather than theirs.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://legacy.sba.gov/document/information-notice-5000-880695-issuance-sop-50-10-81" target="_blank" rel="noopener">SBA: the notice issuing the revised standard operating procedure and its October 1 effective date</a> &middot; <a href="https://www.pilieromazza.com/five-sba-7a-changes-that-could-reshape-business-acquisitions/" target="_blank" rel="noopener">PilieroMazza: the underwriting changes, the coverage move and the $3 million quality of earnings trigger</a> &middot; <a href="https://www.opsfi.co/insights/sba-acquisition-quality-of-earnings-sop-50-10-8-1" target="_blank" rel="noopener">OpsFi: the deal categories with their coverage floors side by side and what the report must contain</a> &middot; <a href="https://www.security-banks.com/blog/everything-about-new-sba-sop" target="_blank" rel="noopener">Security Bank and Trust: an old rule against new rule comparison including seller notes and consulting periods</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>It is not the application date and not the credit approval. It is the loan number, which sits in a queue you cannot see.</p></div>
+          <div class="tool" data-tool="clf">
+            <span class="tlabel">The way to act · live</span>
+            <span class="tname">The Eight Percent</span>
+            <span class="tsub">Two numbers. It shows what the same cash flow supports before and after October 1, and what the difference is in equity.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="clf-cf">ADJUSTED ANNUAL CASH FLOW, HISTORICAL</label><input id="clf-cf" type="number" inputmode="numeric" min="0" placeholder="e.g. 1200000" data-live="clf" /></div>
+              <div><label class="fl" for="clf-rate">LOAN RATE, PERCENT</label><input id="clf-rate" type="number" inputmode="numeric" min="0" placeholder="e.g. 9.75" data-live="clf" /></div>
+            </div>
+            <div class="readout" id="clf-readout" style="display:none">
+              <div class="big" id="clf-big">$0</div>
+              <div class="cap" id="clf-cap"></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CLOSE ============ -->
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm" data-src="close section">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="pass-it">
+    <span class="label">Back issue</span>
+    <p>This is back issue No. 007. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      &copy; 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+const ISSUE_URL='https://goudegroup.com/briefing/archive/no-007/';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, sends, shares */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-send],[data-share]');
+  if(!t) return;
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ copyText(box.textContent,()=>{
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }); }
+    return;
+  }
+  if(t.dataset.send){ sendEmail(t.dataset.send,t); return; }
+  if(t.dataset.share){ doShare(t); return; }
+});
+
+/* ---------- sharing ---------- */
+function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
+function flash(btn,msg){
+  const sl=btn.querySelector('.sl'); if(!sl) return;
+  const o=sl.textContent; sl.textContent=msg||'Link copied';
+  setTimeout(()=>{ sl.textContent=o; },1600);
+}
+function copyText(text,done){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,()=>legacyCopy(text,done));
+  }else{ legacyCopy(text,done); }
+}
+function legacyCopy(text,done){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(err){}
+  document.body.removeChild(ta);
+  if(done) done();
+}
+function doShare(btn){
+  const url=shareLink(btn.dataset.share);
+  const title=btn.dataset.title||document.title;
+  if(navigator.share){
+    navigator.share({title:title,url:url}).catch(()=>{});
+  }else{
+    copyText(url,()=>flash(btn,'Link copied'));
+  }
+}
+/* a link ending in #tN lands with that article's go-deeper open */
+function openFromHash(){
+  const h=(location.hash||'').replace('#','');
+  if(!/^t[1-5]$/.test(h)) return;
+  const topic=document.getElementById(h);
+  if(!topic||topic.classList.contains('open')) return;
+  topic.classList.add('open');
+  const b=topic.querySelector('.deep-toggle');
+  if(b){ b.setAttribute('aria-expanded','true'); b.firstChild.textContent='Close '; }
+  setTimeout(()=>{ topic.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+addEventListener('hashchange',openFromHash);
+openFromHash();
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='pool') calc_pool();
+  if(el.dataset.live==='box') calc_box();
+  if(el.dataset.live==='clf') calc_clf();
+});
+document.addEventListener('change',e=>{
+  const el=e.target.closest('select[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='pool') calc_pool();
+  if(el.dataset.live==='box') calc_box();
+  if(el.dataset.live==='clf') calc_clf();
+});
+
+function calc_pool(){
+  const lives=parseFloat($('#pool-lives').value)||0;
+  const prem=parseFloat($('#pool-prem').value)||0;
+  let target=parseFloat($('#pool-target').value);
+  const ro=$('#pool-readout');
+  if(!lives||!prem||isNaN(target)){ ro.style.display='none'; return; }
+  if(target<0){ target=0; }
+  if(target>100){ target=100; }
+  ro.style.display='block';
+  const base=lives*prem;
+  const atMedian=base*1.14;
+  const atTarget=base*(1+target/100);
+  const gap=atMedian-atTarget;
+  $('#pool-big').textContent=money(atMedian);
+  $('#pool-cap').innerHTML='Your book is <b>'+money(base)+'</b> today. At the filed 14 percent median it becomes <b>'+money(atMedian)+'</b>. Landing at '+target+' percent instead puts it at '+money(atTarget)+', a difference of <b>'+money(gap)+'</b> in the first year alone, and it compounds because next year prices off this year. That gap is the whole reason to ask for three quotes with compensation disclosed rather than approving one.';
+}
+
+function calc_box(){
+  const emp=parseFloat($('#box-emp').value)||0;
+  let pct=parseFloat($('#box-pct').value);
+  const ro=$('#box-readout');
+  if(!emp||isNaN(pct)){ ro.style.display='none'; return; }
+  if(pct<0){ pct=0; }
+  if(pct>100){ pct=100; }
+  ro.style.display='block';
+  const worst=emp*340*2;
+  let bad=Math.round(emp*(1-pct/100));
+  if(bad<0){ bad=0; }
+  const now=bad*60*2;
+  const aug=bad*130*2;
+  const late=bad*340*2;
+  $('#box-big').textContent=money(worst);
+  $('#box-cap').innerHTML='That is your ceiling: '+emp+' forms all wrong, at $340 a return charged twice, once for the agency copy and once for the employee copy. At '+pct+' percent mapped correctly, <b>'+bad+' forms</b> are exposed, which costs <b>'+money(now)+'</b> if fixed within thirty days of filing, <b>'+money(aug)+'</b> if corrected by the following August, and <b>'+money(late)+'</b> after that. Same error, three prices, and above $5 million of receipts you do not get the small business cap.';
+}
+
+function calc_clf(){
+  const cf=parseFloat($('#clf-cf').value)||0;
+  let rate=parseFloat($('#clf-rate').value)||0;
+  const ro=$('#clf-readout');
+  if(!cf||!rate){ ro.style.display='none'; return; }
+  if(rate<1){ rate=1; }
+  if(rate>25){ rate=25; }
+  ro.style.display='block';
+  const r=rate/100/12;
+  const n=120;
+  const factor=(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1)*12;
+  const oldLoan=(cf/1.15)/factor;
+  const newLoan=(cf/1.25)/factor;
+  const gap=oldLoan-newLoan;
+  $('#clf-big').textContent=money(gap);
+  $('#clf-cap').innerHTML='On '+money(cf)+' of adjusted historical cash flow at '+rate+' percent over ten years, the old 1.15 test supports about <b>'+money(oldLoan)+'</b> of loan and the new 1.25 test supports about <b>'+money(newLoan)+'</b>. The difference, <b>'+money(gap)+'</b>, does not disappear from the deal. It becomes equity somebody has to find, or it comes off the price. Ask your lender in writing whether your file gets an agency loan number before September 30.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  if(kind==='ask'){
+const co=v('ask-co')||'[Business]';
+    const bank=v('ask-bank')||'[banker]';
+    const bal=parseFloat(v('ask-bal'))||0;
+    const dt=v('ask-date')||'[date]';
+    const fifty=Math.round(bal*0.005);
+    const out=
+'TO THE BANK · AHEAD OF RENEWAL\n\n'+
+'To: '+bank+'\n'+
+'Subject: '+co+' facility renewal, '+dt+'\n\n'+
+'Ahead of our renewal I want to put three things in front of you rather than react to a letter.\n\n'+
+'1. WHAT THE MARKET DID LAST QUARTER.\n'+
+'In the July senior loan officer survey, a net 25.0 percent of banks reported narrowing spreads on loans to firms above $50 million in sales. For firms below $50 million it was 14.5 percent. Standards were basically unchanged for both. I am asking to be priced against the first number rather than the second.\n\n'+
+'2. COMPARABLES.\n'+
+'Two mid-market revolvers repriced publicly in August at SOFR plus 137.5 to 212.5 and SOFR plus 112.5 to 212.5, with unused fees of 12.5 to 30 basis points, maximum net leverage of 3.0 to 4.0 times and minimum fixed charge coverage of 1.25 times. If our credit is better than those, I would like the pricing to say so.\n\n'+
+'3. WHAT I AM ASKING FOR.\n'+
+'   Spread: [current] to [target] over the index\n'+
+'   Unused line fee: [current] to [target]\n'+
+'   Covenant: [which one] from [current] to [target]\n\n'+
+'On our '+money(bal)+' of floating balances, fifty basis points is about '+money(fifty)+' a year, so this is worth a conversation on both sides.\n\n'+
+'Happy to send updated coverage and leverage figures before we speak. What do you need from me, and by when?\n\n'+
+'[name], '+co+'\n'+
+'[phone]   [date]\n\n'+
+'NOTES TO YOURSELF, delete before sending\n\n'+
+'  Ask for the covenant as well as the rate. Covenants eased on net last quarter too, and headroom is worth more than basis points in a soft year.\n'+
+'  Do not open with a rate request. Open with the survey. One is a favour, the other is a market.\n'+
+'  Commercial and industrial balances contracted in July for the first time all year. Banks need earning assets right now. That is your timing.';
+    show('ask-out','ask-copy',out); return;
+  }
+  if(kind==='cpa'){
+const co=v('cpa-co')||'[Business]';
+    const raw=($('#cpa-work').value||'').split(/\n|,/).map(function(s){return s.trim();}).filter(Boolean);
+    const items=raw.length?raw:['[type of work]'];
+    let rows='';
+    items.forEach(function(s){ rows+='  '+s+'\n     WAGES AND COSTS 2022-2024: $__________   CAPITALISED? [ ] yes [ ] no\n'; });
+    const out=
+'TO OUR CPA · SECTION 174 ELECTION ON THE 2025 RETURN\n\n'+
+'Subject: Unamortised domestic R and E balance, and what we are electing\n\n'+
+'Before our extended 2025 return is assembled, I want these three answered in writing.\n\n'+
+'1. What is our unamortised domestic research and experimental balance carried into 2025? Please give me the figure, not a description.\n\n'+
+'2. Are we recovering it fully in 2025, splitting it across 2025 and 2026, or continuing to amortise, and what is the reasoning for the option you are recommending?\n\n'+
+'3. If we accelerate fully, does it create a loss we can only use against 80 percent of future taxable income, and does it interact with our interest deduction limit or our research credit election in a way that changes the answer?\n\n'+
+'WORK I BELIEVE MAY QUALIFY\n'+
+'My understanding is that this is not limited to laboratory research and includes ordinary engineering, software and development wages.\n\n'+
+rows+'\n'+
+'FOR THE RECORD\n'+
+'I understand the election is made by attaching a statement to the return and that Form 3115 is not required, so this is a filing-time decision with no later correction. If continuing to amortise is the right answer for '+co+', I am content with that, but I want it to be a decision we made rather than a default we allowed.\n\n'+
+'Please reply before the return goes out.\n\n'+
+'[name], '+co+'\n'+
+'[date]\n\n'+
+'NOTES TO YOURSELF, delete before sending\n\n'+
+'  Deadlines: 15 September for partnerships and S corporations, 15 October for C corporations.\n'+
+'  The separate route for amending 2022 to 2024 outright closed on 6 July 2026. This return is what is left.\n'+
+'  If nobody can produce the balance quickly, that is itself the finding.';
+    show('cpa-out','cpa-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* email-me capture (doubles as a quiet lead signal) */
+function sendEmail(kind,btn){
+  const cap=document.querySelector('[data-emailcap="'+kind+'"]');
+  const email=cap.querySelector('input[type=email]').value.trim();
+  if(!email) return;
+  let result='';
+  if(kind==='renewal') result=$('#rn-big').textContent+': '+$('#rn-cap').textContent;
+  btn.disabled=true; btn.textContent='...';
+  fetch(NEWSLETTER_ENDPOINT,{
+    method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify({email:email,source:'Briefing No. 007 tool: The Renewal Gap',result:result})
+  }).catch(()=>{}).finally(()=>{
+    cap.querySelector('.er').style.display='none';
+    cap.querySelector('.microcopy').style.display='none';
+    document.querySelector('[data-done="'+kind+'"]').classList.add('show');
+  });
+}
+
+/* newsletter: the reminder row under the contents and the form in the close section */
+document.querySelectorAll('form.signup').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=form.querySelector('input[type=email]').value.trim();
+    if(!email) return;
+    const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+    fetch(NEWSLETTER_ENDPOINT,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:email,source:'Briefing No. 007',placement:form.getAttribute('data-src')||''})
+    }).catch(()=>{}).finally(()=>{
+      form.innerHTML='<p class="signup-done">On the list. No. 008 comes your way next week.</p>';
+    });
+  });
+});
+</script>
+</body>
+</html>
