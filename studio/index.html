@@ -424,6 +424,7 @@ html[data-brand="gabes"] .gdOnly{display:none}
     </div>
     <div class="stagebar">
       <button class="btn" id="copyCapBtn">Copy caption</button>
+      <button class="btn ghost small" id="fitCapBtn">Fit to channel</button>
       <button class="btn ghost small" id="regenBtn">Rebuild caption</button>
     </div>
   </section>
@@ -873,7 +874,12 @@ var GOUDE = {
     {id:'instrument', name:'The tool'}
   ],
   pairs:[['statement','instrument'],['figure','mistake'],['statement','line'],['figure','instrument'],['statement','mistake']],
-  toggles:[['wordmark','Wordmark',true],['stamp','Issue stamp',true],['support','Support line',true],['footer','Footer',true],['rule','Statement rule',true]],
+  /* STUDIO_DATE_OFF_PATCH 2026-09-13: 'Issue date' is a toggle of its own and
+     it starts OFF. The stamp used to carry the issue number and the date as one
+     unit, which put a publication date on artwork that stays up for months and
+     made every operator uncheck the whole stamp by hand every morning. The
+     number survives; the date is opt in. */
+  toggles:[['wordmark','Wordmark',true],['stamp','Issue stamp',true],['stampdate','Issue date',false],['support','Support line',true],['footer','Footer',true],['rule','Statement rule',true]],
   defaults:{layout:'statement', weight:'500', track:-20, align:'left', world:'mint'},
   dayLabel:function(i){ return DAYS[i % DAYS.length]; },
   slotLabel:function(s){ return s; },
@@ -1061,7 +1067,8 @@ var GOUDE = {
       ctx.fillStyle=wd.ink; ctx.font='700 '+Math.round(19*s)+'px '+INTER;
       if(S.toggles.wordmark) dt(ctx,'THE GOUDE GROUP',left,topY,19*s*0.22);
       if(S.toggles.stamp){
-        var st=(S.meta.no?S.meta.no.toUpperCase():'')+(S.meta.date?'  ·  '+S.meta.date.toUpperCase():'');
+        /* STUDIO_DATE_OFF_PATCH: the date rides only when S.toggles.stampdate is on. */
+        var st=(S.meta.no?S.meta.no.toUpperCase():'')+((S.toggles.stampdate && S.meta.date)?'  ·  '+S.meta.date.toUpperCase():'');
         if(!st) st='WEEKLY INTELLIGENCE';
         ctx.fillStyle=wd.soft;
         dt(ctx,st,W-M-mw(ctx,st,19*s*0.18),topY,19*s*0.18);
@@ -1652,6 +1659,41 @@ function captionFor(post){
   return (S.brand === 'goude' && S.format === 'x' && post.captionX) ? post.captionX : (post.caption || '');
 }
 
+/* ---------- STUDIO_CAPTION_FIT_PATCH 2026-09-13 ----------
+   The house ceiling used to be a refusal. A caption over it disabled the post
+   button and left the operator to hand trim, which is where the morning run
+   kept stopping on IG feed and on Threads, the two tightest channels on the
+   Goude side. The fan-out spec says fold at the house ceiling and refuse only
+   at the platform ceiling, so the Studio now does the folding.
+
+   foldTo cuts on a paragraph break first, then a sentence end, then a word.
+   Never mid word, never on a caption that already fits. Rebuild caption
+   restores the full text, so nothing is destroyed. */
+function foldTo(t, cap){
+  t = String(t == null ? '' : t);
+  if(!cap || t.length <= cap) return t;
+  var slice = t.slice(0, cap);
+  var cut = Math.max(slice.lastIndexOf('\n\n'), slice.lastIndexOf('. '), slice.lastIndexOf('.\n'));
+  if(cut > cap * 0.45){
+    return t.slice(0, cut + (slice.charAt(cut) === '.' ? 1 : 0)).replace(/\s+$/, '');
+  }
+  var w = slice.lastIndexOf(' ');
+  return (w > cap * 0.45 ? slice.slice(0, w) : slice).replace(/[\s,;:]+$/, '');
+}
+
+/* Folds the caption box to the current channel's house ceiling. Returns true
+   when it changed something, so the caller can say so out loud. */
+function fitCaptionToChannel(){
+  var f = fmtNow(), box = $('capText');
+  if(!f || !f.maxChars || !box) return false;
+  var before = box.value;
+  var after = foldTo(before, f.maxChars);
+  if(after === before) return false;
+  box.value = after;
+  updateCapMeta();
+  return true;
+}
+
 function applyPost(post){
   S.card.kicker = post.kicker; S.card.statement = post.statement;
   S.card.figure = post.figure || ''; S.card.support = post.support || '';
@@ -1660,6 +1702,7 @@ function applyPost(post){
   S.layout = post.layout;
   syncFields();
   $('capText').value = captionFor(post);
+  fitCaptionToChannel();   /* STUDIO_CAPTION_FIT_PATCH */
   updateCapMeta();
   renderSegs(); draw();
 }
@@ -1782,9 +1825,17 @@ function updateCapMeta(){
     }
     var over = Boolean(cap) && t.length > cap;
     pb.disabled = over;
+    /* STUDIO_CAPTION_FIT_PATCH: a refusal that does not say what to press is
+       a dead end, and this one was being hit every morning. */
     pb.textContent = over
-      ? ('Too long for ' + f.name + ' (' + t.length + '/' + cap + ')')
+      ? ('Too long for ' + f.name + ' (' + t.length + '/' + cap + '), press Fit to channel')
       : 'Post to OmniSocials (~30 min)';
+  }
+  var fb = $('fitCapBtn');
+  if(fb){
+    var needsFit = Boolean(cap) && t.length > cap;
+    fb.disabled = !needsFit;
+    fb.textContent = needsFit ? ('Fit to ' + f.name) : 'Fits ' + (f.name || '');
   }
   var fold = t.slice(0,210), cut = fold.lastIndexOf(' ');
   if(cut > 60) fold = fold.slice(0,cut);
@@ -1925,10 +1976,21 @@ function postOmniSocials(){
   var caption = ($('capText').value || '').trim();
   if(!caption){ setStatus('write a caption first.', true);
     toast('write a caption first'); return; }   /* STUDIO_FEEDBACK_PATCH */
+  /* STUDIO_CAPTION_FIT_PATCH 2026-09-13: this used to refuse and stop, which
+     is what the morning run kept hitting on IG feed and Threads. It now folds
+     to the channel's ceiling, says so, and carries on. It only refuses if the
+     fold could not get under the ceiling, which means a single word longer
+     than the whole limit. */
   if(f.maxChars && caption.length > f.maxChars){
-    setStatus('caption is ' + caption.length + ' characters, over the ' + f.maxChars + ' limit for ' + f.name + ' - shorten it before posting.', true);
-    toast('too long for ' + f.name + ': ' + caption.length + '/' + f.maxChars);
-    return;
+    var wasLen = caption.length;
+    if(fitCaptionToChannel()) caption = ($('capText').value || '').trim();
+    if(caption.length > f.maxChars){
+      setStatus('caption is ' + caption.length + ' characters, over the ' + f.maxChars + ' limit for ' + f.name + ' and it will not fold - shorten it before posting.', true);
+      toast('too long for ' + f.name + ': ' + caption.length + '/' + f.maxChars);
+      return;
+    }
+    setStatus('caption folded from ' + wasLen + ' to ' + caption.length + ' for ' + f.name + '.', false);
+    toast('caption fitted to ' + f.name);
   }
   postingOn(f);
   setStatus('rendering the card ...', false);
@@ -2172,6 +2234,10 @@ function bind(){
           var box = $('capText');
           if(cp && (box.value === cp.caption || box.value === cp.captionX)) box.value = captionFor(cp);
         }
+        /* STUDIO_CAPTION_FIT_PATCH: switching channel refits the caption to
+           the channel we just switched to, which is the whole point of the
+           channel having a ceiling of its own. */
+        if(fitCaptionToChannel()) toast('caption fitted to ' + fmtNow().name);
         setTimeout(updateCapMeta,0);
       }
       if(b.hasAttribute('data-layout'))  S.layout  = b.getAttribute('data-layout');
@@ -2217,6 +2283,9 @@ function bind(){
   $('dlBtn').addEventListener('click', download);
   $('dlAllBtn').addEventListener('click', downloadAll);
   $('copyImgBtn').addEventListener('click', copyImage);
+  $('fitCapBtn').addEventListener('click', function(){
+    if(fitCaptionToChannel()) toast('caption fitted to ' + fmtNow().name);
+  });
   $('postOmniBtn').addEventListener('click', postOmniSocials);
   $('capText').addEventListener('input', updateCapMeta);
   $('copyCapBtn').addEventListener('click', function(){
