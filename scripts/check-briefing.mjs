@@ -129,6 +129,15 @@ async function main() {
     }))
   );
   for (const t of tools) {
+    // the instrument now lives in a right-hand drawer, so open it the way a
+    // reader does before driving it, and shut it again afterwards
+    const opener = pg.locator(`[data-tool-open="${t.prefix}"]`);
+    if (await opener.count()) {
+      await opener.click();
+      await pg.waitForTimeout(420);
+      if (!(await pg.locator(`#dw-${t.prefix}`).evaluate((d) => d.classList.contains('on'))))
+        fail(`tool ${t.prefix} drawer did not open`);
+    }
     for (const f of t.fields) {
       if (f.type === 'email') continue;
       if (f.tag === 'SELECT') {
@@ -154,6 +163,7 @@ async function main() {
       else if (cap.length < 60) fail(`tool ${t.prefix} caption is ${cap.length} chars, too thin`);
       else pass(`tool ${t.prefix} computed ${big}`);
     }
+    if (await opener.count()) { await pg.keyboard.press('Escape'); await pg.waitForTimeout(300); }
   }
 
   // share links

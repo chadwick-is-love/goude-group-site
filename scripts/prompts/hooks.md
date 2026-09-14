@@ -12,6 +12,29 @@ The tone is a competent person telling you something inconvenient without soften
 
 The wit is never the point. It is the residue of saying something true in the fewest possible words. If you find yourself constructing a joke, you have already failed; delete it and state the fact more plainly, and the dryness will arrive on its own.
 
+# CALL IT
+
+Before the tests, the posture, because it is the thing most headlines miss.
+
+The headline renders a verdict. It does not describe a situation and leave the
+reader to work out what we think. We read the week, we know what is going on,
+and we say it. Balls and strikes, called out loud, by someone with the standing
+to call them.
+
+In practice that means the ruling comes first and the evidence comes second.
+"You are measuring the wrong shelf" is a call. "1.28 percent of products appear
+in AI Mode" is a reading off an instrument, and a reader can do nothing with it
+until somebody says what it means. Put the sentence that takes a position at the
+front, then hand over the number that earns it.
+
+This is the difference between a page worth reading and a page that aggregates.
+Everyone has the same facts by Tuesday. The statement above the noise is the
+only thing that is ours.
+
+Say it plainly enough that we could be wrong. A hook nobody could disagree with
+is not a call, it is a summary. If the sentence would survive being printed
+under our name in front of the company it describes, it is right.
+
 # THE SIX TESTS
 
 Every headline must pass all six.
@@ -23,6 +46,10 @@ Every headline must pass all six.
 **3. Second person, present tense, something being done to them.** The reader is in the sentence. "You are stocked on the shelf people are leaving" beats any construction where the owner is absent and a market is described. Never "businesses should". Never "companies are finding".
 
 **4. The joke is carried by the fact.** "A chemistry wiki from 2008" is funny because it is true and specific. Nothing in the sentence winks, nudges, or sets up a punchline. No rhetorical questions. No "spoiler". No "turns out". The moment a headline reaches for a comic device it stops being intelligence and becomes a newsletter being clever, which is the one failure mode that costs us this reader permanently.
+
+**4b. The ruling leads.** The first sentence takes the position. The second
+delivers the evidence. When a headline opens with a statistic, the position is
+either buried at the end or missing, and both readers and forwards die there.
 
 **5. End on the hard word.** The last word is the one that stays. "Posted anything." "Biggest hurry." "Called progress." Never trail into a qualifier, a date, a hedge, or a subordinate clause explaining the thing you just said.
 

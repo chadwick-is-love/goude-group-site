@@ -923,7 +923,15 @@ var GOUDE = {
       var k = sec.querySelector('.kicker span'), rt = sec.querySelector('.kicker .rt'), h2 = sec.querySelector('h2');
       var briefs = sec.querySelectorAll('.brief > div');
       var pull = sec.querySelector('.pull p');
+      /* the instrument moved out of the article into a right-hand drawer from
+         No. 009 on, so resolve it through the opener's prefix and fall back to
+         the old inline shape for back issues */
       var tname = sec.querySelector('.tool .tname'), tsub = sec.querySelector('.tool .tsub');
+      if(!tname){
+        var opener = sec.querySelector('[data-tool-open]');
+        var dw = opener ? doc.getElementById('dw-' + opener.getAttribute('data-tool-open')) : null;
+        if(dw){ tname = dw.querySelector('.tname'); tsub = dw.querySelector('.tsub'); }
+      }
       var plays = sec.querySelectorAll('.deep-main ol li');
       var go = toc[i] ? toc[i].querySelector('.go') : null;
       var kick = k ? clean(k.textContent) : ('0'+(i+1));

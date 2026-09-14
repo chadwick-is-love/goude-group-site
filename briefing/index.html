@@ -316,6 +316,62 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   .signup input{flex:1 1 100%}
   .signup button{width:100%}
 }
+
+/* ---------- THE INSTRUMENT, AS A DRAWER ---------- */
+.tool-open{
+  display:flex;flex-direction:column;align-items:flex-start;gap:2px;
+  text-align:left;padding:13px 22px 14px;border-radius:2px;
+  background:var(--navy);color:var(--mint);
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.tool-open:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(6,22,43,.22)}
+.tool-open .tk{font-size:9.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.6}
+.tool-open .tnm{font-family:var(--display);font-size:19px;letter-spacing:-.015em;line-height:1.15}
+.tool-open .tgo{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;opacity:.78;margin-top:3px}
+.tool-open .tar{transition:transform .2s ease;display:inline-block}
+.tool-open:hover .tar{transform:translateX(4px)}
+
+.scrim{
+  position:fixed;inset:0;z-index:80;background:rgba(6,22,43,.20);
+  opacity:0;transition:opacity .32s ease;
+}
+.scrim.on{opacity:1}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:90;
+  width:min(94vw,468px);
+  background:var(--mint-deep);
+  border-left:2.5px solid var(--navy);
+  box-shadow:-26px 0 60px rgba(6,22,43,.26);
+  transform:translateX(102%);
+  /* hidden outright when closed, or the shadow paints a band down the page
+     edge and the inputs stay in the tab order */
+  visibility:hidden;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s linear .38s;
+  display:flex;flex-direction:column;
+  overscroll-behavior:contain;
+}
+.drawer.on{
+  transform:translateX(0);visibility:visible;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s;
+}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 14px;border-bottom:1px solid var(--navy-hair);flex:none;
+}
+.drawer-head .dh-k{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.55}
+.drawer-x{font-size:26px;line-height:1;padding:0 4px;opacity:.55;transition:opacity .2s ease}
+.drawer-x:hover{opacity:1}
+.drawer-body{padding:22px 24px 40px;overflow-y:auto;flex:1 1 auto}
+.drawer-body .tool{box-shadow:none;background:transparent;padding:0;border-radius:0}
+@media(max-width:620px){
+  .drawer{width:100vw;border-left:0;box-shadow:none}
+  .tool-open{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .drawer{transition:transform 0s, visibility 0s}
+  .scrim{transition:none}
+  .tool-open:hover{transform:none}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
@@ -357,11 +413,11 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
   <div class="contents-inner">
     <span class="label">In this issue</span>
     <div class="toc">
-      <a href="#t1"><span class="n">01</span><span class="t">Your AI spend is now set by whoever is in the biggest hurry.</span><span class="go">The meter</span><span class="tk">+ tool</span></a>
-      <a href="#t2"><span class="n">02</span><span class="t">It costs two and a half times more and got worse at your actual job. This is called progress.</span><span class="go">The upgrade</span><span class="tk">+ tool</span></a>
-      <a href="#t3"><span class="n">03</span><span class="t">The instruction said do not post anything. So the agents found a chemistry wiki from 2008 and posted anything.</span><span class="go">The dead drop</span><span class="tk">+ tool</span></a>
-      <a href="#t4"><span class="n">04</span><span class="t">There are two shelves now. You are stocked on the one people are leaving.</span><span class="go">The second shelf</span><span class="tk">+ tool</span></a>
-      <a href="#t5"><span class="n">05</span><span class="t">They do not want your bank login. They want the key somebody pasted into Zapier in March, because that one bills you while it works for them.</span><span class="go">The three hours</span><span class="tk">+ tool</span></a>
+      <a href="#t1"><span class="n">01</span><span class="t">You do not have an AI budget. You have an open tab held by whoever is in the biggest hurry.</span><span class="go">The meter</span><span class="tk">+ tool</span></a>
+      <a href="#t2"><span class="n">02</span><span class="t">Newest is not better. Two and a half times the price to do your work worse, and they called it an upgrade.</span><span class="go">The upgrade</span><span class="tk">+ tool</span></a>
+      <a href="#t3"><span class="n">03</span><span class="t">A rule you typed is not a control. Told not to post, the agents went and posted, on a chemistry wiki from 2008.</span><span class="go">The dead drop</span><span class="tk">+ tool</span></a>
+      <a href="#t4"><span class="n">04</span><span class="t">You are measuring the wrong shelf. One in eighty of your listings survives onto the one your customers actually use.</span><span class="go">The second shelf</span><span class="tk">+ tool</span></a>
+      <a href="#t5"><span class="n">05</span><span class="t">Your incident plan is wrong about the clock and wrong about the target. Two hours, and they came for the API key.</span><span class="go">The three hours</span><span class="tk">+ tool</span></a>
     </div>
     <p class="passnote"><b>Send it when it hits.</b> Every article here has its own link; the send button next to each one copies it, ready to text or email to the person who needs it. Back issues stay in the archive and their tools keep working, so nothing you forward goes stale.</p>
     <div class="passrow">
@@ -382,7 +438,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
 <section class="topic" id="t1">
   <div class="topic-inner">
     <div class="kicker"><span>01 / The Trap</span><span class="rt">Brief &middot; 45 sec</span></div>
-    <h2>Your AI spend is now set by whoever is in the biggest hurry.</h2>
+    <h2>You do not have an AI budget. You have an open tab held by whoever is in the biggest hurry.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
@@ -398,8 +454,9 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
       </div>
     </div>
     <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="ot" aria-controls="dw-ot" aria-expanded="false"><span class="tk">The instrument</span><span class="tnm">The Open Tab</span><span class="tgo">Open it <span class="tar">&rarr;</span></span></button>
       <button class="deep-toggle" data-deep="t1" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
-      <button class="share" type="button" data-share="t1" data-title="Your AI spend is now set by whoever is in the biggest hurry."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+      <button class="share" type="button" data-share="t1" data-title="You do not have an AI budget. You have an open tab held by whoever is in the biggest hurry."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
     </div>
     <div class="deep">
       <div class="deep-grid">
@@ -419,7 +476,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
           <ol>
             <li>Owner: get yesterday's token spend on a screen, by person, before the end of this week. If your vendor cannot show it by person, that is the finding.</li>
             <li>Set a daily cap per user, not a monthly one, and set it at roughly twice the median day. The point is to catch the outlier on the day it happens.</li>
-            <li>Name a default model for ordinary work and a named person who approves the exception. Write it on one page with the tool on the right.</li>
+            <li>Name a default model for ordinary work and a named person who approves the exception. Write it on one page with the instrument.</li>
             <li>Price your exposure with the calculator before your next renewal conversation, and take the number into the room.</li>
           </ol>
           <div class="sources">
@@ -429,21 +486,6 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         </div>
         <aside class="deep-aside">
           <div class="pull"><p>Consumption pricing moved the decision out of the budget and into the moment of use, where nobody is checking and the invoice arrives a month later.</p></div>
-          <div class="tool" data-tool="ot">
-            <span class="tlabel">The instrument &middot; live</span>
-            <span class="tname">The Open Tab</span>
-            <span class="tsub">Three numbers. It prices what your AI usage costs a year, and what the same volume costs on the cheapest and most expensive tier available to you.</span>
-            <span class="tfree">Free to use, like every tool in every issue</span>
-            <div class="fieldset">
-              <div><label class="fl" for="ot-people">PEOPLE WITH AI ACCESS</label><input id="ot-people" type="number" inputmode="numeric" min="0" placeholder="e.g. 40" data-live="ot" /></div>
-              <div><label class="fl" for="ot-tok">AVERAGE TOKENS PER PERSON PER DAY, IN THOUSANDS</label><input id="ot-tok" type="number" inputmode="numeric" min="0" placeholder="e.g. 120" data-live="ot" /></div>
-              <div><label class="fl" for="ot-price">BLENDED PRICE PER MILLION TOKENS, IN DOLLARS</label><input id="ot-price" type="number" inputmode="decimal" min="0" placeholder="e.g. 18" data-live="ot" /></div>
-            </div>
-            <div class="readout" id="ot-readout" style="display:none">
-              <div class="big" id="ot-big">$0</div>
-              <div class="cap" id="ot-cap"></div>
-            </div>
-          </div>
         </aside>
       </div>
     </div>
@@ -454,7 +496,7 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
 <section class="topic" id="t2">
   <div class="topic-inner">
     <div class="kicker"><span>02 / The Truth</span><span class="rt">Brief &middot; 45 sec</span></div>
-    <h2>It costs two and a half times more and got worse at your actual job. This is called progress.</h2>
+    <h2>Newest is not better. Two and a half times the price to do your work worse, and they called it an upgrade.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
@@ -470,8 +512,9 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
       </div>
     </div>
     <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="mp" aria-controls="dw-mp" aria-expanded="false"><span class="tk">The instrument</span><span class="tnm">The Routing Policy</span><span class="tgo">Open it <span class="tar">&rarr;</span></span></button>
       <button class="deep-toggle" data-deep="t2" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
-      <button class="share" type="button" data-share="t2" data-title="It costs two and a half times more and got worse at your actual job. This is called progress."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+      <button class="share" type="button" data-share="t2" data-title="Newest is not better. Two and a half times the price to do your work worse, and they called it an upgrade."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
     </div>
     <div class="deep">
       <div class="deep-grid">
@@ -501,22 +544,6 @@ footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
         </div>
         <aside class="deep-aside">
           <div class="pull"><p>The model spends fewer reasoning turns per task, which is what makes it cheaper to run an agent and weaker at the drafting your team does all day.</p></div>
-          <div class="tool" data-tool="mp">
-            <span class="tlabel">The instrument &middot; writes the policy</span>
-            <span class="tname">The Routing Policy</span>
-            <span class="tsub">Three fields. It writes the one page that says which work goes to which model tier, with the blind bake-off protocol underneath it.</span>
-            <span class="tfree">Free to use, like every tool in every issue</span>
-            <div class="fieldset">
-              <div><label class="fl" for="mp-co">YOUR COMPANY</label><input id="mp-co" type="text" placeholder="e.g. Meridian Supply" /></div>
-              <div><label class="fl" for="mp-jobs">THE JOBS YOUR TEAM SENDS AI MOST, ONE PER LINE</label><textarea id="mp-jobs" rows="4" placeholder="drafting quote follow-ups
-summarizing customer calls
-pulling line items out of supplier PDFs"></textarea></div>
-              <div><label class="fl" for="mp-who">WHO OWNS THE AI BILL</label><input id="mp-who" type="text" placeholder="e.g. the controller" /></div>
-            </div>
-            <button class="tbtn" type="button" data-build="mp">Write the policy</button>
-            <div class="out" id="mp-out"></div>
-            <button class="tbtn ghost" type="button" data-copy="mp-out" style="display:none" id="mp-copy">Copy to clipboard</button>
-          </div>
         </aside>
       </div>
     </div>
@@ -527,7 +554,7 @@ pulling line items out of supplier PDFs"></textarea></div>
 <section class="topic" id="t3">
   <div class="topic-inner">
     <div class="kicker"><span>03 / The Absurd</span><span class="rt">Brief &middot; 45 sec</span></div>
-    <h2>The instruction said do not post anything. So the agents found a chemistry wiki from 2008 and posted anything.</h2>
+    <h2>A rule you typed is not a control. Told not to post, the agents went and posted, on a chemistry wiki from 2008.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
@@ -543,8 +570,9 @@ pulling line items out of supplier PDFs"></textarea></div>
       </div>
     </div>
     <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="ap" aria-controls="dw-ap" aria-expanded="false"><span class="tk">The instrument</span><span class="tnm">The Agent Permissions Page</span><span class="tgo">Open it <span class="tar">&rarr;</span></span></button>
       <button class="deep-toggle" data-deep="t3" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
-      <button class="share" type="button" data-share="t3" data-title="The instruction said do not post anything. So the agents found a chemistry wiki from 2008 and posted anything."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+      <button class="share" type="button" data-share="t3" data-title="A rule you typed is not a control. Told not to post, the agents went and posted, on a chemistry wiki from 2008."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
     </div>
     <div class="deep">
       <div class="deep-grid">
@@ -565,7 +593,7 @@ pulling line items out of supplier PDFs"></textarea></div>
             <li>Ask whoever runs your agent for the egress list. Every domain and service it can reach. If the answer is a paragraph rather than a list, you do not have a boundary.</li>
             <li>Separate read from write. Most agents need to read broadly and write to almost nothing. Configure it that way and see what actually breaks.</li>
             <li>Write the three things it may never do without a person, and put them somewhere other than the system prompt.</li>
-            <li>Name who reads the logs and on what day. Use the tool on the right to write the whole page in one pass.</li>
+            <li>Name who reads the logs and on what day. Use the instrument to write the whole page in one pass.</li>
           </ol>
           <div class="sources">
             <span class="label">Sources</span>
@@ -574,22 +602,6 @@ pulling line items out of supplier PDFs"></textarea></div>
         </div>
         <aside class="deep-aside">
           <div class="pull"><p>The restriction lived in the prompt, where the model reads it, and not in the network, where something could actually have stopped it.</p></div>
-          <div class="tool" data-tool="ap">
-            <span class="tlabel">The instrument &middot; writes the page</span>
-            <span class="tname">The Agent Permissions Page</span>
-            <span class="tsub">Three fields. It writes the one page that says what your agent may read, what it may write, what it may reach, and who reads the logs.</span>
-            <span class="tfree">Free to use, like every tool in every issue</span>
-            <div class="fieldset">
-              <div><label class="fl" for="ap-co">YOUR COMPANY</label><input id="ap-co" type="text" placeholder="e.g. Meridian Supply" /></div>
-              <div><label class="fl" for="ap-what">WHAT THE AGENT DOES</label><input id="ap-what" type="text" placeholder="e.g. answers supplier email and updates the order log" /></div>
-              <div><label class="fl" for="ap-sys">SYSTEMS AND SERVICES IT TOUCHES, ONE PER LINE</label><textarea id="ap-sys" rows="4" placeholder="the shared inbox
-the order database
-the supplier portal"></textarea></div>
-            </div>
-            <button class="tbtn" type="button" data-build="ap">Write the page</button>
-            <div class="out" id="ap-out"></div>
-            <button class="tbtn ghost" type="button" data-copy="ap-out" style="display:none" id="ap-copy">Copy to clipboard</button>
-          </div>
         </aside>
       </div>
     </div>
@@ -600,7 +612,7 @@ the supplier portal"></textarea></div>
 <section class="topic" id="t4">
   <div class="topic-inner">
     <div class="kicker"><span>04 / The Shift</span><span class="rt">Brief &middot; 45 sec</span></div>
-    <h2>There are two shelves now. You are stocked on the one people are leaving.</h2>
+    <h2>You are measuring the wrong shelf. One in eighty of your listings survives onto the one your customers actually use.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
@@ -616,8 +628,9 @@ the supplier portal"></textarea></div>
       </div>
     </div>
     <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="ag" aria-controls="dw-ag" aria-expanded="false"><span class="tk">The instrument</span><span class="tnm">The Answer Gap</span><span class="tgo">Open it <span class="tar">&rarr;</span></span></button>
       <button class="deep-toggle" data-deep="t4" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
-      <button class="share" type="button" data-share="t4" data-title="There are two shelves now. You are stocked on the one people are leaving."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+      <button class="share" type="button" data-share="t4" data-title="You are measuring the wrong shelf. One in eighty of your listings survives onto the one your customers actually use."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
     </div>
     <div class="deep">
       <div class="deep-grid">
@@ -632,7 +645,7 @@ the supplier portal"></textarea></div>
           </div>
           <h3>The premium is the signal, not the price</h3>
           <p>Most coverage of the Productrise study read it as consumers being overcharged. For an owner the more useful reading is the reverse. A surface that consistently surfaces the more expensive option is a surface that is not ranking on price, and that is the first genuinely good news in this category in two years. Something is selecting on other criteria: catalog quality, structured data, seller reputation, the specificity of your product information. Those are things you can change, and unlike ad spend they compound. The companies that lose here are the ones whose only differentiator was being three dollars cheaper.</p>
-          <p>The immediate work is measurement, and it is manual, and it takes twenty minutes. Take your five highest margin products. Run the query a customer would actually type into both Google's AI Mode and the traditional results. Write down whether you appear, at what price, and who the lead seller is. That grid is your real position, and it will not match anything in your marketing report. Then, before your next channel budget conversation, price what share of your revenue currently begins in a search box. That is the number that is exposed, and the tool on the right puts a figure on it.</p>
+          <p>The immediate work is measurement, and it is manual, and it takes twenty minutes. Take your five highest margin products. Run the query a customer would actually type into both Google's AI Mode and the traditional results. Write down whether you appear, at what price, and who the lead seller is. That grid is your real position, and it will not match anything in your marketing report. Then, before your next channel budget conversation, price what share of your revenue currently begins in a search box. That is the number that is exposed, and the instrument puts a figure on it.</p>
           <h3>The play</h3>
           <ol>
             <li>Run the five query test this week. Five products, both surfaces, three columns: do you appear, at what price, and which seller is quoted.</li>
@@ -647,21 +660,6 @@ the supplier portal"></textarea></div>
         </div>
         <aside class="deep-aside">
           <div class="pull"><p>Something is now selecting on catalog quality and seller reputation rather than lowest price, which is the first thing in two years that rewards being good over being cheap.</p></div>
-          <div class="tool" data-tool="ag">
-            <span class="tlabel">The instrument &middot; live</span>
-            <span class="tname">The Answer Gap</span>
-            <span class="tsub">Three numbers. It prices the gross profit sitting behind a search box, and what it costs you at three levels of invisibility.</span>
-            <span class="tfree">Free to use, like every tool in every issue</span>
-            <div class="fieldset">
-              <div><label class="fl" for="ag-rev">ANNUAL REVENUE THAT STARTS WITH A SEARCH, IN DOLLARS</label><input id="ag-rev" type="number" inputmode="numeric" min="0" placeholder="e.g. 4200000" data-live="ag" /></div>
-              <div><label class="fl" for="ag-marg">GROSS MARGIN ON THAT REVENUE, IN PERCENT</label><input id="ag-marg" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 38" data-live="ag" /></div>
-              <div><label class="fl" for="ag-shift">SHARE OF THOSE SEARCHES YOU EXPECT TO MOVE TO AI ANSWERS IN TWO YEARS, IN PERCENT</label><input id="ag-shift" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 40" data-live="ag" /></div>
-            </div>
-            <div class="readout" id="ag-readout" style="display:none">
-              <div class="big" id="ag-big">$0</div>
-              <div class="cap" id="ag-cap"></div>
-            </div>
-          </div>
         </aside>
       </div>
     </div>
@@ -672,7 +670,7 @@ the supplier portal"></textarea></div>
 <section class="topic" id="t5">
   <div class="topic-inner">
     <div class="kicker"><span>05 / The Warning</span><span class="rt">Brief &middot; 45 sec</span></div>
-    <h2>They do not want your bank login. They want the key somebody pasted into Zapier in March, because that one bills you while it works for them.</h2>
+    <h2>Your incident plan is wrong about the clock and wrong about the target. Two hours, and they came for the API key.</h2>
     <div class="brief">
       <div>
         <span class="label">What moved</span>
@@ -688,8 +686,9 @@ the supplier portal"></textarea></div>
       </div>
     </div>
     <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="kr" aria-controls="dw-kr" aria-expanded="false"><span class="tk">The instrument</span><span class="tnm">The Key Register</span><span class="tgo">Open it <span class="tar">&rarr;</span></span></button>
       <button class="deep-toggle" data-deep="t5" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
-      <button class="share" type="button" data-share="t5" data-title="They do not want your bank login. They want the key somebody pasted into Zapier in March, because that one bills you while it works for them."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+      <button class="share" type="button" data-share="t5" data-title="Your incident plan is wrong about the clock and wrong about the target. Two hours, and they came for the API key."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
     </div>
     <div class="deep">
       <div class="deep-grid">
@@ -719,23 +718,6 @@ the supplier portal"></textarea></div>
         </div>
         <aside class="deep-aside">
           <div class="pull"><p>Your incident plan assumes days. The window is now shorter than a lunch and a meeting.</p></div>
-          <div class="tool" data-tool="kr">
-            <span class="tlabel">The instrument &middot; writes the register</span>
-            <span class="tname">The Key Register</span>
-            <span class="tsub">Three fields. It writes the register, the rotation order and the two hour incident rule, ready to hand to whoever runs your systems.</span>
-            <span class="tfree">Free to use, like every tool in every issue</span>
-            <div class="fieldset">
-              <div><label class="fl" for="kr-co">YOUR COMPANY</label><input id="kr-co" type="text" placeholder="e.g. Meridian Supply" /></div>
-              <div><label class="fl" for="kr-sys">WHERE API KEYS LIVE TODAY, ONE PER LINE</label><textarea id="kr-sys" rows="4" placeholder="the Zapier account
-the website server
-two laptops
-somebody's notes app"></textarea></div>
-              <div><label class="fl" for="kr-who">WHO CAN ROTATE A KEY TODAY</label><input id="kr-who" type="text" placeholder="e.g. our outside IT provider" /></div>
-            </div>
-            <button class="tbtn" type="button" data-build="kr">Write the register</button>
-            <div class="out" id="kr-out"></div>
-            <button class="tbtn ghost" type="button" data-copy="kr-out" style="display:none" id="kr-copy">Copy to clipboard</button>
-          </div>
         </aside>
       </div>
     </div>
@@ -785,6 +767,134 @@ somebody's notes app"></textarea></div>
   </div>
 </footer>
 
+<div class="scrim" data-tool-close hidden></div>
+<div class="drawers">
+  <aside class="drawer" id="dw-ot" role="dialog" aria-modal="false" aria-label="The Open Tab" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">The instrument</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="ot">
+        <span class="tlabel">The instrument &middot; live</span>
+        <span class="tname">The Open Tab</span>
+        <span class="tsub">Three numbers. It prices what your AI usage costs a year, and what the same volume costs on the cheapest and most expensive tier available to you.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="ot-people">PEOPLE WITH AI ACCESS</label><input id="ot-people" type="number" inputmode="numeric" min="0" placeholder="e.g. 40" data-live="ot" /></div>
+          <div><label class="fl" for="ot-tok">AVERAGE TOKENS PER PERSON PER DAY, IN THOUSANDS</label><input id="ot-tok" type="number" inputmode="numeric" min="0" placeholder="e.g. 120" data-live="ot" /></div>
+          <div><label class="fl" for="ot-price">BLENDED PRICE PER MILLION TOKENS, IN DOLLARS</label><input id="ot-price" type="number" inputmode="decimal" min="0" placeholder="e.g. 18" data-live="ot" /></div>
+        </div>
+        <div class="readout" id="ot-readout" style="display:none">
+          <div class="big" id="ot-big">$0</div>
+          <div class="cap" id="ot-cap"></div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-mp" role="dialog" aria-modal="false" aria-label="The Routing Policy" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">The instrument</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="mp">
+        <span class="tlabel">The instrument &middot; writes the policy</span>
+        <span class="tname">The Routing Policy</span>
+        <span class="tsub">Three fields. It writes the one page that says which work goes to which model tier, with the blind bake-off protocol underneath it.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="mp-co">YOUR COMPANY</label><input id="mp-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+          <div><label class="fl" for="mp-jobs">THE JOBS YOUR TEAM SENDS AI MOST, ONE PER LINE</label><textarea id="mp-jobs" rows="4" placeholder="drafting quote follow-ups
+summarizing customer calls
+pulling line items out of supplier PDFs"></textarea></div>
+          <div><label class="fl" for="mp-who">WHO OWNS THE AI BILL</label><input id="mp-who" type="text" placeholder="e.g. the controller" /></div>
+        </div>
+        <button class="tbtn" type="button" data-build="mp">Write the policy</button>
+        <div class="out" id="mp-out"></div>
+        <button class="tbtn ghost" type="button" data-copy="mp-out" style="display:none" id="mp-copy">Copy to clipboard</button>
+      </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-ap" role="dialog" aria-modal="false" aria-label="The Agent Permissions Page" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">The instrument</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="ap">
+        <span class="tlabel">The instrument &middot; writes the page</span>
+        <span class="tname">The Agent Permissions Page</span>
+        <span class="tsub">Three fields. It writes the one page that says what your agent may read, what it may write, what it may reach, and who reads the logs.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="ap-co">YOUR COMPANY</label><input id="ap-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+          <div><label class="fl" for="ap-what">WHAT THE AGENT DOES</label><input id="ap-what" type="text" placeholder="e.g. answers supplier email and updates the order log" /></div>
+          <div><label class="fl" for="ap-sys">SYSTEMS AND SERVICES IT TOUCHES, ONE PER LINE</label><textarea id="ap-sys" rows="4" placeholder="the shared inbox
+the order database
+the supplier portal"></textarea></div>
+        </div>
+        <button class="tbtn" type="button" data-build="ap">Write the page</button>
+        <div class="out" id="ap-out"></div>
+        <button class="tbtn ghost" type="button" data-copy="ap-out" style="display:none" id="ap-copy">Copy to clipboard</button>
+      </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-ag" role="dialog" aria-modal="false" aria-label="The Answer Gap" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">The instrument</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="ag">
+        <span class="tlabel">The instrument &middot; live</span>
+        <span class="tname">The Answer Gap</span>
+        <span class="tsub">Three numbers. It prices the gross profit sitting behind a search box, and what it costs you at three levels of invisibility.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="ag-rev">ANNUAL REVENUE THAT STARTS WITH A SEARCH, IN DOLLARS</label><input id="ag-rev" type="number" inputmode="numeric" min="0" placeholder="e.g. 4200000" data-live="ag" /></div>
+          <div><label class="fl" for="ag-marg">GROSS MARGIN ON THAT REVENUE, IN PERCENT</label><input id="ag-marg" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 38" data-live="ag" /></div>
+          <div><label class="fl" for="ag-shift">SHARE OF THOSE SEARCHES YOU EXPECT TO MOVE TO AI ANSWERS IN TWO YEARS, IN PERCENT</label><input id="ag-shift" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 40" data-live="ag" /></div>
+        </div>
+        <div class="readout" id="ag-readout" style="display:none">
+          <div class="big" id="ag-big">$0</div>
+          <div class="cap" id="ag-cap"></div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-kr" role="dialog" aria-modal="false" aria-label="The Key Register" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">The instrument</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="kr">
+        <span class="tlabel">The instrument &middot; writes the register</span>
+        <span class="tname">The Key Register</span>
+        <span class="tsub">Three fields. It writes the register, the rotation order and the two hour incident rule, ready to hand to whoever runs your systems.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="kr-co">YOUR COMPANY</label><input id="kr-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+          <div><label class="fl" for="kr-sys">WHERE API KEYS LIVE TODAY, ONE PER LINE</label><textarea id="kr-sys" rows="4" placeholder="the Zapier account
+the website server
+two laptops
+somebody's notes app"></textarea></div>
+          <div><label class="fl" for="kr-who">WHO CAN ROTATE A KEY TODAY</label><input id="kr-who" type="text" placeholder="e.g. our outside IT provider" /></div>
+        </div>
+        <button class="tbtn" type="button" data-build="kr">Write the register</button>
+        <div class="out" id="kr-out"></div>
+        <button class="tbtn ghost" type="button" data-copy="kr-out" style="display:none" id="kr-copy">Copy to clipboard</button>
+      </div>
+
+    </div>
+  </aside>
+</div>
+
 <script>
 const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
 const ISSUE_URL='https://goudegroup.com/briefing/';
@@ -798,8 +908,11 @@ const money=n=>'$'+Math.round(n).toLocaleString('en-US');
 
 /* one delegated listener for toggles, builds, copies, shares */
 document.addEventListener('click',e=>{
-  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-share]');
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-share],[data-tool-open],[data-tool-close]');
   if(!t) return;
+
+  if(t.hasAttribute('data-tool-close')){ closeDrawer(); return; }
+  if(t.dataset.toolOpen){ openDrawer(t.dataset.toolOpen,t); return; }
 
   if(t.dataset.deep){
     const topic=t.closest('.topic');
@@ -817,6 +930,40 @@ document.addEventListener('click',e=>{
   }
   if(t.dataset.share){ doShare(t); return; }
 });
+
+/* ---------- the instrument, as a drawer ---------- */
+const scrim=document.querySelector('.scrim');
+let openTool=null, lastOpener=null;
+function openDrawer(pre,btn){
+  if(openTool===pre){ closeDrawer(); return; }
+  if(openTool) closeDrawer(true);
+  const d=document.getElementById('dw-'+pre);
+  if(!d) return;
+  openTool=pre; lastOpener=btn||null;
+  scrim.hidden=false;
+  requestAnimationFrame(()=>{ scrim.classList.add('on'); d.classList.add('on'); });
+  d.setAttribute('aria-hidden','false');
+  if(btn) btn.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+  const f=d.querySelector('input,textarea,select,button');
+  if(f) setTimeout(()=>f.focus({preventScroll:true}),340);
+}
+function closeDrawer(quiet){
+  if(!openTool) return;
+  const d=document.getElementById('dw-'+openTool);
+  if(d){ d.classList.remove('on'); d.setAttribute('aria-hidden','true'); }
+  const b=document.querySelector('[data-tool-open="'+openTool+'"]');
+  if(b) b.setAttribute('aria-expanded','false');
+  openTool=null;
+  if(!quiet){
+    scrim.classList.remove('on');
+    setTimeout(()=>{ if(!openTool) scrim.hidden=true; },340);
+    document.body.style.overflow='';
+    if(lastOpener) lastOpener.focus({preventScroll:true});
+  }
+  lastOpener=null;
+}
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
 
 /* ---------- sharing ---------- */
 function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
