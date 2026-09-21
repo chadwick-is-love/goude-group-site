@@ -3,10 +3,19 @@
  * omnisocials.php - shared server-side helpers for talking to OmniSocials.
  *
  * Same key-file idiom already proven in the gabes-social-studio repo: the
- * key never reaches the browser. Read (in order) from:
- *   1) environment variable OMNISOCIALS_API_KEY
- *   2) omnisocials-key.txt one level ABOVE this folder (outside the web folder)
- *   3) omnisocials-key.txt in this folder (blocked from the web by .htaccess)
+ * key never reaches the browser.
+ *
+ * GABES_KEY_PATCH 2026-09-21: keys are PER BRAND, because each brand is its own
+ * OmniSocials workspace:
+ *   goude -> "Goude Group / Gabes", workspace 1000120
+ *   gabes -> "Gabes.AI / Gabes",   workspace 1000551 (0 accounts on 2026-09-21)
+ * For each brand the key is read (in order) from:
+ *   1) an environment variable  (OMNISOCIALS_API_KEY / OMNISOCIALS_API_KEY_GABES)
+ *   2) its key file one level ABOVE this folder
+ *   3) its key file in this folder (blocked from the web by .htaccess)
+ * Key files: omnisocials-key.txt (goude, unchanged) and omnisocials-key-gabes.txt.
+ * A brand NEVER falls back to another brand's key: >gabes work posted with the
+ * Goude key would land in the Goude workspace.
  *
  * channels.json maps brand -> platform key (matching GB_FORMATS and
  * GD_FORMATS ids in index.html) -> the OmniSocials channel/account id it
@@ -15,8 +24,9 @@
  *
  * All six connected accounts in that workspace are The Goude Group's
  * (instagram, facebook, linkedin_page, x, threads, pinterest - verified
- * against GET /accounts 2026-08-31). There is no gabes.ai account yet, so
- * the "gabes" map is empty on purpose.
+ * against GET /accounts 2026-08-31). The >gabes accounts live in their own
+ * workspace (1000551), which had none connected on 2026-09-21, so the "gabes"
+ * map is empty on purpose until they are.
  *
  * Base API shape proven live in production, first by Brother Holiday's
  * card_upload.py, then again directly against this workspace 2026-08-28
@@ -28,10 +38,19 @@
 
 const OMNISOCIALS_BASE = 'https://api.omnisocials.com/v1';
 
-function omnisocials_key() {
-    $env = getenv('OMNISOCIALS_API_KEY');
+const OMNISOCIALS_KEY_SOURCES = [
+    'goude' => ['env' => 'OMNISOCIALS_API_KEY',       'file' => 'omnisocials-key.txt'],
+    'gabes' => ['env' => 'OMNISOCIALS_API_KEY_GABES', 'file' => 'omnisocials-key-gabes.txt'],
+];
+
+// Defaults to goude so any caller written before brand-scoped keys keeps its
+// old behaviour. An unknown brand gets no key at all.
+function omnisocials_key($brand = 'goude') {
+    if (!array_key_exists($brand, OMNISOCIALS_KEY_SOURCES)) return '';
+    $src = OMNISOCIALS_KEY_SOURCES[$brand];
+    $env = getenv($src['env']);
     if ($env) return trim($env);
-    foreach ([__DIR__ . '/../omnisocials-key.txt', __DIR__ . '/omnisocials-key.txt'] as $p) {
+    foreach ([__DIR__ . '/../' . $src['file'], __DIR__ . '/' . $src['file']] as $p) {
         if (is_readable($p)) {
             $k = trim(file_get_contents($p));
             if ($k !== '') return $k;

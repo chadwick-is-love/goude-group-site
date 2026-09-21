@@ -29,12 +29,13 @@ AuthUserFile "/home/u644675766/studio.htpasswd"
 Require valid-user
 
 # ---------------------------------------------------------------------------
-# 2. Block the OmniSocials key file from ever being served over the web.
+# 2. Block the OmniSocials key files (omnisocials-key.txt and any
+#    omnisocials-key-<brand>.txt) from ever being served over the web.
 #    (PHP still reads it from disk; this only stops browser access.)
 #    Kept as a second line of defence - it must hold even if the auth block
 #    above is ever removed or misconfigured.
 # ---------------------------------------------------------------------------
-<FilesMatch "(omnisocials-key\.txt|\.htpasswd)$">
+<FilesMatch "(omnisocials-key[-a-z]*\.txt|\.htpasswd)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>

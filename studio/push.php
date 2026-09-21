@@ -79,6 +79,9 @@ const PLATFORM_POST_TYPE = [
     'ig_story' => 'story', 'facebook' => 'post', 'threads' => 'post',
 ];
 const BRANDS = ['goude', 'gabes'];
+// GABES_KEY_PATCH 2026-09-21: each brand is its own OmniSocials workspace, and
+// every channel id carries its workspace id as a prefix (1000120_linkedin_page).
+const BRAND_WORKSPACE = ['goude' => '1000120', 'gabes' => '1000551'];
 
 function fail($msg, $code = 200) {
     http_response_code($code);
@@ -86,10 +89,6 @@ function fail($msg, $code = 200) {
     exit;
 }
 
-$key = omnisocials_key();
-if ($key === '') {
-    fail('no omnisocials key on the server. add omnisocials-key.txt next to push.php.');
-}
 $channels = omnisocials_channels();
 
 $in = json_decode(file_get_contents('php://input'), true);
@@ -104,6 +103,13 @@ $dataUrl = $in['image'] ?? '';
 if (!in_array($brand, BRANDS, true)) {
     fail('unknown brand: ' . $brand);
 }
+// GABES_KEY_PATCH: the key is per brand, so it is read only once the brand is
+// known. No brand ever falls back to another brand's key.
+$key = omnisocials_key($brand);
+if ($key === '') {
+    fail('no OmniSocials key on the server for the ' . $brand . ' side. add '
+        . OMNISOCIALS_KEY_SOURCES[$brand]['file'] . ' next to push.php.');
+}
 if (!array_key_exists($k, PLATFORM_LABELS)) {
     fail('unknown platform: ' . $k);
 }
@@ -115,6 +121,13 @@ if (!array_key_exists($k, PLATFORM_LABELS)) {
 $channelId = trim($channels[$brand][$k] ?? '');
 if ($channelId === '') {
     fail('no channel id configured for ' . $label . ' on the ' . $brand . ' side in channels.json');
+}
+// GABES_KEY_PATCH: refuse a channel id from the wrong workspace outright. This
+// is exactly how >gabes work could end up on Goude Group's feeds (a parked
+// branch in gabes-social-studio maps >gabes to the 1000120 accounts).
+if (strpos($channelId, BRAND_WORKSPACE[$brand] . '_') !== 0) {
+    fail('the ' . $label . ' channel for the ' . $brand . ' side belongs to a different '
+        . 'OmniSocials workspace. check channels.json.');
 }
 if ($caption === '') {
     fail('empty caption');
