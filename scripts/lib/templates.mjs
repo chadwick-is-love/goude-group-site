@@ -9,6 +9,18 @@ const esc = (s) =>
 export const attr = (s) =>
   String(s).replace(/<[^>]+>/g, '').replace(/&/g, '&amp;').replace(/"/g, '&quot;');
 
+// The drawer label, as shipped in No. 009: "live" or "writes the policy". The page
+// stopped calling the tool an instrument on 2026-09-14, so any "The instrument ·"
+// prefix a writer supplies is dropped, and an HTML entity is decoded before escaping
+// so it cannot double-escape the way No. 008's separators did.
+function toolLabel(t) {
+  const raw = String(t.kicker || (t.kind === 'calc' ? 'live' : 'writes it'))
+    .replace(/&middot;/g, '·')
+    .replace(/^\s*the instrument\s*·\s*/i, '')
+    .trim();
+  return raw || (t.kind === 'calc' ? 'live' : 'writes it');
+}
+
 // The instrument panel. Two kinds only, both proven in the shipped issues.
 function toolBlock(t, n) {
   const fields = t.fields
@@ -43,7 +55,7 @@ function toolBlock(t, n) {
             <button class="tbtn ghost" type="button" data-copy="${t.idPrefix}-out" style="display:none" id="${t.idPrefix}-copy">Copy to clipboard</button>`;
 
   return `<div class="tool" data-tool="${t.idPrefix}">
-            <span class="tlabel">${esc(t.kicker || (t.kind === 'calc' ? 'The instrument · live' : 'The instrument · writes it'))}</span>
+            <span class="tlabel">${esc(toolLabel(t))}</span>
             <span class="tname">${esc(t.name)}</span>
             <span class="tsub">${esc(t.sub)}</span>
             <span class="tfree">Free to use, like every tool in every issue</span>
@@ -94,6 +106,7 @@ export function topicSection(t, n) {
       </div>
     </div>
     <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="${t.tool.idPrefix}" aria-controls="dw-${t.tool.idPrefix}" aria-expanded="false"><span class="tk">Free tool</span><span class="tnm">${esc(t.tool.name)}</span><span class="tar">&rarr;</span></button>
       <button class="deep-toggle" data-deep="t${n}" aria-expanded="false">Go deeper <span class="arrow">+</span></button>
       <button class="share" type="button" data-share="t${n}" data-title="${attr(t.headline)}">${SHARE_SVG}<span class="sl">Send this one</span></button>
     </div>
@@ -117,7 +130,6 @@ ${play}
         </div>
         <aside class="deep-aside">
           <div class="pull"><p>${esc(t.pull)}</p></div>
-          ${toolBlock(t.tool, n)}
         </aside>
       </div>
     </div>
@@ -127,4 +139,20 @@ ${play}
 
 export function tocRow(t, n) {
   return `      <a href="#t${n}"><span class="n">0${n}</span><span class="t">${esc(t.headline)}</span><span class="go">${esc(t.go)}</span><span class="tk">+ tool</span></a>`;
+}
+
+// The tool lives in a right-hand drawer from No. 009, opened by the Free tool button
+// in each article's actions row. One drawer per article, all inside <div class="drawers">.
+export function drawerBlock(t) {
+  const tool = t.tool;
+  return `  <aside class="drawer" id="dw-${tool.idPrefix}" role="dialog" aria-modal="false" aria-label="${attr(tool.name)}" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      ${toolBlock(tool)}
+
+    </div>
+  </aside>`;
 }

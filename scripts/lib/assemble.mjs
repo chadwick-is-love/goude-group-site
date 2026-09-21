@@ -1,6 +1,6 @@
 // Deterministic HTML surgery. No model output touches structure.
 // Ports exactly what shipped by hand for No. 005 on 2026-08-10.
-import { topicSection, tocRow, SHARE_SVG, attr } from './templates.mjs';
+import { topicSection, tocRow, drawerBlock, SHARE_SVG, attr } from './templates.mjs';
 
 const pad = (n) => String(n).padStart(3, '0');
 
@@ -58,15 +58,24 @@ export function buildIssue({ canon, num, dateLong, standfirst, topics }) {
   const sections = topics.map((t, i) => topicSection(t, i + 1)).join('\n\n');
   s = s.slice(0, firstTopic) + sections + '\n\n' + s.slice(close);
 
-  // 7. tool JS: replace the calculator/generator bodies between the fence comments
+  // 6b. drawers: one per article, rebuilt whole (No. 009 onward). Back issues before
+  // 009 carry the tool inline and have no drawer block; nothing to replace there.
+  if (s.includes('<div class="drawers">')) {
+    s = replaceBetween(
+      s,
+      '<div class="drawers">',
+      '\n</div>\n\n<script>',
+      '<div class="drawers">\n' + topics.map((t) => drawerBlock(t)).join('\n'),
+      'drawers'
+    );
+  }
+
+  // 7. tool JS: replace the calculator/generator bodies between the fence comments.
+  // The end fence was the email-me block until No. 009 dropped it; the newsletter
+  // block is the fence now. Take whichever the canon carries.
   const js = buildToolJs(topics);
-  s = replaceBetween(
-    s,
-    '/* live calculators */',
-    '/* email-me capture',
-    js,
-    'tool js'
-  );
+  const jsEnd = s.includes('/* email-me capture') ? '/* email-me capture' : '/* newsletter';
+  s = replaceBetween(s, '/* live calculators */', jsEnd, js, 'tool js');
 
   // 8. subscribe promise and Formspree sources
   s = s.replace(
