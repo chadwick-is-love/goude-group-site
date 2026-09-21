@@ -23,6 +23,21 @@ export function buildIssue({ canon, num, dateLong, standfirst, topics }) {
     `The Briefing, No. ${pad(num)}:`
   );
 
+  // 1b. share metadata, per issue. Every issue used to carry the same og:url, image
+  //     and description, so a shared link rendered as last week's post and the
+  //     platforms reused their cached card. Each issue now gets its own URL (the
+  //     ?no= query, same page), its own card image (scripts/og-card.mjs) and its
+  //     own description (the standfirst).
+  const shareUrl = `https://goudegroup.com/briefing/?no=${pad(num)}`;
+  const desc = attr(`This week's news: ${standfirst}`);
+  s = s.replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${shareUrl}" />`);
+  s = s.replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="https://goudegroup.com/briefing/og/no-${pad(num)}.png" />`);
+  s = s.replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${desc}" />`);
+  s = s.replace(/<meta name="description" content="[^"]*" \/>/, `<meta name="description" content="${desc}" />`);
+  s = s.replace(/\n<meta name="twitter:card"[^\n]*/g, '');
+  s = s.replace(/(<meta property="og:image" content="[^"]*" \/>)/, `$1\n<meta name="twitter:card" content="summary_large_image" />`);
+  s = s.replace(/const ISSUE_URL='[^']*';/, `const ISSUE_URL='${shareUrl}';`);
+
   // 2. nav tag + masthead meta + share titles: every remaining "No. 00prev" becomes num.
   //    Safe because the archived copy is written from the untouched canon before this runs.
   s = s.split(`No. ${pad(prev)}`).join(`No. ${pad(num)}`);
@@ -160,14 +175,8 @@ export function archiveIssue({ prevIssueHtml, prevNum }) {
     <p>This is back issue No. ${pad(prevNum)}. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>`;
   a = a.slice(0, i) + back + a.slice(j);
 
-  a = a.replace(
-    "const ISSUE_URL='https://goudegroup.com/briefing/';",
-    `const ISSUE_URL='${base}';`
-  );
-  a = a.replace(
-    '<meta property="og:url" content="https://goudegroup.com/briefing/" />',
-    `<meta property="og:url" content="${base}" />`
-  );
+  a = a.replace(/const ISSUE_URL='[^']*';/, `const ISSUE_URL='${base}';`);
+  a = a.replace(/<meta property="og:url" content="[^"]*" \/>/, `<meta property="og:url" content="${base}" />`);
   // relative asset paths 404 one directory deeper
   a = a.split('src="../goude-logo.png"').join('src="/goude-logo.png"');
   a = a.split('href="../favicon.png"').join('href="/favicon.png"');

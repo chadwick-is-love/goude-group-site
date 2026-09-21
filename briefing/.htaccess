@@ -1,0 +1,8 @@
+# The Briefing changes every Monday at the same URL. Without this, phones kept
+# showing last week's issue from their own cache (Sep 21 2026, No. 010 live,
+# No. 009 on screen). HTML revalidates on every visit; images and the rest are untouched.
+<IfModule mod_headers.c>
+  <FilesMatch "\.html?$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

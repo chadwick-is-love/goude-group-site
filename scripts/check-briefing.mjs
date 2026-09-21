@@ -170,11 +170,11 @@ async function main() {
   for (let i = 1; i <= 5; i++) {
     await pg.click(`button[data-share="t${i}"]`);
     const got = await pg.evaluate(() => window.__copied);
-    const want = `https://goudegroup.com/briefing/#t${i}`;
+    const want = `https://goudegroup.com/briefing/?no=${num}#t${i}`;
     if (got !== want) fail(`share t${i} copied "${got}", expected "${want}"`);
   }
   await pg.click('.passrow button[data-share="issue"]');
-  if ((await pg.evaluate(() => window.__copied)) !== 'https://goudegroup.com/briefing/') fail('issue share link wrong');
+  if ((await pg.evaluate(() => window.__copied)) !== `https://goudegroup.com/briefing/?no=${num}`) fail('issue share link wrong');
   if (clean()) pass('every share button copies the right link');
   await pg.close();
 
