@@ -70,13 +70,18 @@ def build_sandbox():
     os.makedirs(os.path.join(root, "tmp"))
     return root
 
-def set_keys(studio, goude, gabes):
+def set_keys(studio, goude, gabes, where="studio"):
+    """Place the key files next to push.php, or ONE LEVEL UP (the public_html
+    root on the server), and clear every copy from the other location."""
+    parent = os.path.dirname(studio)
+    target = studio if where == "studio" else parent
     for name, val in (("omnisocials-key.txt", goude), ("omnisocials-key-gabes.txt", gabes)):
-        p = os.path.join(studio, name)
+        for d in (studio, parent):
+            p = os.path.join(d, name)
+            if os.path.exists(p):
+                os.remove(p)
         if val:
-            open(p, "w").write(val)
-        elif os.path.exists(p):
-            os.remove(p)
+            open(os.path.join(target, name), "w").write(val)
 
 def set_channels(studio, gabes_map):
     goude = json.load(open(os.path.join(studio, "channels.json"), encoding="utf-8"))["goude"]
@@ -108,6 +113,11 @@ CASES = [
      None, GABES_KEY, {}, "goude", False, "no OmniSocials key on the server for the goude side", None, None),
     ("unknown brand is refused",
      GOUDE_KEY, GABES_KEY, {}, "nobody", False, "unknown brand", None, None),
+    # One level up from /studio is the public_html root, which has no .htaccess, so
+    # a key file there would be publicly downloadable. It must never be read.
+    ("a key left one level up (public_html root) is ignored",
+     GOUDE_KEY, None, {}, "goude", False, "no OmniSocials key on the server for the goude side",
+     None, None, "parent"),
 ]
 
 def main():
@@ -123,8 +133,9 @@ def main():
     time.sleep(1.5)
     fails = 0
     try:
-        for (name, gk, bk, gmap, brand, ok, err, auth, chan) in CASES:
-            set_keys(studio, gk, bk)
+        for case in CASES:
+            (name, gk, bk, gmap, brand, ok, err, auth, chan), where = case[:9], (case[9:] or ("studio",))[0]
+            set_keys(studio, gk, bk, where)
             set_channels(studio, gmap)
             captured.clear()
             r = post(brand, "linkedin")

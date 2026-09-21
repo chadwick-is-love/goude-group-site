@@ -11,8 +11,11 @@
  *   gabes -> "Gabes.AI / Gabes",   workspace 1000551 (0 accounts on 2026-09-21)
  * For each brand the key is read (in order) from:
  *   1) an environment variable  (OMNISOCIALS_API_KEY / OMNISOCIALS_API_KEY_GABES)
- *   2) its key file one level ABOVE this folder
- *   3) its key file in this folder (blocked from the web by .htaccess)
+ *   2) its key file in THIS folder, next to push.php (blocked from the web by
+ *      the .htaccess here, and gitignored)
+ * There is deliberately NO one-level-up fallback: one level up is the
+ * public_html root, which has no .htaccess, so a key file there would be
+ * publicly downloadable. Removed on Chadwick's review, 2026-09-21.
  * Key files: omnisocials-key.txt (goude, unchanged) and omnisocials-key-gabes.txt.
  * A brand NEVER falls back to another brand's key: >gabes work posted with the
  * Goude key would land in the Goude workspace.
@@ -50,11 +53,10 @@ function omnisocials_key($brand = 'goude') {
     $src = OMNISOCIALS_KEY_SOURCES[$brand];
     $env = getenv($src['env']);
     if ($env) return trim($env);
-    foreach ([__DIR__ . '/../' . $src['file'], __DIR__ . '/' . $src['file']] as $p) {
-        if (is_readable($p)) {
-            $k = trim(file_get_contents($p));
-            if ($k !== '') return $k;
-        }
+    $p = __DIR__ . '/' . $src['file'];
+    if (is_readable($p)) {
+        $k = trim(file_get_contents($p));
+        if ($k !== '') return $k;
     }
     return '';
 }
