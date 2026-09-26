@@ -1,136 +1,40 @@
-# THE HOOK CANON
+# THE HOOK CANON (amended 2026-09-26, CK ruling on No. 011)
 
-This file governs the headline of every article in The Briefing. Read it before you write a single headline. `topic.md` points here; where the two ever differ, this file wins.
+This file governs the headline of every article in The Briefing. `topic.md` and `research.md` point here; where they differ, this file wins. The governing document is "The Briefing" section of the Goude Group Voice Canon (vault 01_CANONICAL/GOUDE_VOICE_CANON.md). It supersedes the 2026-09-13 register and the approved and spiked lines that used to live here.
 
-The headline is the only sentence most readers will finish. It is also the line that gets screenshotted, forwarded, and turned into the social card by the Studio, which reads the `<h2>` directly. So the headline is not a summary of the article. It is the argument, compressed until it has a spine.
+CK, 2026-09-25: "your headlines need to be more direct, they are too wordy. get to the point in the least amount of words that even damon can understand."
 
-# THE REGISTER
+# THE RULES
 
-Aggressive. Irreverent. Brutally honest. Very dry.
+1. Eight to twelve words. One or two short sentences. The assembler rejects under 8 and over 28; the target is 8 to 12.
+2. The point first. No setup, no colons, no lists, no stacked clauses.
+3. Plain words a non-technical owner uses. The Damon test: if Damon does not get it in one read, rewrite it.
+4. Literal nouns: a tool, a price, a policy, an invoice, a customer, a login. No metaphor.
+5. A short number helps. A long decimal does not.
+6. Second person where it fits. Present tense.
+7. Edge is welcome. A joke written as a joke is not. No rhetorical questions, no puns, no "good news" or "bad news".
+8. Never use a phrase you could not say out loud to the owner across a table.
+9. The pull quote is the reason the headline is true, in one sentence. It never repeats the headline's sharpest phrase.
 
-The tone is a competent person telling you something inconvenient without softening it and without enjoying it too much. Not a comedian. Not a doom merchant. Someone who has read the thing you have not read and is not going to pretend it is fine.
+# APPROVED, No. 011
 
-The wit is never the point. It is the residue of saying something true in the fewest possible words. If you find yourself constructing a joke, you have already failed; delete it and state the fact more plainly, and the dryness will arrive on its own.
+> Small businesses using AI grew their teams 7% faster.
+> Your insurance can now exclude AI. Check for form CG 40 47.
+> OpenAI cut its prices in half. Your AI vendor should too.
+> Stop buying AI blog posts in bulk. Google just cracked down.
+> ChatGPT can now read your Gmail and flag what matters.
 
-# CALL IT
+# REJECTED, and why
 
-Before the tests, the posture, because it is the thing most headlines miss.
+> "About $31 billion in tariff refunds has not entered the customs refund system. If you paid import duties in 2025, check each entry's deadline."
+Not AI, and a paragraph wearing a headline.
 
-The headline renders a verdict. It does not describe a situation and leave the
-reader to work out what we think. We read the week, we know what is going on,
-and we say it. Balls and strikes, called out loud, by someone with the standing
-to call them.
+> "A stroller store tied $60,000 in sales to one Claude workflow in four days: walk-ins scan, save a wishlist, get a follow-up."
+Too many words, a colon, a list, and a vendor's own pilot as the lead.
 
-In practice that means the ruling comes first and the evidence comes second.
-"You are measuring the wrong shelf" is a call. "1.28 percent of products appear
-in AI Mode" is a reading off an instrument, and a reader can do nothing with it
-until somebody says what it means. Put the sentence that takes a position at the
-front, then hand over the number that earns it.
+> "A 3.5% raise barely covers 3.4% inflation. Your best people can get 4.7% by changing jobs."
+Three numbers fighting. Not AI.
 
-This is the difference between a page worth reading and a page that aggregates.
-Everyone has the same facts by Tuesday. The statement above the noise is the
-only thing that is ours.
+# EVOLVING THIS FILE
 
-Say it plainly enough that we could be wrong. A hook nobody could disagree with
-is not a call, it is a summary. If the sentence would survive being printed
-under our name in front of the company it describes, it is right.
-
-# THE SIX TESTS
-
-Every headline must pass all six.
-
-**1. One sentence.** Two only when the second is short and lands a turn. Twelve to twenty-two words is where this register lives. Anything over twenty-eight is a paragraph wearing a headline's clothes and the assembler will reject it.
-
-**2. The number arrives late, or not at all.** A headline that opens with a statistic is a spreadsheet. Most weeks the strongest hook has no number in it, because the number is already sitting in "what moved" one inch below. When a number does belong in the headline, it lands mid-sentence and it is the shape of the number that carries, not the digits. "One in eighty" beats "1.28 percent" every time.
-
-**3. Second person, present tense, something being done to them.** The reader is in the sentence. "You are stocked on the shelf people are leaving" beats any construction where the owner is absent and a market is described. Never "businesses should". Never "companies are finding".
-
-**4. The joke is carried by the fact.** "A chemistry wiki from 2008" is funny because it is true and specific. Nothing in the sentence winks, nudges, or sets up a punchline. No rhetorical questions. No "spoiler". No "turns out". The moment a headline reaches for a comic device it stops being intelligence and becomes a newsletter being clever, which is the one failure mode that costs us this reader permanently.
-
-**4b. The ruling leads.** The first sentence takes the position. The second
-delivers the evidence. When a headline opens with a statistic, the position is
-either buried at the end or missing, and both readers and forwards die there.
-
-**5. End on the hard word.** The last word is the one that stays. "Posted anything." "Biggest hurry." "Called progress." Never trail into a qualifier, a date, a hedge, or a subordinate clause explaining the thing you just said.
-
-**6. It survives being read alone.** It will be. On a card, in a forward, in a subject line, with no article under it. If it needs the brief to make sense, it is not a headline yet.
-
-# THE RATIO, WHICH IS NOT OPTIONAL
-
-Two or three of the five headlines carry the dry wit. The other two are flat and hard.
-
-An issue where all five are doing a bit reads as a personality, and this page is selling judgment. The reader is deciding whether to hand real decisions to the people who wrote it. Wit reads as confidence when they already trust you and as flippancy when they do not, and on any given Monday half of them do not yet.
-
-The two flat ones are usually the money story and the risk story. Let those land with no spin at all.
-
-# APPROVED
-
-Each of these passes all six tests. Study the rhythm, not the subject.
-
-> You are not buying software anymore. You are buying how fast your staff can type.
-
-Two short sentences, second one turns. No number. Names the actual mechanism of consumption pricing in twelve words.
-
-> Your AI spend is now set by whoever is in the biggest hurry.
-
-Flat, hard, no wit, ends on the hard word. This is what the other two of five look like.
-
-> It costs two and a half times more and got worse at your actual job. This is called progress.
-
-The second sentence is the whole article. Nothing winks; the flatness does the work.
-
-> The instruction said do not post anything. So the agents found a chemistry wiki from 2008 and posted anything.
-
-The repetition is the joke and the repetition is also the finding. Specific enough to be unarguable.
-
-> There are two shelves now. You are stocked on the one people are leaving.
-
-Nine words of setup, then the accusation. No statistic anywhere.
-
-> The whole breach now takes less time than your Monday standup.
-
-One sentence, eleven words, the comparison is the entire payload.
-
-> They do not want your bank login. They want the key somebody pasted into Zapier in March, because that one bills you while it works for them.
-
-Longer, and it earns the length because the final clause is a fact most readers have never considered.
-
-> Customs is holding $166 billion that belongs to the businesses that paid it, and it moves only for the ones who ask.
-
-From No. 007, and it still passes. One sentence, the number lands after the verb, ends on "ask". Proof that the register is a sharpening of what already worked, not a break from it.
-
-# SPIKED
-
-These are the first cut of No. 009, written before this canon existed and replaced by the lines above before the issue settled. Every one of them is accurate and every one of them is a paragraph. They are here because they are the exact failure this canon exists to prevent, and because the fix is visible in the pair.
-
-> Spiked: "One person burned 1.5 million tokens in a single day. 56 percent of companies running AI have no usage policy at all, and 60 percent are walking into a cost overrun nobody budgeted."
-> Fixed: "You are not buying software anymore. You are buying how fast your staff can type."
-
-Three statistics, thirty-three words, no reader in the sentence. Everything in the spiked version belongs in "what moved".
-
-> Spiked: "The newest model shipped September 9 at two and a half times the price of the one it replaces, and it scores about 45 Elo lower on the benchmark built out of real professional work."
-> Fixed: "It costs two and a half times more and got worse at your actual job. This is called progress."
-
-The spiked one is a changelog. "45 Elo" and "GDPval" are for the deep read, never the hook.
-
-> Spiked: "1.28 percent of the products that rank in Google search appear in AI Mode for the same query on the same day. The ones that do are priced 21.6 percent higher. Amazon began selling ads inside ChatGPT on September 10."
-> Fixed: "There are two shelves now. You are stocked on the one people are leaving."
-
-Three sentences, three dates, three decimals. The spiked version is the "what moved" column with a bigger font.
-
-> Spiked: "The AI assisted breach now runs from first access to stolen data in two to three hours. The credential they want first is the API key somebody on your team pasted into a workflow six months ago."
-> Fixed: "The whole breach now takes less time than your Monday standup."
-
-The spiked one is not wrong. It is just two headlines fighting, and neither wins.
-
-# NEVER
-
-Never label an article "Good News" or "Bad News", in the kicker, the headline, or anywhere else. Whether a development helps or hurts is carried by the substance. Stating it is the laziest available reading of the brief and it has been rejected twice.
-
-Never open with the date, the source, or the study. "A new report finds" is not a headline, it is a citation.
-
-Never use a colon to bolt a summary onto a label. "The meter: why your AI bill is now variable" is a slide title.
-
-Never repeat a hook shape from the previous two issues. If last week had "There are two shelves now", this week does not get "There are two clocks now".
-
-Never write a headline you would not say out loud to the owner across a table.
+Every CK ruling on a headline is added here the same day: approved lines under APPROVED, rejected lines under REJECTED with the reason. Keep the two most recent issues' examples; move older ones to the canon.
