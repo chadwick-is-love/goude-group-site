@@ -731,7 +731,7 @@ var GD_WORLDS = [
 ];
 
 var GD_LAYOUTS = [{id:'statement',name:'Statement'},{id:'figure',name:'Figure'},{id:'quote',name:'Quote'}];
-var GB_LAYOUTS = [{id:'card',name:'card'},{id:'figure',name:'figure'},{id:'quote',name:'quote'},{id:'week',name:'the week'}];
+var GB_LAYOUTS = [{id:'card',name:'card'},{id:'quote',name:'quote'},{id:'week',name:'the week'}];
 
 var ALIGNS     = [{id:'left',name:'Left'},{id:'center',name:'Centred'}];
 var GD_WEIGHTS = [{id:'400',name:'Light'},{id:'500',name:'Book'},{id:'600',name:'Bold'}];
@@ -1525,9 +1525,14 @@ var GABES = {
       p.kicker = lower('> the letter · ' + (S.meta.no || ''));
       p.layout = 'card';
     } else if(angle === 'number'){
-      p.figure = extractFigureFrom([it.line, it.hook, it.condition, it.cost].join(' '));
-      p.statement = lower(h1); p.support = lower(l1);
-      p.layout = p.figure ? 'figure' : 'card';
+      /* CK 2026-09-26: no big number on >gabes. The number stays inside the
+         sentence on the house card and takes the third colour as the accent
+         phrase, the way the card always carried an accent. */
+      var pool = sentencesLoose(it.hook).concat(sentencesLoose(it.line), sentencesLoose(it.cost || ''));
+      var withNum = pool.filter(function(x){ return /\d/.test(x); })[0] || h1;
+      var nm = withNum.match(/\$?\d[\d,.]*(?:\s+to\s+\d[\d,.]*)?(?:%|\s+percent)?/i);
+      p.statement = lower(withNum); p.figure = nm ? lower(nm[0].trim()) : '';
+      p.support = lower(withNum === h1 ? l1 : h1); p.layout = 'card';
     } else if(angle === 'dothis'){
       p.statement = lower(firstLoose(it.doThis || it.fix || it.line, 2));
       p.support = it.notThis ? lower('not this: ' + it.notThis) : lower(h1);
@@ -1535,11 +1540,11 @@ var GABES = {
     } else if(angle === 'notthis'){
       p.statement = lower(it.notThis || h1);
       p.support = it.doThis ? lower('do this instead: ' + firstLoose(it.doThis,1)) : lower(l1);
-      p.kicker = lower('> not this · ' + (it.lane || '')); p.layout = 'quote';
+      p.kicker = lower('> not this · ' + (it.lane || '')); p.layout = 'card';
     } else if(angle === 'fix'){
       p.statement = lower(firstLoose(it.fix || it.line, 2));
       p.support = lower(h1);
-      p.kicker = lower('> the fix · ' + (it.lane || '')); p.layout = 'quote';
+      p.kicker = lower('> the fix · ' + (it.lane || '')); p.layout = 'card';
     }
     p.caption = GABES.caption(it, angle, p);
     return p;
@@ -1576,7 +1581,7 @@ var GABES = {
     } else if(angle === 'knife'){
       hook = it.line; body = [it.hook, it.condition, it.cost, it.fix]; shortHook = firstLoose(it.line,1);
     } else if(angle === 'number'){
-      var fg = post && post.figure; hook = (fg ? fg + '. ' : '') + firstLoose(it.hook,1);
+      hook = (post && post.statement) || firstLoose(it.hook,1);
       body = [it.line, it.condition, it.cost, it.fix]; shortHook = hook;
     } else if(angle === 'dothis'){
       hook = 'do this: ' + (it.doThis || firstLoose(it.fix,1)); body = [it.hook, it.fix, it.cost];
@@ -1781,7 +1786,7 @@ var GABES = {
     var wt = S.weight || '500';
     var lhF = 1.04;
     var headline = lower(S.card.statement);
-    var figMode = (S.layout === 'figure' && S.card.figure);
+    var figMode = false;   /* CK 2026-09-26: no big number on >gabes */
     var quote = (S.layout === 'quote');
     var barW = quote ? Math.max(4, W*0.006) : 0, barGap = quote ? W*0.032 : 0;
     var hW = maxW - (barW + barGap);
