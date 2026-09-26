@@ -443,6 +443,9 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
         <span class="slidecount" id="slideCount"></span>
       </div>
       <div class="slides" id="slides"></div>
+      <div class="capctl" style="margin:4px 0 2px">
+        <span id="slCountLbl">Slides</span><div class="segs" id="slidecounts"></div>
+      </div>
       <div class="stagebar" style="margin-top:4px">
         <button class="btn small" id="slAdd">Add this card</button>
         <button class="btn ghost small" id="slStory">Build from this story</button>
@@ -455,7 +458,7 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
         <button class="btn ghost small" id="slDel">Remove</button>
         <button class="btn ghost small" id="slClear">Clear</button>
       </div>
-      <p class="hint" id="slideHint">Click a slide to edit it. Every field, angle and queue pick on the left writes into the slide that is selected. Style, format and colour apply to the whole carousel.</p>
+      <p class="hint" id="slideHint">A story builds in a fixed order, nothing said twice: pick 1 for the lead card, 2 for the lead and the next, up to 5 for the full set. The week builds one card per day. Click a slide to edit it; every field, angle and queue pick writes into the selected slide.</p>
     </div>
     <div class="stagebar">
       <button class="btn" id="dlBtn">Download PNG</button>
@@ -763,7 +766,7 @@ var S = {
   toggles:{},
   posting:false,   /* STUDIO_POST_LOCK_PATCH: true while a post is in flight */
   /* STUDIO_PARITY_2026-09-26 */
-  mode:'single', slides:[], slideIndex:-1, safe:false,
+  mode:'single', slides:[], slideIndex:-1, safe:false, slideCount:5, lastBuild:'',
   capLength:'standard', xMode:'short', lastGen:'',
   card:{kicker:'',statement:'',figure:'',support:'',foot:'',footR:'',stack:[]}
 };
@@ -822,6 +825,32 @@ function extractFigureFrom(pool){
   if(m) return '$' + m[1];
   m = pool.match(/\b(\d[\d,]{1,}(?:\.\d+)?)\b/);
   return m ? m[1] : '';
+}
+/* STUDIO_SEQUENCE_2026-09-26: a signal's body is the condition, the cost and
+   the fix, then do this / not this. Most pages set them as three paragraphs;
+   some run them as one. Either way each part lands in its own field, so a
+   carousel never gets one paragraph where it expected three. */
+function signalBody(it, ps){
+  ps = (ps || []).slice();
+  var pair = (ps.length && /^do this:/i.test(ps[ps.length-1])) ? ps.pop() : '';
+  if(ps.length >= 3){
+    it.condition = ps[0]; it.cost = ps[1]; it.fix = ps.slice(2).join(' ');
+  } else {
+    var ss = sentencesLoose(ps.join(' '));
+    function at(re, from){ for(var i=from||0;i<ss.length;i++) if(re.test(ss[i])) return i; return -1; }
+    var ci = at(/^(the )?cost\b|^the (subscription|damage|price)\b/i, 1);
+    var fi = at(/^the fix\b|^fix\b|^do\b|^before\b|^sell\b|^write\b/i, ci > 0 ? ci + 1 : 2);
+    var third = Math.max(1, Math.round(ss.length / 3));
+    if(ci < 1) ci = Math.min(ss.length, third);
+    if(fi <= ci) fi = Math.min(ss.length, ci + third);
+    it.condition = ss.slice(0, ci).join(' ');
+    it.cost = ss.slice(ci, fi).join(' ');
+    it.fix = ss.slice(fi).join(' ');
+  }
+  var m = pair.match(/^do this:\s*([\s\S]*?)\s*not this:\s*([\s\S]*)$/i);
+  it.doThis = m ? m[1] : pair.replace(/^do this:\s*/i,'');
+  it.notThis = m ? m[2] : '';
+  it.enriched = true;
 }
 function absoluteUrl(u){ try { return new URL(u, window.location.href).href; } catch(e){ return u; } }
 function viaFetcher(u){ return 'fetch.php?u=' + encodeURIComponent(u); }
@@ -1107,7 +1136,7 @@ var GOUDE = {
       p.figure = GOUDE.extractFigure(it); p.statement = head2 || head1;
       p.support = firstSentences(it.changes,1); p.layout = 'figure';
     } else if(angle === 'mistake'){
-      p.statement = firstDoNot(it.notdo) || head1; p.support = firstSentences(it.changes,1);
+      p.statement = firstDoNot(it.notdo) || head1; p.support = it.play ? 'Do this instead: ' + firstSentences(it.play,1) : firstSentences(it.changes,1);
       p.kicker = caps(GOUDE.issueTag() + ' · What not to do');
     } else if(angle === 'line'){
       p.statement = it.pull || head1; p.support = head1; p.layout = 'quote';
@@ -1203,31 +1232,24 @@ var GOUDE = {
             close:close, shortHook:clean(shortHook || hook), url:url};
   },
 
-  /* Carousel builders. Section labels are literal, per the Goude canon. */
+  /* Carousel builders. STUDIO_SEQUENCE_2026-09-26: one fixed order per
+     story, five cards, each saying something the others do not. Pick 1 for
+     the lead card alone, 2 for the lead and what happened, up to 5 for the
+     full set. Section labels are literal, per the Goude canon. */
   storySlides:function(it){
     if(!it) return [];
-    var T = GOUDE.issueTag(), out = [];
-    out.push(GOUDE.buildPost(it,'statement'));
-    var fig = GOUDE.extractFigure(it);
-    if(fig) out.push(GOUDE.buildPost(it,'figure'));
-    out.push({kicker:caps(T + ' · What happened'), statement:firstSentences(it.moved,2), support:'', layout:'statement', foot:'goudegroup.com/briefing', footR:''});
-    out.push({kicker:caps(T + ' · What it costs'), statement:firstSentences(it.changes,2), support:'', layout:'statement', foot:'goudegroup.com/briefing', footR:''});
-    out.push(GOUDE.buildPost(it,'mistake'));
-    if(it.toolName) out.push(GOUDE.buildPost(it,'instrument'));
-    out.push({kicker:caps(T), statement:"The full read and the free tool are in this week's Briefing.",
-              support:'goudegroup.com/briefing', layout:'statement', foot:'goudegroup.com/briefing', footR:'No signup'});
-    return out;
+    var T = GOUDE.issueTag(), hs = sentences(it.headline);
+    var lead = GOUDE.buildPost(it,'statement'); lead.support = hs.slice(1).join(' ');
+    var what = {kicker:caps(T + ' · What happened'), statement:firstSentences(it.moved,2), support:'', layout:'statement', foot:'goudegroup.com/briefing', footR:''};
+    var cost = {kicker:caps(T + ' · What it costs'), statement:firstSentences(it.changes,2), support:'', layout:'statement', foot:'goudegroup.com/briefing', footR:''};
+    var mistake = GOUDE.buildPost(it,'mistake'); mistake.support = it.play ? 'Do this instead: ' + firstSentences(it.play,1) : '';
+    var tool = it.toolName ? GOUDE.buildPost(it,'instrument') : null;
+    var fallbacks = [GOUDE.buildPost(it,'line'), GOUDE.buildPost(it,'figure')];
+    return distinctSlides([lead, what, cost, mistake, tool], fallbacks, 5);
   },
   weekSlides:function(){
-    var T = GOUDE.issueTag(), out = [];
-    out.push({kicker:caps(T), statement:'Five stories this week. A free tool in every one.',
-              support:(S.meta.date || ''), layout:'statement', foot:'goudegroup.com/briefing', footR:''});
-    (S.items || []).slice(0,8).forEach(function(it){
-      var p = GOUDE.buildPost(it,'statement'); p.support = ''; out.push(p);
-    });
-    out.push({kicker:caps(T), statement:'Read it this week. Nothing to download, no signup.',
-              support:'goudegroup.com/briefing', layout:'statement', foot:'goudegroup.com/briefing', footR:''});
-    return out;
+    var list = (S.items || []).slice(0,5).map(function(it){ var p = GOUDE.buildPost(it,'statement'); p.support = ''; return p; });
+    return distinctSlides(list, [], 5);
   },
 
   fileName:function(q){
@@ -1396,7 +1418,7 @@ var GABES = {
     {id:'notthis', name:'not this'},
     {id:'fix',   name:'the fix'}
   ],
-  pairs:[['hook','lane'],['knife','pair'],['hook','knife'],['lane','hook'],['pair','knife']],
+  pairs:[['hook','dothis'],['knife','notthis'],['hook','fix'],['knife','dothis'],['hook','notthis']],
   toggles:[['mark','the mark',true],['kicker','kicker',true],['site','gabes.ai',true],['stamp','issue stamp',false],['support','the line',true],['subOn916','line on 9:16',false],['footer','footer text',false],['rule','accent rule',false],['slidenum','slide numbers',true]],
   defaults:{layout:'card', weight:'500', track:-10, texture:'none', align:'left'},
   dayLabel:function(i){ return GB_DAYS[i % GB_DAYS.length]; },
@@ -1484,13 +1506,7 @@ var GABES = {
         if(!html) return;
         var doc = new DOMParser().parseFromString(html, 'text/html');
         var ps = Array.prototype.map.call(doc.querySelectorAll('.body p'), function(p){ return clean(p.textContent); }).filter(Boolean);
-        var pair = '';
-        if(ps.length && /^do this:/i.test(ps[ps.length-1])) pair = ps.pop();
-        it.condition = ps[0] || ''; it.cost = ps[1] || ''; it.fix = ps.slice(2).join(' ');
-        var m = pair.match(/^do this:\s*([\s\S]*?)\s*not this:\s*([\s\S]*)$/i);
-        it.doThis = m ? m[1] : pair.replace(/^do this:\s*/i,'');
-        it.notThis = m ? m[2] : '';
-        it.enriched = true;
+        signalBody(it, ps);
       }).catch(function(){});
     }));
   },
@@ -1598,28 +1614,24 @@ var GABES = {
             shortHook:lower(shortHook || hook), url:url};
   },
 
+  /* STUDIO_SEQUENCE_2026-09-26: the signal in its own order, five cards,
+     nothing said twice. 1 the hook (knife under it, the house card), 2 the
+     condition, 3 the cost, 4 the fix, 5 do this / not this. Pick 1, 2 or up
+     to the full 5. */
   storySlides:function(it){
     if(!it) return [];
-    var ln = lower(it.lane || 'the signal'), out = [];
-    out.push(GABES.buildPost(it,'hook'));
-    out.push(GABES.buildPost(it,'knife'));
-    var fg = extractFigureFrom([it.line, it.hook, it.condition, it.cost].join(' '));
-    if(fg) out.push(GABES.buildPost(it,'number'));
-    if(it.condition) out.push({kicker:'> the condition · ' + ln, statement:lower(firstLoose(it.condition,2)), support:'', layout:'card', foot:'gabes.ai/letter', footR:''});
-    if(it.cost)      out.push({kicker:'> the cost · ' + ln,      statement:lower(firstLoose(it.cost,2)),      support:'', layout:'card', foot:'gabes.ai/letter', footR:''});
-    if(it.fix)       out.push(GABES.buildPost(it,'fix'));
-    if(it.doThis)    out.push(GABES.buildPost(it,'dothis'));
-    out.push({kicker:'> the letter', statement:'the whole week lands friday in the letter.', support:'gabes.ai/letter', layout:'card', foot:'gabes.ai/letter', footR:''});
-    return out.slice(0,10);
+    var ln = lower(it.lane || 'the signal');
+    function card(k, st){ return st ? {kicker:'> ' + k + ' · ' + ln, statement:lower(firstLoose(st,2)), support:'', layout:'card', foot:'gabes.ai/letter', footR:''} : null; }
+    var hook = GABES.buildPost(it,'hook');
+    var pair = it.doThis ? {kicker:'> do this · ' + ln, statement:lower(firstLoose(it.doThis,2)),
+                            support: it.notThis ? lower('not this: ' + it.notThis) : '', layout:'card', foot:'gabes.ai/letter', footR:''} : null;
+    var seq = [hook, card('the condition', it.condition), card('the cost', it.cost), card('the fix', it.fix), pair];
+    var fallbacks = [GABES.buildPost(it,'knife'), GABES.buildPost(it,'number')];
+    return distinctSlides(seq, fallbacks, 5);
   },
   weekSlides:function(){
-    var out = [];
-    var first = (S.items && S.items[0]) || null;
-    out.push({kicker:lower('> ' + (S.meta.no || 'the week')), statement:lower(S.meta.title || 'five signals. one week.'),
-              support:lower(firstLoose(S.meta.lede,1)), layout:'card', foot:'gabes.ai/letter', footR:''});
-    (S.items || []).slice(0,8).forEach(function(it){ var p = GABES.buildPost(it,'hook'); out.push(p); });
-    out.push({kicker:'> the letter', statement:'one signal a day. the whole week on friday.', support:'gabes.ai/letter', layout:'card', foot:'gabes.ai/letter', footR:''});
-    return out;
+    var list = (S.items || []).slice(0,5).map(function(it){ return GABES.buildPost(it,'hook'); });
+    return distinctSlides(list, [], 5);
   },
 
   fileName:function(q){
@@ -1950,14 +1962,42 @@ function selectSource(i){
 
 /* ---------- queue ---------- */
 
+/* STUDIO_SEQUENCE_2026-09-26: no two cards in a set say the same thing.
+   A card whose statement repeats a line already used (as a statement or a
+   support line) is dropped and the next candidate takes its place; a support
+   line that repeats one already used is cleared. */
+function normT(x){ return String(x||'').toLowerCase().replace(/[^a-z0-9%$ ]/g,' ').replace(/\s+/g,' ').trim(); }
+function isDup(t, used){
+  var n = normT(t); if(!n) return false;
+  return used.some(function(u){ return u === n || (n.length > 24 && u.indexOf(n) !== -1) || (u.length > 24 && n.indexOf(u) !== -1); });
+}
+function distinctSlides(list, fallbacks, max){
+  var out = [], used = [];
+  list.concat(fallbacks || []).forEach(function(p){
+    if(!p || !p.statement || out.length >= max) return;
+    if(isDup(p.statement, used)) return;
+    if(p.support && isDup(p.support, used.concat([normT(p.statement)]))) p.support = '';
+    out.push(p); used.push(normT(p.statement)); if(p.support) used.push(normT(p.support));
+  });
+  return out;
+}
 function buildQueue(){
   var eng = E();
   S.queue = [];
+  var spare = eng.angles.map(function(a){ return a.id; }).filter(function(a){ return a !== 'week' && a !== 'lede'; });
   for(var i=0;i<S.items.length;i++){
     var pair = eng.pairs[i % eng.pairs.length];
-    var day = eng.dayLabel(i);
+    var day = eng.dayLabel(i), it = S.items[i];
+    var am = eng.buildPost(it, pair[0]);
+    var used = [normT(am.statement), normT(am.support)].filter(Boolean);
+    /* the PM card takes its planned angle unless that repeats the AM card */
+    var pmAngle = [pair[1]].concat(spare).filter(function(a){
+      if(a === pair[0]) return false;
+      var p = eng.buildPost(it, a);
+      return p.statement && !isDup(p.statement, used);
+    })[0] || pair[1];
     S.queue.push({day:day, slot:eng.slotLabel('AM'), itemIndex:i, angle:pair[0]});
-    S.queue.push({day:day, slot:eng.slotLabel('PM'), itemIndex:i, angle:pair[1]});
+    S.queue.push({day:day, slot:eng.slotLabel('PM'), itemIndex:i, angle:pmAngle});
   }
   renderQueue();
 }
@@ -2184,9 +2224,10 @@ function runChecks(){
   var frames = (S.mode === 'carousel') ? S.slides.length : 1;
   if(S.mode === 'carousel'){
     if(frames === 0) add('fail', 'the carousel is empty. Add a card or build one.');
+    else if(frames > MAX_SLIDES) add('fail', 'a set is 5 slides at most; this carousel has ' + frames + '.');
     else if(frames > P.frames[1]) add('fail', f.name + ' takes up to ' + P.frames[1] + ' images in one post; this carousel has ' + frames + '.');
     else if(frames === 1) add('info', 'one slide posts as a single card.');
-    else add('ok', frames + ' slides. ' + (pid === 'linkedin' ? 'LinkedIn shows them as a swipeable document.' : pid === 'ig_story' ? 'Each slide posts as its own story, in order.' : f.name + ' takes up to ' + P.frames[1] + '.'));
+    else add('ok', frames + ' slides. ' + (pid === 'linkedin' ? 'LinkedIn shows them as a swipeable document.' : pid === 'ig_story' ? 'Each slide posts as its own story, in order.' : f.name + ' takes up to ' + Math.min(MAX_SLIDES, P.frames[1]) + '.'));
   }
   if(pid === 'ig_story') add('info', 'type on the card stays clear of the story top bar and reply bar.');
   if(P.fold && t.length > P.fold){
@@ -2261,6 +2302,7 @@ function renderSegs(){
   segGroup('moods', TRIO_MOODS.map(function(m){return {id:m, name:m};}), S.trioMood, 'data-mood');
   /* STUDIO_PARITY_2026-09-26 */
   segGroup('lengths', LENGTHS, S.capLength, 'data-len');
+  segGroup('slidecounts', [1,2,3,4,5].map(function(n){ return {id:String(n), name:(n === 5 ? '5, full set' : String(n))}; }), String(S.slideCount || 5), 'data-count');
   segGroup('xmodes', XMODES, S.xMode, 'data-xmode');
   $('xrow').classList.toggle('off', S.format !== 'x');
   $('lengths').parentNode && ($('lengths').style.opacity = (S.format === 'x') ? '.45' : '1');
@@ -2661,9 +2703,10 @@ function selectSlide(i){
   S.card = JSON.parse(JSON.stringify(sl.card)); S.layout = sl.layout; if(sl.angle) S.angle = sl.angle;
   syncFields(); renderSegs(); renderAngles(); draw(); renderSlides();
 }
+var MAX_SLIDES = 5;   /* STUDIO_SEQUENCE_2026-09-26: CK, a set is 1 to 5 */
 function setSlides(list, msg){
-  var cap = (PLATFORM[pidNow()] || PLATFORM.linkedin).frames[1];
-  S.slides = list.slice(0, 10).map(postToSlide);
+  var cap = Math.min(MAX_SLIDES, (PLATFORM[pidNow()] || PLATFORM.linkedin).frames[1]);
+  S.slides = list.slice(0, Math.min(S.slideCount || MAX_SLIDES, MAX_SLIDES)).map(postToSlide);
   S.slideIndex = -1;
   if(S.mode !== 'carousel'){ S.mode = 'carousel'; renderModeUI(); }
   selectSlide(0); updateCapMeta(); renderModeUI();
@@ -2671,7 +2714,7 @@ function setSlides(list, msg){
 }
 function renderSlides(){
   var box = $('slides'); if(!box) return;
-  var f = fmtNow(), n = S.slides.length, cap = (PLATFORM[f.id] || PLATFORM.linkedin).frames[1];
+  var f = fmtNow(), n = S.slides.length, cap = Math.min(MAX_SLIDES, (PLATFORM[f.id] || PLATFORM.linkedin).frames[1]);
   var cnt = $('slideCount');
   cnt.textContent = n + ' of up to ' + cap + ' on ' + f.name;
   cnt.classList.toggle('over', n > cap);
@@ -2694,6 +2737,7 @@ function renderSlides(){
 }
 function slideOp(op){
   var i = S.slideIndex, L = S.slides;
+  if((op === 'add' || op === 'dup') && L.length >= MAX_SLIDES){ toast('a set is 5 slides at most'); return; }
   if(op === 'add'){ L.splice(i + 1, 0, captureSlide()); selectSlide(i + 1); }
   else if(op === 'dup' && i >= 0){ L.splice(i + 1, 0, JSON.parse(JSON.stringify(L[i]))); selectSlide(i + 1); }
   else if(op === 'del' && i >= 0){ L.splice(i, 1); if(L.length) selectSlide(Math.min(i, L.length - 1)); else { S.slideIndex = -1; renderSlides(); draw(); } }
@@ -2729,7 +2773,7 @@ function blankCard(scroll){
 
 var CARRY = ['sources','sourceIndex','sourceTab','items','meta','queue','qIndex','angle','format',
              'layout','world','trioMood','trioIndex','canvas','align','weight','scale','supScale',
-             'track','toggles','card','mode','slides','slideIndex','capLength','xMode','lastGen'];
+             'track','toggles','card','mode','slides','slideIndex','capLength','xMode','lastGen','slideCount','lastBuild'];
 
 function snapshot(){
   var o = {}; CARRY.forEach(function(k){ o[k] = S[k]; });
@@ -2806,6 +2850,7 @@ function applyBrand(brand, first){
   S.align = d.align || 'left'; S.world = d.world || 'mint'; S.canvas = 'cotton';
   S.format = formatsNow()[0].id; S.scale = 100; S.supScale = 100;
   S.mode = 'single'; S.slides = []; S.slideIndex = -1; S.capLength = 'standard'; S.xMode = 'short'; S.lastGen = '';
+  S.slideCount = 5; S.lastBuild = '';
   renderModeUI();
   S.toggles = {};
   eng.toggles.forEach(function(t){ S.toggles[t[0]] = t[2]; });
@@ -2878,10 +2923,7 @@ function gabesFromPaste(txt){
               hook:clean(h.textContent), line:k ? clean(k.textContent) : '', url:'https://gabes.ai/letter/'};
     it.short = firstLoose(it.hook,1);
     var ps = Array.prototype.map.call(doc.querySelectorAll('.body p'), function(p){ return clean(p.textContent); }).filter(Boolean);
-    var pair = (ps.length && /^do this:/i.test(ps[ps.length-1])) ? ps.pop() : '';
-    it.condition = ps[0] || ''; it.cost = ps[1] || ''; it.fix = ps.slice(2).join(' ');
-    var m = pair.match(/^do this:\s*([\s\S]*?)\s*not this:\s*([\s\S]*)$/i);
-    it.doThis = m ? m[1] : pair.replace(/^do this:\s*/i,''); it.notThis = m ? m[2] : ''; it.enriched = true;
+    signalBody(it, ps);
     items = [it];
     meta = {no:'pasted signal', date:it.date, title:'', lede:'', engine:'', url:'https://gabes.ai/letter/', kind:'signal'};
   }
@@ -2924,6 +2966,13 @@ function bind(){
     renderAngles();
   });
 
+  $('slidecounts').addEventListener('click', function(e){
+    var b = e.target.closest('[data-count]'); if(!b) return;
+    S.slideCount = parseInt(b.getAttribute('data-count'),10); renderSegs();
+    /* re-cut the last build to the new count, in the same order */
+    if(S.lastBuild === 'story' && currentItem()) setSlides(E().storySlides(currentItem()), 'built from this story');
+    else if(S.lastBuild === 'week' && S.items.length) setSlides(E().weekSlides(), 'built from the week');
+  });
   ['formats','layouts','aligns','weights','worlds','moods','trios','canvases','lengths','xmodes'].forEach(function(id){
     var el = $(id); if(!el) return;
     el.addEventListener('click', function(e){
@@ -3004,11 +3053,11 @@ function bind(){
   $('slStory').addEventListener('click', function(){
     var it = currentItem();
     if(!it){ toast('pick a story from the week first'); return; }
-    setSlides(E().storySlides(it), 'built from this story');
+    S.lastBuild = 'story'; setSlides(E().storySlides(it), 'built from this story');
   });
   $('slWeek').addEventListener('click', function(){
     if(!S.items || !S.items.length){ toast('load a source first'); return; }
-    setSlides(E().weekSlides(), 'built from the week');
+    S.lastBuild = 'week'; setSlides(E().weekSlides(), 'built from the week');
   });
   $('safeTg').addEventListener('change', function(){ S.safe = this.checked; draw(); });
   $('capText').addEventListener('input', updateCapMeta);
