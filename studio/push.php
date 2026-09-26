@@ -66,10 +66,24 @@ const PLATFORM_LABELS = [
     'ig_story' => 'Instagram story', 'facebook' => 'Facebook',
     'threads' => 'Threads',
 ];
+// STUDIO_PARITY_2026-09-26: these are now the PLATFORMS' own ceilings, read
+// from docs.omnisocials.com 2026-09-26. The house ceilings (IG 900, LinkedIn
+// 1300, Facebook 1000) moved into the Studio as the "standard" length; the
+// operator can pick "long" up to these. The client's PLATFORM table in
+// index.html carries the same numbers - keep the two in step.
 const PLATFORM_MAX_CHARS = [
-    'x' => 280, 'linkedin' => 1300, 'ig_feed' => 900,
-    'ig_story' => 140, 'facebook' => 1000, 'threads' => 500,
+    'x' => 280, 'linkedin' => 3000, 'ig_feed' => 2200,
+    'ig_story' => 140, 'facebook' => 63206, 'threads' => 500,
 ];
+// Images one post may carry. X 4; Instagram, Facebook and Threads carousels
+// 2 to 10; an Instagram story set posts each image as its own slide (up to
+// 10); LinkedIn turns 2+ images into its native document carousel.
+const PLATFORM_MAX_IMAGES = [
+    'x' => 4, 'linkedin' => 10, 'ig_feed' => 10,
+    'ig_story' => 10, 'facebook' => 10, 'threads' => 10,
+];
+const X_LONG_MAX = 25000;      // X Premium long post
+const X_THREAD_MAX_PARTS = 25; // X threads: 2 to 25 parts of 280
 // ig_feed and ig_story share ONE Instagram channel id (confirmed live: GET
 // /accounts returns a single instagram account carrying
 // content_types:["post","story","reel"]) - the channel id alone cannot tell
@@ -97,7 +111,26 @@ $brand = $in['brand'] ?? '';
 $k = $in['platform'] ?? '';
 $label = PLATFORM_LABELS[$k] ?? $k;
 $caption = trim($in['caption'] ?? '');
-$dataUrl = $in['image'] ?? '';
+// STUDIO_PARITY_2026-09-26: 'images' is the ordered carousel (1..N). The old
+// single 'image' field is still accepted so a cached page keeps working.
+$images = $in['images'] ?? (isset($in['image']) ? [$in['image']] : []);
+if (!is_array($images)) $images = [];
+$xMode = ($k === 'x') ? (string)($in['x_mode'] ?? 'short') : '';
+if ($xMode === '') $xMode = ($k === 'x') ? 'short' : '';
+$thread = $in['thread'] ?? null;
+
+// X counts every link as 23 characters and wide characters as two. Same rule
+// as xLen() in index.html.
+function x_len($t) {
+    $n = 0;
+    $t = preg_replace_callback('~(https?://\S+|www\.\S+|\b[a-z0-9-]+\.(?:com|ai|org|net|io|co)(?:/\S*)?)~i',
+        function ($m) use (&$n) { $n += 23; return ''; }, $t);
+    foreach (preg_split('//u', $t, -1, PREG_SPLIT_NO_EMPTY) as $ch) {
+        $cp = function_exists('mb_ord') ? mb_ord($ch, 'UTF-8') : 0;
+        $n += ($cp > 0x10FF) ? 2 : 1;
+    }
+    return $n;
+}
 
 // ---- server-side checks gate. Never trust the client-side pass alone.
 if (!in_array($brand, BRANDS, true)) {
@@ -132,22 +165,56 @@ if (strpos($channelId, BRAND_WORKSPACE[$brand] . '_') !== 0) {
 if ($caption === '') {
     fail('empty caption');
 }
-// Count CHARACTERS, not bytes. strlen() counted bytes, so a caption using
-// the Briefing's typographic punctuation (- and the middot in every kicker
-// are multi-byte in UTF-8) could pass the client's character count and then
-// be rejected here for a length the user cannot see. mb_strlen matches what
-// the on-screen counter shows.
-$max = PLATFORM_MAX_CHARS[$k];
-$len = function_exists('mb_strlen') ? mb_strlen($caption, 'UTF-8') : strlen($caption);
-if ($len > $max) {
-    fail('caption is ' . $len . ' characters, over the ' . $max . ' limit for ' . $label . ' - shorten it before posting.');
+// Count CHARACTERS, not bytes (mb_strlen), so the server agrees with the
+// on-screen counter. X counts links as 23 (x_len).
+if (preg_match('/[\x{2013}\x{2014}]/u', $caption)) {
+    fail('the caption has an em or en dash. House rule: none. Press Fit to channel.');
 }
-if (!is_string($dataUrl) || strpos($dataUrl, 'data:image/png;base64,') !== 0) {
-    fail('no rendered card image');
+if (preg_match('/(^|\s)#[A-Za-z0-9_]+/', $caption)) {
+    fail('the caption has a hashtag. House rule: no hashtags on any network.');
 }
-$bin = base64_decode(substr($dataUrl, strlen('data:image/png;base64,')), true);
-if ($bin === false || strlen($bin) === 0) {
-    fail('card image failed to decode');
+$threadParts = [];
+if ($k === 'x' && $xMode === 'thread') {
+    if (!is_array($thread)) fail('a thread was asked for but no parts arrived.');
+    foreach ($thread as $i => $part) {
+        $part = trim((string)$part);
+        if ($part === '') continue;
+        if (preg_match('/[\x{2013}\x{2014}]/u', $part) || preg_match('/(^|\s)#[A-Za-z0-9_]+/', $part)) {
+            fail('thread part ' . ($i + 1) . ' has a dash or a hashtag.');
+        }
+        $pl = x_len($part);
+        if ($pl > 280) fail('thread part ' . ($i + 1) . ' is ' . $pl . ' characters, over 280.');
+        $threadParts[] = $part;
+    }
+    if (count($threadParts) < 2 || count($threadParts) > X_THREAD_MAX_PARTS) {
+        fail('an X thread takes 2 to ' . X_THREAD_MAX_PARTS . ' parts; this has ' . count($threadParts) . '.');
+    }
+    $caption = $threadParts[0];
+} elseif ($k === 'x') {
+    $max = ($xMode === 'long') ? X_LONG_MAX : 280;
+    $len = x_len($caption);
+    if ($len > $max) {
+        fail('caption is ' . $len . ' characters on X (links count as 23), over the ' . $max . ' limit' . ($xMode === 'long' ? '' : '. Pick Long (Premium) or Thread.'));
+    }
+} else {
+    $max = PLATFORM_MAX_CHARS[$k];
+    $len = function_exists('mb_strlen') ? mb_strlen($caption, 'UTF-8') : strlen($caption);
+    if ($len > $max) {
+        fail('caption is ' . $len . ' characters, over the ' . $max . ' limit for ' . $label . ' - shorten it before posting.');
+    }
+}
+if (count($images) < 1) fail('no rendered card image');
+if (count($images) > PLATFORM_MAX_IMAGES[$k]) {
+    fail($label . ' takes up to ' . PLATFORM_MAX_IMAGES[$k] . ' images in one post; this has ' . count($images) . '.');
+}
+$bins = [];
+foreach ($images as $i => $dataUrl) {
+    if (!is_string($dataUrl) || strpos($dataUrl, 'data:image/png;base64,') !== 0) {
+        fail('image ' . ($i + 1) . ' is not a rendered card');
+    }
+    $bin = base64_decode(substr($dataUrl, strlen('data:image/png;base64,')), true);
+    if ($bin === false || strlen($bin) === 0) fail('image ' . ($i + 1) . ' failed to decode');
+    $bins[] = $bin;
 }
 
 /*
@@ -167,7 +234,7 @@ if ($bin === false || strlen($bin) === 0) {
  * "already queued", because that is what it is.
  */
 $dupWindow = 600;
-$dupFile = sys_get_temp_dir() . '/studio-post-' . md5($brand . '|' . $k . '|' . $caption) . '.json';
+$dupFile = sys_get_temp_dir() . '/studio-post-' . md5($brand . '|' . $k . '|' . $xMode . '|' . count($bins) . '|' . $caption . '|' . implode("\n", $threadParts)) . '.json';
 if (is_readable($dupFile)) {
     $prev = json_decode(@file_get_contents($dupFile), true);
     if (is_array($prev) && isset($prev['at']) && (time() - (int)$prev['at']) < $dupWindow) {
@@ -179,17 +246,22 @@ if (is_readable($dupFile)) {
     }
 }
 
-// ---- 1) upload the card image
-$tmp = tempnam(sys_get_temp_dir(), 'card') . '.png';
-file_put_contents($tmp, $bin);
-$upload = omnisocials_request('POST', '/media/upload', $key, [
-    'file' => new CURLFile($tmp, 'image/png', $k . '.png'),
-], true);
-@unlink($tmp);
-if (!$upload['ok'] || !isset($upload['data']['data']['id'])) {
-    fail('upload failed: ' . ($upload['data']['error']['message'] ?? ($upload['error'] ?? 'unknown error')));
+// ---- 1) upload every image, in order
+$mediaIds = [];
+foreach ($bins as $i => $bin) {
+    $tmp = tempnam(sys_get_temp_dir(), 'card') . '.png';
+    file_put_contents($tmp, $bin);
+    $upload = omnisocials_request('POST', '/media/upload', $key, [
+        'file' => new CURLFile($tmp, 'image/png', $k . '-' . ($i + 1) . '.png'),
+    ], true);
+    @unlink($tmp);
+    if (!$upload['ok'] || !isset($upload['data']['data']['id'])) {
+        fail('upload of image ' . ($i + 1) . ' failed' . ($mediaIds ? ' (after ' . count($mediaIds) . ' uploaded)' : '') . ': '
+            . ($upload['data']['error']['message'] ?? ($upload['error'] ?? 'unknown error')));
+    }
+    $mediaIds[] = $upload['data']['data']['id'];
 }
-$mediaId = $upload['data']['data']['id'];
+$mediaId = $mediaIds[0];
 
 // ---- 2) create the post, scheduled 30 minutes out (not a permanent draft -
 // this WILL publish itself when the time hits unless someone cancels it from
@@ -197,15 +269,28 @@ $mediaId = $upload['data']['data']['id'];
 // set to false - combining it with scheduled_at was never tested and BH's
 // proven pattern never sends it at all.
 $scheduledAt = gmdate('Y-m-d\TH:i:s.000\Z', time() + 1800);
-$create = omnisocials_request('POST', '/posts/create', $key, [
+// STUDIO_PARITY_2026-09-26: several media ids make a carousel (or a story
+// set); OmniSocials infers it from the count. A thread rides in
+// x.thread_parts per the vendor docs, card on part one. NOT yet proven live on
+// this workspace: carousels, X long posts and X threads. The single-image
+// shape above is the proven one.
+$body = [
     'content' => $caption,
     'channels' => [$channelId],
     'type' => PLATFORM_POST_TYPE[$k],
-    'media_ids' => [$mediaId],
+    'media_ids' => $mediaIds,
     'scheduled_at' => $scheduledAt,
-]);
+];
+if ($threadParts) {
+    $parts = [];
+    foreach ($threadParts as $i => $t) {
+        $parts[] = ($i === 0) ? ['text' => $t, 'media_ids' => $mediaIds] : ['text' => $t];
+    }
+    $body['x'] = ['thread_parts' => $parts];
+}
+$create = omnisocials_request('POST', '/posts/create', $key, $body);
 if (!$create['ok'] || !isset($create['data']['data']['id'])) {
-    fail('post create failed (media uploaded, id ' . $mediaId . '): '
+    fail('post create failed (media uploaded, ids ' . implode(',', $mediaIds) . '): '
         . ($create['data']['error']['message'] ?? ($create['error'] ?? 'unknown error')));
 }
 
@@ -222,6 +307,9 @@ echo json_encode([
     'label' => $label,
     'post_id' => $create['data']['data']['id'],
     'media_id' => $mediaId,
+    'media_ids' => $mediaIds,
+    'images' => count($mediaIds),
+    'kind' => $threadParts ? ('thread of ' . count($threadParts)) : ($k === 'x' && $xMode === 'long' ? 'long post' : (count($mediaIds) > 1 ? ($k === 'ig_story' ? 'story set' : 'carousel') : 'single card')),
     'status' => $create['data']['data']['status'] ?? null,
     'scheduled_at' => $scheduledAt,
 ]);

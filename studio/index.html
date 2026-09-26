@@ -287,6 +287,34 @@ html[data-brand="gabes"] .toast{text-transform:lowercase;font-weight:400}
 .gbOnly{display:none}
 html[data-brand="gabes"] .gbOnly{display:flex}
 html[data-brand="gabes"] .gdOnly{display:none}
+
+/* ---------- STUDIO_PARITY_2026-09-26: carousel, caption lengths, X modes, checks ---------- */
+.modebar{display:flex;gap:6px;margin-bottom:14px}
+.modebar .seg{flex:0 0 auto;padding:9px 16px}
+.slidepanel{display:none;margin-top:14px;border-top:1px solid var(--faint);padding-top:14px}
+.slidepanel.on{display:block}
+.slidehead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.slidecount{font-size:10.5px;color:var(--soft);font-family:var(--label);letter-spacing:.08em}
+.slidecount.over{color:#c05a3c;font-weight:700}
+.slides{display:flex;gap:8px;overflow-x:auto;padding:2px 2px 10px}
+.slide{flex:0 0 auto;position:relative;border-radius:6px;box-shadow:inset 0 0 0 1.5px var(--hair);padding:3px;background:var(--field)}
+.slide canvas{display:block;width:78px;height:auto;border-radius:3px}
+.slide.on{box-shadow:inset 0 0 0 2.5px var(--ink)}
+html[data-brand="gabes"] .slide.on{box-shadow:inset 0 0 0 2.5px var(--acc)}
+.slide .sn{position:absolute;left:6px;top:5px;font-size:9px;font-family:var(--label);background:var(--ink);color:var(--bg);padding:1px 5px;border-radius:999px}
+.slides-empty{font-size:12.5px;color:var(--soft);padding:10px 0}
+.capctl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 12px;align-items:center;margin-bottom:12px}
+.capctl > span{font-size:9.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:var(--soft);font-family:var(--label)}
+html[data-brand="gabes"] .capctl > span{text-transform:lowercase;font-weight:400}
+.capctl .xrow{display:contents}
+.capctl .xrow.off{display:none}
+.checks{list-style:none;margin-top:12px;border-top:1px solid var(--faint);padding-top:10px;display:grid;gap:5px}
+.checks li{font-size:12px;line-height:1.4;display:grid;grid-template-columns:44px minmax(0,1fr);gap:8px;align-items:baseline}
+.checks li b{font-size:9px;font-family:var(--label);letter-spacing:.12em;text-transform:uppercase;text-align:center;padding:2px 0;border-radius:4px;box-shadow:inset 0 0 0 1px var(--hair);color:var(--soft)}
+.checks li.fail b{background:#c05a3c;color:#fff;box-shadow:none}
+.checks li.warn b{background:#d9a13b;color:#1d1405;box-shadow:none}
+.checks li.ok b{background:var(--ink);color:var(--bg);box-shadow:none}
+html[data-brand="gabes"] .checks li b{text-transform:lowercase}
 </style>
 </head>
 <body>
@@ -323,7 +351,7 @@ html[data-brand="gabes"] .gdOnly{display:none}
     <div class="adv" id="adv">
       <button class="adv-toggle" type="button" id="advToggle"><span class="chev">&#9656;</span> If it will not load</button>
       <div class="adv-body">
-        <p class="hint" style="margin-top:0">Type a path, or open the page in another tab, select all, copy, and paste it below. Paste only works for the Briefing.</p>
+        <p class="hint" style="margin-top:0" id="advHint">Type a path, or open the page in another tab, select all, copy, and paste it below.</p>
         <div class="srcrow">
           <input id="srcUrl" type="text" value="/briefing/" spellcheck="false" />
           <button class="btn" id="loadBtn">Read it</button>
@@ -377,7 +405,7 @@ html[data-brand="gabes"] .gdOnly{display:none}
       </div>
       <div class="f"><label>Format</label><div class="segs" id="formats"></div></div>
       <div class="f"><label>Layout</label><div class="segs" id="layouts"></div></div>
-      <div class="f gdOnly"><label>Alignment</label><div class="segs" id="aligns"></div></div>
+      <div class="f"><label>Alignment</label><div class="segs" id="aligns"></div></div>
       <div class="f"><label>Statement size <span id="scaleVal" style="letter-spacing:normal;text-transform:none"></span></label><input id="fScale" type="range" min="60" max="150" step="2" value="100" /></div>
       <div class="f"><label>Support size <span id="supVal" style="letter-spacing:normal;text-transform:none"></span></label><input id="fSupScale" type="range" min="70" max="150" step="2" value="100" /></div>
       <div class="f"><label>Weight</label><div class="segs" id="weights"></div></div>
@@ -402,8 +430,33 @@ html[data-brand="gabes"] .gdOnly{display:none}
 <div class="stage">
   <section class="panel" style="margin-top:24px">
     <span class="label">The card</span>
+    <div class="modebar" id="modebar">
+      <button class="seg on" type="button" data-mode="single">Single card</button>
+      <button class="seg" type="button" data-mode="carousel">Carousel</button>
+    </div>
     <div class="canvaswrap"><canvas id="card" width="1080" height="1350"></canvas></div>
     <div class="dims" id="dims"></div>
+    <label class="sw" style="margin-top:9px"><input type="checkbox" id="safeTg" /> <span id="safeLbl">Show platform safe zones (preview only)</span></label>
+    <div class="slidepanel" id="slidepanel">
+      <div class="slidehead">
+        <span class="label" style="margin:0" id="slideLbl">The carousel</span>
+        <span class="slidecount" id="slideCount"></span>
+      </div>
+      <div class="slides" id="slides"></div>
+      <div class="stagebar" style="margin-top:4px">
+        <button class="btn small" id="slAdd">Add this card</button>
+        <button class="btn ghost small" id="slStory">Build from this story</button>
+        <button class="btn ghost small" id="slWeek">Build from the week</button>
+      </div>
+      <div class="stagebar" style="margin-top:8px">
+        <button class="btn ghost small" id="slLeft">&larr;</button>
+        <button class="btn ghost small" id="slRight">&rarr;</button>
+        <button class="btn ghost small" id="slDup">Duplicate</button>
+        <button class="btn ghost small" id="slDel">Remove</button>
+        <button class="btn ghost small" id="slClear">Clear</button>
+      </div>
+      <p class="hint" id="slideHint">Click a slide to edit it. Every field, angle and queue pick on the left writes into the slide that is selected. Style, format and colour apply to the whole carousel.</p>
+    </div>
     <div class="stagebar">
       <button class="btn" id="dlBtn">Download PNG</button>
       <button class="btn ghost" id="copyImgBtn">Copy image</button>
@@ -417,11 +470,16 @@ html[data-brand="gabes"] .gdOnly{display:none}
   <section class="panel cap">
     <span class="label">The caption</span>
     <h2 style="font-size:21px;margin-bottom:11px" id="capTitle">Paste this under it.</h2>
+    <div class="capctl">
+      <span id="lenLbl">Length</span><div class="segs" id="lengths"></div>
+      <div class="xrow off" id="xrow"><span id="xLbl">X post</span><div class="segs" id="xmodes"></div></div>
+    </div>
     <textarea id="capText" spellcheck="true"></textarea>
     <div class="capmeta">
       <span><b id="capCount">0</b> characters<span id="capLimit"></span></span>
       <span id="capFold"></span>
     </div>
+    <ul class="checks" id="checks"></ul>
     <div class="stagebar">
       <button class="btn" id="copyCapBtn">Copy caption</button>
       <button class="btn ghost small" id="fitCapBtn">Fit to channel</button>
@@ -631,6 +689,40 @@ var GD_FORMATS = [
   {id:'threads',  w:1080, h:1350, ratio:'4:5',  name:'Threads',   maxChars:500}
 ];
 
+/* STUDIO_PARITY_2026-09-26 ------------------------------------------------
+   THE PLATFORM RULES. One table both houses read. max is the platform's own
+   ceiling (a hard refusal, and push.php refuses at the same number); house is
+   the voice ceiling the "standard" length folds to; short is the quick hook
+   plus link. frames is the image count the platform takes in one post, read
+   from docs.omnisocials.com on 2026-09-26. fold is roughly where the feed
+   cuts to "more". link:false means a URL in the caption is not clickable.
+   X long posts (25,000) need X Premium on the connected account; X threads
+   run 2 to 25 parts of 280, hero card on part one. */
+var PLATFORM = {
+  linkedin: {max:3000,  house:1300, short:300, longCap:3000, fold:210, frames:[1,10], link:true},
+  ig_feed:  {max:2200,  house:900,  short:300, longCap:2200, fold:125, frames:[1,10], link:false},
+  x:        {max:280,   house:280,  short:280, longCap:280,  fold:0,   frames:[1,4],  link:true, premium:25000, threadMax:25},
+  ig_story: {max:140,   house:140,  short:140, longCap:140,  fold:0,   frames:[1,10], link:false},
+  facebook: {max:63206, house:1000, short:300, longCap:3000, fold:480, frames:[1,10], link:true},
+  threads:  {max:500,   house:500,  short:300, longCap:500,  fold:0,   frames:[1,10], link:true}
+};
+var LENGTHS = [{id:'short',name:'Short'},{id:'standard',name:'Standard'},{id:'long',name:'Long'}];
+var XMODES  = [{id:'short',name:'280'},{id:'long',name:'Long (Premium)'},{id:'thread',name:'Thread'}];
+var GD_BANNED = ['honestly','frankly','truthfully','at the end of the day','that being said','worth noting',
+  'seamless','game-chang','unlock','supercharge','cutting-edge','future-proof','ai-powered','revolutioniz',
+  'delve','leverage','robust','agentic','10x','transformative'];
+/* X counts every link as 23 characters (t.co) and wide characters (emoji,
+   CJK) as two. The counter and the gate use this, not .length. */
+var URL_RE = /(https?:\/\/[^\s]+|www\.[^\s]+|\b[a-z0-9-]+\.(?:com|ai|org|net|io|co)(?:\/[^\s]*)?)/gi;
+function xLen(t){
+  t = String(t||'');
+  var n = 0, s = t.replace(URL_RE, function(){ n += 23; return ''; });
+  for(var ch of s){ n += (ch.codePointAt(0) > 0x10FF) ? 2 : 1; }
+  return n;
+}
+function charLen(t){ var n = 0; for(var ch of String(t||'')) n++; return n; }
+function lenFor(pid){ return pid === 'x' ? xLen : charLen; }
+
 var GD_WORLDS = [
   {id:'mint',  name:'Mint',  bg:'#d8f7c9', ink:'#06162b', soft:'rgba(6,22,43,.60)',    hair:'rgba(6,22,43,.24)',     rule:'#06162b'},
   {id:'deep',  name:'Deep',  bg:'#c7efb2', ink:'#06162b', soft:'rgba(6,22,43,.60)',    hair:'rgba(6,22,43,.24)',     rule:'#06162b'},
@@ -639,7 +731,7 @@ var GD_WORLDS = [
 ];
 
 var GD_LAYOUTS = [{id:'statement',name:'Statement'},{id:'figure',name:'Figure'},{id:'quote',name:'Quote'}];
-var GB_LAYOUTS = [{id:'card',name:'card'},{id:'week',name:'the week'}];
+var GB_LAYOUTS = [{id:'card',name:'card'},{id:'figure',name:'figure'},{id:'quote',name:'quote'},{id:'week',name:'the week'}];
 
 var ALIGNS     = [{id:'left',name:'Left'},{id:'center',name:'Centred'}];
 var GD_WEIGHTS = [{id:'400',name:'Light'},{id:'500',name:'Book'},{id:'600',name:'Bold'}];
@@ -670,6 +762,9 @@ var S = {
   scale:100, supScale:100, track:-20,
   toggles:{},
   posting:false,   /* STUDIO_POST_LOCK_PATCH: true while a post is in flight */
+  /* STUDIO_PARITY_2026-09-26 */
+  mode:'single', slides:[], slideIndex:-1, safe:false,
+  capLength:'standard', xMode:'short', lastGen:'',
   card:{kicker:'',statement:'',figure:'',support:'',foot:'',footR:'',stack:[]}
 };
 
@@ -712,6 +807,21 @@ function firstDoNot(t){
   var ss = sentences(t);
   for(var i=0;i<ss.length;i++){ if(/^(do not|don't|never|stop)\b/i.test(ss[i])) return ss[i]; }
   return ss[0] || '';
+}
+/* STUDIO_PARITY_2026-09-26: the number, pulled from any text. Shared so the
+   >gabes number angle reads figures the same way the Briefing side does. */
+function extractFigureFrom(pool){
+  pool = String(pool||''); var m;
+  m = pool.match(/\$\s?(\d[\d,]*(?:\.\d+)?)\s*(billion|million|trillion)/i);
+  if(m) return '$' + m[1] + m[2].charAt(0).toUpperCase();
+  m = pool.match(/(\d[\d,]*(?:\.\d+)?)\s+to\s+(\d[\d,]*(?:\.\d+)?)\s*(?:percent|%)/i);
+  if(m) return m[1] + ' to ' + m[2] + '%';
+  m = pool.match(/(\d[\d,]*(?:\.\d+)?)\s*(?:percent|%)/i);
+  if(m) return m[1] + '%';
+  m = pool.match(/\$\s?(\d[\d,]*(?:\.\d+)?)/);
+  if(m) return '$' + m[1];
+  m = pool.match(/\b(\d[\d,]{1,}(?:\.\d+)?)\b/);
+  return m ? m[1] : '';
 }
 function absoluteUrl(u){ try { return new URL(u, window.location.href).href; } catch(e){ return u; } }
 function viaFetcher(u){ return 'fetch.php?u=' + encodeURIComponent(u); }
@@ -763,7 +873,8 @@ var GB_FORMATS = [
   {id:'ig_feed',  w:1080, h:1350, ratio:'4:5',  name:'ig feed',   maxChars:900},
   {id:'x',        w:1600, h:900,  ratio:'16:9', name:'x',         maxChars:280},
   {id:'ig_story', w:1080, h:1920, ratio:'9:16', name:'ig story',  maxChars:140},
-  {id:'facebook', w:1080, h:1080, ratio:'1:1',  name:'facebook',  maxChars:1000}
+  {id:'facebook', w:1080, h:1080, ratio:'1:1',  name:'facebook',  maxChars:1000},
+  {id:'threads',  w:1080, h:1350, ratio:'4:5',  name:'threads',   maxChars:500}
 ];
 function formatsNow(){ return (S.brand === 'gabes') ? GB_FORMATS : GD_FORMATS; }
 function fmtNow(){ var L = formatsNow(); return L.filter(function(f){return f.id===S.format;})[0] || L[0]; }
@@ -879,7 +990,7 @@ var GOUDE = {
      unit, which put a publication date on artwork that stays up for months and
      made every operator uncheck the whole stamp by hand every morning. The
      number survives; the date is opt in. */
-  toggles:[['wordmark','Wordmark',true],['stamp','Issue stamp',true],['stampdate','Issue date',false],['support','Support line',true],['footer','Footer',true],['rule','Statement rule',true]],
+  toggles:[['wordmark','Wordmark',true],['stamp','Issue stamp',true],['stampdate','Issue date',false],['support','Support line',true],['footer','Footer',true],['rule','Statement rule',true],['slidenum','Slide numbers',true]],
   defaults:{layout:'statement', weight:'500', track:-20, align:'left', world:'mint'},
   dayLabel:function(i){ return DAYS[i % DAYS.length]; },
   slotLabel:function(s){ return s; },
@@ -1060,6 +1171,65 @@ var GOUDE = {
     return hook + '\n\n' + url;
   },
 
+  /* STUDIO_PARITY_2026-09-26: the caption as parts, so every platform and
+     every length is assembled from the same material and the close (with the
+     link) is never the thing a fold cuts off. */
+  captionParts:function(it, angle, post){
+    var url = (it && it.url) || S.meta.url || 'https://goudegroup.com/briefing/';
+    var close = ["The full read, and a free tool that does the arithmetic for your numbers, is in this week's Briefing:\n" + url,
+                 'The Briefing. Once a week. No signup, nothing to download.'];
+    if(!it){
+      return {hook:clean(S.card.statement), body:[clean(S.card.support)], action:'',
+              close:['goudegroup.com/briefing'], shortHook:clean(S.card.statement), url:'https://goudegroup.com/briefing/'};
+    }
+    var hook, action = it.play || '', shortHook;
+    if(angle === 'instrument'){
+      hook = it.toolName + '. ' + (it.toolSub || '');
+      action = 'It runs in the page. Nothing to download, no email, no signup.';
+      shortHook = hook;
+    } else if(angle === 'mistake'){
+      hook = firstDoNot(it.notdo); action = it.play ? 'Do this instead: ' + it.play : ''; shortHook = hook;
+    } else if(angle === 'line'){
+      hook = it.pull; shortHook = it.pull;
+    } else if(angle === 'figure'){
+      hook = (post && post.figure ? post.figure + '. ' : '') + firstSentences(it.headline,1); shortHook = hook;
+    } else {
+      hook = firstSentences(it.headline,2); shortHook = firstSentences(it.headline,1);
+    }
+    var body = [it.moved, it.changes];
+    if(angle === 'line') body.unshift(firstSentences(it.headline,2));
+    if(angle !== 'mistake' && it.notdo) body.push(it.notdo);
+    return {hook:clean(hook), body:body.map(clean).filter(Boolean), action:clean(action),
+            close:close, shortHook:clean(shortHook || hook), url:url};
+  },
+
+  /* Carousel builders. Section labels are literal, per the Goude canon. */
+  storySlides:function(it){
+    if(!it) return [];
+    var T = GOUDE.issueTag(), out = [];
+    out.push(GOUDE.buildPost(it,'statement'));
+    var fig = GOUDE.extractFigure(it);
+    if(fig) out.push(GOUDE.buildPost(it,'figure'));
+    out.push({kicker:caps(T + ' · What happened'), statement:firstSentences(it.moved,2), support:'', layout:'statement', foot:'goudegroup.com/briefing', footR:''});
+    out.push({kicker:caps(T + ' · What it costs'), statement:firstSentences(it.changes,2), support:'', layout:'statement', foot:'goudegroup.com/briefing', footR:''});
+    out.push(GOUDE.buildPost(it,'mistake'));
+    if(it.toolName) out.push(GOUDE.buildPost(it,'instrument'));
+    out.push({kicker:caps(T), statement:"The full read and the free tool are in this week's Briefing.",
+              support:'goudegroup.com/briefing', layout:'statement', foot:'goudegroup.com/briefing', footR:'No signup'});
+    return out;
+  },
+  weekSlides:function(){
+    var T = GOUDE.issueTag(), out = [];
+    out.push({kicker:caps(T), statement:'Five stories this week. A free tool in every one.',
+              support:(S.meta.date || ''), layout:'statement', foot:'goudegroup.com/briefing', footR:''});
+    (S.items || []).slice(0,8).forEach(function(it){
+      var p = GOUDE.buildPost(it,'statement'); p.support = ''; out.push(p);
+    });
+    out.push({kicker:caps(T), statement:'Read it this week. Nothing to download, no signup.',
+              support:'goudegroup.com/briefing', layout:'statement', foot:'goudegroup.com/briefing', footR:''});
+    return out;
+  },
+
   fileName:function(q){
     return 'goude-' + slug((S.meta.no||'briefing') + '-' + (q ? q.day+'-'+q.slot+'-'+q.angle : S.angle)) + '.png';
   },
@@ -1069,8 +1239,11 @@ var GOUDE = {
     ctx.clearRect(0,0,W,H); ctx.fillStyle=wd.bg; ctx.fillRect(0,0,W,H);
     ctx.textBaseline='alphabetic'; setLS(ctx,0);
     var M=Math.round(76*s), Mv=Math.round((wide?52:76)*s), maxW=W-M*2, left=M;
+    /* STUDIO_PARITY_2026-09-26: a story keeps its type clear of Instagram's
+       own top bar and reply bar, so nothing on the card sits under the UI. */
+    var story=(f.id==='ig_story'), Mt=story?Math.round(250*s):Mv, Mb=story?Math.round(300*s):Mv;
 
-    var topY = Mv + Math.round(16*s), ruleTopY = topY + Math.round(24*s);
+    var topY = Mt + Math.round(16*s), ruleTopY = topY + Math.round(24*s);
     if(S.toggles.wordmark || S.toggles.stamp){
       ctx.fillStyle=wd.ink; ctx.font='700 '+Math.round(19*s)+'px '+INTER;
       if(S.toggles.wordmark) dt(ctx,'THE GOUDE GROUP',left,topY,19*s*0.22);
@@ -1078,14 +1251,15 @@ var GOUDE = {
         /* STUDIO_DATE_OFF_PATCH: the date rides only when S.toggles.stampdate is on. */
         var st=(S.meta.no?S.meta.no.toUpperCase():'')+((S.toggles.stampdate && S.meta.date)?'  ·  '+S.meta.date.toUpperCase():'');
         if(!st) st='WEEKLY INTELLIGENCE';
+        var sc = slideCounter(); if(sc) st = sc;
         ctx.fillStyle=wd.soft;
         dt(ctx,st,W-M-mw(ctx,st,19*s*0.18),topY,19*s*0.18);
       }
       ctx.fillStyle=wd.hair; ctx.fillRect(left,ruleTopY,maxW,Math.max(1,Math.round(1.5*s)));
-    } else { ruleTopY = Mv; }
+    } else { ruleTopY = Mt; }
     setLS(ctx,0);
 
-    var footRuleY = H - Mv - Math.round(58*s);
+    var footRuleY = H - Mb - Math.round(58*s);
     if(S.toggles.footer){
       ctx.fillStyle=wd.hair; ctx.fillRect(left,footRuleY,maxW,Math.max(1,Math.round(1.5*s)));
       ctx.font='700 '+Math.round(18*s)+'px '+INTER; ctx.fillStyle=wd.ink;
@@ -1096,7 +1270,7 @@ var GOUDE = {
         var fr=S.card.footR.toUpperCase();
         dt(ctx,fr,W-M-mw(ctx,fr,18*s*0.16),fy,18*s*0.16);
       }
-    } else { footRuleY = H - Mv; }
+    } else { footRuleY = H - Mb; }
     setLS(ctx,0);
 
     var contentTop = ruleTopY + Math.round((wide?44:58)*s);
@@ -1216,11 +1390,15 @@ var GABES = {
     {id:'pair',  name:'the pair'},
     {id:'lane',  name:'the lane'},
     {id:'week',  name:'the week'},
-    {id:'lede',  name:'the lede'}
+    {id:'lede',  name:'the lede'},
+    {id:'number', name:'the number'},
+    {id:'dothis', name:'do this'},
+    {id:'notthis', name:'not this'},
+    {id:'fix',   name:'the fix'}
   ],
   pairs:[['hook','lane'],['knife','pair'],['hook','knife'],['lane','hook'],['pair','knife']],
-  toggles:[['mark','the mark',true],['kicker','kicker',true],['site','gabes.ai',true],['support','the line',true],['subOn916','line on 9:16',false]],
-  defaults:{layout:'card', weight:'500', track:-10, texture:'none'},
+  toggles:[['mark','the mark',true],['kicker','kicker',true],['site','gabes.ai',true],['stamp','issue stamp',false],['support','the line',true],['subOn916','line on 9:16',false],['footer','footer text',false],['rule','accent rule',false],['slidenum','slide numbers',true]],
+  defaults:{layout:'card', weight:'500', track:-10, texture:'none', align:'left'},
   dayLabel:function(i){ return GB_DAYS[i % GB_DAYS.length]; },
   slotLabel:function(s){ return s.toLowerCase(); },
 
@@ -1289,8 +1467,32 @@ var GABES = {
         meta = {no:src.no, date:src.date, title:'', lede:'', engine:'',
                 url:'https://gabes.ai/letter/', kind:'signal'};
       }
-      return {items:items, meta:meta};
+      return GABES.enrich(items).then(function(){ return {items:items, meta:meta}; });
     });
+  },
+
+  /* STUDIO_PARITY_2026-09-26: the index carries only the hook and the knife.
+     The signal page carries the three body paragraphs (the condition, the
+     cost, the fix) and the do this / not this pair. Reading them gives this
+     side the same depth the Briefing gives the Goude side: the number, the
+     mistake, the fix, long captions and story carousels. A page that will not
+     load leaves the item as it was; nothing else depends on it. */
+  enrich:function(items){
+    return Promise.all(items.map(function(it){
+      if(it.enriched || !/^https:\/\/gabes\.ai\/letter\/signals\//.test(it.url || '')) return Promise.resolve();
+      return fetch(viaFetcher(it.url)).then(function(r){ return r.ok ? r.text() : ''; }).then(function(html){
+        if(!html) return;
+        var doc = new DOMParser().parseFromString(html, 'text/html');
+        var ps = Array.prototype.map.call(doc.querySelectorAll('.body p'), function(p){ return clean(p.textContent); }).filter(Boolean);
+        var pair = '';
+        if(ps.length && /^do this:/i.test(ps[ps.length-1])) pair = ps.pop();
+        it.condition = ps[0] || ''; it.cost = ps[1] || ''; it.fix = ps.slice(2).join(' ');
+        var m = pair.match(/^do this:\s*([\s\S]*?)\s*not this:\s*([\s\S]*)$/i);
+        it.doThis = m ? m[1] : pair.replace(/^do this:\s*/i,'');
+        it.notThis = m ? m[2] : '';
+        it.enriched = true;
+      }).catch(function(){});
+    }));
   },
 
   buildPost:function(it, angle){
@@ -1322,6 +1524,22 @@ var GABES = {
       p.support = lower(S.meta.title || it.line);
       p.kicker = lower('> the letter · ' + (S.meta.no || ''));
       p.layout = 'card';
+    } else if(angle === 'number'){
+      p.figure = extractFigureFrom([it.line, it.hook, it.condition, it.cost].join(' '));
+      p.statement = lower(h1); p.support = lower(l1);
+      p.layout = p.figure ? 'figure' : 'card';
+    } else if(angle === 'dothis'){
+      p.statement = lower(firstLoose(it.doThis || it.fix || it.line, 2));
+      p.support = it.notThis ? lower('not this: ' + it.notThis) : lower(h1);
+      p.kicker = lower('> do this · ' + (it.lane || '')); p.layout = 'card';
+    } else if(angle === 'notthis'){
+      p.statement = lower(it.notThis || h1);
+      p.support = it.doThis ? lower('do this instead: ' + firstLoose(it.doThis,1)) : lower(l1);
+      p.kicker = lower('> not this · ' + (it.lane || '')); p.layout = 'quote';
+    } else if(angle === 'fix'){
+      p.statement = lower(firstLoose(it.fix || it.line, 2));
+      p.support = lower(h1);
+      p.kicker = lower('> the fix · ' + (it.lane || '')); p.layout = 'quote';
     }
     p.caption = GABES.caption(it, angle, p);
     return p;
@@ -1339,6 +1557,64 @@ var GABES = {
       parts = [lower(it.hook), lower(it.line), close];
     }
     return parts.filter(function(x){ return x && x.trim(); }).join('\n\n').replace(/\n{3,}/g,'\n\n');
+  },
+
+  captionParts:function(it, angle, post){
+    var letter = 'https://gabes.ai/letter/';
+    var close = ['the whole week lands friday in the letter. one signal a day, monday to friday, no funnel attached.\n' + letter];
+    if(!it){
+      return {hook:lower(S.card.statement), body:[lower(S.card.support)], action:'', close:close,
+              shortHook:lower(S.card.statement), url:letter};
+    }
+    var url = it.url || letter;
+    var pairLine = it.doThis ? ('do this: ' + it.doThis + (it.notThis ? ' not this: ' + it.notThis : '')) : '';
+    var hook, body, shortHook;
+    if(angle === 'week' || angle === 'lede'){
+      var five = (S.items || []).map(function(x){ return '> ' + lower(x.short || firstLoose(x.hook,1) || x.hook); }).join('\n');
+      return {hook:lower(S.meta.title || (post && post.statement) || ''), body:[lower(S.meta.lede), five].filter(Boolean),
+              action:'', close:close, shortHook:lower(S.meta.title || firstLoose(S.meta.lede,1)), url:S.meta.url || letter};
+    } else if(angle === 'knife'){
+      hook = it.line; body = [it.hook, it.condition, it.cost, it.fix]; shortHook = firstLoose(it.line,1);
+    } else if(angle === 'number'){
+      var fg = post && post.figure; hook = (fg ? fg + '. ' : '') + firstLoose(it.hook,1);
+      body = [it.line, it.condition, it.cost, it.fix]; shortHook = hook;
+    } else if(angle === 'dothis'){
+      hook = 'do this: ' + (it.doThis || firstLoose(it.fix,1)); body = [it.hook, it.fix, it.cost];
+      shortHook = hook; pairLine = it.notThis ? 'not this: ' + it.notThis : '';
+    } else if(angle === 'notthis'){
+      hook = 'not this: ' + (it.notThis || firstLoose(it.hook,1)); body = [it.hook, it.cost, it.fix];
+      shortHook = hook; pairLine = it.doThis ? 'do this instead: ' + it.doThis : '';
+    } else if(angle === 'fix'){
+      hook = firstLoose(it.fix || it.line, 1); body = [it.hook, it.condition, it.fix]; shortHook = hook;
+    } else {
+      hook = it.hook; body = [it.line, it.condition, it.cost, it.fix]; shortHook = firstLoose(it.hook,1);
+    }
+    return {hook:lower(hook), body:body.map(lower).filter(Boolean), action:lower(pairLine), close:close,
+            shortHook:lower(shortHook || hook), url:url};
+  },
+
+  storySlides:function(it){
+    if(!it) return [];
+    var ln = lower(it.lane || 'the signal'), out = [];
+    out.push(GABES.buildPost(it,'hook'));
+    out.push(GABES.buildPost(it,'knife'));
+    var fg = extractFigureFrom([it.line, it.hook, it.condition, it.cost].join(' '));
+    if(fg) out.push(GABES.buildPost(it,'number'));
+    if(it.condition) out.push({kicker:'> the condition · ' + ln, statement:lower(firstLoose(it.condition,2)), support:'', layout:'card', foot:'gabes.ai/letter', footR:''});
+    if(it.cost)      out.push({kicker:'> the cost · ' + ln,      statement:lower(firstLoose(it.cost,2)),      support:'', layout:'card', foot:'gabes.ai/letter', footR:''});
+    if(it.fix)       out.push(GABES.buildPost(it,'fix'));
+    if(it.doThis)    out.push(GABES.buildPost(it,'dothis'));
+    out.push({kicker:'> the letter', statement:'the whole week lands friday in the letter.', support:'gabes.ai/letter', layout:'card', foot:'gabes.ai/letter', footR:''});
+    return out.slice(0,10);
+  },
+  weekSlides:function(){
+    var out = [];
+    var first = (S.items && S.items[0]) || null;
+    out.push({kicker:lower('> ' + (S.meta.no || 'the week')), statement:lower(S.meta.title || 'five signals. one week.'),
+              support:lower(firstLoose(S.meta.lede,1)), layout:'card', foot:'gabes.ai/letter', footR:''});
+    (S.items || []).slice(0,8).forEach(function(it){ var p = GABES.buildPost(it,'hook'); out.push(p); });
+    out.push({kicker:'> the letter', statement:'one signal a day. the whole week on friday.', support:'gabes.ai/letter', layout:'card', foot:'gabes.ai/letter', footR:''});
+    return out;
   },
 
   fileName:function(q){
@@ -1413,41 +1689,57 @@ var GABES = {
     ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left'; setLS(ctx,0);
 
     var pad    = W*0.075;
+    /* STUDIO_PARITY_2026-09-26: a story keeps clear of Instagram's top bar
+       and reply bar, the same as the Goude side. */
+    var story  = (f.id === 'ig_story');
+    var padT   = story ? H*0.13 : pad, padB = story ? H*0.16 : pad;
     var kickPx = Math.max(W*0.026, 13);
     var footPx = Math.max(W*0.022, 12);
     var subPx  = Math.max(W*0.030, 15) * (S.supScale/100);
     var maxW   = W - pad*2;
     var trackEm = S.track/1000;
+    var center = (S.align === 'center');
+    function ax(w){ return center ? pad + (maxW - w)/2 : pad; }
 
     /* top rule: kicker left, gabes.ai right, both in the charge */
-    var topBase = pad + kickPx;
+    var topBase = padT + kickPx;
     ctx.font = '400 ' + kickPx + 'px ' + MONO;
     ctx.fillStyle = accent;
     if(S.toggles.kicker !== false && S.card.kicker){
       dt(ctx, lower(S.card.kicker), pad, topBase, kickPx*0.02);
     }
-    if(S.toggles.site !== false){
-      var site = 'gabes.ai';
+    var rightTop = [];
+    if(S.toggles.stamp && S.meta && S.meta.no) rightTop.push(lower(S.meta.no));
+    if(S.toggles.site !== false) rightTop.push('gabes.ai');
+    var sc = slideCounter(); if(sc) rightTop = [sc];
+    if(rightTop.length){
+      var site = rightTop.join('  ·  ');
       dt(ctx, site, W - pad - mw(ctx, site, kickPx*0.02), topBase, kickPx*0.02);
     }
     setLS(ctx,0);
 
-    /* bottom rule: the mark left, the handle right */
-    var footBase = H - pad;
+    /* bottom rule: the mark (and the footer text) left, the handle right */
+    var footBase = H - padB;
+    var fx = pad;
+    ctx.font = '400 ' + footPx + 'px ' + MONO;
     if(S.toggles.mark !== false){
-      ctx.font = '400 ' + footPx + 'px ' + MONO; ctx.fillStyle = accent;
-      ctx.fillText('>', pad, footBase);
+      ctx.fillStyle = accent; ctx.fillText('>', pad, footBase);
+      fx = pad + ctx.measureText('> ').width;
+    }
+    if(S.toggles.footer && S.card.foot){
+      ctx.fillStyle = head; ctx.globalAlpha = 0.85;
+      ctx.fillText(lower(S.card.foot), fx, footBase);
+      ctx.globalAlpha = 1;
     }
     if(S.card.footR){
-      ctx.font = '400 ' + footPx + 'px ' + MONO;
       ctx.fillStyle = head; ctx.globalAlpha = 0.7;
       var hd = lower(S.card.footR);
       ctx.fillText(hd, W - pad - ctx.measureText(hd).width, footBase);
       ctx.globalAlpha = 1;
     }
 
-    var zoneTop = pad + kickPx*2.2;
-    var zoneBot = H - pad - footPx*1.7;
+    var zoneTop = padT + kickPx*2.2;
+    var zoneBot = H - padB - footPx*1.7;
     var zoneH   = Math.max(40, zoneBot - zoneTop);
 
     /* the week: five hooks, one prompt each, same frame */
@@ -1489,8 +1781,23 @@ var GABES = {
     var wt = S.weight || '500';
     var lhF = 1.04;
     var headline = lower(S.card.statement);
-    var toks = GABES.tokens(headline, S.card.figure);
-    var hpx = GABES.headlinePx(headline, W, ratio) * (S.scale/100);
+    var figMode = (S.layout === 'figure' && S.card.figure);
+    var quote = (S.layout === 'quote');
+    var barW = quote ? Math.max(4, W*0.006) : 0, barGap = quote ? W*0.032 : 0;
+    var hW = maxW - (barW + barGap);
+    var hLeft = pad + barW + barGap;
+    var toks = GABES.tokens(headline, figMode ? '' : S.card.figure);
+    var hpx = GABES.headlinePx(headline, W, ratio) * (S.scale/100) * (figMode ? 0.62 : 1);
+
+    /* the big number, figure layout only, set in the charge */
+    var figTxt = figMode ? lower(S.card.figure) : '', figPx = 0, figH = 0;
+    if(figTxt){
+      figPx = W * (ratio === '16:9' ? 0.12 : 0.2) * (S.scale/100);
+      ctx.font = '500 ' + figPx + 'px ' + OUTFIT;
+      while(mw(ctx, figTxt, figPx*-0.02) > maxW && figPx > W*0.05){ figPx *= 0.93; ctx.font = '500 ' + figPx + 'px ' + OUTFIT; }
+      figH = figPx * 1.02;
+      setLS(ctx,0);
+    }
 
     /* the knife line, measured first so the hook knows its ceiling */
     var showSub = (S.toggles.support !== false) && !!S.card.support && (ratio !== '9:16' || S.toggles.subOn916);
@@ -1501,33 +1808,58 @@ var GABES = {
       subLines = wrap(ctx, lower(S.card.support), maxW*0.94 - pw2, 0);
     }
     var subH = subLines.length ? (subGap + subLines.length*subPx*1.35) : 0;
+    var ruleH = S.toggles.rule ? W*0.04 : 0;
 
     /* shrink the hook until the block clears the frame */
     var lines;
     for(var guard=0; guard<40; guard++){
       ctx.font = wt + ' ' + hpx + 'px ' + OUTFIT;
-      lines = GABES.wrapTokens(ctx, toks, maxW, hpx*trackEm);
-      if(lines.length*hpx*lhF + subH <= zoneH || hpx <= W*0.030) break;
+      lines = GABES.wrapTokens(ctx, toks, hW, hpx*trackEm);
+      if(ruleH + figH + lines.length*hpx*lhF + subH <= zoneH || hpx <= W*0.030) break;
       hpx *= 0.94;
     }
-    var blockH = lines.length*hpx*lhF + subH;
-    var top = (ratio === '9:16')
+    var blockH = ruleH + figH + lines.length*hpx*lhF + subH;
+    var top = (ratio === '9:16' || center)
       ? zoneTop + Math.max(0,(zoneH - blockH)/2)
       : Math.max(zoneTop, zoneBot - blockH);
 
+    if(ruleH){
+      var rw = W*0.065;
+      ctx.fillStyle = accent; ctx.fillRect(ax(rw), top, rw, Math.max(3, W*0.004));
+      top += ruleH;
+    }
+    if(figTxt){
+      ctx.font = '500 ' + figPx + 'px ' + OUTFIT; ctx.fillStyle = accent;
+      dt(ctx, figTxt, ax(mw(ctx, figTxt, figPx*-0.02)), top + figPx*0.84, figPx*-0.02);
+      setLS(ctx,0);
+      top += figH;
+    }
+    var hookTop = top;
     ctx.font = wt + ' ' + hpx + 'px ' + OUTFIT;
+    var wsp = mw(ctx,' ',hpx*trackEm);
     for(var i=0;i<lines.length;i++){
-      GABES.drawTokenLine(ctx, lines[i], pad, top + hpx*0.82 + i*hpx*lhF, hpx*trackEm, head, accent);
+      var lw = 0;
+      for(var k0=0;k0<lines[i].length;k0++) lw += mw(ctx, lines[i][k0].t, hpx*trackEm) + (k0 ? wsp : 0);
+      var lx = center ? hLeft + (hW - lw)/2 : hLeft;
+      GABES.drawTokenLine(ctx, lines[i], lx, top + hpx*0.82 + i*hpx*lhF, hpx*trackEm, head, accent);
     }
     setLS(ctx,0);
+    if(quote){
+      ctx.fillStyle = accent;
+      ctx.fillRect(pad, hookTop + hpx*0.08, barW, lines.length*hpx*lhF - hpx*0.12);
+    }
 
     if(subLines.length){
-      var sy = top + lines.length*hpx*lhF + subGap + subPx*0.82;
+      var sy = hookTop + lines.length*hpx*lhF + subGap + subPx*0.82;
       ctx.font = '400 ' + subPx + 'px ' + MONO;
-      ctx.fillStyle = accent; ctx.fillText('> ', pad, sy);
-      ctx.fillStyle = head; ctx.globalAlpha = 0.92;
-      for(var k=0;k<subLines.length;k++) ctx.fillText(subLines[k], pad+pw2, sy + k*subPx*1.35);
-      ctx.globalAlpha = 1;
+      for(var k=0;k<subLines.length;k++){
+        var sw = pw2 + ctx.measureText(subLines[k]).width;
+        var sx = center ? pad + (maxW - sw)/2 : pad;
+        if(k === 0){ ctx.fillStyle = accent; ctx.fillText('> ', sx, sy); }
+        ctx.fillStyle = head; ctx.globalAlpha = 0.92;
+        ctx.fillText(subLines[k], sx + pw2, sy + k*subPx*1.35);
+        ctx.globalAlpha = 1;
+      }
     }
   }
 };
@@ -1660,23 +1992,9 @@ function currentItem(){
   return S.items[S.queue[S.qIndex].itemIndex];
 }
 
-/* Which of the post's two captions belongs in the box. Only the Goude side
-   carries a second one; gabes has a single shared caption by design. */
-function captionFor(post){
-  if(!post) return '';
-  return (S.brand === 'goude' && S.format === 'x' && post.captionX) ? post.captionX : (post.caption || '');
-}
-
-/* ---------- STUDIO_CAPTION_FIT_PATCH 2026-09-13 ----------
-   The house ceiling used to be a refusal. A caption over it disabled the post
-   button and left the operator to hand trim, which is where the morning run
-   kept stopping on IG feed and on Threads, the two tightest channels on the
-   Goude side. The fan-out spec says fold at the house ceiling and refuse only
-   at the platform ceiling, so the Studio now does the folding.
-
-   foldTo cuts on a paragraph break first, then a sentence end, then a word.
-   Never mid word, never on a caption that already fits. Rebuild caption
-   restores the full text, so nothing is destroyed. */
+/* STUDIO_CAPTION_FIT_PATCH 2026-09-13 kept: fold, never refuse, at the house
+   ceiling. foldTo cuts on a paragraph break, then a sentence end, then a word.
+   Never mid word, never on a caption that already fits. */
 function foldTo(t, cap){
   t = String(t == null ? '' : t);
   if(!cap || t.length <= cap) return t;
@@ -1689,17 +2007,201 @@ function foldTo(t, cap){
   return (w > cap * 0.45 ? slice.slice(0, w) : slice).replace(/[\s,;:]+$/, '');
 }
 
-/* Folds the caption box to the current channel's house ceiling. Returns true
-   when it changed something, so the caller can say so out loud. */
-function fitCaptionToChannel(){
-  var f = fmtNow(), box = $('capText');
-  if(!f || !f.maxChars || !box) return false;
-  var before = box.value;
-  var after = foldTo(before, f.maxChars);
-  if(after === before) return false;
-  box.value = after;
+/* ============================================================
+   STUDIO_PARITY_2026-09-26: THE CAPTION SYSTEM
+   Both houses now build captions the same way. Each engine hands
+   over parts (hook, body paragraphs, action, close with the link,
+   a short hook); the room assembles them for the platform on
+   screen at the length picked: short (hook and link), standard
+   (the house ceiling), long (the platform's own ceiling). X adds
+   three post kinds: 280, a Premium long post, and a thread.
+   The close is reserved first, so a fold never cuts the link.
+   ============================================================ */
+function pidNow(){ return fmtNow().id; }
+function capTarget(pid){
+  var P = PLATFORM[pid] || PLATFORM.linkedin;
+  if(pid === 'x'){ return (S.xMode === 'short') ? 280 : P.premium; }
+  if(S.capLength === 'short') return Math.min(P.short, P.max);
+  if(S.capLength === 'long') return Math.min(P.longCap, P.max);
+  return Math.min(P.house, P.max);
+}
+function hardCap(pid){
+  var P = PLATFORM[pid] || PLATFORM.linkedin;
+  if(pid === 'x') return (S.xMode === 'long' || S.xMode === 'thread') ? P.premium : 280;
+  return P.max;
+}
+function composeCaption(parts, cap, L, length){
+  function J(a){ return a.filter(function(x){ return x && String(x).trim(); }).join('\n\n').replace(/\n{3,}/g,'\n\n'); }
+  function shortOne(){
+    var hook = parts.shortHook || parts.hook, url = parts.url || '';
+    var room = cap - (url ? L(url) + 2 : 0);
+    if(L(hook) > room){
+      hook = foldTo(hook, Math.max(20, room));
+      if(L(hook) > room) hook = hook.slice(0, Math.max(10, room - 1)).replace(/\s+\S*$/,'');
+    }
+    return J([hook, url]);
+  }
+  if(length === 'short') return shortOne();
+  var close = parts.close || [], action = parts.action ? [parts.action] : [];
+  var out = [parts.hook];
+  if(L(J(out.concat(close))) > cap) return shortOne();
+  var body = parts.body || [];
+  for(var i=0;i<body.length;i++){
+    var trial = out.concat([body[i]]);
+    if(L(J(trial.concat(action, close))) <= cap){ out = trial; continue; }
+    var room = cap - L(J(out.concat(action, close))) - 2;
+    if(room > 90){ var cut = foldTo(body[i], room); if(cut && L(cut) <= room && cut.length > 40) out.push(cut); }
+    break;
+  }
+  if(action.length && L(J(out.concat(action, close))) <= cap) out = out.concat(action);
+  return J(out.concat(close));
+}
+function threadSplit(text){
+  var paras = String(text||'').split(/\n\s*\n/).map(function(x){ return x.trim(); }).filter(Boolean);
+  var units = [];
+  paras.forEach(function(pg){
+    var ss = sentencesLoose(pg); if(!ss.length) ss = [pg];
+    ss.forEach(function(x, k){ units.push({t:x, brk:(k === 0)}); });
+  });
+  var LIM = 268, parts = [], cur = '';
+  function push(){ if(cur.trim()) parts.push(cur.trim()); cur = ''; }
+  units.forEach(function(u){
+    var t = u.t;
+    while(xLen(t) > LIM){
+      var head = foldTo(t, LIM); if(!head || head.length >= t.length) head = t.slice(0, LIM);
+      push(); parts.push(head.trim()); t = t.slice(head.length).trim();
+    }
+    /* one paragraph, one part: a thread reads as a run of single thoughts */
+    if(u.brk && cur){ push(); }
+    var joined = cur ? cur + ' ' + t : t;
+    if(xLen(joined) > LIM){ push(); cur = t; } else cur = joined;
+  });
+  push();
+  var n = parts.length;
+  if(n < 2) return parts;
+  return parts.slice(0, PLATFORM.x.threadMax).map(function(x, i){ return x + ' ' + (i+1) + '/' + Math.min(n, PLATFORM.x.threadMax); });
+}
+function threadParts(t){
+  return String(t||'').split(/\n\s*---\s*\n/).map(function(x){ return x.trim(); }).filter(Boolean);
+}
+function genCaption(){
+  var it = currentItem(), eng = E();
+  var post = it ? eng.buildPost(it, S.angle) : null;
+  var parts = eng.captionParts(it, S.angle, post);
+  var pid = pidNow(), L = lenFor(pid);
+  if(pid === 'x'){
+    if(S.xMode === 'short') return composeCaption(parts, 280, L, 'short');
+    var full = composeCaption(parts, PLATFORM.x.premium, L, 'long');
+    if(S.xMode === 'thread') return threadSplit(full).join('\n\n---\n\n');
+    return full;
+  }
+  return composeCaption(parts, capTarget(pid), L, S.capLength);
+}
+function setCaption(t){
+  $('capText').value = t || '';
+  S.lastGen = $('capText').value;
   updateCapMeta();
-  return true;
+}
+function refreshCaption(force){
+  var box = $('capText');
+  if(force || !box.value.trim() || box.value === S.lastGen) setCaption(genCaption());
+  else updateCapMeta();
+}
+/* Fit keeps the close: the last paragraph carrying a link, and everything
+   after it, is held back while the rest folds. */
+function foldKeepClose(t, cap, L){
+  if(L(t) <= cap) return t;
+  var paras = t.split(/\n\s*\n/), at = -1;
+  for(var i=paras.length-1;i>=0;i--){ URL_RE.lastIndex = 0; if(URL_RE.test(paras[i])){ at = i; break; } }
+  URL_RE.lastIndex = 0;
+  if(at <= 0) return foldTo(t, cap);
+  var tail = paras.slice(at).join('\n\n'), head = paras.slice(0, at).join('\n\n');
+  var room = cap - L(tail) - 2;
+  if(room < 40){
+    var urlOnly = (paras[at].match(URL_RE) || [''])[0];
+    URL_RE.lastIndex = 0;
+    tail = urlOnly; room = cap - L(tail) - 2;
+  }
+  var h = foldTo(head, Math.max(20, room));
+  while(L(h) > room && h.length > 20) h = foldTo(h, h.length - 10);
+  return (h + '\n\n' + tail).trim();
+}
+function fixCaption(){
+  var box = $('capText'), before = box.value, pid = pidNow(), L = lenFor(pid);
+  var t = before.replace(/\s*[—–]\s*/g, ', ');
+  if(pid === 'x' && S.xMode === 'thread'){
+    var ps = threadParts(t), out = [];
+    ps.forEach(function(x){ if(xLen(x) <= 280) out.push(x); else out = out.concat(threadSplit(x.replace(/\s\d+\/\d+$/,''))); });
+    t = out.join('\n\n---\n\n');
+  } else {
+    t = foldKeepClose(t, capTarget(pid), L);
+  }
+  if(t === before) return false;
+  box.value = t; updateCapMeta(); return true;
+}
+function fitCaptionToChannel(){ return fixCaption(); }
+
+/* ---------- the checks ----------
+   Every rule the platform or the house enforces, shown under the caption.
+   A FAIL blocks the post button and push.php refuses the same things. */
+function runChecks(){
+  var out = [], t = $('capText').value || '', pid = pidNow(), f = fmtNow();
+  var P = PLATFORM[pid] || PLATFORM.linkedin, L = lenFor(pid), gb = (S.brand === 'gabes');
+  function add(level, msg){ out.push({level:level, msg:msg}); }
+  if(!t.trim()) add('fail', 'the caption is empty.');
+  if(pid === 'x' && S.xMode === 'thread'){
+    var ps = threadParts(t);
+    if(ps.length < 2) add('fail', 'a thread needs at least 2 parts. Separate parts with a line holding only ---, or press Rebuild caption.');
+    if(ps.length > P.threadMax) add('fail', 'X threads take at most ' + P.threadMax + ' parts; this has ' + ps.length + '.');
+    ps.forEach(function(x, i){ var n = xLen(x); if(n > 280) add('fail', 'part ' + (i+1) + ' is ' + n + '/280. Fit to channel splits it.'); });
+    if(ps.length >= 2 && ps.every(function(x){ return xLen(x) <= 280; })) add('ok', ps.length + ' parts, every one under 280. The card rides on part 1.');
+  } else if(t.trim()){
+    var n = L(t), hard = hardCap(pid), tgt = capTarget(pid);
+    if(n > hard) add('fail', n + ' characters, over the ' + hard + ' ' + f.name + ' limit' + (pid === 'x' ? ' (links count as 23)' : '') + '. Fit to channel folds it.');
+    else if(n > tgt) add('info', n + ' characters, over the ' + S.capLength + ' target of ' + tgt + '. ' + f.name + ' allows ' + hard + '.');
+    else add('ok', n + ' / ' + hard + ' on ' + f.name + (pid === 'x' ? ' (links count as 23)' : '') + '.');
+  }
+  if(pid === 'x' && S.xMode === 'long') add('warn', 'long posts need X Premium on the connected X account. A standard account rejects anything over 280.');
+  var tags = t.match(/(^|\s)#[A-Za-z0-9_]+/g);
+  if(tags) add('fail', tags.length + ' hashtag' + (tags.length > 1 ? 's' : '') + '. House rule: no hashtags on any network.');
+  if(/[—–]/.test(t)) add('fail', 'em or en dash in the caption. Fit to channel replaces it with a comma.');
+  if(gb){
+    var noUrl = t.replace(URL_RE, ''); URL_RE.lastIndex = 0;
+    if(/[A-Z]/.test(noUrl)) add('warn', 'capital letters in a >gabes caption. The house is lowercase.');
+  } else {
+    var low = t.toLowerCase(), hits = GD_BANNED.filter(function(w){ return low.indexOf(w) !== -1; });
+    if(hits.length) add('warn', 'off-canon words: ' + hits.join(', ') + '.');
+    if(/!/.test(t)) add('warn', 'exclamation mark. Goude does not use them.');
+    if(/\?\s/.test(t + ' ')) add('info', 'a question in the caption. The canon prefers a statement.');
+  }
+  var urls = t.match(URL_RE) || []; URL_RE.lastIndex = 0;
+  if(urls.length && !P.link) add('warn', 'links are not clickable in Instagram captions. The URL reads as plain text.');
+  var frames = (S.mode === 'carousel') ? S.slides.length : 1;
+  if(S.mode === 'carousel'){
+    if(frames === 0) add('fail', 'the carousel is empty. Add a card or build one.');
+    else if(frames > P.frames[1]) add('fail', f.name + ' takes up to ' + P.frames[1] + ' images in one post; this carousel has ' + frames + '.');
+    else if(frames === 1) add('info', 'one slide posts as a single card.');
+    else add('ok', frames + ' slides. ' + (pid === 'linkedin' ? 'LinkedIn shows them as a swipeable document.' : pid === 'ig_story' ? 'Each slide posts as its own story, in order.' : f.name + ' takes up to ' + P.frames[1] + '.'));
+  }
+  if(pid === 'ig_story') add('info', 'type on the card stays clear of the story top bar and reply bar.');
+  if(P.fold && t.length > P.fold){
+    var fold = t.slice(0, P.fold), c = fold.lastIndexOf(' ');
+    if(c > 40) fold = fold.slice(0, c);
+    add('info', f.name + ' cuts to "more" near ' + P.fold + ' characters, after: "' + fold.split(/\s+/).slice(-5).join(' ') + '"');
+  }
+  return out;
+}
+function renderChecks(list){
+  var ul = $('checks'); if(!ul) return;
+  ul.innerHTML = '';
+  var name = {fail:'fail', warn:'check', info:'note', ok:'ok'};
+  list.forEach(function(c){
+    var li = document.createElement('li'); li.className = c.level;
+    li.innerHTML = '<b></b><span></span>';
+    li.querySelector('b').textContent = name[c.level];
+    li.querySelector('span').textContent = c.msg;
+    ul.appendChild(li);
+  });
 }
 
 function applyPost(post){
@@ -1709,9 +2211,7 @@ function applyPost(post){
   S.card.stack = post.stack || [];
   S.layout = post.layout;
   syncFields();
-  $('capText').value = captionFor(post);
-  fitCaptionToChannel();   /* STUDIO_CAPTION_FIT_PATCH */
-  updateCapMeta();
+  setCaption(genCaption());   /* STUDIO_PARITY_2026-09-26: built for the platform and length on screen */
   renderSegs(); draw();
 }
 
@@ -1754,6 +2254,15 @@ function renderSegs(){
   segGroup('aligns',  ALIGNS, S.align, 'data-align');
   segGroup('weights', eng.weights, S.weight, 'data-weight');
   segGroup('moods', TRIO_MOODS.map(function(m){return {id:m, name:m};}), S.trioMood, 'data-mood');
+  /* STUDIO_PARITY_2026-09-26 */
+  segGroup('lengths', LENGTHS, S.capLength, 'data-len');
+  segGroup('xmodes', XMODES, S.xMode, 'data-xmode');
+  $('xrow').classList.toggle('off', S.format !== 'x');
+  $('lengths').parentNode && ($('lengths').style.opacity = (S.format === 'x') ? '.45' : '1');
+  Array.prototype.forEach.call(document.querySelectorAll('[data-mode]'), function(b){
+    b.classList.toggle('on', b.getAttribute('data-mode') === S.mode);
+  });
+  $('slidepanel').classList.toggle('on', S.mode === 'carousel');
   var cvw = $('canvases');
   if(cvw){
     cvw.innerHTML = '';
@@ -1806,60 +2315,91 @@ function renderToggles(){
 
 function updateCapMeta(){
   var t = $('capText').value;
-  $('capCount').textContent = t.length;
-  var f = fmtNow();
-  var cap = f.maxChars || 0;
-  var label = $('capLimit');
-  if(cap){
-    label.textContent = ' / ' + cap + ' on ' + f.name + (t.length > cap ? '  ·  over' : '');
-    label.style.opacity = (t.length > cap) ? '1' : '.7';
-  } else { label.textContent = '  ·  the fold sits at 210'; label.style.opacity = '.7'; }
-  /* STUDIO_FEEDBACK_PATCH: the button must not look clickable when the caption
-     cannot pass the length gate - the refusal message renders far above
-     this point on the page and is missed. */
+  var f = fmtNow(), pid = f.id, L = lenFor(pid);
+  var thread = (pid === 'x' && S.xMode === 'thread');
+  $('capCount').textContent = thread ? threadParts(t).length + ' parts, ' + L(t) : L(t);
+  var hard = hardCap(pid), label = $('capLimit');
+  var over = !thread && L(t) > hard;
+  label.textContent = thread ? ' across the thread' : (' / ' + hard + ' on ' + f.name + (over ? '  ·  over' : ''));
+  label.style.opacity = over ? '1' : '.7';
+  $('capFold').textContent = (S.brand === 'gabes' ? 'length: ' : 'Length: ') + S.capLength + (pid === 'x' ? ', ' + S.xMode : '');
+  var checks = runChecks(); renderChecks(checks);
+  var firstFail = checks.filter(function(c){ return c.level === 'fail'; })[0];
+  /* STUDIO_FEEDBACK_PATCH / STUDIO_POST_LOCK_PATCH kept: never touch the
+     button while a post is in flight, and never let it look clickable when
+     the post cannot pass. */
   var pb = $('postOmniBtn');
-  /* STUDIO_POST_LOCK_PATCH: skip entirely while a post is in flight. This
-     runs on every keystroke and on format change, and it used to rewrite
-     .disabled unconditionally - which re-enabled the button mid-post and
-     re-opened the duplicate window the lock exists to close. */
   if(pb && !S.posting){
-    /* STUDIO_BUTTON_STATE_PATCH: any edit to the caption or a format switch
-       retires the confirmation, so it cannot describe a card that has since
-       changed underneath it. */
-    if(S.doneShown){
-      S.doneShown = false;
-      clearTimeout(S._doneTimer);
-      pb.classList.remove('done');
-    }
-    var over = Boolean(cap) && t.length > cap;
-    pb.disabled = over;
-    /* STUDIO_CAPTION_FIT_PATCH: a refusal that does not say what to press is
-       a dead end, and this one was being hit every morning. */
-    pb.textContent = over
-      ? ('Too long for ' + f.name + ' (' + t.length + '/' + cap + '), press Fit to channel')
-      : 'Post to OmniSocials (~30 min)';
+    if(S.doneShown){ S.doneShown = false; clearTimeout(S._doneTimer); pb.classList.remove('done'); }
+    pb.disabled = !!firstFail;
+    var what = (S.mode === 'carousel' && S.slides.length > 1) ? ('carousel of ' + S.slides.length) : (thread ? 'thread' : 'card');
+    pb.textContent = firstFail
+      ? ('Not ready for ' + f.name + ': see the checks under the caption')
+      : ('Post ' + what + ' to ' + f.name + ' via OmniSocials (~30 min)');
   }
   var fb = $('fitCapBtn');
   if(fb){
-    var needsFit = Boolean(cap) && t.length > cap;
-    fb.disabled = !needsFit;
-    fb.textContent = needsFit ? ('Fit to ' + f.name) : 'Fits ' + (f.name || '');
+    var needs = checks.some(function(c){ return c.level === 'fail' && /Fit to channel/.test(c.msg); }) || (!thread && L(t) > capTarget(pid));
+    fb.disabled = !needs;
+    fb.textContent = needs ? ('Fit to ' + f.name) : ('Fits ' + f.name);
   }
-  var fold = t.slice(0,210), cut = fold.lastIndexOf(' ');
-  if(cut > 60) fold = fold.slice(0,cut);
-  var tail = fold.split(/\s+/).slice(-5).join(' ');
-  $('capFold').textContent = t.length > 210
-    ? 'above the fold ends at: "' + tail + '"'
-    : 'the whole thing sits above the fold.';
 }
 
 /* ---------- render + export ---------- */
 
+/* STUDIO_PARITY_2026-09-26: the slide counter a card draws when it is
+   slide 2 or later of a carousel and slide numbers are on. */
+function slideCounter(){
+  var d = S._drawSlide;
+  if(!d || !S.toggles.slidenum || d.n < 2 || d.i < 1) return '';
+  function p2(x){ return (x < 10 ? '0' : '') + x; }
+  return p2(d.i + 1) + ' / ' + p2(d.n);
+}
+function captureSlide(){
+  return {card:JSON.parse(JSON.stringify(S.card)), layout:S.layout, angle:S.angle};
+}
+function withSlide(sl, i, fn){
+  var keep = {card:S.card, layout:S.layout, ds:S._drawSlide};
+  S.card = sl.card; S.layout = sl.layout; S._drawSlide = {i:i, n:S.slides.length};
+  try { fn(); } finally { S.card = keep.card; S.layout = keep.layout; S._drawSlide = keep.ds; }
+}
+function drawSafe(ctx, f){
+  var W = f.w, H = f.h;
+  ctx.save();
+  ctx.fillStyle = 'rgba(214,40,40,.18)'; ctx.strokeStyle = 'rgba(214,40,40,.7)';
+  ctx.lineWidth = Math.max(2, W*0.002); ctx.setLineDash([W*0.012, W*0.008]);
+  ctx.font = '700 ' + Math.round(W*0.018) + 'px ' + INTER;
+  function band(x,y,w,h,label){ ctx.fillRect(x,y,w,h); ctx.strokeRect(x,y,w,h);
+    ctx.fillStyle = 'rgba(160,20,20,.9)'; ctx.fillText(label, x + W*0.02, y + Math.min(h - W*0.015, W*0.04)); ctx.fillStyle = 'rgba(214,40,40,.18)'; }
+  if(f.id === 'ig_story'){
+    band(0, 0, W, Math.round(H*0.12), 'INSTAGRAM TOP BAR');
+    band(0, H - Math.round(H*0.14), W, Math.round(H*0.14), 'REPLY BAR');
+  } else if(f.id === 'ig_feed'){
+    var vis = H*0.75, side = (W - vis)/2;
+    if(side > 0){ band(0,0,side,H,''); band(W-side,0,side,H,''); }
+    ctx.fillStyle = 'rgba(160,20,20,.9)'; ctx.fillText('PROFILE GRID CROPS TO 3:4', W*0.03 + side, H - W*0.03);
+  } else {
+    ctx.strokeRect(W*0.05, H*0.05, W*0.9, H*0.9);
+    ctx.fillStyle = 'rgba(160,20,20,.9)'; ctx.fillText('KEEP TYPE INSIDE', W*0.06, H*0.05 + W*0.03);
+  }
+  ctx.restore();
+}
+var _stripT = 0;
+function scheduleStrip(){ clearTimeout(_stripT); _stripT = setTimeout(renderSlides, 110); }
+
 function draw(){
   var f = fmtNow(), cv = $('card');
   cv.width = f.w; cv.height = f.h;
-  E().draw(cv.getContext('2d'), f);
-  $('dims').textContent = f.w + ' × ' + f.h + '  ·  ' + f.name + '  ·  exports at 2×';
+  if(S.mode === 'carousel' && S.slideIndex >= 0 && S.slides[S.slideIndex]){
+    S.slides[S.slideIndex] = captureSlide();
+    S._drawSlide = {i:S.slideIndex, n:S.slides.length};
+  } else S._drawSlide = null;
+  var ctx = cv.getContext('2d');
+  E().draw(ctx, f);
+  if(S.safe) drawSafe(ctx, f);
+  $('dims').textContent = f.w + ' × ' + f.h + '  ·  ' + f.name + '  ·  exports at 2×'
+    + (S.mode === 'carousel' && S.slides.length ? '  ·  slide ' + (S.slideIndex + 1) + ' of ' + S.slides.length : '');
+  if(S.mode === 'carousel') scheduleStrip();
 }
 
 function renderToBlob(f, cb){
@@ -1868,6 +2408,22 @@ function renderToBlob(f, cb){
   var ctx = cv.getContext('2d'); ctx.scale(2,2);
   E().draw(ctx, f);
   cv.toBlob(cb, 'image/png');
+}
+/* every slide, in order, as PNG blobs */
+function slidesToBlobs(f, cb){
+  var out = [], i = 0;
+  function next(){
+    if(i >= S.slides.length){ cb(out); return; }
+    var idx = i;
+    withSlide(S.slides[idx], idx, function(){
+      var cv = document.createElement('canvas');
+      cv.width = f.w*2; cv.height = f.h*2;
+      var ctx = cv.getContext('2d'); ctx.scale(2,2);
+      E().draw(ctx, f);
+      cv.toBlob(function(b){ out[idx] = b; i++; setTimeout(next, 0); }, 'image/png');
+    });
+  }
+  next();
 }
 
 function saveBlob(b, name){
@@ -1880,6 +2436,14 @@ function saveBlob(b, name){
 function download(){
   var q = S.queue[S.qIndex];
   var name = E().fileName(q);
+  if(S.mode === 'carousel' && S.slides.length){
+    var base = name.replace(/\.png$/,'') + '-' + fmtNow().id + '-slide-';
+    slidesToBlobs(fmtNow(), function(bs){
+      bs.forEach(function(b, i){ setTimeout(function(){ saveBlob(b, base + (i < 9 ? '0' : '') + (i+1) + '.png'); }, i*380); });
+    });
+    toast('downloading ' + S.slides.length + ' slides');
+    return;
+  }
   renderToBlob(fmtNow(), function(b){ saveBlob(b, name); });
   toast('downloaded');
 }
@@ -1889,6 +2453,7 @@ function downloadAll(){
   var eng = E();
   var saved = {card: JSON.parse(JSON.stringify(S.card)), layout:S.layout, angle:S.angle, q:S.qIndex};
   var i = 0;
+  S._drawSlide = null;   /* STUDIO_PARITY_2026-09-26: queue cards carry no slide counter */
   function step(){
     if(i >= S.queue.length){
       S.card = saved.card; S.layout = saved.layout; S.angle = saved.angle; S.qIndex = saved.q;
@@ -1982,72 +2547,155 @@ function postOmniSocials(){
   if(S.posting){ toast('already posting, hold on'); return; }
   var f = fmtNow();
   var caption = ($('capText').value || '').trim();
-  if(!caption){ setStatus('write a caption first.', true);
-    toast('write a caption first'); return; }   /* STUDIO_FEEDBACK_PATCH */
-  /* STUDIO_CAPTION_FIT_PATCH 2026-09-13: this used to refuse and stop, which
-     is what the morning run kept hitting on IG feed and Threads. It now folds
-     to the channel's ceiling, says so, and carries on. It only refuses if the
-     fold could not get under the ceiling, which means a single word longer
-     than the whole limit. */
-  if(f.maxChars && caption.length > f.maxChars){
-    var wasLen = caption.length;
-    if(fitCaptionToChannel()) caption = ($('capText').value || '').trim();
-    if(caption.length > f.maxChars){
-      setStatus('caption is ' + caption.length + ' characters, over the ' + f.maxChars + ' limit for ' + f.name + ' and it will not fold - shorten it before posting.', true);
-      toast('too long for ' + f.name + ': ' + caption.length + '/' + f.maxChars);
-      return;
-    }
-    setStatus('caption folded from ' + wasLen + ' to ' + caption.length + ' for ' + f.name + '.', false);
-    toast('caption fitted to ' + f.name);
+  /* STUDIO_PARITY_2026-09-26: the checks under the caption are the gate.
+     A fail that Fit to channel can clear is cleared once, then re-checked. */
+  var fails = runChecks().filter(function(c){ return c.level === 'fail'; });
+  if(fails.length && fixCaption()){
+    caption = ($('capText').value || '').trim();
+    fails = runChecks().filter(function(c){ return c.level === 'fail'; });
+    if(!fails.length){ setStatus('caption fitted to ' + f.name + '.', false); toast('caption fitted to ' + f.name); }
   }
+  if(fails.length){
+    setStatus('not posted: ' + fails[0].msg, true);
+    toast('not posted: ' + fails[0].msg.slice(0, 80), 6000);
+    updateCapMeta(); return;
+  }
+  var xMode = (f.id === 'x') ? S.xMode : '';
+  var thread = (xMode === 'thread') ? threadParts(caption) : null;
   postingOn(f);
-  setStatus('rendering the card ...', false);
-  toast('rendering the card ...');          /* #status is above the fold; the button is not */
-  renderToBlob(f, function(blob){
-    var reader = new FileReader();
-    reader.onload = function(){
-      setStatus('uploading to omnisocials ...', false);
-      toast('uploading to omnisocials ...');
-      fetch('push.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ brand: S.brand, platform: f.id, caption: caption, image: reader.result })
-      }).then(function(res){
-        /* Read the body as TEXT first and parse by hand. r.json() on a 502
-           or a PHP error page rejects with "Unexpected token <", which is
-           what puts an unreadable error on screen and tells the operator
-           nothing about what actually happened. Reporting the real HTTP
-           status is the difference between "it threw an error" and "the
-           server returned 503". */
-        return res.text().then(function(body){
-          var data = null;
-          try { data = JSON.parse(body); } catch(e){}
-          if(!data){
-            throw new Error('the server returned ' + res.status + ' ' +
-              (res.statusText || '') + ' instead of a result. It may still have posted - ' +
-              'CHECK YOUR OMNISOCIALS CALENDAR before pressing again. Response began: ' +
-              body.slice(0,140).replace(/\s+/g,' '));
-          }
-          return data;
-        });
-      }).then(function(r){
-        postingOff();
-        if(!r.ok){ setStatus('did not post: ' + (r.error || 'unknown error'), true);
-          toast('did not post: ' + (r.error || 'unknown error'), 7000); return; }
-        var when = new Date(r.scheduled_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-        setStatus(r.label + ': queued for ' + when + ' (post ' + r.post_id + '). It is NOT on ' + r.label + ' yet and will not appear there until ' + when + '. It WILL go live then unless you cancel it from your OmniSocials calendar first.', false);
-        toast('queued for ' + when + ' - NOT live yet, do not press again', 7000);
-        postingDone('Queued for ' + when);   /* STUDIO_BUTTON_STATE_PATCH */
-      }).catch(function(e){ postingOff();
-        var m = (e && e.message) ? e.message : String(e);
-        setStatus(m, true);
-        toast(m.slice(0,90), 7000); });
-    };
-    reader.onerror = function(){ postingOff();
-      setStatus('could not read the rendered card.', true);
-      toast('could not read the card'); };
-    reader.readAsDataURL(blob);
+  var many = (S.mode === 'carousel' && S.slides.length > 1);
+  setStatus(many ? 'rendering ' + S.slides.length + ' slides ...' : 'rendering the card ...', false);
+  toast(many ? 'rendering ' + S.slides.length + ' slides ...' : 'rendering the card ...');          /* #status is above the fold; the button is not */
+  function toDataUrls(blobs, cb){
+    var urls = [], i = 0;
+    function next(){
+      if(i >= blobs.length){ cb(urls); return; }
+      var r = new FileReader();
+      r.onload = function(){ urls.push(r.result); i++; next(); };
+      r.onerror = function(){ cb(null); };
+      r.readAsDataURL(blobs[i]);
+    }
+    next();
+  }
+  function send(images){
+    if(!images || !images.length){ postingOff(); setStatus('could not read the rendered card.', true); toast('could not read the card'); return; }
+    setStatus('uploading ' + images.length + ' image' + (images.length > 1 ? 's' : '') + ' to omnisocials ...', false);
+    toast('uploading to omnisocials ...');
+    fetch('push.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ brand: S.brand, platform: f.id, caption: thread ? thread[0] : caption,
+                             images: images, x_mode: xMode, thread: thread })
+    }).then(function(res){
+      /* Read the body as TEXT first and parse by hand. r.json() on a 502
+         or a PHP error page rejects with "Unexpected token <". */
+      return res.text().then(function(body){
+        var data = null;
+        try { data = JSON.parse(body); } catch(e){}
+        if(!data){
+          throw new Error('the server returned ' + res.status + ' ' +
+            (res.statusText || '') + ' instead of a result. It may still have posted - ' +
+            'CHECK YOUR OMNISOCIALS CALENDAR before pressing again. Response began: ' +
+            body.slice(0,140).replace(/\s+/g,' '));
+        }
+        return data;
+      });
+    }).then(function(r){
+      postingOff();
+      if(!r.ok){ setStatus('did not post: ' + (r.error || 'unknown error'), true);
+        toast('did not post: ' + (r.error || 'unknown error'), 7000); return; }
+      var when = new Date(r.scheduled_at).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+      setStatus(r.label + ': queued for ' + when + ' (post ' + r.post_id + ', ' + (r.images || 1) + ' image' + ((r.images || 1) > 1 ? 's' : '') + (r.kind ? ', ' + r.kind : '') + '). It is NOT on ' + r.label + ' yet and will not appear there until ' + when + '. It WILL go live then unless you cancel it from your OmniSocials calendar first.', false);
+      toast('queued for ' + when + ' - NOT live yet, do not press again', 7000);
+      postingDone('Queued for ' + when);   /* STUDIO_BUTTON_STATE_PATCH */
+    }).catch(function(e){ postingOff();
+      var m = (e && e.message) ? e.message : String(e);
+      setStatus(m, true);
+      toast(m.slice(0,90), 7000); });
+  }
+  if(S.mode === 'carousel' && S.slides.length){
+    var cap = (PLATFORM[f.id] || PLATFORM.linkedin).frames[1];
+    slidesToBlobs(f, function(bs){ toDataUrls(bs.slice(0, cap), send); });
+  } else {
+    renderToBlob(f, function(b){ toDataUrls([b], send); });
+  }
+}
+
+/* ============================================================
+   STUDIO_PARITY_2026-09-26: THE CAROUSEL BUILDER
+   A carousel is an ordered list of slides. Each slide carries its
+   own words, layout and angle; format, colour, type and toggles
+   are shared so the set reads as one piece. The selected slide is
+   the one the editor writes into, so every existing control works
+   on a slide without a second editor.
+   ============================================================ */
+function postToSlide(p){
+  return {card:{kicker:p.kicker || '', statement:p.statement || '', figure:p.figure || '', support:p.support || '',
+                foot:p.foot || '', footR:p.footR || '', stack:p.stack || []},
+          layout:p.layout || E().defaults.layout, angle:p.angle || S.angle};
+}
+function renderModeUI(){
+  Array.prototype.forEach.call(document.querySelectorAll('[data-mode]'), function(b){
+    b.classList.toggle('on', b.getAttribute('data-mode') === S.mode);
   });
+  $('slidepanel').classList.toggle('on', S.mode === 'carousel');
+  var gb = (S.brand === 'gabes');
+  $('dlBtn').textContent = (S.mode === 'carousel' && S.slides.length)
+    ? (gb ? 'download ' + S.slides.length + ' slides' : 'Download ' + S.slides.length + ' slides')
+    : (gb ? 'download png' : 'Download PNG');
+}
+function setMode(m){
+  S.mode = m;
+  if(m === 'carousel' && !S.slides.length){ S.slides = [captureSlide()]; S.slideIndex = 0; }
+  renderModeUI(); draw(); if(m === 'carousel') renderSlides(); updateCapMeta();
+}
+function selectSlide(i){
+  if(i < 0 || i >= S.slides.length) return;
+  S.slideIndex = i;
+  var sl = S.slides[i];
+  S.card = JSON.parse(JSON.stringify(sl.card)); S.layout = sl.layout; if(sl.angle) S.angle = sl.angle;
+  syncFields(); renderSegs(); renderAngles(); draw(); renderSlides();
+}
+function setSlides(list, msg){
+  var cap = (PLATFORM[pidNow()] || PLATFORM.linkedin).frames[1];
+  S.slides = list.slice(0, 10).map(postToSlide);
+  S.slideIndex = -1;
+  if(S.mode !== 'carousel'){ S.mode = 'carousel'; renderModeUI(); }
+  selectSlide(0); updateCapMeta(); renderModeUI();
+  toast((msg || 'carousel built') + ': ' + S.slides.length + ' slides' + (S.slides.length > cap ? ', over ' + fmtNow().name + "'s " + cap : ''), 3200);
+}
+function renderSlides(){
+  var box = $('slides'); if(!box) return;
+  var f = fmtNow(), n = S.slides.length, cap = (PLATFORM[f.id] || PLATFORM.linkedin).frames[1];
+  var cnt = $('slideCount');
+  cnt.textContent = n + ' of up to ' + cap + ' on ' + f.name;
+  cnt.classList.toggle('over', n > cap);
+  box.innerHTML = '';
+  if(!n){ box.innerHTML = '<span class="slides-empty">No slides yet. Add this card, or build one from a story or the week.</span>'; renderModeUI(); return; }
+  var k = 156 / f.w;
+  S.slides.forEach(function(sl, i){
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'slide' + (i === S.slideIndex ? ' on' : '');
+    b.setAttribute('data-slide', i);
+    var cv = document.createElement('canvas');
+    cv.width = Math.round(f.w*k); cv.height = Math.round(f.h*k);
+    var ctx = cv.getContext('2d'); ctx.scale(k,k);
+    withSlide(sl, i, function(){ E().draw(ctx, f); });
+    b.appendChild(cv);
+    var sn = document.createElement('span'); sn.className = 'sn'; sn.textContent = i + 1; b.appendChild(sn);
+    box.appendChild(b);
+  });
+  renderModeUI();
+}
+function slideOp(op){
+  var i = S.slideIndex, L = S.slides;
+  if(op === 'add'){ L.splice(i + 1, 0, captureSlide()); selectSlide(i + 1); }
+  else if(op === 'dup' && i >= 0){ L.splice(i + 1, 0, JSON.parse(JSON.stringify(L[i]))); selectSlide(i + 1); }
+  else if(op === 'del' && i >= 0){ L.splice(i, 1); if(L.length) selectSlide(Math.min(i, L.length - 1)); else { S.slideIndex = -1; renderSlides(); draw(); } }
+  else if(op === 'left' && i > 0){ var a = L[i-1]; L[i-1] = L[i]; L[i] = a; S.slideIndex = i - 1; renderSlides(); draw(); }
+  else if(op === 'right' && i >= 0 && i < L.length - 1){ var c = L[i+1]; L[i+1] = L[i]; L[i] = c; S.slideIndex = i + 1; renderSlides(); draw(); }
+  else if(op === 'clear'){ S.slides = []; S.slideIndex = -1; renderSlides(); draw(); }
+  updateCapMeta();
 }
 
 /* ---------- blank card ---------- */
@@ -2061,14 +2709,14 @@ function blankCard(scroll){
               figure:'', support:'One line underneath that says what it costs them to ignore it.',
               foot:'goudegroup.com', footR:'', stack:[]};
   } else {
-    S.angle = 'hook'; S.layout = 'prompt';
+    S.angle = 'hook'; S.layout = 'card';
     S.card = {kicker:'> the note',
               statement:'write the one line you want them to argue with.',
               figure:'', support:'the knife under it.',
               foot:'gabes.ai/letter', footR:'', stack:[]};
   }
   syncFields(); renderSegs(); renderAngles(); renderQueue();
-  $('capText').value = ''; updateCapMeta(); draw();
+  draw(); setCaption(genCaption());
   if(scroll !== false) window.scrollTo({top: $('editor').offsetTop - 20, behavior:'smooth'});
 }
 
@@ -2076,7 +2724,7 @@ function blankCard(scroll){
 
 var CARRY = ['sources','sourceIndex','sourceTab','items','meta','queue','qIndex','angle','format',
              'layout','world','trioMood','trioIndex','canvas','align','weight','scale','supScale',
-             'track','toggles','card'];
+             'track','toggles','card','mode','slides','slideIndex','capLength','xMode','lastGen'];
 
 function snapshot(){
   var o = {}; CARRY.forEach(function(k){ o[k] = S[k]; });
@@ -2110,7 +2758,10 @@ function applyBrand(brand, first){
   var gb = (brand === 'gabes');
   $('lFigure').textContent = gb ? 'accent phrase (inside the hook)' : 'Figure (Figure layout only)';
   $('lFootR').textContent  = gb ? 'handle, bottom right' : 'Footer right';
-  $('fFoot').parentNode.style.display = gb ? 'none' : '';
+  $('fFoot').parentNode.style.display = '';   /* STUDIO_PARITY_2026-09-26: both sides, drawn on >gabes when footer text is on */
+  $('advHint').textContent = gb
+    ? 'paste the signals feed (gabes.ai/letter/signals/index.json) or a whole signal page, then press read it.'
+    : 'Type a path, or open the page in another tab, select all, copy, and paste it below.';
   $('capTitle').textContent = gb ? 'paste this under it.' : 'Paste this under it.';
   $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
   $('postOmniRow').style.display = '';  // both brands; gabes fails loudly server-side until its channels exist
@@ -2133,8 +2784,10 @@ function applyBrand(brand, first){
     // nothing selected - snap it to a real id.
     restore(mem);
     if(!formatsNow().some(function(f){ return f.id === S.format; })) S.format = formatsNow()[0].id;
+    S.toggles = S.toggles || {};
+    eng.toggles.forEach(function(t){ if(!(t[0] in S.toggles)) S.toggles[t[0]] = t[2]; });
     renderTiles(); renderQueue(); renderAngles(); renderSegs(); renderToggles();
-    syncFields(); updateCapMeta(); paintTheme(); draw();
+    syncFields(); updateCapMeta(); paintTheme(); renderModeUI(); draw(); if(S.mode === 'carousel') renderSlides();
     $('queue').classList.toggle('on', S.queue.length > 0);
     $('issueStamp').textContent = (S.meta.no || '') + (S.meta.date ? '  ·  ' + S.meta.date : '');
     setStatus('', false);
@@ -2147,6 +2800,8 @@ function applyBrand(brand, first){
   S.layout = d.layout; S.weight = d.weight; S.track = d.track;
   S.align = d.align || 'left'; S.world = d.world || 'mint'; S.canvas = 'cotton';
   S.format = formatsNow()[0].id; S.scale = 100; S.supScale = 100;
+  S.mode = 'single'; S.slides = []; S.slideIndex = -1; S.capLength = 'standard'; S.xMode = 'short'; S.lastGen = '';
+  renderModeUI();
   S.toggles = {};
   eng.toggles.forEach(function(t){ S.toggles[t[0]] = t[2]; });
   $('fScale').value = 100; $('fSupScale').value = 100; $('fTrack').value = S.track;
@@ -2186,12 +2841,49 @@ function loadFromUrl(raw){
 function loadFromPaste(){
   var txt = $('pasteArea').value;
   if(!txt.trim()){ setStatus('nothing pasted yet.', true); return; }
+  if(S.brand === 'gabes') return gabesFromPaste(txt);
   var doc = new DOMParser().parseFromString(txt,'text/html');
   var out = GOUDE.parseDoc(doc, absoluteUrl($('srcUrl').value || '/briefing/'));
   if(!out.items.length){ setStatus('could not find any stories in that. copy the whole issue page.', true); return; }
   S.items = out.items; S.meta = out.meta;
   buildQueue(); $('queue').classList.add('on'); selectQueue(0);
   setStatus('loaded from paste: ' + out.items.length + ' stories.', false);
+}
+
+/* STUDIO_PARITY_2026-09-26: the >gabes side gets the same way in when the
+   feed will not load. Paste the signals index JSON (newest week is used) or
+   one whole signal page. */
+function gabesFromPaste(txt){
+  var items = [], meta = null;
+  try {
+    var j = JSON.parse(txt), list = (j.signals || j || []).slice();
+    if(!list.length) throw new Error('empty');
+    list.sort(function(a,b){ return a.date < b.date ? 1 : -1; });
+    var wk = mondayOf(list[0].date);
+    list = list.filter(function(sg){ return mondayOf(sg.date) === wk; }).sort(function(a,b){ return a.date < b.date ? -1 : 1; });
+    items = list.map(function(sg){ return {date:sg.date, day:sg.day || '', lane:sg.lane || '', hook:sg.hook || '',
+      short:firstLoose(sg.hook || '',1), line:sg.line || '', url:'https://gabes.ai/letter/' + (sg.url || '')}; });
+    meta = {no:'week of ' + prettyDay(wk), date:'', title:'', lede:'', engine:'', url:'https://gabes.ai/letter/', kind:'signal'};
+  } catch(e){
+    var doc = new DOMParser().parseFromString(txt, 'text/html');
+    var h = doc.querySelector('.hook'), k = doc.querySelector('.knife');
+    if(!h){ setStatus('could not read that. paste the signals index json or a whole signal page.', true); return; }
+    var cat = doc.querySelector('.tag .cat'), day = doc.querySelector('.tag .day'), num = doc.querySelector('.tag .num');
+    var it = {date:num ? clean(num.textContent) : '', day:day ? clean(day.textContent) : '', lane:cat ? clean(cat.textContent) : '',
+              hook:clean(h.textContent), line:k ? clean(k.textContent) : '', url:'https://gabes.ai/letter/'};
+    it.short = firstLoose(it.hook,1);
+    var ps = Array.prototype.map.call(doc.querySelectorAll('.body p'), function(p){ return clean(p.textContent); }).filter(Boolean);
+    var pair = (ps.length && /^do this:/i.test(ps[ps.length-1])) ? ps.pop() : '';
+    it.condition = ps[0] || ''; it.cost = ps[1] || ''; it.fix = ps.slice(2).join(' ');
+    var m = pair.match(/^do this:\s*([\s\S]*?)\s*not this:\s*([\s\S]*)$/i);
+    it.doThis = m ? m[1] : pair.replace(/^do this:\s*/i,''); it.notThis = m ? m[2] : ''; it.enriched = true;
+    items = [it];
+    meta = {no:'pasted signal', date:it.date, title:'', lede:'', engine:'', url:'https://gabes.ai/letter/', kind:'signal'};
+  }
+  S.items = items; S.meta = meta;
+  buildQueue(); $('queue').classList.add('on'); selectQueue(0);
+  $('issueStamp').textContent = meta.no;
+  setStatus('loaded from paste: ' + items.length + ' signal' + (items.length > 1 ? 's' : '') + '.', false);
 }
 
 /* ---------- wiring ---------- */
@@ -2227,27 +2919,22 @@ function bind(){
     renderAngles();
   });
 
-  ['formats','layouts','aligns','weights','worlds','moods','trios','canvases'].forEach(function(id){
+  ['formats','layouts','aligns','weights','worlds','moods','trios','canvases','lengths','xmodes'].forEach(function(id){
     var el = $(id); if(!el) return;
     el.addEventListener('click', function(e){
       var b = e.target.closest('button'); if(!b) return;
       if(b.hasAttribute('data-format')){
         var prevFmt = S.format;
         S.format = b.getAttribute('data-format');
-        // Crossing into or out of X swaps the caption - but only while the box
-        // still holds untouched generated text. Hand edits are never clobbered.
-        if(S.brand === 'goude' && (prevFmt === 'x') !== (S.format === 'x')){
-          var cit = currentItem();
-          var cp = cit ? E().buildPost(cit, S.angle) : null;
-          var box = $('capText');
-          if(cp && (box.value === cp.caption || box.value === cp.captionX)) box.value = captionFor(cp);
-        }
-        /* STUDIO_CAPTION_FIT_PATCH: switching channel refits the caption to
-           the channel we just switched to, which is the whole point of the
-           channel having a ceiling of its own. */
-        if(fitCaptionToChannel()) toast('caption fitted to ' + fmtNow().name);
-        setTimeout(updateCapMeta,0);
+        /* STUDIO_PARITY_2026-09-26: switching platform rebuilds the caption
+           for that platform while the box still holds generated text. Hand
+           edits are never clobbered; the checks say what the new platform
+           will refuse. */
+        renderSegs(); refreshCaption(false);
+        if(S.mode === 'carousel') renderSlides();
       }
+      if(b.hasAttribute('data-len')){ S.capLength = b.getAttribute('data-len'); renderSegs(); refreshCaption(true); return; }
+      if(b.hasAttribute('data-xmode')){ S.xMode = b.getAttribute('data-xmode'); renderSegs(); refreshCaption(true); return; }
       if(b.hasAttribute('data-layout'))  S.layout  = b.getAttribute('data-layout');
       if(b.hasAttribute('data-align'))   S.align   = b.getAttribute('data-align');
       if(b.hasAttribute('data-weight'))  S.weight  = b.getAttribute('data-weight');
@@ -2285,6 +2972,7 @@ function bind(){
   $('pasteBtn').addEventListener('click', function(){ $('pastebox').classList.toggle('on'); });
   $('loadBtn').addEventListener('click', function(){
     if($('pastebox').classList.contains('on') && $('pasteArea').value.trim()) loadFromPaste();
+    else if(S.brand === 'gabes') loadSources();
     else loadFromUrl($('srcUrl').value);
   });
 
@@ -2295,6 +2983,29 @@ function bind(){
     if(fitCaptionToChannel()) toast('caption fitted to ' + fmtNow().name);
   });
   $('postOmniBtn').addEventListener('click', postOmniSocials);
+  /* STUDIO_PARITY_2026-09-26 */
+  $('modebar').addEventListener('click', function(e){
+    var b = e.target.closest('[data-mode]'); if(b) setMode(b.getAttribute('data-mode'));
+  });
+  $('slides').addEventListener('click', function(e){
+    var b = e.target.closest('[data-slide]'); if(b) selectSlide(parseInt(b.getAttribute('data-slide'),10));
+  });
+  $('slAdd').addEventListener('click', function(){ slideOp('add'); });
+  $('slDup').addEventListener('click', function(){ slideOp('dup'); });
+  $('slDel').addEventListener('click', function(){ slideOp('del'); });
+  $('slLeft').addEventListener('click', function(){ slideOp('left'); });
+  $('slRight').addEventListener('click', function(){ slideOp('right'); });
+  $('slClear').addEventListener('click', function(){ slideOp('clear'); });
+  $('slStory').addEventListener('click', function(){
+    var it = currentItem();
+    if(!it){ toast('pick a story from the week first'); return; }
+    setSlides(E().storySlides(it), 'built from this story');
+  });
+  $('slWeek').addEventListener('click', function(){
+    if(!S.items || !S.items.length){ toast('load a source first'); return; }
+    setSlides(E().weekSlides(), 'built from the week');
+  });
+  $('safeTg').addEventListener('change', function(){ S.safe = this.checked; draw(); });
   $('capText').addEventListener('input', updateCapMeta);
   $('copyCapBtn').addEventListener('click', function(){
     var t = $('capText');
@@ -2304,8 +3015,7 @@ function bind(){
   $('regenBtn').addEventListener('click', function(){
     var it = currentItem();
     if(!it){ toast('load a source first'); return; }
-    $('capText').value = captionFor(E().buildPost(it, S.angle));
-    updateCapMeta(); toast('caption rebuilt');
+    setCaption(genCaption()); toast('caption rebuilt');
   });
 }
 

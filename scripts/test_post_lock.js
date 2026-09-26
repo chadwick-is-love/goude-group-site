@@ -59,11 +59,19 @@ const els = {
   capCount: {}, capLimit: {}, capFold: {},
 };
 global.$ = id => els[id];
-global.S = { brand: 'goude', posting: false, format: 'linkedin' };
+global.S = { brand: 'goude', posting: false, format: 'linkedin', mode: 'single', slides: [] };
 global.setStatus = (m, e) => STATUS.push({ m, err: !!e });
 global.clearTimeout = () => {};
 global.setTimeout = (fn, ms) => { /* watchdog only; never fires in test */ };
 global.fmtNow = () => ({ id: 'linkedin', name: 'LinkedIn', maxChars: 1300 });
+// STUDIO_PARITY_2026-09-26: postOmniSocials now gates on the caption checks
+// and can post a carousel. The lock is what this test is about, so the checks
+// pass and the mode is a single card.
+global.runChecks = () => [];
+global.fixCaption = () => false;
+global.threadParts = t => [t];
+global.PLATFORM = { linkedin: { frames: [1, 10] } };
+global.slidesToBlobs = () => { throw new Error('single-card test should not render slides'); };
 global.updateCapMeta = function () {
   // mirrors only the button branch, which is what the lock interacts with
   const t = els.capText.value, f = fmtNow(), cap = f.maxChars;
