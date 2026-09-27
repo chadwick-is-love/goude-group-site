@@ -362,8 +362,22 @@ html[data-brand="gabes"] .tlink{text-transform:lowercase;font-weight:400}
 .stage{position:sticky;top:12px;margin-top:24px;max-height:calc(100vh - 24px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-bottom:4px}
 .stage .panel:first-child{margin-top:0}
 @media(max-width:860px){.stage{position:static;max-height:none;overflow:visible}}
-.editing{font-family:var(--label);font-size:10.5px;letter-spacing:.06em;color:var(--soft);margin:0 0 8px;display:none}
-.editing.on{display:block}
+.editing{font-family:var(--label);font-size:10.5px;letter-spacing:.06em;color:var(--soft);margin:0 0 8px;display:none;align-items:center;gap:10px}
+.editing.on{display:flex}
+.editing .step{width:28px;height:26px;border-radius:var(--radius-sm);box-shadow:inset 0 0 0 1.5px var(--hair);color:var(--ink);font-size:13px;line-height:26px;text-align:center}
+.editing .step:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.editing .step:disabled{opacity:.3;cursor:default}
+html[data-brand="gabes"] .editing .step{box-shadow:inset 0 0 0 1px var(--line);color:var(--figure)}
+html[data-brand="gabes"] .editing .step:hover{box-shadow:inset 0 0 0 1px var(--acc)}
+/* STUDIO_PAPER_2026-09-27: the off-white room. The card and the accents keep
+   their colour; only the room around them goes to paper. */
+.bswitch.paper{margin-right:16px}
+html[data-paper="1"] .bswitch.paper{background:var(--ink);color:var(--bg);box-shadow:none}
+html[data-brand="goude"][data-paper="1"]{
+  --bg:#fbf6f0; --panel:#fbf6f0; --field:#ffffff; --sel:#f1eadf;
+  --nm-dark:rgba(150,130,100,.26); --nm-light:rgba(255,255,255,.95); --ontag:#fbf6f0;
+}
+html[data-brand="gabes"][data-paper="1"] .bswitch.paper{background:var(--figure);color:var(--g-mid)}
 html[data-brand="gabes"] .editing{text-transform:lowercase}
 canvas#card{max-height:56vh;width:auto;max-width:100%;margin:0 auto}
 .cap textarea{height:170px}
@@ -426,6 +440,7 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
     <button class="bswitch on" type="button" data-brand-btn="goude">The Goude Group</button>
     <button class="bswitch" type="button" data-brand-btn="gabes"><span class="chev-mark">&gt;</span>gabes</button>
     <span class="bsep"></span>
+    <button class="bswitch paper" type="button" id="paperTg" title="work on an off-white room; the card keeps its colour">Paper</button>
     <div class="mast-meta">Not indexed<br>Internal use</div>
   </div>
   <h1 id="mastTitle">The Studio.</h1>
@@ -559,13 +574,14 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
       </div>
       <div class="slides" id="slides"></div>
       <div class="setbuild">
+        <button class="btn ghost small" id="slPair">Build a pair</button>
         <button class="btn ghost small" id="slStory">Build from this story</button>
         <button class="btn ghost small" id="slWeek">Build from the week</button>
         <span class="setcount"><span class="label" id="slCountLbl" style="margin:0">Cards</span><div class="segs" id="slidecounts"></div></span>
         <button class="tlink" type="button" id="slClear">Clear the set</button>
       </div>
     </div>
-    <p class="editing" id="editing"></p>
+    <div class="editing" id="editing"><button class="step" type="button" id="slPrev" title="previous slide">&larr;</button><span id="editingTxt"></span><button class="step" type="button" id="slNext" title="next slide">&rarr;</button></div>
     <div class="canvaswrap"><canvas id="card" width="1080" height="1350"></canvas></div>
     <label class="sw safe"><input type="checkbox" id="safeTg" /> <span id="safeLbl">Show platform safe zones (preview only)</span></label>
   </section>
@@ -873,7 +889,7 @@ var S = {
   posting:false,   /* STUDIO_POST_LOCK_PATCH: true while a post is in flight */
   /* STUDIO_PARITY_2026-09-26 */
   mode:'single', slides:[], slideIndex:-1, safe:false, slideCount:5, lastBuild:'',
-  capLength:'standard', xMode:'short', lastGen:'',
+  capLength:'standard', xMode:'short', lastGen:'', paper:false,
   card:{kicker:'',statement:'',figure:'',support:'',foot:'',footR:'',stack:[]}
 };
 
@@ -1093,20 +1109,37 @@ function liftAcc(C,A){
 }
 var ROOM_VARS = ['--g-lit','--g-mid','--g-deep','--g-vig','--g-well','--figure','--acc','--acc-text','--logo-mark',
                  '--dim','--line','--field','--field-in','--field-hi','--card-edge','--card-shade','--acc-ring'];
+function applyPaper(on, remember){
+  S.paper = !!on;
+  document.documentElement.setAttribute('data-paper', S.paper ? '1' : '0');
+  var b = $('paperTg'); if(b) b.textContent = S.brand === 'gabes' ? (S.paper ? 'colour' : 'paper') : (S.paper ? 'Colour' : 'Paper');
+  if(remember){ try { localStorage.setItem('studio.paper', S.paper ? '1' : '0'); } catch(e){} }
+  paintTheme();
+}
 function paintTheme(){
   var r = document.documentElement.style;
   if(S.brand !== 'gabes'){ ROOM_VARS.forEach(function(k){ r.removeProperty(k); }); return; }
   var t = trioNow(), R = roomStops(t.A,t.C);
   var src = hslOf(t.A)[1]<0.08 ? t.C : t.A, s = hslOf(src)[1];
-  var acc = liftAcc(t.C, t.A);
+  var ground = t.A, fig = t.B;
+  if(S.paper){
+    /* STUDIO_PAPER_2026-09-27: the room goes to paper. The figure becomes a
+       rich dark of the trio's own ground hue (or the trio's figure when that
+       is already dark), the accent lifts against paper. Still three colours. */
+    R = {light:true, lit:'#f8f5ef', mid:'#f2eee6', deep:'#e7e1d5', vig:'#d8d0c0', well:'#ebe5d9'};
+    ground = '#f2eee6';
+    fig = (relLum(t.B) < 0.18) ? t.B : tone(src, 0.16, Math.min(1, s + 0.10));
+    if(relLum(fig) >= 0.18) fig = tone(t.C, 0.14, 0.7);
+  }
+  var acc = liftAcc(t.C, ground);
   [['--g-lit',R.lit],['--g-mid',R.mid],['--g-deep',R.deep],['--g-vig',R.vig],['--g-well',R.well],
-   ['--figure',t.B],['--acc',acc],['--logo-mark',t.C],
-   ['--dim',alphaOf(t.B,.66)],['--line',alphaOf(t.B,R.light?.16:.20)],
+   ['--figure',fig],['--acc',acc],['--logo-mark',t.C],
+   ['--dim',alphaOf(fig,.66)],['--line',alphaOf(fig,R.light?.16:.20)],
    ['--field',   R.light?alphaOf(R.lit,.52):alphaOf(R.deep,.40)],
    ['--field-in',R.light?alphaOf(R.lit,.72):alphaOf(R.vig,.45)],
    ['--field-hi',R.light?alphaOf(R.lit,.80):alphaOf(R.lit,.14)],
-   ['--card-edge',alphaOf(t.B,.26)],['--card-shade',alphaOf(R.vig,.7)],
-   ['--acc-ring',contrastRatio(acc,t.A)<3?'inset 0 0 0 1.5px '+t.B:'none']
+   ['--card-edge',alphaOf(fig,.26)],['--card-shade',alphaOf(R.vig,.7)],
+   ['--acc-ring',contrastRatio(acc,ground)<3?'inset 0 0 0 1.5px '+fig:'none']
   ].forEach(function(p){ r.setProperty(p[0],p[1]); });
   /* type on the charge stays inside the ground hue; pick the stop that reads */
   var darkT=tone(src,0.12,s), liteT=tone(src,0.94,s);
@@ -1379,7 +1412,20 @@ var GOUDE = {
     var list = (S.items || []).slice(0,5).map(function(it, i){ var p = GOUDE.buildPost(it,'statement'); p.support = ''; p.role = 'day' + i; return p; });
     return distinctSlides(list, [], 5);
   },
-  roles:{lead:'Lead', what:'What happened', cost:'What it costs', mistake:'The mistake', tool:'The tool', extra:'Another angle', added:'Added', day0:'Monday', day1:'Tuesday', day2:'Wednesday', day3:'Thursday', day4:'Friday'},
+  /* STUDIO_PAIR_2026-09-27: CK, the pair on every side. Page 1 is the
+     headline alone, page 2 is the payoff. */
+  pairSlides:function(it){
+    if(!it) return [];
+    var hs = sentences(it.headline), head1 = hs[0] || it.headline, head2 = hs.slice(1).join(' ');
+    var T = GOUDE.issueTag();
+    var one = GOUDE.buildPost(it,'statement'); one.support = ''; one.role = 'headline';
+    var two = {kicker:caps(T + ' · The payoff'), statement: head2 || firstSentences(it.changes,2) || firstSentences(it.moved,2),
+               support: it.play ? 'Do this: ' + firstSentences(it.play,1) : (it.toolName ? 'The tool: ' + it.toolName : ''),
+               layout:'statement', foot:'goudegroup.com/briefing', footR:'A working tool in every article', role:'payoff'};
+    if(!two.statement){ two.statement = firstSentences(it.changes,1) || head1; }
+    return [one, two];
+  },
+  roles:{headline:'Headline', payoff:'Payoff', lead:'Lead', what:'What happened', cost:'What it costs', mistake:'The mistake', tool:'The tool', extra:'Another angle', added:'Added', day0:'Monday', day1:'Tuesday', day2:'Wednesday', day3:'Thursday', day4:'Friday'},
 
   fileName:function(q){
     return 'goude-' + slug((S.meta.no||'briefing') + '-' + (q ? q.day+'-'+q.slot+'-'+q.angle : S.angle)) + '.png';
@@ -1764,7 +1810,19 @@ var GABES = {
     var list = (S.items || []).slice(0,5).map(function(it, i){ var p = GABES.buildPost(it,'hook'); p.role = 'day' + i; return p; });
     return distinctSlides(list, [], 5);
   },
-  roles:{hook:'the hook', condition:'the condition', cost:'the cost', fix:'the fix', pair:'do this / not this', extra:'another angle', added:'added', day0:'monday', day1:'tuesday', day2:'wednesday', day3:'thursday', day4:'friday'},
+  pairSlides:function(it){
+    if(!it) return [];
+    var ln = lower(it.lane || 'the signal');
+    var one = GABES.buildPost(it,'hook'); one.support = ''; one.role = 'headline';
+    var pay = it.line || it.knife || it.cost || it.fix || '';
+    var two = {kicker:'> the payoff · ' + ln, statement: lower(firstLoose(pay,2)),
+               support: it.doThis ? lower('do this: ' + firstLoose(it.doThis,1)) : (it.fix ? lower(firstLoose(it.fix,1)) : ''),
+               layout:'card', foot:'gabes.ai/letter', footR:'', role:'payoff'};
+    if(two.support && normT(two.support) === normT(two.statement)) two.support = '';
+    if(!two.statement){ var k = GABES.buildPost(it,'knife'); two.statement = k.statement; two.support = k.support || ''; }
+    return [one, two];
+  },
+  roles:{headline:'the headline', payoff:'the payoff', hook:'the hook', condition:'the condition', cost:'the cost', fix:'the fix', pair:'do this / not this', extra:'another angle', added:'added', day0:'monday', day1:'tuesday', day2:'wednesday', day3:'thursday', day4:'friday'},
 
   fileName:function(q){
     var it = q ? S.items[q.itemIndex] : null;
@@ -2890,11 +2948,15 @@ function postToSlide(p){
    say which slide the fields write into. */
 function renderEditing(){
   var on = (S.mode === 'carousel' && S.slideIndex >= 0 && S.slides[S.slideIndex]);
-  var el = $('editing'), tag = $('postSlideTag');
+  var el = $('editing'), tag = $('postSlideTag'), et = $('editingTxt');
   var gb = (S.brand === 'gabes');
-  var txt = on ? ((gb ? 'editing slide ' : 'Editing slide ') + (S.slideIndex + 1) + ' of ' + S.slides.length
+  var txt = on ? ((gb ? 'slide ' : 'Slide ') + (S.slideIndex + 1) + ' of ' + S.slides.length
              + (S.slides[S.slideIndex].role ? ', ' + roleName(S.slides[S.slideIndex].role) : '')) : '';
-  if(el){ el.textContent = txt; el.classList.toggle('on', !!on); }
+  if(et) et.textContent = txt;
+  if(el){ el.classList.toggle('on', !!on); }
+  var pv = $('slPrev'), nx = $('slNext');
+  if(pv) pv.disabled = !on || S.slideIndex <= 0;
+  if(nx) nx.disabled = !on || S.slideIndex >= S.slides.length - 1;
   if(tag) tag.textContent = on ? ((gb ? 'slide ' : 'Slide ') + (S.slideIndex + 1) + (S.slides[S.slideIndex].role ? ', ' + roleName(S.slides[S.slideIndex].role) : '')) : '';
 }
 function renderModeUI(){
@@ -3070,6 +3132,7 @@ function applyBrand(brand, first){
   $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
   $('postOmniRow').style.display = '';  // both brands; gabes fails loudly server-side until its channels exist
   document.title = (brand === 'goude') ? 'The Studio: Goude Group' : 'the studio: >gabes';
+  var pt = $('paperTg'); if(pt) pt.textContent = gb ? (S.paper ? 'colour' : 'paper') : (S.paper ? 'Colour' : 'Paper');
 
   var tabs = $('srcTabs'); tabs.innerHTML = '';
   if(eng.tabs.length > 1){
@@ -3246,6 +3309,7 @@ function bind(){
     /* re-cut the last build to the new count, in the same order */
     if(S.lastBuild === 'story' && currentItem()) setSlides(E().storySlides(currentItem()), 'built from this story');
     else if(S.lastBuild === 'week' && S.items.length) setSlides(E().weekSlides(), 'built from the week');
+    else if(S.lastBuild === 'pair' && currentItem()) setSlides(E().pairSlides(currentItem()), 'the pair');
   });
   ['formats','layouts','aligns','weights','worlds','moods','trios','lengths','xmodes'].forEach(function(id){
     var el = $(id); if(!el) return;
@@ -3322,6 +3386,25 @@ function bind(){
   });
   $('slClear').addEventListener('click', function(){ slideOp('clear'); });
   $('srcChange').addEventListener('click', function(){ srcDone(false); });
+  /* STUDIO_PAIR_2026-09-27 */
+  $('slPair').addEventListener('click', function(){
+    var it = currentItem();
+    if(!it){ toast('pick a story from the week first'); return; }
+    S.lastBuild = 'pair'; S.slideCount = Math.max(2, S.slideCount || 5); renderSegs();
+    setSlides(E().pairSlides(it), 'the pair');
+  });
+  /* STUDIO_STEP_2026-09-27: step through the set on the stage, and with the
+     arrow keys when nothing is being typed */
+  $('slPrev').addEventListener('click', function(){ if(S.mode === 'carousel') selectSlide(S.slideIndex - 1); });
+  $('slNext').addEventListener('click', function(){ if(S.mode === 'carousel') selectSlide(S.slideIndex + 1); });
+  document.addEventListener('keydown', function(e){
+    if(S.mode !== 'carousel' || !S.slides.length) return;
+    var t = e.target, tag = (t && t.tagName) ? t.tagName.toLowerCase() : '';
+    if(tag === 'input' || tag === 'textarea' || tag === 'select' || (t && t.isContentEditable)) return;
+    if(e.key === 'ArrowLeft'){ selectSlide(S.slideIndex - 1); e.preventDefault(); }
+    else if(e.key === 'ArrowRight'){ selectSlide(S.slideIndex + 1); e.preventDefault(); }
+  });
+  $('paperTg').addEventListener('click', function(){ applyPaper(!S.paper, true); });
   $('slStory').addEventListener('click', function(){
     var it = currentItem();
     if(!it){ toast('pick a story from the week first'); return; }
@@ -3349,7 +3432,9 @@ function bind(){
 
 function boot(){
   bind();
+  var paper = false; try { paper = localStorage.getItem('studio.paper') === '1'; } catch(e){}
   applyBrand('goude', true);
+  applyPaper(paper, false);
   loadChannels(); loadLog();
 }
 
