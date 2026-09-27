@@ -378,13 +378,20 @@ html[data-brand="gabes"] .editing{font-weight:400;color:var(--figure)}
 html[data-brand="gabes"] .cardstep{border-radius:0;background:var(--acc);color:var(--acc-text);box-shadow:var(--acc-ring),0 4px 14px var(--card-shade)}
 /* STUDIO_PAPER_2026-09-27: the off-white room. The card and the accents keep
    their colour; only the room around them goes to paper. */
-.bswitch.paper{margin-right:16px}
-html[data-paper="1"] .bswitch.paper{background:var(--ink);color:var(--bg);box-shadow:none}
-html[data-brand="goude"][data-paper="1"]{
+.roomsw{display:flex;gap:4px;margin-right:18px}
+.roomsw .seg{flex:0 0 auto;padding:8px 11px;font-size:9.5px}
+html[data-brand="gabes"] .roomsw .seg{min-height:0;padding:8px 11px}
+/* STUDIO_ROOM_MODES_2026-09-27: colour is the full trio (or the mint), tint is
+   the same ground at 20% over paper, paper is off-white. Goude values here;
+   the >gabes values are painted per trio by paintTheme(). */
+html[data-brand="goude"][data-room="tint"]{
+  --bg:#f3f7ea; --panel:#f3f7ea; --field:#fdfdf8; --sel:#e6efd8;
+  --nm-dark:rgba(140,160,120,.26); --nm-light:rgba(255,255,255,.95); --ontag:#f3f7ea;
+}
+html[data-brand="goude"][data-room="paper"]{
   --bg:#fbf6f0; --panel:#fbf6f0; --field:#ffffff; --sel:#f1eadf;
   --nm-dark:rgba(150,130,100,.26); --nm-light:rgba(255,255,255,.95); --ontag:#fbf6f0;
 }
-html[data-brand="gabes"][data-paper="1"] .bswitch.paper{background:var(--figure);color:var(--g-mid)}
 html[data-brand="gabes"] .editing{text-transform:lowercase}
 canvas#card{max-height:56vh;width:auto;max-width:100%;margin:0 auto}
 .cap textarea{height:170px}
@@ -447,7 +454,11 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
     <button class="bswitch on" type="button" data-brand-btn="goude">The Goude Group</button>
     <button class="bswitch" type="button" data-brand-btn="gabes"><span class="chev-mark">&gt;</span>gabes</button>
     <span class="bsep"></span>
-    <button class="bswitch paper" type="button" id="paperTg" title="work on an off-white room; the card keeps its colour">Paper</button>
+    <div class="roomsw" id="roomsw" title="the room around the card: full colour, a 20% tint of it, or paper">
+      <button class="seg on" type="button" data-room="colour">Colour</button>
+      <button class="seg" type="button" data-room="tint">Tint</button>
+      <button class="seg" type="button" data-room="paper">Paper</button>
+    </div>
     <div class="mast-meta">Not indexed<br>Internal use</div>
   </div>
   <h1 id="mastTitle">The Studio.</h1>
@@ -900,7 +911,7 @@ var S = {
   posting:false,   /* STUDIO_POST_LOCK_PATCH: true while a post is in flight */
   /* STUDIO_PARITY_2026-09-26 */
   mode:'single', slides:[], slideIndex:-1, safe:false, slideCount:5, lastBuild:'',
-  capLength:'standard', xMode:'short', lastGen:'', paper:false,
+  capLength:'standard', xMode:'short', lastGen:'', room:'colour',
   card:{kicker:'',statement:'',figure:'',support:'',foot:'',footR:'',stack:[]}
 };
 
@@ -1120,11 +1131,18 @@ function liftAcc(C,A){
 }
 var ROOM_VARS = ['--g-lit','--g-mid','--g-deep','--g-vig','--g-well','--figure','--acc','--acc-text','--logo-mark',
                  '--dim','--line','--field','--field-in','--field-hi','--card-edge','--card-shade','--acc-ring'];
-function applyPaper(on, remember){
-  S.paper = !!on;
-  document.documentElement.setAttribute('data-paper', S.paper ? '1' : '0');
-  var b = $('paperTg'); if(b) b.textContent = S.brand === 'gabes' ? (S.paper ? 'colour' : 'paper') : (S.paper ? 'Colour' : 'Paper');
-  if(remember){ try { localStorage.setItem('studio.paper', S.paper ? '1' : '0'); } catch(e){} }
+function mixHex(a, b, k){
+  var x = hexRgb(a), y = hexRgb(b);
+  return rgbHex(x[0]+(y[0]-x[0])*k, x[1]+(y[1]-x[1])*k, x[2]+(y[2]-x[2])*k);
+}
+var ROOMS = ['colour','tint','paper'];
+function applyRoom(mode, remember){
+  S.room = (ROOMS.indexOf(mode) >= 0) ? mode : 'colour';
+  document.documentElement.setAttribute('data-room', S.room);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-room]'), function(b){
+    if(b.tagName === 'BUTTON') b.classList.toggle('on', b.getAttribute('data-room') === S.room);
+  });
+  if(remember){ try { localStorage.setItem('studio.room', S.room); } catch(e){} }
   paintTheme();
 }
 function paintTheme(){
@@ -1133,12 +1151,20 @@ function paintTheme(){
   var t = trioNow(), R = roomStops(t.A,t.C);
   var src = hslOf(t.A)[1]<0.08 ? t.C : t.A, s = hslOf(src)[1];
   var ground = t.A, fig = t.B;
-  if(S.paper){
-    /* STUDIO_PAPER_2026-09-27: the room goes to paper. The figure becomes a
-       rich dark of the trio's own ground hue (or the trio's figure when that
-       is already dark), the accent lifts against paper. Still three colours. */
-    R = {light:true, lit:'#f8f5ef', mid:'#f2eee6', deep:'#e7e1d5', vig:'#d8d0c0', well:'#ebe5d9'};
-    ground = '#f2eee6';
+  if(S.room === 'paper' || S.room === 'tint'){
+    /* STUDIO_ROOM_MODES_2026-09-27: paper is off-white; tint is the trio's
+       ground at 20% over that paper. In both the figure becomes a rich dark
+       of the trio's own ground hue (or the trio's figure when that is already
+       dark) and the accent lifts against the new ground. Still three colours. */
+    if(S.room === 'tint'){
+      var m = mixHex('#f2eee6', t.A, 0.20), mh = hslOf(m);
+      ground = m;
+      R = {light:true, lit:tone(m, Math.min(0.97, mh[2]+0.03), mh[1]), mid:m, deep:tone(m, mh[2]-0.07, mh[1]+0.06),
+           vig:tone(m, mh[2]-0.16, mh[1]+0.08), well:tone(m, mh[2]-0.10, mh[1]+0.06)};
+    } else {
+      R = {light:true, lit:'#f8f5ef', mid:'#f2eee6', deep:'#e7e1d5', vig:'#d8d0c0', well:'#ebe5d9'};
+      ground = '#f2eee6';
+    }
     fig = (relLum(t.B) < 0.18) ? t.B : tone(src, 0.16, Math.min(1, s + 0.10));
     if(relLum(fig) >= 0.18) fig = tone(t.C, 0.14, 0.7);
   }
@@ -3148,7 +3174,9 @@ function applyBrand(brand, first){
   $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
   $('postOmniRow').style.display = '';  // both brands; gabes fails loudly server-side until its channels exist
   document.title = (brand === 'goude') ? 'The Studio: Goude Group' : 'the studio: >gabes';
-  var pt = $('paperTg'); if(pt) pt.textContent = gb ? (S.paper ? 'colour' : 'paper') : (S.paper ? 'Colour' : 'Paper');
+  Array.prototype.forEach.call(document.querySelectorAll('#roomsw [data-room]'), function(b){
+    var k = b.getAttribute('data-room'); b.textContent = gb ? k : k.charAt(0).toUpperCase() + k.slice(1);
+  });
 
   var tabs = $('srcTabs'); tabs.innerHTML = '';
   if(eng.tabs.length > 1){
@@ -3420,7 +3448,9 @@ function bind(){
     if(e.key === 'ArrowLeft'){ selectSlide(S.slideIndex - 1); e.preventDefault(); }
     else if(e.key === 'ArrowRight'){ selectSlide(S.slideIndex + 1); e.preventDefault(); }
   });
-  $('paperTg').addEventListener('click', function(){ applyPaper(!S.paper, true); });
+  $('roomsw').addEventListener('click', function(e){
+    var b = e.target.closest('[data-room]'); if(b) applyRoom(b.getAttribute('data-room'), true);
+  });
   $('slStory').addEventListener('click', function(){
     var it = currentItem();
     if(!it){ toast('pick a story from the week first'); return; }
@@ -3448,9 +3478,9 @@ function bind(){
 
 function boot(){
   bind();
-  var paper = false; try { paper = localStorage.getItem('studio.paper') === '1'; } catch(e){}
+  var room = 'colour'; try { room = localStorage.getItem('studio.room') || 'colour'; } catch(e){}
   applyBrand('goude', true);
-  applyPaper(paper, false);
+  applyRoom(room, false);
   loadChannels(); loadLog();
 }
 
