@@ -61,6 +61,9 @@ const els = {
 global.$ = id => els[id];
 global.S = { brand: 'goude', posting: false, format: 'linkedin', mode: 'single', slides: [] };
 global.setStatus = (m, e) => STATUS.push({ m, err: !!e });
+// STUDIO_LAYOUT_2026-09-26: the receipt now lands under the button (sendStatus)
+global.sendStatus = (m, e) => STATUS.push({ m, err: !!e });
+global.loadLog = () => {};
 global.clearTimeout = () => {};
 global.setTimeout = (fn, ms) => { /* watchdog only; never fires in test */ };
 global.fmtNow = () => ({ id: 'linkedin', name: 'LinkedIn', maxChars: 1300 });

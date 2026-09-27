@@ -118,6 +118,11 @@ if (!is_array($images)) $images = [];
 $xMode = ($k === 'x') ? (string)($in['x_mode'] ?? 'short') : '';
 if ($xMode === '') $xMode = ($k === 'x') ? 'short' : '';
 $thread = $in['thread'] ?? null;
+// STUDIO_LOG_2026-09-26: where in the week this card sits, so the log can mark
+// the queue row. Free text from the client, capped, never trusted for anything
+// but display.
+$slot  = mb_substr(trim((string)($in['slot'] ?? '')), 0, 40);
+$issue = mb_substr(trim((string)($in['issue'] ?? '')), 0, 60);
 
 // X counts every link as 23 characters and wide characters as two. Same rule
 // as xLen() in index.html.
@@ -299,6 +304,41 @@ if (!$create['ok'] || !isset($create['data']['data']['id'])) {
     'at' => time(),
     'post_id' => $create['data']['data']['id'],
 ]));
+
+/*
+ * STUDIO_LOG_2026-09-26 - the post log. One line per created post, appended
+ * under studio/data/ (denied to the web by data/.htaccess, read back through
+ * log.php behind the same login). Until this file existed the Studio had no
+ * record of what went where, when, or by whom; the only memory was the
+ * ten-minute dup guard in /tmp. Best effort: a log failure never fails a post.
+ */
+$kind = $threadParts ? ('thread of ' . count($threadParts)) : ($k === 'x' && $xMode === 'long' ? 'long post' : (count($mediaIds) > 1 ? ($k === 'ig_story' ? 'story set' : 'carousel') : 'single card'));
+studio_log_append([
+    'at'           => gmdate('c'),
+    'by'           => $remoteUser,
+    'brand'        => $brand,
+    'platform'     => $k,
+    'label'        => $label,
+    'kind'         => $kind,
+    'images'       => count($mediaIds),
+    'post_id'      => $create['data']['data']['id'],
+    'media_ids'    => $mediaIds,
+    'scheduled_at' => $scheduledAt,
+    'slot'         => $slot,
+    'issue'        => $issue,
+    'caption_hash' => substr(md5($caption), 0, 12),
+    'caption_head' => mb_substr($caption, 0, 90),
+]);
+function studio_log_append($row) {
+    $dir = __DIR__ . '/data';
+    if (!is_dir($dir)) @mkdir($dir, 0750, true);
+    if (!is_dir($dir)) return;
+    if (!is_file($dir . '/.htaccess')) @file_put_contents($dir . '/.htaccess', "Require all denied\n");
+    $fh = @fopen($dir . '/posts.jsonl', 'ab');
+    if (!$fh) return;
+    if (@flock($fh, LOCK_EX)) { @fwrite($fh, json_encode($row, JSON_UNESCAPED_SLASHES) . "\n"); @flock($fh, LOCK_UN); }
+    @fclose($fh);
+}
 
 echo json_encode([
     'ok' => true,

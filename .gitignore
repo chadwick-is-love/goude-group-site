@@ -4,3 +4,5 @@ package-lock.json
 .briefing-script-check.mjs
 *.env
 omnisocials-key*.txt
+
+studio/data/posts.jsonl
