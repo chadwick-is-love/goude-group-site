@@ -8,5 +8,8 @@
     "threads":   "1000120_threads"
   },
   "gabes": {
+    "ig_feed":  "1000551_instagram",
+    "ig_story": "1000551_instagram",
+    "threads":  "1000551_threads"
   }
 }
