@@ -1494,8 +1494,11 @@ var GOUDE = {
 
     var supTop=footRuleY-Math.round((wide?26:40)*s), supLines=[], supSize=0, supLh=1.42;
     if(S.toggles.support && S.card.support){
-      supSize=Math.round(26*s*(S.supScale/100));
-      ctx.font='400 '+supSize+'px '+INTER;
+      /* STUDIO_SUPPORT_2026-09-27: CK, the body was too subtle; people need
+         the fix. 34px at book weight in the ink, up from 26px light in the
+         soft colour. The slider still scales it. */
+      supSize=Math.round(34*s*(S.supScale/100));
+      ctx.font='500 '+supSize+'px '+INTER;
       supLines=wrap(ctx,S.card.support,maxW,0);
       var supCap = wide?2:(f.id==='ig_story'?5:4);
       if(supLines.length>supCap) supLines=supLines.slice(0,supCap);
@@ -1543,7 +1546,7 @@ var GOUDE = {
     }
     setLS(ctx,0);
     if(supLines.length){
-      ctx.font='400 '+supSize+'px '+INTER; ctx.fillStyle=wd.soft;
+      ctx.font='500 '+supSize+'px '+INTER; ctx.fillStyle=wd.ink;
       for(var k=0;k<supLines.length;k++){
         dt(ctx,supLines[k],alignX(S.align,left,maxW,mw(ctx,supLines[k],0)),supTop+supSize*0.82+k*supSize*supLh,0);
       }
