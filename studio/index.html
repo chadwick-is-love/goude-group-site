@@ -455,8 +455,8 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
     <button class="bswitch" type="button" data-brand-btn="gabes"><span class="chev-mark">&gt;</span>gabes</button>
     <span class="bsep"></span>
     <div class="roomsw" id="roomsw" title="the room around the card: full colour, a 20% tint of it, or paper">
+      <button class="seg" type="button" data-room="tint">Fade</button>
       <button class="seg on" type="button" data-room="colour">Colour</button>
-      <button class="seg" type="button" data-room="tint">Tint</button>
       <button class="seg" type="button" data-room="paper">Paper</button>
     </div>
     <div class="mast-meta">Not indexed<br>Internal use</div>
@@ -1125,8 +1125,11 @@ function roomStops(A,C){
 /* the accent moves along its own lightness, away from the ground, only as
    far as it needs to clear 3:1. the card keeps the raw accent; this is the ui. */
 function liftAcc(C,A){
-  var dir = relLum(A)>relLum(C) ? -1 : 1, c=C, k=0;
-  while(contrastRatio(c,A)<3 && k<7){ k++; c=shade(C,dir*0.055*k,0.04); }
+  /* a light ground pushes the accent darker, a dark ground pushes it lighter;
+     the old rule compared the two luminances and lightened a bright accent
+     on a light ground, which is how acid green went pale on the fade room */
+  var dir = relLum(A) > 0.35 ? -1 : 1, c=C, k=0;
+  while(contrastRatio(c,A)<3 && k<9){ k++; c=shade(C,dir*0.055*k,0.04); }
   return c;
 }
 var ROOM_VARS = ['--g-lit','--g-mid','--g-deep','--g-vig','--g-well','--figure','--acc','--acc-text','--logo-mark',
@@ -1135,14 +1138,25 @@ function mixHex(a, b, k){
   var x = hexRgb(a), y = hexRgb(b);
   return rgbHex(x[0]+(y[0]-x[0])*k, x[1]+(y[1]-x[1])*k, x[2]+(y[2]-x[2])*k);
 }
-var ROOMS = ['colour','tint','paper'];
+var ROOMS = ['tint','colour','paper'];
+var ROOM_NAMES = {tint:'Fade', colour:'Colour', paper:'Paper'};
+/* STUDIO_ROOM_MODES_2026-09-27: the room is remembered per house. >gabes
+   opens on fade (CK 2026-09-27), Goude on colour. */
+var ROOM_DEFAULT = {goude:'colour', gabes:'tint'};
+function roomFor(brand){
+  var v = '';
+  try { v = localStorage.getItem('studio.room.' + brand) || ''; } catch(e){}
+  return (ROOMS.indexOf(v) >= 0) ? v : ROOM_DEFAULT[brand];
+}
 function applyRoom(mode, remember){
-  S.room = (ROOMS.indexOf(mode) >= 0) ? mode : 'colour';
+  S.room = (ROOMS.indexOf(mode) >= 0) ? mode : ROOM_DEFAULT[S.brand];
   document.documentElement.setAttribute('data-room', S.room);
-  Array.prototype.forEach.call(document.querySelectorAll('[data-room]'), function(b){
-    if(b.tagName === 'BUTTON') b.classList.toggle('on', b.getAttribute('data-room') === S.room);
+  Array.prototype.forEach.call(document.querySelectorAll('#roomsw [data-room]'), function(b){
+    var k = b.getAttribute('data-room');
+    b.classList.toggle('on', k === S.room);
+    b.textContent = (S.brand === 'gabes') ? ROOM_NAMES[k].toLowerCase() : ROOM_NAMES[k];
   });
-  if(remember){ try { localStorage.setItem('studio.room', S.room); } catch(e){} }
+  if(remember){ try { localStorage.setItem('studio.room.' + S.brand, S.room); } catch(e){} }
   paintTheme();
 }
 function paintTheme(){
@@ -3174,9 +3188,7 @@ function applyBrand(brand, first){
   $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
   $('postOmniRow').style.display = '';  // both brands; gabes fails loudly server-side until its channels exist
   document.title = (brand === 'goude') ? 'The Studio: Goude Group' : 'the studio: >gabes';
-  Array.prototype.forEach.call(document.querySelectorAll('#roomsw [data-room]'), function(b){
-    var k = b.getAttribute('data-room'); b.textContent = gb ? k : k.charAt(0).toUpperCase() + k.slice(1);
-  });
+  applyRoom(roomFor(brand), false);
 
   var tabs = $('srcTabs'); tabs.innerHTML = '';
   if(eng.tabs.length > 1){
@@ -3478,9 +3490,7 @@ function bind(){
 
 function boot(){
   bind();
-  var room = 'colour'; try { room = localStorage.getItem('studio.room') || 'colour'; } catch(e){}
   applyBrand('goude', true);
-  applyRoom(room, false);
   loadChannels(); loadLog();
 }
 
