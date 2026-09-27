@@ -362,13 +362,20 @@ html[data-brand="gabes"] .tlink{text-transform:lowercase;font-weight:400}
 .stage{position:sticky;top:12px;margin-top:24px;max-height:calc(100vh - 24px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;padding-bottom:4px}
 .stage .panel:first-child{margin-top:0}
 @media(max-width:860px){.stage{position:static;max-height:none;overflow:visible}}
-.editing{font-family:var(--label);font-size:10.5px;letter-spacing:.06em;color:var(--soft);margin:0 0 8px;display:none;align-items:center;gap:10px}
+.editing{font-family:var(--label);font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--ink);margin:0 0 10px;display:none;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .editing.on{display:flex}
-.editing .step{width:28px;height:26px;border-radius:var(--radius-sm);box-shadow:inset 0 0 0 1.5px var(--hair);color:var(--ink);font-size:13px;line-height:26px;text-align:center}
-.editing .step:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
-.editing .step:disabled{opacity:.3;cursor:default}
-html[data-brand="gabes"] .editing .step{box-shadow:inset 0 0 0 1px var(--line);color:var(--figure)}
-html[data-brand="gabes"] .editing .step:hover{box-shadow:inset 0 0 0 1px var(--acc)}
+.editing-hint{font-size:10px;font-weight:400;color:var(--soft);letter-spacing:.06em}
+html[data-brand="gabes"] .editing{font-weight:400;color:var(--figure)}
+/* STUDIO_STEP_2026-09-27: the arrows sit ON the card, where the eye already is */
+.canvaswrap{position:relative}
+.cardstep{display:none;position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:46px;height:46px;border-radius:50%;
+  background:var(--ink);color:var(--bg);font-size:20px;line-height:46px;text-align:center;box-shadow:0 4px 14px rgba(0,0,0,.28);transition:opacity .15s ease,transform .15s ease}
+.cardstep.prev{left:-4px}
+.cardstep.next{right:-4px}
+.cardstep:hover{transform:translateY(-50%) scale(1.06)}
+.cardstep:disabled{opacity:.25;cursor:default;transform:translateY(-50%)}
+.stagepanel.carousel .cardstep{display:block}
+html[data-brand="gabes"] .cardstep{border-radius:0;background:var(--acc);color:var(--acc-text);box-shadow:var(--acc-ring),0 4px 14px var(--card-shade)}
 /* STUDIO_PAPER_2026-09-27: the off-white room. The card and the accents keep
    their colour; only the room around them goes to paper. */
 .bswitch.paper{margin-right:16px}
@@ -581,8 +588,12 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
         <button class="tlink" type="button" id="slClear">Clear the set</button>
       </div>
     </div>
-    <div class="editing" id="editing"><button class="step" type="button" id="slPrev" title="previous slide">&larr;</button><span id="editingTxt"></span><button class="step" type="button" id="slNext" title="next slide">&rarr;</button></div>
-    <div class="canvaswrap"><canvas id="card" width="1080" height="1350"></canvas></div>
+    <div class="editing" id="editing"><span id="editingTxt"></span><span class="editing-hint" id="editingHint">use the arrows on the card, or the arrow keys</span></div>
+    <div class="canvaswrap" id="canvaswrap">
+      <button class="cardstep prev" type="button" id="slPrev" title="previous slide (left arrow key)">&larr;</button>
+      <canvas id="card" width="1080" height="1350"></canvas>
+      <button class="cardstep next" type="button" id="slNext" title="next slide (right arrow key)">&rarr;</button>
+    </div>
     <label class="sw safe"><input type="checkbox" id="safeTg" /> <span id="safeLbl">Show platform safe zones (preview only)</span></label>
   </section>
 
@@ -2953,6 +2964,7 @@ function renderEditing(){
   var txt = on ? ((gb ? 'slide ' : 'Slide ') + (S.slideIndex + 1) + ' of ' + S.slides.length
              + (S.slides[S.slideIndex].role ? ', ' + roleName(S.slides[S.slideIndex].role) : '')) : '';
   if(et) et.textContent = txt;
+  var eh = $('editingHint'); if(eh) eh.textContent = gb ? 'arrows on the card, or the arrow keys' : 'Arrows on the card, or the arrow keys';
   if(el){ el.classList.toggle('on', !!on); }
   var pv = $('slPrev'), nx = $('slNext');
   if(pv) pv.disabled = !on || S.slideIndex <= 0;
@@ -2964,6 +2976,7 @@ function renderModeUI(){
     b.classList.toggle('on', b.getAttribute('data-mode') === S.mode);
   });
   $('slidepanel').classList.toggle('on', S.mode === 'carousel');
+  var sp = $('stagePanel'); if(sp) sp.classList.toggle('carousel', S.mode === 'carousel' && S.slides.length > 0);
   var gb = (S.brand === 'gabes');
   $('dlBtn').textContent = (S.mode === 'carousel' && S.slides.length)
     ? (gb ? 'download ' + S.slides.length + ' slides' : 'Download ' + S.slides.length + ' slides')
