@@ -1560,6 +1560,13 @@ var GOUDE = {
     function fitFont(px){ return S.weight+' '+px+'px '+PLAYFAIR; }
 
     var fit=fitBlock(ctx,fitFont,S.card.statement,stMaxW,Math.max(20,zoneH-figH),minPx,maxPx,lh,trackEm);
+    /* SET_TYPE_LOCK_2026-09-29: in a set, every slide takes the set's one
+       headline size (see setTypeLock). A big-number slide keeps its own. */
+    if(S._measuring) S._measured = fit.size;
+    else if(S._setLock && !figMode){
+      var lockPx = Math.max(minPx, Math.round(S._setLock*W));
+      if(lockPx < fit.size){ ctx.font = fitFont(lockPx); fit = {size:lockPx, lines:wrap(ctx,S.card.statement,stMaxW,lockPx*trackEm)}; }
+    }
     var stSize=fit.size, bestLines=fit.lines;
     var blockH=figH + bestLines.length*stSize*lh;
     var blockTop=zoneTop + Math.max(0,(zoneH-blockH)/2);
@@ -2078,6 +2085,14 @@ var GABES = {
       lines = GABES.wrapTokens(ctx, toks, hW, hpx*trackEm);
       if(ruleH + figH + lines.length*hpx*lhF + subH <= zoneH || hpx <= W*0.030) break;
       hpx *= 0.94;
+    }
+    /* SET_TYPE_LOCK_2026-09-29: in a set, every slide takes the set's one
+       hook size (see setTypeLock) */
+    if(S._measuring) S._measured = hpx;
+    else if(S._setLock && S._setLock*W < hpx){
+      hpx = S._setLock*W;
+      ctx.font = wt + ' ' + hpx + 'px ' + OUTFIT;
+      lines = GABES.wrapTokens(ctx, toks, hW, hpx*trackEm);
     }
     var blockH = ruleH + figH + lines.length*hpx*lhF + subH;
     var top = (ratio === '9:16' || center)
@@ -2714,6 +2729,30 @@ function slideCounter(){
   function p2(x){ return (x < 10 ? '0' : '') + x; }
   return p2(d.i + 1) + ' / ' + p2(d.n);
 }
+/* SET_TYPE_LOCK_2026-09-29: one headline size per set. On its own, each card
+   fits its headline as large as its space allows, so in a set a short lead
+   came out huge and a two-sentence slide small. Here every slide is measured
+   first with its own fit, and the whole set draws at the smallest of those
+   sizes, so all slides match and every one still fits. Stored as a share of
+   the card width so the thumbnails, the stage and the 2x export agree. A
+   single card is never locked. A Goude big-number (figure) slide is left out:
+   its headline is deliberately set small under the number. */
+function setTypeLock(f){
+  S._setLock = null;
+  if(S.mode !== 'carousel' || S.slides.length < 2) return;
+  var cv = document.createElement('canvas'); cv.width = f.w; cv.height = f.h;
+  var ctx = cv.getContext('2d'), min = Infinity;
+  S._measuring = true;
+  try {
+    S.slides.forEach(function(sl, i){
+      if(S.brand !== 'gabes' && sl.layout === 'figure' && sl.card && sl.card.figure) return;
+      S._measured = 0;
+      withSlide(sl, i, function(){ E().draw(ctx, f); });
+      if(S._measured) min = Math.min(min, S._measured / f.w);
+    });
+  } finally { S._measuring = false; }
+  if(isFinite(min)) S._setLock = min;
+}
 function captureSlide(){
   return {card:JSON.parse(JSON.stringify(S.card)), layout:S.layout, angle:S.angle};
 }
@@ -2755,6 +2794,7 @@ function draw(){
     S._drawSlide = {i:S.slideIndex, n:S.slides.length};
   } else S._drawSlide = null;
   renderEditing();
+  setTypeLock(f); if(!S._drawSlide) S._setLock = null;   /* the stage card is locked only while it is a slide of the set */
   var ctx = cv.getContext('2d');
   E().draw(ctx, f);
   if(S.safe) drawSafe(ctx, f);
@@ -2764,6 +2804,7 @@ function draw(){
 }
 
 function renderToBlob(f, cb){
+  S._setLock = null;   /* SET_TYPE_LOCK_2026-09-29: a single card is never locked */
   var cv = document.createElement('canvas');
   cv.width = f.w*2; cv.height = f.h*2;
   var ctx = cv.getContext('2d'); ctx.scale(2,2);
@@ -2772,6 +2813,7 @@ function renderToBlob(f, cb){
 }
 /* every slide, in order, as PNG blobs */
 function slidesToBlobs(f, cb){
+  setTypeLock(f);
   var out = [], i = 0;
   function next(){
     if(i >= S.slides.length){ cb(out); return; }
@@ -3066,6 +3108,7 @@ function renderSlides(){
   if(!n){ box.innerHTML = '<span class="slides-empty">' + (gb ? 'no slides yet. build one from this story or the week, or add the card on the stage.' : 'No slides yet. Build one from this story or the week, or add the card on the stage.') + '</span>'; renderModeUI(); renderEditing(); return; }
   /* thumbnails render at 2x their cell so they stay sharp; the cell width is
      the strip width over five columns */
+  setTypeLock(f);
   var cellW = Math.max(60, Math.floor((box.clientWidth - 32) / 5));
   var k = (2 * cellW) / f.w;
   S.slides.forEach(function(sl, i){
