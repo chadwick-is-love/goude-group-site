@@ -11,8 +11,8 @@
 </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Build your AI hiring employee · Goude Group</title>
-<meta name="description" content="The prompts from Gabrielle Goude's session that take a hire from job description to day 90." />
+<title>HireRight · Goude Group</title>
+<meta name="description" content="HireRight: every prompt from Gabrielle Goude's session. Build your first AI employee to hire employees who stay." />
 <meta name="robots" content="noindex" />
 <link rel="icon" type="image/png" href="/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -41,7 +41,8 @@ nav.scrolled{padding-top:14px;padding-bottom:14px;border-bottom-color:rgba(6,18,
 .kicker{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:13px;margin-bottom:clamp(16px,2.4vw,26px)}
 .kicker::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--light);flex:none;filter:drop-shadow(0 0 4px rgba(240,101,74,.55));animation:pulseLight 1.9s ease-in-out infinite}
 @keyframes pulseLight{0%{box-shadow:0 0 0 0 rgba(240,101,74,.5)}70%{box-shadow:0 0 0 9px rgba(240,101,74,0)}100%{box-shadow:0 0 0 0 rgba(240,101,74,0)}}
-h1{font-family:var(--display);font-weight:500;font-size:clamp(40px,6.4vw,84px);line-height:.95;letter-spacing:-.028em;max-width:14ch}
+h1{font-family:var(--display);font-weight:500;font-size:clamp(48px,7.4vw,96px);line-height:.92;letter-spacing:-.028em}
+.sub{font-family:var(--display);font-weight:400;font-style:italic;font-size:clamp(24px,2.9vw,38px);line-height:1.15;letter-spacing:-.012em;max-width:22ch;margin-top:clamp(10px,1.4vw,16px)}
 .intro{font-size:clamp(16px,1.32vw,18px);line-height:1.62;max-width:620px;margin-top:clamp(18px,2.4vw,28px);color:var(--soft)}
 .intro strong{color:var(--dark-green);font-weight:500}
 
@@ -102,13 +103,14 @@ footer{padding:30px 6vw;font-size:12px;letter-spacing:.04em;color:var(--soft)}
 
 <main class="wrap">
   <div class="kicker">From the session</div>
-  <h1>Build your AI hiring employee.</h1>
-  <p class="intro">Everything from today's session in one folder: the prompts that take a hire from job description to day 90. <strong>Leave your email and we'll send it over.</strong></p>
+  <h1>HireRight.</h1>
+  <p class="sub">Build your first AI employee to hire employees who stay.</p>
+  <p class="intro">Every prompt from the session, in order, built for restoration companies. <strong>Leave your email and we'll send you the whole folder.</strong></p>
 
   <div class="grid">
     <section class="card" aria-labelledby="formTitle">
       <form id="optin" novalidate>
-        <h2 id="formTitle">Get the files</h2>
+        <h2 id="formTitle">Get HireRight</h2>
         <div class="field" id="f-first">
           <label for="first_name">First name</label>
           <input id="first_name" name="first_name" type="text" autocomplete="given-name" placeholder="Your first name" required />
@@ -125,28 +127,26 @@ footer{padding:30px 6vw;font-size:12px;letter-spacing:.04em;color:var(--soft)}
           <label for="website">Leave this empty</label>
           <input id="website" name="website" type="text" tabindex="-1" autocomplete="off" />
         </div>
-        <button class="btn btn-solid" id="send" type="submit">Send me the files</button>
+        <button class="btn btn-solid" id="send" type="submit">Send me HireRight</button>
         <p class="fine">We'll email you the folder, and now and then a short note on putting AI to work in your business. Unsubscribe any time.</p>
         <p class="msg" id="msg" role="alert"></p>
       </form>
       <div class="done" id="done" role="status" aria-live="polite">
         <h3>Check your inbox.</h3>
-        <p>The folder is on its way to <strong id="sentTo"></strong>. If it isn't there in a few minutes, look in spam or promotions.</p>
+        <p>HireRight is on its way to <strong id="sentTo"></strong>. Start with <strong>00 - Start Here</strong>. If it isn't there in a few minutes, look in spam or promotions.</p>
       </div>
     </section>
 
     <section class="inside" aria-labelledby="insideTitle">
       <h2 id="insideTitle">What's inside</h2>
       <ol>
-        <li>Write the job description, with responsibilities and KPIs</li>
-        <li>Score every resume against the role, with a clear proceed or pass</li>
-        <li>Plan a 60-minute interview, with the questions</li>
-        <li>Read an interview transcript for strong signals and red flags</li>
-        <li>Set a short test project to see real work</li>
-        <li>Pick the final candidate, with the reasons written down</li>
-        <li>Draft the offer letter and the welcome email</li>
-        <li>Map the first 90 days: learn, contribute, execute</li>
-        <li class="bonus">Bonus: Enneagram and StrengthsFinder summaries, and a quarterly review guide</li>
+        <li>Start Here: the one-hour build, step by step</li>
+        <li>The Company Brain: 6 ready-made training files, from the hiring playbook and pay guide to the scoring rubric, IICRC certification reference and offer letter template</li>
+        <li>Its instructions, two ways: let AI interview you, or fill in 5 blanks</li>
+        <li>Hire prompts for your 5 most common roles: water tech, laborer, project manager, estimator, office manager</li>
+        <li>A resume review prompt for any candidate</li>
+        <li>The 4 tests from stage, how to grade the answers, and demo resumes to practice on</li>
+        <li class="bonus">Bonus: 4 research prompts that tailor every file to your own market</li>
       </ol>
     </section>
   </div>
@@ -155,7 +155,7 @@ footer{padding:30px 6vw;font-size:12px;letter-spacing:.04em;color:var(--soft)}
 <footer>Goude Group &middot; <a class="footlink" href="/privacy/">Privacy</a> &middot; <a class="footlink" href="/terms/">Terms</a></footer>
 
 <script>
-// Where signups go: the n8n workflow "Talk Lead Capture" (strpJlt0Vho1426Q). It emails the folder,
+// Where signups go: the n8n workflow "Talk Lead Capture" (strpJlt0Vho1426Q). It emails the HireRight link,
 // adds a row to the signup sheet and pings Slack. Sent form-encoded so the browser needs no preflight.
 const ENDPOINT = "https://goudegroup.app.n8n.cloud/webhook/talk-signup";
 
@@ -198,7 +198,7 @@ form.addEventListener("submit", async (e) => {
   } catch (err) {
     showError("That didn't go through. Please try again, or email hello@goudegroup.com.");
   } finally {
-    btn.disabled = false; btn.textContent = "Send me the files";
+    btn.disabled = false; btn.textContent = "Send me HireRight";
   }
 });
 </script>
