@@ -62,6 +62,8 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 .tabs button.on{box-shadow:inset 0 -2px 0 var(--ink)}
 @media (max-width:520px){ .row .grid{grid-template-columns:96px 1fr} .row img{width:96px} h1{font-size:28px} }
 /* STUDIO_APPROVE_READ_2026-10-14: the quick read */
+.row .grid.nothumb{grid-template-columns:1fr}
+.row .grid.nothumb > div:first-child:empty{display:none}
 .row .open{display:block;padding:0;cursor:zoom-in}
 .row .statement.open{cursor:pointer;text-align:left}
 .acts a.btn{text-decoration:none;display:inline-flex;align-items:center}
@@ -161,10 +163,10 @@ function render(){
     if(d !== lastDay){ var h = document.createElement('div'); h.className = 'day'; h.textContent = d; list.appendChild(h); lastDay = d; }
     var row = document.createElement('div'); row.className = 'row';
     var lead = g.posts.filter(function(p){ return p.platform === 'ig_feed'; })[0] || g.posts[0];
-    var thumb = (lead.status === 'pending') ? '<button class="open" type="button" title="Quick read"><img alt="" src="queue.php?action=img&id=' + encodeURIComponent(lead.id) + '&n=0"></button>' : '<div></div>';
+    var thumb = (lead.status === 'pending' || lead.frames_kept) ? '<button class="open" type="button" title="Quick read"><img alt="" src="queue.php?action=img&id=' + encodeURIComponent(lead.id) + '&n=0"></button>' : '<div></div>';
     var nets = g.posts.map(function(p){
       var frames = '';
-      if(p.status === 'pending'){
+      if(p.status === 'pending' || p.frames_kept){
         for(var n = 0; n < p.images; n++) frames += '<img alt="' + (n + 1) + ' of ' + p.images + '" loading="lazy" src="queue.php?action=img&id=' + encodeURIComponent(p.id) + '&n=' + n + '">';
       }
       var res = p.result && p.result.post_id ? ' · post ' + esc(p.result.post_id) : '';
@@ -173,7 +175,7 @@ function render(){
         + '<pre>' + esc(p.caption) + '</pre>'
         + (p.error ? '<p class="err">' + esc(p.error) + '</p>' : '') + '</details>';
     }).join('');
-    row.innerHTML = '<div class="grid">' + thumb + '<div><div class="when">' + esc(fmtWhen(g.at)) + '</div>'
+    row.innerHTML = '<div class="grid' + (thumb === '<div></div>' ? ' nothumb' : '') + '">' + thumb + '<div><div class="when">' + esc(fmtWhen(g.at)) + '</div>'
       + '<button class="statement open" type="button">' + esc(g.statement || '') + '</button>'
       + '<div class="meta">' + esc(g.posts.length + ' network' + (g.posts.length === 1 ? '' : 's') + (g.colour ? ' · ' + g.colour : '') + (lead.issue ? ' · ' + lead.issue : '')) + '</div></div></div>'
       + '<div class="nets">' + nets + '</div>'
@@ -207,12 +209,12 @@ function openRead(g, row){
       $('qrTabs').appendChild(b);
     });
     var fr = '';
-    if(p.status === 'pending'){
+    if(p.status === 'pending' || p.frames_kept){
       for(var n = 0; n < p.images; n++) fr += '<figure><img alt="' + (n + 1) + ' of ' + p.images + '" src="queue.php?action=img&id=' + encodeURIComponent(p.id) + '&n=' + n + '"><figcaption>' + (n + 1) + ' / ' + p.images + '</figcaption></figure>';
     }
     $('qrFrames').innerHTML = fr;
     $('qrCap').textContent = p.caption || '';
-    $('qrNote').textContent = (p.status === 'pending') ? '' : ('This post is ' + p.status + '; its frames are with OmniSocials now.');
+    $('qrNote').textContent = (p.status === 'pending') ? '' : (p.frames_kept ? ('Scheduled as post ' + ((p.result && p.result.post_id) || '') + '. To change it, cancel it in OmniSocials first, then queue the new version.') : ('This post is ' + p.status + '; its frames are with OmniSocials now.'));
     var foot = $('qrFoot'); foot.innerHTML = '';
     if(g.status === 'pending'){
       var a1 = document.createElement('button'); a1.className = 'btn'; a1.type = 'button'; a1.textContent = 'Approve this slot';

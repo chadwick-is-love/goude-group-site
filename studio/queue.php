@@ -94,6 +94,10 @@ function q_all($brand = '', $status = '') {
         if (($j['status'] ?? '') === 'pending' && (int)$j['publish_at'] < time() + 600) {
             $j['status'] = 'missed'; $j['updated_at'] = gmdate('c'); q_save($j); q_drop_images($j);
         }
+        // frames of a scheduled post go a day after it published
+        if (!empty($j['frames_kept']) && (int)$j['publish_at'] < time() - 86400) {
+            q_drop_images($j); $j['frames_kept'] = false; q_save($j);
+        }
         if ($status !== '' && ($j['status'] ?? '') !== $status) continue;
         $out[] = $j;
     }
@@ -207,7 +211,10 @@ if ($action === 'approve' || $action === 'reject') {
             $r = studio_post($req, $by, ['scheduled_at' => (int)$row['publish_at'], 'via' => 'approve', 'queue_id' => $row['id']]);
             $row['status'] = 'scheduled'; $row['result'] = $r;
             $row['decided_by'] = $by; $row['updated_at'] = gmdate('c');
-            q_save($row); q_drop_images($row);
+            // STUDIO_APPROVE_READ_2026-10-14: the frames stay until a day after
+            // the post time, so a scheduled slot keeps its card and quick read.
+            $row['frames_kept'] = true;
+            q_save($row);
             $done[] = ['id' => $id, 'ok' => true, 'status' => 'scheduled', 'post_id' => $r['post_id'], 'scheduled_at' => $r['scheduled_at']];
         } catch (StudioFail $e) {
             $msg = $e->getMessage();
