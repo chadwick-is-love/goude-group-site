@@ -2061,37 +2061,50 @@ var GABES = {
     for(var i = 0; i < lines.length; i++) dt(ctx, lines[i], pad, y + px*0.84 + i*px*1.2, px*trackEm);
     setLS(ctx,0);
   },
-  drawAction:function(ctx, f, ink, pad, maxW, zoneTop, zoneBot, ratio){
+  drawAction:function(ctx, f, ink, charge, pad, maxW, zoneTop, zoneBot, ratio){
     var W = f.w, wide = (ratio === '16:9'), trackEm = S.track/1000;
     var labelPx = W*(wide ? 0.07 : 0.11) * (S.scale/100);
     var supPx = Math.max(W*0.030, 15) * (S.supScale/100);
     var ctaPx = Math.max(W*0.026, 13);
     var gap = W*0.035;
+    var barW = Math.max(4, W*0.008), barGap = W*0.032, inW = maxW - barW - barGap;
     var cta = 'the whole week lands friday: gabes.ai/letter';
     ctx.font = '400 ' + supPx + 'px ' + MONO;
-    var supLines = (S.toggles.support !== false && S.card.support) ? wrap(ctx, lower(S.card.support), maxW, 0) : [];
+    var supPw = ctx.measureText('> ').width;
+    var supLines = (S.toggles.support !== false && S.card.support) ? wrap(ctx, lower(S.card.support), inW - supPw, 0) : [];
     var supH = supLines.length ? gap*0.7 + supLines.length*supPx*1.35 : 0;
     var ctaH = ctaPx*2.6;
     var avail = (zoneBot - zoneTop) - labelPx*1.05 - gap - supH - ctaH;
-    var px = GABES.bodyFit(ctx, lower(S.card.statement), maxW, avail, W*(wide ? 0.05 : 0.072)*(S.scale/100), W*0.03, trackEm);
+    var px = GABES.bodyFit(ctx, lower(S.card.statement), inW, avail, W*(wide ? 0.05 : 0.072)*(S.scale/100), W*0.03, trackEm);
     ctx.font = '500 ' + px + 'px ' + OUTFIT;
-    var lines = wrap(ctx, lower(S.card.statement), maxW, px*trackEm); setLS(ctx,0);
+    var lines = wrap(ctx, lower(S.card.statement), inW, px*trackEm); setLS(ctx,0);
     var blockH = labelPx*1.05 + gap + lines.length*px*1.18 + supH;
     var top = zoneTop + Math.max(0, ((zoneBot - ctaH - zoneTop) - blockH)/2);
-    ctx.fillStyle = ink;
+    /* "do this." large in the charge; the action beside a charge bar, so the
+       close has its own shape on the same ground */
+    ctx.fillStyle = charge;
     ctx.font = '500 ' + labelPx + 'px ' + OUTFIT;
     dt(ctx, 'do this.', pad, top + labelPx*0.84, labelPx*-0.02); setLS(ctx,0);
     var y = top + labelPx*1.05 + gap;
+    var actH = lines.length*px*1.18;
+    ctx.fillRect(pad, y + px*0.12, barW, actH - px*0.2);
+    ctx.fillStyle = ink;
     ctx.font = '500 ' + px + 'px ' + OUTFIT;
-    for(var i = 0; i < lines.length; i++) dt(ctx, lines[i], pad, y + px*0.84 + i*px*1.18, px*trackEm);
+    for(var i = 0; i < lines.length; i++) dt(ctx, lines[i], pad + barW + barGap, y + px*0.84 + i*px*1.18, px*trackEm);
     setLS(ctx,0);
-    y += lines.length*px*1.18 + gap*0.7;
+    y += actH + gap*0.7;
     ctx.font = '400 ' + supPx + 'px ' + MONO;
-    for(var k = 0; k < supLines.length; k++) ctx.fillText(supLines[k], pad, y + supPx*0.82 + k*supPx*1.35);
+    for(var k = 0; k < supLines.length; k++){
+      if(k === 0){ ctx.fillStyle = charge; ctx.fillText('> ', pad + barW + barGap, y + supPx*0.82); }
+      ctx.fillStyle = ink;
+      ctx.fillText(supLines[k], pad + barW + barGap + supPw, y + supPx*0.82 + k*supPx*1.35);
+    }
     /* the ask, ruled off above the footer */
     var cy = zoneBot - ctaPx*0.9;
+    ctx.fillStyle = charge;
     ctx.fillRect(pad, cy - ctaPx*1.6, maxW, Math.max(2, W*0.002));
     ctx.font = '400 ' + ctaPx + 'px ' + MONO;
+    ctx.fillStyle = ink;
     ctx.fillText(cta, pad, cy);
   },
 
@@ -2148,11 +2161,10 @@ var GABES = {
     var W = f.w, H = f.h, ratio = f.ratio || '4:5';
     var t = trioNow();
     var bg = t.A, head = t.B, accent = t.C;
-    /* STUDIO_GABES_SET_2026-10-14: the action card turns the trio over, the
-       charge becomes the ground and the ground becomes the ink, so the close
-       reads as a different card while keeping the same colours. */
+    /* STUDIO_GABES_SET_2026-10-14: the action card keeps the trio exactly
+       (CK: no colour shifts inside a carousel); it reads as the close by its
+       layout, not its colour. */
     var actionCard = (S.layout === 'action');
-    if(actionCard){ bg = t.C; head = t.A; accent = t.A; }
 
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
@@ -2248,7 +2260,7 @@ var GABES = {
     }
 
     /* STUDIO_GABES_SET_2026-10-14 */
-    if(actionCard){ GABES.drawAction(ctx, f, head, pad, maxW, zoneTop, zoneBot, ratio); return; }
+    if(actionCard){ GABES.drawAction(ctx, f, head, accent, pad, maxW, zoneTop, zoneBot, ratio); return; }
     var slideRole = (S._drawSlide && S.slides[S._drawSlide.i]) ? (S.slides[S._drawSlide.i].role || '') : '';
     if(S._drawSlide && S._drawSlide.i > 0 && GABES.BODY_ROLES[slideRole] && S.layout === 'card'){
       GABES.drawBody(ctx, f, head, accent, pad, maxW, zoneTop, zoneBot, ratio, slideRole); return;
