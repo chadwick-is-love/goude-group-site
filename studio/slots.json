@@ -6,7 +6,7 @@
     "slots": { "AM": "08:30", "PM": "12:30" }
   },
   "gabes": {
-    "platforms": ["ig_feed", "ig_story", "threads"],
+    "platforms": ["ig_feed", "ig_story", "threads", "tiktok"],
     "slots": { "am": "12:00", "pm": "18:00" }
   }
 }

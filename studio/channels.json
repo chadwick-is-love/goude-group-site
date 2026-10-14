@@ -1,15 +1,16 @@
 {
   "goude": {
-    "linkedin":  "1000120_linkedin_page",
-    "ig_feed":   "1000120_instagram",
-    "x":         "1000120_x",
-    "ig_story":  "1000120_instagram",
-    "facebook":  "1000120_facebook",
-    "threads":   "1000120_threads"
+    "linkedin": "1000120_linkedin_page",
+    "ig_feed": "1000120_instagram",
+    "x": "1000120_x",
+    "ig_story": "1000120_instagram",
+    "facebook": "1000120_facebook",
+    "threads": "1000120_threads"
   },
   "gabes": {
-    "ig_feed":  "1000551_instagram",
+    "ig_feed": "1000551_instagram",
     "ig_story": "1000551_instagram",
-    "threads":  "1000551_threads"
+    "threads": "1000551_threads",
+    "tiktok": "1000551_tiktok"
   }
 }

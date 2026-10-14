@@ -30,7 +30,7 @@ function studio_fail($msg) { throw new StudioFail($msg); }
 const PLATFORM_LABELS = [
     'x' => 'X', 'linkedin' => 'LinkedIn', 'ig_feed' => 'Instagram feed',
     'ig_story' => 'Instagram story', 'facebook' => 'Facebook',
-    'threads' => 'Threads',
+    'threads' => 'Threads', 'tiktok' => 'TikTok',
 ];
 // STUDIO_PARITY_2026-09-26: these are now the PLATFORMS' own ceilings, read
 // from docs.omnisocials.com 2026-09-26. The house ceilings (IG 900, LinkedIn
@@ -39,14 +39,14 @@ const PLATFORM_LABELS = [
 // index.html carries the same numbers - keep the two in step.
 const PLATFORM_MAX_CHARS = [
     'x' => 280, 'linkedin' => 3000, 'ig_feed' => 2200,
-    'ig_story' => 140, 'facebook' => 63206, 'threads' => 500,
+    'ig_story' => 140, 'facebook' => 63206, 'threads' => 500, 'tiktok' => 4000,
 ];
 // Images one post may carry. X 4; Instagram, Facebook and Threads carousels
 // 2 to 10; an Instagram story set posts each image as its own slide (up to
 // 10); LinkedIn turns 2+ images into its native document carousel.
 const PLATFORM_MAX_IMAGES = [
     'x' => 4, 'linkedin' => 10, 'ig_feed' => 10,
-    'ig_story' => 10, 'facebook' => 10, 'threads' => 10,
+    'ig_story' => 10, 'facebook' => 10, 'threads' => 10, 'tiktok' => 35,
 ];
 const X_LONG_MAX = 25000;      // X Premium long post
 const X_THREAD_MAX_PARTS = 25; // X threads: 2 to 25 parts of 280
@@ -56,7 +56,7 @@ const X_THREAD_MAX_PARTS = 25; // X threads: 2 to 25 parts of 280
 // them apart, so the post TYPE does. Both values PROVEN 2026-08-28.
 const PLATFORM_POST_TYPE = [
     'x' => 'post', 'linkedin' => 'post', 'ig_feed' => 'post',
-    'ig_story' => 'story', 'facebook' => 'post', 'threads' => 'post',
+    'ig_story' => 'story', 'facebook' => 'post', 'threads' => 'post', 'tiktok' => 'post',
 ];
 const BRANDS = ['goude', 'gabes'];
 // GABES_KEY_PATCH 2026-09-21: each brand is its own OmniSocials workspace, and
@@ -277,6 +277,12 @@ function studio_post(array $in, $by, array $opt = []) {
             $parts[] = ($i === 0) ? ['text' => $t, 'media_ids' => $mediaIds] : ['text' => $t];
         }
         $body['x'] = ['thread_parts' => $parts];
+    }
+    // STUDIO_TIKTOK_2026-10-14: TikTok refuses any post without
+    // tiktok.privacy_level (400). A photo carousel, public. Not yet proven live
+    // on this workspace; the first approval is the proof.
+    if ($k === 'tiktok') {
+        $body['tiktok'] = ['privacy_level' => 'PUBLIC_TO_EVERYONE'];
     }
     $create = omnisocials_request('POST', '/posts/create', $key, $body);
     if (!$create['ok'] || !isset($create['data']['data']['id'])) {
