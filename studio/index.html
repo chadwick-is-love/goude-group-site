@@ -891,7 +891,7 @@ var GD_WORLDS = [
   {id:'cream', name:'Cream', bg:'#fbf8f1', ink:'#06162b', soft:'rgba(6,22,43,.60)',    hair:'rgba(6,22,43,.24)',     rule:'#06162b'}
 ];
 
-var GD_LAYOUTS = [{id:'statement',name:'Statement'},{id:'figure',name:'Figure'},{id:'quote',name:'Quote'}];
+var GD_LAYOUTS = [{id:'statement',name:'Statement'},{id:'figure',name:'Figure'},{id:'quote',name:'Quote'},{id:'tool',name:'Tool'}];
 var GB_LAYOUTS = [{id:'card',name:'card'},{id:'quote',name:'quote'},{id:'week',name:'the week'}];
 
 var ALIGNS     = [{id:'left',name:'Left'},{id:'center',name:'Centred'}];
@@ -1365,8 +1365,11 @@ var GOUDE = {
       p.statement = it.pull || head1; p.support = head1; p.layout = 'quote';
     } else if(angle === 'instrument'){
       p.statement = it.toolName || head1; p.support = it.toolSub || firstSentences(it.changes,1);
-      p.kicker = caps(GOUDE.issueTag() + ' · The instrument');
-      p.foot = 'Free in the article. No signup.'; p.footR = 'goudegroup.com/briefing';
+      /* STUDIO_TOOL_2026-10-14: CK, the last slide is the tool they will
+         want, so it reads as a tool and an offer, not another headline. */
+      p.kicker = caps(GOUDE.issueTag() + ' · The tool');
+      p.layout = it.toolName ? 'tool' : p.layout;
+      p.foot = 'A working tool in every article'; p.footR = '';
     }
     p.caption  = GOUDE.caption(it, angle, p);
     p.captionX = GOUDE.captionX(it, angle, p);
@@ -1496,6 +1499,68 @@ var GOUDE = {
     return 'goude-' + slug((S.meta.no||'briefing') + '-' + (q ? q.day+'-'+q.slot+'-'+q.angle : S.angle)) + '.png';
   },
 
+  drawTool:function(ctx, f, wd, s, wide, left, maxW, top, bottom){
+    var sc=S.scale/100;
+    var gap=Math.round((wide?18:28)*s), pad=Math.round((wide?28:40)*s);
+    var lab='USE IT FREE IN THE ARTICLE', labPx=Math.round(20*s);
+    var url='goudegroup.com/briefing', note='No signup.', notePx=Math.round((wide?24:28)*s);
+    /* tall cards: the panel runs across the foot. X (wide): the panel takes
+       the right column so the name keeps its size on the left. */
+    var colGap=Math.round(44*s);
+    var panelW = wide ? Math.round(maxW*0.44) : maxW;
+    var panelX = wide ? left + maxW - panelW : left;
+    var urlPx=Math.round((wide?40:54)*s*sc);
+    ctx.font='600 '+urlPx+'px '+INTER;
+    while(mw(ctx,url,0) > panelW-pad*2 && urlPx > 18){ urlPx--; ctx.font='600 '+urlPx+'px '+INTER; }
+    var innerH = labPx + Math.round(urlPx*1.25) + Math.round(6*s) + Math.round(notePx*1.5);
+    var panelH = pad*2 + innerH;
+    var zoneTop = top, zoneBot;
+    var panelY;
+    if(wide){
+      panelY = top + Math.max(0, ((bottom - Math.round(22*s)) - top - panelH)/2);
+      zoneBot = bottom - Math.round(22*s);
+    } else {
+      panelY = bottom - Math.round(36*s) - panelH;
+      zoneBot = panelY - gap*2;
+    }
+    ctx.font='700 '+labPx+'px '+INTER;
+    while(mw(ctx,lab,labPx*0.18) > panelW-pad*2 && labPx > 12){ labPx--; ctx.font='700 '+labPx+'px '+INTER; }
+    ctx.fillStyle=wd.ink; ctx.fillRect(panelX, panelY, panelW, panelH);
+    ctx.fillStyle=wd.bg;
+    ctx.font='700 '+labPx+'px '+INTER;
+    var y = panelY + pad + labPx*0.8;
+    dt(ctx, lab, panelX+pad, y, labPx*0.18); setLS(ctx,0);
+    ctx.font='600 '+urlPx+'px '+INTER;
+    y += Math.round(urlPx*1.25) + Math.round(6*s);
+    dt(ctx, url, panelX+pad, y, urlPx*-0.01); setLS(ctx,0);
+    ctx.font='500 '+notePx+'px '+INTER;
+    y += Math.round(notePx*1.5);
+    dt(ctx, note, panelX+pad, y, 0); setLS(ctx,0);
+
+    /* the name and what it does */
+    var colW = wide ? maxW - panelW - colGap : maxW;
+    var supPx = Math.round((wide?26:38)*s*(S.supScale/100)), supLh=1.38;
+    ctx.font='500 '+supPx+'px '+INTER;
+    var supLines = (S.toggles.support && S.card.support) ? wrap(ctx, S.card.support, colW, 0) : [];
+    var supCap = wide?3:(f.id==='ig_story'?5:4);
+    if(supLines.length > supCap) supLines = supLines.slice(0, supCap);
+    var supH = supLines.length ? supLines.length*supPx*supLh + gap : 0;
+    function fitFont(px){ return S.weight+' '+px+'px '+PLAYFAIR; }
+    var maxPx=Math.round((wide?76:124)*s*sc), minPx=Math.round(30*s);
+    var nameH = Math.max(40, zoneBot - zoneTop - supH);
+    var fit = fitBlock(ctx, fitFont, S.card.statement, colW, nameH, minPx, maxPx, 1.06, S.track/1000);
+    var blockH = fit.lines.length*fit.size*1.06 + supH;
+    var by = zoneTop + Math.max(0, (zoneBot - zoneTop - blockH)/2);
+    if(S.toggles.rule && by - Math.round(30*s) > zoneTop - Math.round(4*s)){ ctx.fillStyle=wd.rule; ctx.fillRect(left, by-Math.round(30*s), Math.round(70*s), Math.max(2,Math.round(3*s))); }
+    ctx.font=fitFont(fit.size); ctx.fillStyle=wd.ink;
+    for(var j=0;j<fit.lines.length;j++) dt(ctx, fit.lines[j], left, by+fit.size*0.80+j*fit.size*1.06, fit.size*(S.track/1000));
+    setLS(ctx,0);
+    by += fit.lines.length*fit.size*1.06 + gap;
+    ctx.font='500 '+supPx+'px '+INTER; ctx.fillStyle=wd.ink;
+    for(var k=0;k<supLines.length;k++) dt(ctx, supLines[k], left, by+supPx*0.82+k*supPx*supLh, 0);
+    setLS(ctx,0);
+  },
+
   draw:function(ctx, f){
     var W=f.w, H=f.h, s=W/1080, wd=worldNow(), wide=(f.id==='x');
     ctx.clearRect(0,0,W,H); ctx.fillStyle=wd.bg; ctx.fillRect(0,0,W,H);
@@ -1545,6 +1610,12 @@ var GOUDE = {
       contentTop += (kl.length-1)*Math.round(26*s) + Math.round((wide?34:44)*s);
     }
     setLS(ctx,0);
+
+    /* STUDIO_TOOL_2026-10-14: the tool card. A small "the tool" label, the
+       tool's name, what it does at reading size, and a full-ink panel that
+       says where to get it. The panel is the ink on the ground, so the card
+       keeps its two colours and nothing fades. */
+    if(S.layout === 'tool'){ GOUDE.drawTool(ctx, f, wd, s, wide, left, maxW, contentTop, footRuleY); return; }
 
     var supTop=footRuleY-Math.round((wide?26:40)*s), supLines=[], supSize=0, supLh=1.42;
     if(S.toggles.support && S.card.support){
@@ -2411,6 +2482,22 @@ function rowBody(q, pid, caption, images, xMode, thread, via){
    pair, headline then payoff. Duplicates are already dropped by
    distinctSlides, so a row that only has one thing to say comes back as
    one card and posts single. */
+/* A network that takes fewer frames than the set keeps the first and the
+   last (the tool is the slide they want) and drops from the middle, "what
+   happened" first. Order is never changed. */
+function fitSet(set, cap){
+  if(set.length <= cap) return set.slice();
+  var keep = set.slice(), order = ['what','condition','cost','extra','mistake'];
+  while(keep.length > cap){
+    var i = -1;
+    for(var o = 0; o < order.length && i < 0; o++){
+      for(var j = 1; j < keep.length - 1; j++){ if(keep[j].role === order[o]){ i = j; break; } }
+    }
+    if(i < 0) i = keep.length - 2;
+    keep.splice(i, 1);
+  }
+  return keep;
+}
 function setForRow(q){
   var it = S.items[q.itemIndex], eng = E();
   if(!it) return [];
@@ -2448,7 +2535,7 @@ function queueWeek(via){
          it all. Each network takes the set up to its own frame cap, in order. */
       if(rowSet.length > 1){
         var cap = Math.min(MAX_SLIDES, (PLATFORM[pid] || PLATFORM.linkedin).frames[1]);
-        S.mode = 'carousel'; S.slides = rowSet.slice(0, cap); S.slideIndex = -1;
+        S.mode = 'carousel'; S.slides = fitSet(rowSet, cap); S.slideIndex = -1;
       } else { S.mode = 'single'; S.slides = []; S.slideIndex = -1; }
       setCaption(genCaption());
       var fails = runChecks().filter(function(c){ return c.level === 'fail'; });
