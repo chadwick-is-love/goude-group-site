@@ -53,7 +53,7 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 .net .frames{display:flex;gap:8px;overflow-x:auto;padding-bottom:12px}
 .net .frames img{width:96px}
 .st{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
-.st.scheduled{color:var(--ok)} .st.failed,.st.missed,.st.rejected{color:var(--bad)}
+.st.scheduled{color:var(--ok)} .st.failed,.st.missed,.st.rejected,.st.cancelled{color:var(--bad)}
 .acts{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 .err{font-size:13px;color:var(--bad);margin-top:8px;font-weight:600}
 .empty{font-size:16px;margin-top:30px;line-height:1.5}
@@ -183,6 +183,7 @@ function render(){
       + '<div class="meta">' + esc(g.posts.length + ' network' + (g.posts.length === 1 ? '' : 's') + (g.colour ? ' · ' + g.colour : '') + (lead.issue ? ' · ' + lead.issue : '')) + '</div></div></div>'
       + '<div class="nets">' + nets + '</div>'
       + (g.status === 'pending' ? '<div class="acts"><button class="btn" type="button" data-act="approve">Approve</button><button class="btn ghost" type="button" data-act="reject">Reject</button><a class="btn ghost" href="' + studioLink(g, lead.platform) + '">Change in the Studio</a></div>' : '')
+      + (g.status === 'scheduled' && g.at > Date.now()/1000 + 120 ? '<div class="acts"><button class="btn ghost" type="button" data-act="cancel">Cancel this slot</button><a class="btn ghost" href="' + studioLink(g, lead.platform) + '">Change in the Studio</a></div>' : '')
       + '<p class="err" style="display:none"></p>';
     Array.prototype.forEach.call(row.querySelectorAll('[data-act]'), function(b){
       b.addEventListener('click', function(){ decide(b.getAttribute('data-act'), g.posts.map(function(p){ return p.id; }), row); });
@@ -239,9 +240,10 @@ $('qrX').addEventListener('click', closeRead);
 document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeRead(); });
 
 function decide(act, ids, row){
+  if(act === 'cancel' && !confirm('Cancel this slot on every network? The posts are deleted in OmniSocials and the slot can be queued again.')) return;
   var btns = row ? row.querySelectorAll('button') : [$('all')];
   Array.prototype.forEach.call(btns, function(b){ b.disabled = true; });
-  if(row) row.querySelector('.acts .btn').textContent = (act === 'approve') ? 'Scheduling ...' : 'Rejecting ...';
+  if(row) row.querySelector('.acts .btn').textContent = (act === 'approve') ? 'Scheduling ...' : (act === 'cancel' ? 'Cancelling ...' : 'Rejecting ...');
   fetch('queue.php', {method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:act, ids:ids})})
     .then(function(r){ return r.text(); })
     .then(function(t){
