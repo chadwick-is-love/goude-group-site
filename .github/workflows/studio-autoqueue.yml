@@ -1,5 +1,4 @@
-# STUDIO_AUTOPOST_2026-10-13. Copy to .github/workflows/studio-autoqueue.yml
-# (the deploy token has no workflow scope, so it cannot push this path itself).
+# STUDIO_AUTOPOST_2026-10-13.
 # Needs two repository secrets: STUDIO_USER and STUDIO_PASS, a Studio login.
 #
 # Queues posts for approval only. Nothing reaches a feed until someone
