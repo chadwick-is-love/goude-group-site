@@ -1,0 +1,46 @@
+# STUDIO_AUTOAPPROVE_2026-10-14. Chadwick: "it should be up to us to stop it,
+# not start it." Every 15 minutes this approves each queued post whose time is
+# inside the window in studio/slots.json (auto_approve_minutes, default 90).
+# A person stops a post by rejecting it on goudegroup.com/studio/approve.php
+# before then. Uses the same STUDIO_USER / STUDIO_PASS secrets as the
+# autoqueue. GitHub can run a scheduled job late by several minutes; the
+# 90-minute window absorbs that.
+name: Studio autoapprove
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: studio-autoapprove
+  cancel-in-progress: false
+
+jobs:
+  approve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Approve what is due
+        env:
+          STUDIO_USER: ${{ secrets.STUDIO_USER }}
+          STUDIO_PASS: ${{ secrets.STUDIO_PASS }}
+        run: |
+          body=$(curl -sS --max-time 300 -u "$STUDIO_USER:$STUDIO_PASS" \
+            -H 'Content-Type: application/json' -d '{"action":"autoapprove"}' \
+            https://goudegroup.com/studio/queue.php)
+          echo "$body" | python3 -c '
+          import json, sys
+          j = json.load(sys.stdin)
+          if not j.get("ok"):
+              print("queue.php refused:", j.get("error")); sys.exit(1)
+          res = j.get("results", [])
+          if not res:
+              print("nothing due"); sys.exit(0)
+          bad = 0
+          for r in res:
+              tag = "scheduled" if r.get("ok") else ("FAILED: " + str(r.get("error")))
+              if not r.get("ok"): bad += 1
+              print(r.get("brand"), r.get("slot"), tag)
+          sys.exit(1 if bad else 0)
+          '

@@ -2584,7 +2584,7 @@ function queueWeek(via){
     var passed = tally.failed.filter(function(m){ return /has passed/.test(m); }).length;
     var already = tally.failed.filter(function(m){ return /already scheduled/.test(m); }).length;
     var other = tally.failed.filter(function(m){ return !/has passed|already scheduled/.test(m); });
-    var msg = tally.queued + ' posts across ' + n + ' slots are waiting in approvals. Nothing posts until someone approves it.'
+    var msg = tally.queued + ' posts across ' + n + ' slots are queued. Each posts on its own unless someone rejects it on approvals first.'
       + (passed ? ' ' + passed + ' skipped because their slot has passed.' : '')
       + (already ? ' ' + already + ' already scheduled, left alone.' : '')
       + (tally.skipped.length ? ' ' + tally.skipped.length + ' held by the checks (first: ' + tally.skipped[0] + ').' : '')
@@ -2635,7 +2635,7 @@ function queueOne(){
     .then(function(urls){ return queueAdd(rowBody(q, f.id, thread ? thread[0] : caption, urls, xMode, thread, 'hand')); })
     .then(function(res){
       if(!res.ok){ sendStatus('not queued: ' + res.error, true); return; }
-      sendStatus(res.post.label + ' for ' + q.day + ' ' + q.slot + ' is waiting in approvals (replaces any earlier one for that slot). It posts only once approved.', false);
+      sendStatus(res.post.label + ' for ' + q.day + ' ' + q.slot + ' is queued (replaces any earlier one for that slot). It posts on its own unless rejected on approvals.', false);
       toast('queued for approval');
     }).catch(function(e){ sendStatus('not queued: ' + e.message, true); });
 }

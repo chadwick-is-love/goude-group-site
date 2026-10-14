@@ -5,9 +5,10 @@
  * The Studio (or the headless run) renders a week and ADDS each post here
  * instead of posting it. Nothing reaches OmniSocials until a person approves
  * it on approve.php; approval schedules it for its slot time from slots.json
- * through the same studio_post() the Post button uses. So the gate is one
- * human yes per post, and every check runs twice: once on add (dry run),
- * once on approval (for real).
+ * through the same studio_post() the Post button uses. Since 2026-10-14 a
+ * post nobody rejects approves itself inside the auto-approve window (CK:
+ * up to us to stop it, not start it). Every check runs twice: once on add
+ * (dry run), once on approval (for real).
  *
  * Same login as the rest of the folder (studio/.htaccess). Storage is
  * studio/data/queue/, denied to the web by studio/data/.htaccess:
@@ -21,6 +22,8 @@
  *         slot, issue, date:"YYYY-MM-DD", colour}      queue one post
  *   POST {action:"approve", ids:[...]}                schedule them at their slots (12 per call)
  *   POST {action:"reject",  ids:[...]}                drop them
+ *   POST {action:"autoapprove"}                       approve every pending post
+ *         whose time is inside slots.json auto_approve_minutes (default 90)
  *   POST {action:"notify",  brand, count}             one Slack line, if a
  *         webhook URL sits in slack-webhook.txt next to this file (web-blocked)
  *
@@ -184,49 +187,73 @@ if ($action === 'add') {
     q_out(['ok' => true, 'post' => $row]);
 }
 
+// One decision on one queued post. Shared by the approve and reject buttons
+// and by the auto-approve run.
+function q_decide($id, $action, $by, $via = 'approve') {
+    $row = q_load($id);
+    if (!$row) return ['id' => $id, 'ok' => false, 'error' => 'not found'];
+    if ($row['status'] !== 'pending') return ['id' => $id, 'ok' => false, 'error' => 'already ' . $row['status']];
+    if ($action === 'reject') {
+        $row['status'] = 'rejected'; $row['decided_by'] = $by; $row['updated_at'] = gmdate('c');
+        q_save($row); q_drop_images($row);
+        return ['id' => $id, 'ok' => true, 'status' => 'rejected'];
+    }
+    $req = $row['request'];
+    $req['images'] = [];
+    for ($n = 0; $n < (int)$row['images']; $n++) {
+        $p = q_dir() . '/' . $row['id'] . '-' . $n . '.png';
+        if (!is_readable($p)) { $req['images'] = null; break; }
+        $req['images'][] = 'data:image/png;base64,' . base64_encode(file_get_contents($p));
+    }
+    if ($req['images'] === null) return ['id' => $id, 'ok' => false, 'error' => 'a frame is missing on the server; re-queue it'];
+    try {
+        $r = studio_post($req, $by, ['scheduled_at' => (int)$row['publish_at'], 'via' => $via, 'queue_id' => $row['id']]);
+        $row['status'] = 'scheduled'; $row['result'] = $r;
+        $row['decided_by'] = $by; $row['updated_at'] = gmdate('c');
+        // STUDIO_APPROVE_READ_2026-10-14: the frames stay until a day after
+        // the post time, so a scheduled slot keeps its card and quick read.
+        $row['frames_kept'] = true;
+        if ($via === 'auto') $row['auto_approved'] = true;
+        q_save($row);
+        return ['id' => $id, 'ok' => true, 'status' => 'scheduled', 'post_id' => $r['post_id'], 'scheduled_at' => $r['scheduled_at']];
+    } catch (StudioFail $e) {
+        $msg = $e->getMessage();
+        $missed = strpos($msg, 'passed or is under 10 minutes') !== false;
+        $row['status'] = $missed ? 'missed' : 'failed'; $row['error'] = $msg;
+        $row['decided_by'] = $by; $row['updated_at'] = gmdate('c');
+        q_save($row);
+        if ($missed) q_drop_images($row);
+        return ['id' => $id, 'ok' => false, 'status' => $row['status'], 'error' => $msg];
+    }
+}
+
 if ($action === 'approve' || $action === 'reject') {
     $ids = $in['ids'] ?? [];
     if (!is_array($ids) || !$ids) q_err('no ids');
     @set_time_limit(300);   // each approval uploads frames and creates a post
     $done = [];
-    foreach (array_slice($ids, 0, 12) as $id) {
-        $row = q_load($id);
-        if (!$row) { $done[] = ['id' => $id, 'ok' => false, 'error' => 'not found']; continue; }
-        if ($row['status'] !== 'pending') { $done[] = ['id' => $id, 'ok' => false, 'error' => 'already ' . $row['status']]; continue; }
-        if ($action === 'reject') {
-            $row['status'] = 'rejected'; $row['decided_by'] = $by; $row['updated_at'] = gmdate('c');
-            q_save($row); q_drop_images($row);
-            $done[] = ['id' => $id, 'ok' => true, 'status' => 'rejected'];
-            continue;
-        }
-        $req = $row['request'];
-        $req['images'] = [];
-        for ($n = 0; $n < (int)$row['images']; $n++) {
-            $p = q_dir() . '/' . $row['id'] . '-' . $n . '.png';
-            if (!is_readable($p)) { $req['images'] = null; break; }
-            $req['images'][] = 'data:image/png;base64,' . base64_encode(file_get_contents($p));
-        }
-        if ($req['images'] === null) { $done[] = ['id' => $id, 'ok' => false, 'error' => 'a frame is missing on the server; re-queue it']; continue; }
-        try {
-            $r = studio_post($req, $by, ['scheduled_at' => (int)$row['publish_at'], 'via' => 'approve', 'queue_id' => $row['id']]);
-            $row['status'] = 'scheduled'; $row['result'] = $r;
-            $row['decided_by'] = $by; $row['updated_at'] = gmdate('c');
-            // STUDIO_APPROVE_READ_2026-10-14: the frames stay until a day after
-            // the post time, so a scheduled slot keeps its card and quick read.
-            $row['frames_kept'] = true;
-            q_save($row);
-            $done[] = ['id' => $id, 'ok' => true, 'status' => 'scheduled', 'post_id' => $r['post_id'], 'scheduled_at' => $r['scheduled_at']];
-        } catch (StudioFail $e) {
-            $msg = $e->getMessage();
-            $missed = strpos($msg, 'passed or is under 10 minutes') !== false;
-            $row['status'] = $missed ? 'missed' : 'failed'; $row['error'] = $msg;
-            $row['decided_by'] = $by; $row['updated_at'] = gmdate('c');
-            q_save($row);
-            if ($missed) q_drop_images($row);
-            $done[] = ['id' => $id, 'ok' => false, 'status' => $row['status'], 'error' => $msg];
-        }
-    }
+    foreach (array_slice($ids, 0, 12) as $id) $done[] = q_decide($id, $action, $by, 'approve');
     q_out(['ok' => true, 'results' => $done]);
+}
+
+// STUDIO_AUTOAPPROVE_2026-10-14. CK: "it should be up to us to stop it, not
+// start it." Every pending post whose time is inside the window
+// (slots.json auto_approve_minutes, default 90) approves itself; a person
+// stops a post by rejecting it before then. Called by the scheduled
+// GitHub job every 15 minutes with the Studio login. POST {action:"autoapprove"}
+if ($action === 'autoapprove') {
+    @set_time_limit(300);
+    $cfg = q_slots();
+    $win = max(15, min(720, (int)($cfg['auto_approve_minutes'] ?? 90))) * 60;
+    $done = [];
+    foreach (q_all('', 'pending') as $row) {
+        if ((int)$row['publish_at'] > time() + $win) continue;
+        if (count($done) >= 30) break;
+        $res = q_decide($row['id'], 'approve', 'auto', 'auto');
+        $res['brand'] = $row['brand']; $res['slot'] = $row['date'] . ' ' . $row['slot_key'] . ' ' . $row['platform'];
+        $done[] = $res;
+    }
+    q_out(['ok' => true, 'window_minutes' => $win / 60, 'results' => $done]);
 }
 
 if ($action === 'notify') {
