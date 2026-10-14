@@ -2399,11 +2399,26 @@ function rowBody(q, pid, caption, images, xMode, thread, via){
           statement:S.card.statement, via:via || 'studio'};
 }
 
-/* The whole week: every row, every mapped network from slots.json, single
-   cards, generated captions fitted to each network. One plan, N renders.
+/* The whole week: every row, every mapped network from slots.json, as a
+   carousel in order where the row has more than one card (setForRow),
+   generated captions fitted to each network. One plan, N renders.
    Rows whose slot has passed are refused by the server and counted, not
    retried. Hand edits are not carried: a card someone edited goes in with
    "Queue for its slot" from the send bar. */
+/* The set a row posts as. Morning: the full story in its fixed order
+   (Goude: lead, what happened, what it costs, the mistake, the tool;
+   >gabes: hook, condition, cost, fix, do this / not this). Afternoon: the
+   pair, headline then payoff. Duplicates are already dropped by
+   distinctSlides, so a row that only has one thing to say comes back as
+   one card and posts single. */
+function setForRow(q){
+  var it = S.items[q.itemIndex], eng = E();
+  if(!it) return [];
+  var am = /^am$/i.test(String(q.slot));
+  var list = am ? eng.storySlides(it) : eng.pairSlides(it);
+  if(!am && list.length > 1 && (!list[1].statement || isDup(list[1].statement, [normT(list[0].statement)]))) list = [list[0]];
+  return list.slice(0, MAX_SLIDES).map(postToSlide);
+}
 var QUEUEING = false;
 function queueWeek(via){
   if(QUEUEING){ toast('already queueing'); return Promise.resolve(null); }
@@ -2412,22 +2427,29 @@ function queueWeek(via){
   var btn = $('queueWeekBtn'); if(btn) btn.disabled = true;
   var keep = {qIndex:S.qIndex, angle:S.angle, card:JSON.parse(JSON.stringify(S.card)), layout:S.layout, format:S.format,
               mode:S.mode, world:S.world, trioMood:S.trioMood, trioIndex:S.trioIndex, xMode:S.xMode,
-              cap:$('capText').value, lastGen:S.lastGen};
+              cap:$('capText').value, lastGen:S.lastGen, slides:S.slides, slideIndex:S.slideIndex};
   var tally = {queued:0, slots:{}, skipped:[], failed:[]};
   return loadSlots().then(function(cfg){
     var conf = cfg[S.brand] || {};
     var ids = formatsNow().map(function(f){ return f.id; });
     var pids = (conf.platforms || []).filter(function(p){ return ids.indexOf(p) !== -1 && channelFor(S.brand, p); });
     if(!pids.length) throw new Error('no network in slots.json is mapped in channels.json for this side');
-    S.mode = 'single'; S._drawSlide = null; S.xMode = 'short';
+    S._drawSlide = null; S.xMode = 'short';
     var rows = S.queue.map(function(q, i){ return i; });
-    var r = 0, p = 0;
+    var r = 0, p = 0, rowSet = [];
     function step(){
       if(r >= rows.length) return Promise.resolve();
       var idx = rows[r], q = S.queue[idx];
-      if(p === 0) selectQueue(idx);
+      if(p === 0){ selectQueue(idx); S.mode = 'single'; S.slides = []; S.slideIndex = -1; rowSet = setForRow(q); }
       var pid = pids[p];
       S.format = pid;
+      /* CK 2026-10-14: a carousel wherever the row has more than one thing to
+         say, in the set's fixed order; a single card only when one card says
+         it all. Each network takes the set up to its own frame cap, in order. */
+      if(rowSet.length > 1){
+        var cap = Math.min(MAX_SLIDES, (PLATFORM[pid] || PLATFORM.linkedin).frames[1]);
+        S.mode = 'carousel'; S.slides = rowSet.slice(0, cap); S.slideIndex = -1;
+      } else { S.mode = 'single'; S.slides = []; S.slideIndex = -1; }
       setCaption(genCaption());
       var fails = runChecks().filter(function(c){ return c.level === 'fail'; });
       if(fails.length && fixCaption()) fails = runChecks().filter(function(c){ return c.level === 'fail'; });
@@ -2436,8 +2458,11 @@ function queueWeek(via){
       if(fails.length){ tally.skipped.push(q.day + ' ' + q.slot + ' ' + pid + ': ' + fails[0].msg); job = Promise.resolve(); }
       else {
         var caption = ($('capText').value || '').trim();
-        job = renderBlob(fmtNow()).then(blobToDataUrl).then(function(d){
-          return queueAdd(rowBody(q, pid, caption, [d], pid === 'x' ? 'short' : '', null, via));
+        var frames = (S.mode === 'carousel' && S.slides.length > 1)
+          ? new Promise(function(res){ slidesToBlobs(fmtNow(), res); })
+          : renderBlob(fmtNow()).then(function(b){ return [b]; });
+        job = frames.then(function(bs){ return Promise.all(bs.map(blobToDataUrl)); }).then(function(urls){
+          return queueAdd(rowBody(q, pid, caption, urls, pid === 'x' ? 'short' : '', null, via));
         }).then(function(res){
           if(res.ok){ tally.queued++; tally.slots[q.day + ' ' + q.slot] = 1; }
           else tally.failed.push(q.day + ' ' + q.slot + ' ' + pid + ': ' + res.error);
@@ -2465,6 +2490,7 @@ function queueWeek(via){
     tally.error = e.message; return tally;
   }).then(function(t){
     S.mode = keep.mode; S.format = keep.format; S.xMode = keep.xMode;
+    S.slides = keep.slides; S.slideIndex = keep.slideIndex;
     S.qIndex = keep.qIndex; S.angle = keep.angle; S.card = keep.card; S.layout = keep.layout;
     S.world = keep.world; S.trioMood = keep.trioMood; S.trioIndex = keep.trioIndex;
     $('capText').value = keep.cap; S.lastGen = keep.lastGen;

@@ -138,10 +138,10 @@ function render(){
     var nets = g.posts.map(function(p){
       var frames = '';
       if(p.status === 'pending'){
-        for(var n = 0; n < p.images; n++) frames += '<img alt="" loading="lazy" src="queue.php?action=img&id=' + encodeURIComponent(p.id) + '&n=' + n + '">';
+        for(var n = 0; n < p.images; n++) frames += '<img alt="' + (n + 1) + ' of ' + p.images + '" loading="lazy" src="queue.php?action=img&id=' + encodeURIComponent(p.id) + '&n=' + n + '">';
       }
       var res = p.result && p.result.post_id ? ' · post ' + esc(p.result.post_id) : '';
-      return '<details class="net"><summary><span>' + esc(p.label) + ' · ' + esc(p.kind) + '</span><span class="st ' + esc(p.status) + '">' + esc(p.status) + res + '</span></summary>'
+      return '<details class="net"><summary><span>' + esc(p.label) + ' · ' + esc(p.kind) + (p.images > 1 ? ' of ' + p.images : '') + '</span><span class="st ' + esc(p.status) + '">' + esc(p.status) + res + '</span></summary>'
         + (frames ? '<div class="frames">' + frames + '</div>' : '')
         + '<pre>' + esc(p.caption) + '</pre>'
         + (p.error ? '<p class="err">' + esc(p.error) + '</p>' : '') + '</details>';
