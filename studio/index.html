@@ -895,7 +895,7 @@ var GD_WORLDS = [
 ];
 
 var GD_LAYOUTS = [{id:'statement',name:'Statement'},{id:'figure',name:'Figure'},{id:'quote',name:'Quote'},{id:'tool',name:'Tool'}];
-var GB_LAYOUTS = [{id:'card',name:'card'},{id:'quote',name:'quote'},{id:'week',name:'the week'}];
+var GB_LAYOUTS = [{id:'card',name:'card'},{id:'quote',name:'quote'},{id:'week',name:'the week'},{id:'action',name:'do this'}];
 
 var ALIGNS     = [{id:'left',name:'Left'},{id:'center',name:'Centred'}];
 var GD_WEIGHTS = [{id:'400',name:'Light'},{id:'500',name:'Book'},{id:'600',name:'Bold'}];
@@ -1939,24 +1939,48 @@ var GABES = {
   storySlides:function(it){
     if(!it) return [];
     var ln = lower(it.lane || 'the signal');
-    function card(k, st){ return st ? {kicker:'> ' + k + ' · ' + ln, statement:lower(firstLoose(st,2)), support:'', layout:'card', foot:'gabes.ai/letter', footR:''} : null; }
+    function card(k, st){ return st ? {kicker:'> ' + ln, statement:lower(firstLoose(st,2)), support:'', layout:'card', foot:'gabes.ai/letter', footR:''} : null; }
     var hook = GABES.buildPost(it,'hook');
-    var pair = it.doThis ? {kicker:'> do this · ' + ln, statement:lower(firstLoose(it.doThis,2)),
-                            support: it.notThis ? lower('not this: ' + it.notThis) : '', layout:'card', foot:'gabes.ai/letter', footR:''} : null;
-    var seq = [hook, card('the condition', it.condition), card('the cost', it.cost), card('the fix', it.fix), pair];
-    var fallbacks = [GABES.buildPost(it,'knife'), GABES.buildPost(it,'number')];
-    withRoles(seq, ['hook','condition','cost','fix','pair']);
-    withRoles(fallbacks, ['extra','extra']);
-    return distinctSlides(seq, fallbacks, 5);
+    /* STUDIO_GABES_SET_2026-10-14: CK, the set ends on what to do, and that
+       card looks different. With a do this / not this, the fix keeps its own
+       slide and the action closes; without one, the action is the fix. */
+    var act = GABES.actionSlide(it);
+    var seq = it.doThis
+      ? [hook, card('the condition', it.condition), card('the cost', it.cost), card('the fix', it.fix), act]
+      : [hook, card('the condition', it.condition), card('the cost', it.cost), act];
+    var roles = it.doThis ? ['hook','condition','cost','fix','action'] : ['hook','condition','cost','action'];
+    var fallbacks = [GABES.buildPost(it,'knife')];
+    withRoles(seq, roles);
+    withRoles(fallbacks, ['extra']);
+    var out = distinctSlides(seq.slice(0, -1), fallbacks, 4);
+    if(act && act.statement) out.push(act);   /* the action always closes */
+    return out;
   },
   weekSlides:function(){
     var list = (S.items || []).slice(0,5).map(function(it, i){ var p = GABES.buildPost(it,'hook'); p.role = 'day' + i; return p; });
     return distinctSlides(list, [], 5);
   },
+  /* the closing card: the one thing to do, set apart from the rest */
+  actionSlide:function(it){
+    if(!it) return null;
+    var ln = lower(it.lane || 'the signal');
+    var a = it.doThis || '';
+    if(!a && it.fix){
+      var fx = String(it.fix), c = fx.indexOf(':');
+      a = (c > 0 && c < 120) ? fx.slice(c + 1) : fx.replace(/^\s*the fix is\s+/i, '');
+    }
+    a = clean(a).replace(/^\s*do this:\s*/i, '');
+    if(!a) return null;
+    return {kicker:'> ' + ln, statement:lower(firstLoose(a, 2)),
+            support: it.notThis ? lower('not this: ' + firstLoose(it.notThis, 1)) : '',
+            layout:'action', foot:'gabes.ai/letter', footR:'', role:'action'};
+  },
   pairSlides:function(it){
     if(!it) return [];
     var ln = lower(it.lane || 'the signal');
     var one = GABES.buildPost(it,'hook'); one.support = ''; one.role = 'headline';
+    var act = GABES.actionSlide(it);
+    if(act) return [one, act];   /* STUDIO_GABES_SET_2026-10-14: hook, then what to do */
     var pay = it.line || it.knife || it.cost || it.fix || '';
     var two = {kicker:'> the payoff · ' + ln, statement: lower(firstLoose(pay,2)),
                support: it.doThis ? lower('do this: ' + firstLoose(it.doThis,1)) : (it.fix ? lower(firstLoose(it.fix,1)) : ''),
@@ -1965,7 +1989,7 @@ var GABES = {
     if(!two.statement){ var k = GABES.buildPost(it,'knife'); two.statement = k.statement; two.support = k.support || ''; }
     return [one, two];
   },
-  roles:{headline:'the headline', payoff:'the payoff', hook:'the hook', condition:'the condition', cost:'the cost', fix:'the fix', pair:'do this / not this', extra:'another angle', added:'added', day0:'monday', day1:'tuesday', day2:'wednesday', day3:'thursday', day4:'friday'},
+  roles:{headline:'the headline', payoff:'the payoff', hook:'the hook', condition:'the condition', cost:'the cost', fix:'the fix', pair:'do this / not this', action:'do this', extra:'another angle', added:'added', day0:'monday', day1:'tuesday', day2:'wednesday', day3:'thursday', day4:'friday'},
 
   fileName:function(q){
     var it = q ? S.items[q.itemIndex] : null;
@@ -1979,6 +2003,97 @@ var GABES = {
      9:16), the knife line prompted in Space Mono, the > mark and the
      handle on the bottom rule. The accent phrase inside the hook takes
      the third colour. Nothing here is invented. */
+
+  /* STUDIO_GABES_SET_2026-10-14 ------------------------------------------
+     CK: one body size across the set (it changed card to card), a closing
+     card that says what to do and looks different, and slides that do not
+     all read the same. Body slides carry their name large in the charge and
+     the line under it at one size for the whole set: the smallest size every
+     body slide fits at, so they match and all still fit. */
+  BODY_ROLES:{condition:1, cost:1, fix:1, extra:1, payoff:1},
+  bodyText:function(t){ return lower(t).replace(/^\s*the (condition|cost|fix|read|knife) is\s+/, ''); },
+  labelFor:function(role){ return ({condition:'the condition.', cost:'the cost.', fix:'the fix.', extra:'and.', payoff:'the payoff.'})[role] || ''; },
+  bodyFit:function(ctx, text, maxW, availH, maxPx, minPx, trackEm){
+    var px = maxPx, lines;
+    for(var g = 0; g < 60; g++){
+      ctx.font = '500 ' + px + 'px ' + OUTFIT;
+      lines = wrap(ctx, text, maxW, px*trackEm);
+      if(lines.length*px*1.2 <= availH || px <= minPx) break;
+      px *= 0.95;
+    }
+    setLS(ctx,0);
+    return px;
+  },
+  bodyGeom:function(f, ratio){
+    var W = f.w;
+    return {labelPx: W*(ratio === '16:9' ? 0.052 : 0.078), maxPx: W*(ratio === '16:9' ? 0.040 : 0.058), minPx: W*0.028};
+  },
+  setBodyPx:function(ctx, f, maxW, availH, ratio){
+    var g = GABES.bodyGeom(f, ratio), trackEm = S.track/1000;
+    var key = f.id + '|' + Math.round(maxW) + '|' + Math.round(availH) + '|' + S.scale + '|' + S.track + '|' + S.slides.map(function(sl){ return sl.role + ':' + sl.card.statement; }).join('|');
+    if(GABES._bodyKey === key) return GABES._bodyPx;
+    var px = g.maxPx * (S.scale/100);
+    S.slides.forEach(function(sl, i){
+      if(i === 0 || !GABES.BODY_ROLES[sl.role] || sl.layout !== 'card') return;
+      var p = GABES.bodyFit(ctx, GABES.bodyText(sl.card.statement), maxW, availH, g.maxPx*(S.scale/100), g.minPx, trackEm);
+      if(p < px) px = p;
+    });
+    GABES._bodyKey = key; GABES._bodyPx = px;
+    return px;
+  },
+  drawBody:function(ctx, f, head, accent, pad, maxW, zoneTop, zoneBot, ratio, role){
+    var W = f.w, g = GABES.bodyGeom(f, ratio), trackEm = S.track/1000;
+    var label = GABES.labelFor(role), labelPx = g.labelPx * (S.scale/100);
+    var gap = W*0.03;
+    var availH = (zoneBot - zoneTop) - labelPx*1.1 - gap;
+    var px = GABES.setBodyPx(ctx, f, maxW, availH, ratio);
+    ctx.font = '500 ' + px + 'px ' + OUTFIT;
+    var lines = wrap(ctx, GABES.bodyText(S.card.statement), maxW, px*trackEm);
+    setLS(ctx,0);
+    var blockH = labelPx*1.1 + gap + lines.length*px*1.2;
+    var top = (ratio === '9:16') ? zoneTop + Math.max(0, ((zoneBot - zoneTop) - blockH)/2) : Math.max(zoneTop, zoneBot - blockH);
+    if(label){
+      ctx.font = '500 ' + labelPx + 'px ' + OUTFIT; ctx.fillStyle = accent;
+      dt(ctx, label, pad, top + labelPx*0.84, labelPx*-0.01); setLS(ctx,0);
+    }
+    var y = top + labelPx*1.1 + gap;
+    ctx.font = '500 ' + px + 'px ' + OUTFIT; ctx.fillStyle = head;
+    for(var i = 0; i < lines.length; i++) dt(ctx, lines[i], pad, y + px*0.84 + i*px*1.2, px*trackEm);
+    setLS(ctx,0);
+  },
+  drawAction:function(ctx, f, ink, pad, maxW, zoneTop, zoneBot, ratio){
+    var W = f.w, wide = (ratio === '16:9'), trackEm = S.track/1000;
+    var labelPx = W*(wide ? 0.07 : 0.11) * (S.scale/100);
+    var supPx = Math.max(W*0.030, 15) * (S.supScale/100);
+    var ctaPx = Math.max(W*0.026, 13);
+    var gap = W*0.035;
+    var cta = 'the whole week lands friday: gabes.ai/letter';
+    ctx.font = '400 ' + supPx + 'px ' + MONO;
+    var supLines = (S.toggles.support !== false && S.card.support) ? wrap(ctx, lower(S.card.support), maxW, 0) : [];
+    var supH = supLines.length ? gap*0.7 + supLines.length*supPx*1.35 : 0;
+    var ctaH = ctaPx*2.6;
+    var avail = (zoneBot - zoneTop) - labelPx*1.05 - gap - supH - ctaH;
+    var px = GABES.bodyFit(ctx, lower(S.card.statement), maxW, avail, W*(wide ? 0.05 : 0.072)*(S.scale/100), W*0.03, trackEm);
+    ctx.font = '500 ' + px + 'px ' + OUTFIT;
+    var lines = wrap(ctx, lower(S.card.statement), maxW, px*trackEm); setLS(ctx,0);
+    var blockH = labelPx*1.05 + gap + lines.length*px*1.18 + supH;
+    var top = zoneTop + Math.max(0, ((zoneBot - ctaH - zoneTop) - blockH)/2);
+    ctx.fillStyle = ink;
+    ctx.font = '500 ' + labelPx + 'px ' + OUTFIT;
+    dt(ctx, 'do this.', pad, top + labelPx*0.84, labelPx*-0.02); setLS(ctx,0);
+    var y = top + labelPx*1.05 + gap;
+    ctx.font = '500 ' + px + 'px ' + OUTFIT;
+    for(var i = 0; i < lines.length; i++) dt(ctx, lines[i], pad, y + px*0.84 + i*px*1.18, px*trackEm);
+    setLS(ctx,0);
+    y += lines.length*px*1.18 + gap*0.7;
+    ctx.font = '400 ' + supPx + 'px ' + MONO;
+    for(var k = 0; k < supLines.length; k++) ctx.fillText(supLines[k], pad, y + supPx*0.82 + k*supPx*1.35);
+    /* the ask, ruled off above the footer */
+    var cy = zoneBot - ctaPx*0.9;
+    ctx.fillRect(pad, cy - ctaPx*1.6, maxW, Math.max(2, W*0.002));
+    ctx.font = '400 ' + ctaPx + 'px ' + MONO;
+    ctx.fillText(cta, pad, cy);
+  },
 
   headlinePx:function(text, w, ratio){
     var base = ({'16:9':w*0.058, '4:5':w*0.092, '9:16':w*0.10, '1:1':w*0.082})[ratio] || w*0.085;
@@ -2033,6 +2148,11 @@ var GABES = {
     var W = f.w, H = f.h, ratio = f.ratio || '4:5';
     var t = trioNow();
     var bg = t.A, head = t.B, accent = t.C;
+    /* STUDIO_GABES_SET_2026-10-14: the action card turns the trio over, the
+       charge becomes the ground and the ground becomes the ink, so the close
+       reads as a different card while keeping the same colours. */
+    var actionCard = (S.layout === 'action');
+    if(actionCard){ bg = t.C; head = t.A; accent = t.A; }
 
     ctx.clearRect(0,0,W,H);
     ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
@@ -2125,6 +2245,13 @@ var GABES = {
         setLS(ctx,0);
       }
       return;
+    }
+
+    /* STUDIO_GABES_SET_2026-10-14 */
+    if(actionCard){ GABES.drawAction(ctx, f, head, pad, maxW, zoneTop, zoneBot, ratio); return; }
+    var slideRole = (S._drawSlide && S.slides[S._drawSlide.i]) ? (S.slides[S._drawSlide.i].role || '') : '';
+    if(S._drawSlide && S._drawSlide.i > 0 && GABES.BODY_ROLES[slideRole] && S.layout === 'card'){
+      GABES.drawBody(ctx, f, head, accent, pad, maxW, zoneTop, zoneBot, ratio, slideRole); return;
     }
 
     /* the hook */
