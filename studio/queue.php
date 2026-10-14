@@ -22,6 +22,8 @@
  *         slot, issue, date:"YYYY-MM-DD", colour}      queue one post
  *   POST {action:"approve", ids:[...]}                schedule them at their slots (12 per call)
  *   POST {action:"reject",  ids:[...]}                drop them
+ *   POST {action:"cancel",  ids:[...]}                stop scheduled posts: delete them
+ *         in OmniSocials and mark them cancelled so the slot can be queued again
  *   POST {action:"autoapprove"}                       approve every pending post
  *         whose time is inside slots.json auto_approve_minutes (default 90)
  *   POST {action:"notify",  brand, count}             one Slack line, if a
@@ -225,6 +227,38 @@ function q_decide($id, $action, $by, $via = 'approve') {
         if ($missed) q_drop_images($row);
         return ['id' => $id, 'ok' => false, 'status' => $row['status'], 'error' => $msg];
     }
+}
+
+// STUDIO_CANCEL_2026-10-14: stop a post after it was approved. Deletes the
+// scheduled post in OmniSocials (DELETE /posts/{id}, 204; a 404 means it is
+// already gone) and marks the row cancelled, frames kept, so the same slot
+// can be queued again.
+function q_cancel($id, $by) {
+    $row = q_load($id);
+    if (!$row) return ['id' => $id, 'ok' => false, 'error' => 'not found'];
+    if ($row['status'] !== 'scheduled') return ['id' => $id, 'ok' => false, 'error' => 'not scheduled (' . $row['status'] . ')'];
+    if ((int)$row['publish_at'] < time() + 120) return ['id' => $id, 'ok' => false, 'error' => 'it posts in under two minutes; cancel it in OmniSocials'];
+    $pid = $row['result']['post_id'] ?? '';
+    if ($pid === '') return ['id' => $id, 'ok' => false, 'error' => 'no OmniSocials post id on record'];
+    $key = omnisocials_key($row['brand']);
+    if ($key === '') return ['id' => $id, 'ok' => false, 'error' => 'no OmniSocials key for ' . $row['brand']];
+    $r = omnisocials_request('DELETE', '/posts/' . rawurlencode((string)$pid), $key);
+    $st = $r['status'] ?? 0;
+    if (!$r['ok'] && $st !== 404) {
+        return ['id' => $id, 'ok' => false, 'error' => 'OmniSocials refused the delete (' . $st . '): ' . substr((string)($r['raw'] ?? ($r['error'] ?? '')), 0, 160)];
+    }
+    $row['status'] = 'cancelled'; $row['cancelled_by'] = $by; $row['updated_at'] = gmdate('c');
+    $row['cancelled_post_id'] = $pid;
+    q_save($row);
+    return ['id' => $id, 'ok' => true, 'status' => 'cancelled', 'post_id' => $pid, 'already_gone' => ($st === 404)];
+}
+
+if ($action === 'cancel') {
+    $ids = $in['ids'] ?? [];
+    if (!is_array($ids) || !$ids) q_err('no ids');
+    $done = [];
+    foreach (array_slice($ids, 0, 40) as $id) $done[] = q_cancel($id, $by);
+    q_out(['ok' => true, 'results' => $done]);
 }
 
 if ($action === 'approve' || $action === 'reject') {
