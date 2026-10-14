@@ -89,8 +89,8 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 <body>
 <div class="top">
   <div>
-    <h1>Approve the week.</h1>
-    <p class="lede">Each row is one slot: the card and every network it goes to. Approve schedules it for its time. Nothing here posts until you approve it, and a slot nobody approves by its time is skipped.</p>
+    <h1>The week, before it posts.</h1>
+    <p class="lede">Each row is one slot: the card and every network it goes to. Every slot posts on its own: about 90 minutes before its time it approves itself, unless someone rejects it first. Approve sends it early; Reject stops it.</p>
   </div>
   <div class="brands" id="brands">
     <button type="button" data-brand="goude">Goude</button>
@@ -128,6 +128,9 @@ function fmtWhen(ts){
 function dayOf(ts){
   return new Date(ts * 1000).toLocaleDateString([], {weekday:'long', month:'long', day:'numeric', timeZone:'America/New_York'});
 }
+var AUTO_MIN = 90;
+fetch('slots.json', {cache:'no-store'}).then(function(r){ return r.json(); }).then(function(j){ if(j && j.auto_approve_minutes){ AUTO_MIN = +j.auto_approve_minutes; } }).catch(function(){});
+function fmtClock(ts){ return new Date(ts * 1000).toLocaleTimeString([], {hour:'numeric', minute:'2-digit', timeZone:'America/New_York'}) + ' ET'; }
 function load(){
   Array.prototype.forEach.call(document.querySelectorAll('#brands button'), function(b){ b.classList.toggle('on', b.getAttribute('data-brand') === BRAND); });
   Array.prototype.forEach.call(document.querySelectorAll('#tabs button'), function(b){ b.classList.toggle('on', b.getAttribute('data-st') === STATUS); });
@@ -175,7 +178,7 @@ function render(){
         + '<pre>' + esc(p.caption) + '</pre>'
         + (p.error ? '<p class="err">' + esc(p.error) + '</p>' : '') + '</details>';
     }).join('');
-    row.innerHTML = '<div class="grid' + (thumb === '<div></div>' ? ' nothumb' : '') + '">' + thumb + '<div><div class="when">' + esc(fmtWhen(g.at)) + '</div>'
+    row.innerHTML = '<div class="grid' + (thumb === '<div></div>' ? ' nothumb' : '') + '">' + thumb + '<div><div class="when">' + esc(fmtWhen(g.at)) + '</div>' + (g.status === 'pending' ? '<div class="meta">Posts on its own unless rejected before ' + esc(fmtClock(g.at - AUTO_MIN*60)) + '</div>' : (g.posts.some(function(x){ return x.auto_approved; }) ? '<div class="meta">Approved automatically</div>' : ''))
       + '<button class="statement open" type="button">' + esc(g.statement || '') + '</button>'
       + '<div class="meta">' + esc(g.posts.length + ' network' + (g.posts.length === 1 ? '' : 's') + (g.colour ? ' · ' + g.colour : '') + (lead.issue ? ' · ' + lead.issue : '')) + '</div></div></div>'
       + '<div class="nets">' + nets + '</div>'
