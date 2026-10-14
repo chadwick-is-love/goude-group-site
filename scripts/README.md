@@ -89,3 +89,5 @@ model in the loop. If you touch `lib/assemble.mjs` or `lib/templates.mjs`, run i
 - **How it looks**: `scripts/lib/templates.mjs`. The only place page structure lives.
 - **What blocks a publish**: `scripts/check-briefing.mjs` and the validator at the top of
   `scripts/assemble-issue.mjs`.
+
+Deploy nudge 2026-10-14: Hostinger missed the PR #9 merge; this commit re-triggers the sync.
