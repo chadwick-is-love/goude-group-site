@@ -531,8 +531,8 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
     <p class="sub" id="queueSub"></p>
     <!-- STUDIO_AUTOPOST_2026-10-13: the week goes to the approval queue, not out -->
     <div class="autobar" id="autobar">
-      <button class="btn" type="button" id="queueWeekBtn">Queue the week for approval</button>
-      <a class="btn ghost" id="approveLink" href="approve.php">Open approvals</a>
+      <button class="btn" type="button" id="queueWeekBtn">Queue the week</button>
+      <a class="btn ghost" id="approveLink" href="approve.php">Open the review page</a>
       <button class="tlink" type="button" id="dayColBtn">Day colours: on</button>
     </div>
     <p class="autostat" id="autoStatus"></p>
@@ -3720,9 +3720,9 @@ function applyBrand(brand, first){
   $('capTitle').textContent = gb ? 'paste this under it.' : 'Paste this under it.';
   $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
   /* STUDIO_AUTOPOST_2026-10-13 */
-  $('queueWeekBtn').textContent = gb ? 'queue the week for approval' : 'Queue the week for approval';
+  $('queueWeekBtn').textContent = gb ? 'queue the week' : 'Queue the week';
   $('queueOneBtn').textContent = gb ? 'queue for its slot' : 'Queue for its slot';
-  $('approveLink').textContent = gb ? 'open approvals' : 'Open approvals';
+  $('approveLink').textContent = gb ? 'open the review page' : 'Open the review page';
   $('approveLink').href = 'approve.php?brand=' + brand;
   autoStatus(''); renderDayColBtn();
   $('postOmniRow').style.display = '';  // both brands; gabes fails loudly server-side until its channels exist
