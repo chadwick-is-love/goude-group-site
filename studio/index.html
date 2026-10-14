@@ -2527,11 +2527,18 @@ function queueWeek(via){
     if(!pids.length) throw new Error('no network in slots.json is mapped in channels.json for this side');
     S._drawSlide = null; S.xMode = 'short';
     var rows = S.queue.map(function(q, i){ return i; });
-    var r = 0, p = 0, rowSet = [];
+    var r = 0, p = 0, rowSet = [], rowLead = '';
     function step(){
       if(r >= rows.length) return Promise.resolve();
       var idx = rows[r], q = S.queue[idx];
-      if(p === 0){ selectQueue(idx); S.mode = 'single'; S.slides = []; S.slideIndex = -1; rowSet = setForRow(q); }
+      if(p === 0){
+        selectQueue(idx); S.mode = 'single'; S.slides = []; S.slideIndex = -1; rowSet = setForRow(q);
+        /* the caption speaks for the set: a pair opens on its headline, so
+           its caption takes the headline angle too (the fix angle opened on
+           the fix and then repeated it in the body). */
+        if(!/^am$/i.test(String(q.slot)) && rowSet.length > 1) S.angle = (S.brand === 'gabes') ? 'hook' : 'statement';
+        rowLead = rowSet.length ? rowSet[0].card.statement : S.card.statement;
+      }
       var pid = pids[p];
       S.format = pid;
       /* CK 2026-10-14: a carousel wherever the row has more than one thing to
@@ -2553,7 +2560,8 @@ function queueWeek(via){
           ? new Promise(function(res){ slidesToBlobs(fmtNow(), res); })
           : renderBlob(fmtNow()).then(function(b){ return [b]; });
         job = frames.then(function(bs){ return Promise.all(bs.map(blobToDataUrl)); }).then(function(urls){
-          return queueAdd(rowBody(q, pid, caption, urls, pid === 'x' ? 'short' : '', null, via));
+          var b = rowBody(q, pid, caption, urls, pid === 'x' ? 'short' : '', null, via); b.statement = rowLead || b.statement;
+          return queueAdd(b);
         }).then(function(res){
           if(res.ok){ tally.queued++; tally.slots[q.day + ' ' + q.slot] = 1; }
           else tally.failed.push(q.day + ' ' + q.slot + ' ' + pid + ': ' + res.error);
