@@ -18,8 +18,12 @@ on:
   workflow_dispatch:
     inputs:
       brand:
-        description: 'goude or gabes'
+        description: 'Which side to queue'
         required: true
+        type: choice
+        options:
+          - goude
+          - gabes
         default: 'goude'
 
 concurrency:
