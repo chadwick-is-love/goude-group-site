@@ -39,7 +39,9 @@
  *                        media_ids:[id], publish_now:false} -> 201 {data:{id,status:"draft"}}
  */
 
-const OMNISOCIALS_BASE = 'https://api.omnisocials.com/v1';
+// STUDIO_AUTOPOST_2026-10-13: OMNISOCIALS_BASE_URL in the environment points
+// the test rig at a fake vendor. Unset on the server, so production is unchanged.
+define('OMNISOCIALS_BASE', getenv('OMNISOCIALS_BASE_URL') ?: 'https://api.omnisocials.com/v1');
 
 const OMNISOCIALS_KEY_SOURCES = [
     'goude' => ['env' => 'OMNISOCIALS_API_KEY',       'file' => 'omnisocials-key.txt'],

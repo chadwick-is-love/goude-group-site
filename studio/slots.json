@@ -1,0 +1,12 @@
+{
+  "_note": "STUDIO_AUTOPOST_2026-10-13. When each queued post publishes, per brand, in New York time. queue.php reads this; the Studio reads platforms. Edit times here, nowhere else. Slot keys match the queue rows (Goude AM/PM, >gabes am/pm). Times are a first default awaiting Chadwick's ruling. >gabes AM sits at noon because a signal only exists once it publishes at 9:00 ET, and the headless run queues it at 9:20.",
+  "timezone": "America/New_York",
+  "goude": {
+    "platforms": ["linkedin", "ig_feed", "ig_story", "facebook", "x", "threads"],
+    "slots": { "AM": "08:30", "PM": "12:30" }
+  },
+  "gabes": {
+    "platforms": ["ig_feed", "ig_story", "threads"],
+    "slots": { "am": "12:00", "pm": "18:00" }
+  }
+}

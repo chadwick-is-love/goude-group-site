@@ -1,0 +1,64 @@
+# STUDIO_AUTOPOST_2026-10-13.
+# Needs two repository secrets: STUDIO_USER and STUDIO_PASS, a Studio login.
+#
+# Queues posts for approval only. Nothing reaches a feed until someone
+# approves it on goudegroup.com/studio/approve.php.
+#   Goude:   Monday 06:05 New York, after the Briefing publishes at 00:01.
+#   >gabes:  weekdays 09:20 New York, after the day's signal publishes at 09:00.
+# GitHub cron is UTC only, so both DST offsets are scheduled and a guard drops
+# the run whose New York hour is wrong.
+name: Studio autoqueue
+
+on:
+  schedule:
+    - cron: '5 10 * * 1'      # 06:05 New York during EDT  (goude)
+    - cron: '5 11 * * 1'      # 06:05 New York during EST  (goude)
+    - cron: '20 13 * * 1-5'   # 09:20 New York during EDT  (gabes)
+    - cron: '20 14 * * 1-5'   # 09:20 New York during EST  (gabes)
+  workflow_dispatch:
+    inputs:
+      brand:
+        description: 'goude or gabes'
+        required: true
+        default: 'goude'
+
+concurrency:
+  group: studio-autoqueue
+  cancel-in-progress: false
+
+jobs:
+  queue:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pick the brand, drop the wrong DST twin
+        id: pick
+        run: |
+          LOCAL=$(TZ=America/New_York date +%H:%M)
+          BRAND=""
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            BRAND="${{ github.event.inputs.brand }}"
+          else
+            case "$LOCAL" in
+              06:0*|06:1*) BRAND=goude ;;
+              09:2*|09:3*) BRAND=gabes ;;
+            esac
+          fi
+          echo "New York time $LOCAL, brand '${BRAND:-none}'"
+          echo "brand=$BRAND" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-node@v4
+        if: steps.pick.outputs.brand != ''
+        with:
+          node-version: '20'
+      - name: Install Playwright Chromium
+        if: steps.pick.outputs.brand != ''
+        run: |
+          npm install --no-save playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Queue for approval
+        if: steps.pick.outputs.brand != ''
+        env:
+          STUDIO_USER: ${{ secrets.STUDIO_USER }}
+          STUDIO_PASS: ${{ secrets.STUDIO_PASS }}
+        run: node scripts/studio-autoqueue.mjs "${{ steps.pick.outputs.brand }}"
