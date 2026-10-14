@@ -2406,11 +2406,20 @@ function dayNumber(iso){
   var a = Date.parse(DAY_ANCHOR + 'T12:00:00Z'), b = Date.parse(iso + 'T12:00:00Z');
   return (isNaN(b)) ? NaN : Math.round((b - a) / 86400000);
 }
+function weekdayNumber(iso){
+  var n = dayNumber(iso); if(isNaN(n)) return NaN;
+  var weeks = Math.floor(n / 7), rem = n - weeks*7;   /* anchor is a Monday */
+  return weeks*5 + Math.min(rem, 5);
+}
 function dayColourFor(brand, iso){
   var n = dayNumber(iso); if(isNaN(n)) return null;
   if(brand === 'goude'){ var w = (((n % 2) + 2) % 2 === 0) ? 'mint' : 'navy';
     return {world:w, name:(w === 'mint' ? 'Mint ground' : 'Navy ground')}; }
-  var L = TRIOS.core, i = ((n % L.length) + L.length) % L.length;
+  /* CK 2026-10-14: >gabes runs through the whole core library before it
+     repeats. Signals post on weekdays, so the count is posting days, not
+     calendar days; a calendar count would spend trios on weekends nobody
+     sees and repeat one before the rest had shown. */
+  var L = TRIOS.core, w = weekdayNumber(iso), i = ((w % L.length) + L.length) % L.length;
   return {trioMood:'core', trioIndex:i, name:L[i][0]};
 }
 /* the calendar date a queue row publishes on */
@@ -2616,7 +2625,11 @@ function queueOne(){
   var thread = (xMode === 'thread') ? threadParts(caption) : null;
   sendStatus('rendering for the queue ...', false);
   var frames = (S.mode === 'carousel' && S.slides.length)
-    ? new Promise(function(res){ slidesToBlobs(f, res); }).then(function(bs){ return bs.slice(0, (PLATFORM[f.id] || PLATFORM.linkedin).frames[1]); })
+    ? (function(){
+        var cap = Math.min(MAX_SLIDES, (PLATFORM[f.id] || PLATFORM.linkedin).frames[1]), keep = S.slides;
+        S.slides = fitSet(keep, cap);   /* over the cap: drop from the middle, keep the last slide */
+        return new Promise(function(res){ slidesToBlobs(f, function(bs){ S.slides = keep; res(bs); }); });
+      })()
     : renderBlob(f).then(function(b){ return [b]; });
   frames.then(function(bs){ return Promise.all(bs.map(blobToDataUrl)); })
     .then(function(urls){ return queueAdd(rowBody(q, f.id, thread ? thread[0] : caption, urls, xMode, thread, 'hand')); })
@@ -2625,6 +2638,50 @@ function queueOne(){
       sendStatus(res.post.label + ' for ' + q.day + ' ' + q.slot + ' is waiting in approvals (replaces any earlier one for that slot). It posts only once approved.', false);
       toast('queued for approval');
     }).catch(function(e){ sendStatus('not queued: ' + e.message, true); });
+}
+
+/* From approvals: ?brand=&date=YYYY-MM-DD&slot=AM&platform=ig_feed opens
+   that slot's set in the editor, on that network, ready to change and send
+   back with "Queue for its slot" (which replaces the waiting post). */
+function deepLink(){
+  var u = new URLSearchParams(location.search);
+  var date = u.get('date'), slot = u.get('slot'), pid = u.get('platform');
+  if(!date || !slot) return;
+  var t0 = Date.now(), switched = false;
+  function weekOf(src){
+    if(src.signals) return src.signals.length ? mondayOf(src.signals[0].date) : '';
+    var t = Date.parse(src.date || ''); if(isNaN(t)) return '';
+    var d = new Date(t); return mondayOf(d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()));
+  }
+  var iv = setInterval(function(){
+    if(Date.now() - t0 > 60000){ clearInterval(iv); sendStatus('could not find ' + date + ' ' + slot + ' in the sources.', true); return; }
+    if(S.busy || !S.sources.length || !S.queue.length) return;
+    if(!switched){
+      var want = mondayOf(date), at = -1;
+      S.sources.forEach(function(src, i){ if(at < 0 && weekOf(src) === want) at = i; });
+      switched = true;
+      if(at > 0 && at !== S.sourceIndex){ selectSource(at); return; }
+    }
+    clearInterval(iv);
+    var idx = -1;
+    S.queue.forEach(function(q, i){ if(idx < 0 && rowDate(q) === date && String(q.slot).toLowerCase() === String(slot).toLowerCase()) idx = i; });
+    if(idx < 0){ sendStatus('that slot is not in this week any more.', true); return; }
+    var q = S.queue[idx], am = /^am$/i.test(String(q.slot));
+    selectQueue(idx);
+    if(pid && formatsNow().some(function(f){ return f.id === pid; })) S.format = pid;
+    var it = S.items[q.itemIndex], eng = E();
+    var list = am ? eng.storySlides(it) : eng.pairSlides(it);
+    if(!am && list.length > 1){ S.angle = (S.brand === 'gabes') ? 'hook' : 'statement'; }
+    if(list.length > 1){
+      S.lastBuild = am ? 'story' : 'pair'; S.slideCount = 5;
+      setSlides(list, am ? 'the morning set' : 'the pair');
+      var fcap = Math.min(MAX_SLIDES, (PLATFORM[S.format] || PLATFORM.linkedin).frames[1]);
+      if(S.slides.length > fcap){ S.slides = fitSet(S.slides, fcap); selectSlide(0); }
+    } else if(S.mode !== 'single'){ setMode('single'); }
+    renderSegs(); setCaption(genCaption()); draw();
+    var ed = $('editor'); if(ed && ed.scrollIntoView) ed.scrollIntoView({behavior:'smooth', block:'start'});
+    sendStatus('editing ' + q.day + ' ' + q.slot + ' on ' + fmtNow().name + '. Change anything, then press "Queue for its slot" to replace the waiting post.', false);
+  }, 400);
 }
 
 /* headless: ?auto=queue&brand=goude|gabes loads the newest source and queues it */
@@ -3845,7 +3902,7 @@ function boot(){
   /* STUDIO_AUTOPOST_2026-10-13: ?brand=gabes opens that side; ?auto=queue queues it */
   var ub = new URLSearchParams(location.search).get('brand');
   applyBrand(ub === 'gabes' ? 'gabes' : 'goude', true);
-  loadChannels(); loadLog(); renderDayColBtn(); autoRun();
+  loadChannels(); loadLog(); renderDayColBtn(); autoRun(); deepLink();
 }
 
 if(document.fonts && document.fonts.ready){

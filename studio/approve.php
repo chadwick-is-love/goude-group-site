@@ -61,6 +61,27 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 .tabs button{padding:4px 0}
 .tabs button.on{box-shadow:inset 0 -2px 0 var(--ink)}
 @media (max-width:520px){ .row .grid{grid-template-columns:96px 1fr} .row img{width:96px} h1{font-size:28px} }
+/* STUDIO_APPROVE_READ_2026-10-14: the quick read */
+.row .open{display:block;padding:0;cursor:zoom-in}
+.row .statement.open{cursor:pointer;text-align:left}
+.acts a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.qr{position:fixed;inset:0;background:var(--bg);z-index:50;display:none;flex-direction:column}
+.qr.on{display:flex}
+.qr-top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;border-bottom:1.5px solid var(--ink)}
+.qr-when{font-size:14px;font-weight:700}
+.qr-x{font-size:14px;font-weight:700;padding:8px 12px;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.qr-tabs{display:flex;gap:6px;flex-wrap:wrap;padding:12px 16px 0}
+.qr-tabs button{font-size:13px;font-weight:600;padding:8px 12px;box-shadow:inset 0 0 0 1.5px var(--ink)}
+.qr-tabs button.on{background:var(--ink);color:var(--bg)}
+.qr-body{flex:1;overflow:auto;padding:14px 16px 20px}
+.qr-frames{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+.qr-frames figure{flex:0 0 auto;scroll-snap-align:start;margin:0}
+.qr-frames img{display:block;height:min(62vh,640px);width:auto;max-width:86vw;object-fit:contain;box-shadow:0 0 0 1px var(--hair)}
+.qr-frames figcaption{font-size:12px;font-weight:700;letter-spacing:.08em;margin-top:6px}
+.qr-cap{white-space:pre-wrap;font-family:inherit;font-size:15px;line-height:1.55;max-width:680px;margin-top:16px}
+.qr-note{font-size:13px;color:var(--soft);margin-top:10px}
+.qr-foot{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;border-top:1.5px solid var(--ink)}
+.qr-foot a.btn{text-decoration:none;display:inline-flex;align-items:center}
 </style>
 </head>
 <body>
@@ -85,6 +106,12 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 </div>
 <div class="count" id="count"></div>
 <div id="list"></div>
+<div class="qr" id="qr" role="dialog" aria-modal="true" aria-label="Quick read">
+  <div class="qr-top"><div class="qr-when" id="qrWhen"></div><button class="qr-x" type="button" id="qrX">Close</button></div>
+  <div class="qr-tabs" id="qrTabs"></div>
+  <div class="qr-body"><div class="qr-frames" id="qrFrames"></div><pre class="qr-cap" id="qrCap"></pre><p class="qr-note" id="qrNote"></p></div>
+  <div class="qr-foot" id="qrFoot"></div>
+</div>
 
 <script>
 var BRAND = (new URLSearchParams(location.search).get('brand') === 'gabes') ? 'gabes' : 'goude';
@@ -134,7 +161,7 @@ function render(){
     if(d !== lastDay){ var h = document.createElement('div'); h.className = 'day'; h.textContent = d; list.appendChild(h); lastDay = d; }
     var row = document.createElement('div'); row.className = 'row';
     var lead = g.posts.filter(function(p){ return p.platform === 'ig_feed'; })[0] || g.posts[0];
-    var thumb = (lead.status === 'pending') ? '<img alt="" src="queue.php?action=img&id=' + encodeURIComponent(lead.id) + '&n=0">' : '<div></div>';
+    var thumb = (lead.status === 'pending') ? '<button class="open" type="button" title="Quick read"><img alt="" src="queue.php?action=img&id=' + encodeURIComponent(lead.id) + '&n=0"></button>' : '<div></div>';
     var nets = g.posts.map(function(p){
       var frames = '';
       if(p.status === 'pending'){
@@ -147,17 +174,65 @@ function render(){
         + (p.error ? '<p class="err">' + esc(p.error) + '</p>' : '') + '</details>';
     }).join('');
     row.innerHTML = '<div class="grid">' + thumb + '<div><div class="when">' + esc(fmtWhen(g.at)) + '</div>'
-      + '<div class="statement">' + esc(g.statement || '') + '</div>'
+      + '<button class="statement open" type="button">' + esc(g.statement || '') + '</button>'
       + '<div class="meta">' + esc(g.posts.length + ' network' + (g.posts.length === 1 ? '' : 's') + (g.colour ? ' · ' + g.colour : '') + (lead.issue ? ' · ' + lead.issue : '')) + '</div></div></div>'
       + '<div class="nets">' + nets + '</div>'
-      + (g.status === 'pending' ? '<div class="acts"><button class="btn" type="button" data-act="approve">Approve</button><button class="btn ghost" type="button" data-act="reject">Reject</button></div>' : '')
+      + (g.status === 'pending' ? '<div class="acts"><button class="btn" type="button" data-act="approve">Approve</button><button class="btn ghost" type="button" data-act="reject">Reject</button><a class="btn ghost" href="' + studioLink(g, lead.platform) + '">Change in the Studio</a></div>' : '')
       + '<p class="err" style="display:none"></p>';
     Array.prototype.forEach.call(row.querySelectorAll('[data-act]'), function(b){
       b.addEventListener('click', function(){ decide(b.getAttribute('data-act'), g.posts.map(function(p){ return p.id; }), row); });
     });
+    Array.prototype.forEach.call(row.querySelectorAll('.open'), function(b){
+      b.addEventListener('click', function(){ openRead(g, row); });
+    });
     list.appendChild(row);
   });
 }
+/* the Studio opens on this slot, this network, with the set built */
+function studioLink(g, platform){
+  return 'index.html?brand=' + BRAND + '&date=' + encodeURIComponent(g.date) + '&slot=' + encodeURIComponent(g.slot) + '&platform=' + encodeURIComponent(platform);
+}
+var NET_ORDER = ['ig_feed','ig_story','linkedin','facebook','threads','x','tiktok'];
+function openRead(g, row){
+  var posts = g.posts.slice().sort(function(a,b){ return NET_ORDER.indexOf(a.platform) - NET_ORDER.indexOf(b.platform); });
+  var cur = posts[0];
+  $('qrWhen').textContent = fmtWhen(g.at) + (g.colour ? '  ·  ' + g.colour : '');
+  function show(p){
+    cur = p;
+    $('qrTabs').innerHTML = '';
+    posts.forEach(function(x){
+      var b = document.createElement('button'); b.type = 'button';
+      b.className = (x === p) ? 'on' : ''; b.textContent = x.label + (x.images > 1 ? ' · ' + x.images : '');
+      b.addEventListener('click', function(){ show(x); });
+      $('qrTabs').appendChild(b);
+    });
+    var fr = '';
+    if(p.status === 'pending'){
+      for(var n = 0; n < p.images; n++) fr += '<figure><img alt="' + (n + 1) + ' of ' + p.images + '" src="queue.php?action=img&id=' + encodeURIComponent(p.id) + '&n=' + n + '"><figcaption>' + (n + 1) + ' / ' + p.images + '</figcaption></figure>';
+    }
+    $('qrFrames').innerHTML = fr;
+    $('qrCap').textContent = p.caption || '';
+    $('qrNote').textContent = (p.status === 'pending') ? '' : ('This post is ' + p.status + '; its frames are with OmniSocials now.');
+    var foot = $('qrFoot'); foot.innerHTML = '';
+    if(g.status === 'pending'){
+      var a1 = document.createElement('button'); a1.className = 'btn'; a1.type = 'button'; a1.textContent = 'Approve this slot';
+      a1.addEventListener('click', function(){ closeRead(); decide('approve', g.posts.map(function(x){ return x.id; }), row); });
+      var a2 = document.createElement('button'); a2.className = 'btn ghost'; a2.type = 'button'; a2.textContent = 'Reject';
+      a2.addEventListener('click', function(){ closeRead(); decide('reject', g.posts.map(function(x){ return x.id; }), row); });
+      foot.appendChild(a1); foot.appendChild(a2);
+    }
+    var a3 = document.createElement('a'); a3.className = 'btn ghost'; a3.href = studioLink(g, p.platform);
+    a3.textContent = 'Change ' + p.label + ' in the Studio';
+    foot.appendChild(a3);
+    $('qrFrames').scrollLeft = 0;
+  }
+  show(cur);
+  $('qr').classList.add('on'); document.body.style.overflow = 'hidden';
+}
+function closeRead(){ $('qr').classList.remove('on'); document.body.style.overflow = ''; }
+$('qrX').addEventListener('click', closeRead);
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeRead(); });
+
 function decide(act, ids, row){
   var btns = row ? row.querySelectorAll('button') : [$('all')];
   Array.prototype.forEach.call(btns, function(b){ b.disabled = true; });
