@@ -397,6 +397,12 @@ canvas#card{max-height:56vh;width:auto;max-width:100%;margin:0 auto}
 .cap textarea{height:170px}
 .capmeta .plinks{gap:14px}
 .sendbar{margin-top:14px;padding-top:14px;border-top:1.5px solid var(--ink)}
+/* STUDIO_AUTOPOST_2026-10-13 */
+.autobar{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:14px 0 4px}
+.autobar a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.autostat{font-size:12.5px;line-height:1.5;margin:6px 0 10px;color:var(--ink);font-weight:500;min-height:0}
+.autostat:empty{display:none}
+.autostat.err{color:#8f1d3a}
 .sendsum{font-family:var(--label);font-size:11px;letter-spacing:.04em;line-height:1.6;color:var(--soft);margin-bottom:10px}
 .sendsum b{color:var(--ink);font-weight:700}
 html[data-brand="gabes"] .sendsum b{font-weight:400;color:var(--acc)}
@@ -523,6 +529,13 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
       </span>
     </div>
     <p class="sub" id="queueSub"></p>
+    <!-- STUDIO_AUTOPOST_2026-10-13: the week goes to the approval queue, not out -->
+    <div class="autobar" id="autobar">
+      <button class="btn" type="button" id="queueWeekBtn">Queue the week for approval</button>
+      <a class="btn ghost" id="approveLink" href="approve.php">Open approvals</a>
+      <button class="tlink" type="button" id="dayColBtn">Day colours: on</button>
+    </div>
+    <p class="autostat" id="autoStatus"></p>
     <div class="qgrid" id="qgrid"></div>
   </section>
 
@@ -632,6 +645,7 @@ html[data-brand="gabes"] .checks li b{text-transform:lowercase}
       <p class="sendsum" id="sendSum"></p>
       <div class="stagebar" id="postOmniRow">
         <button class="btn" id="postOmniBtn">Post to OmniSocials (~30 min)</button>
+        <button class="btn ghost" id="queueOneBtn">Queue for its slot</button>
         <button class="btn ghost" id="dlBtn">Download PNG</button>
         <button class="btn ghost" id="copyImgBtn">Copy image</button>
         <button class="btn ghost" id="copyCapBtn">Copy caption</button>
@@ -2296,9 +2310,207 @@ function renderQueue(){
 function selectQueue(idx){
   if(idx < 0 || idx >= S.queue.length) return;
   S.qIndex = idx;
+  applyDayColour(S.queue[idx]);   /* STUDIO_AUTOPOST_2026-10-13 */
   S.angle = S.queue[idx].angle;
   applyPost(E().buildPost(S.items[S.queue[idx].itemIndex], S.angle));
   renderQueue(); renderAngles();
+}
+
+/* ============================================================
+   STUDIO_AUTOPOST_2026-10-13: DAY COLOURS, THE APPROVAL QUEUE
+   CK 2026-10-13: Goude goes back and forth from the green ground to the
+   blue one, every other day. >gabes runs through the core trios, a new
+   combination each day. One running day count drives both, so the
+   pattern carries across weeks and never restarts on a Monday. Picking a
+   colour by hand after selecting a row wins for that post.
+   ============================================================ */
+var DAY_ANCHOR = '2026-10-12';   /* a Monday: day 0, Goude mint, >gabes core 01 */
+function pad2(n){ return (n < 10 ? '0' : '') + n; }
+function isoAdd(iso, n){ var d = new Date(iso + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0,10); }
+function dayNumber(iso){
+  var a = Date.parse(DAY_ANCHOR + 'T12:00:00Z'), b = Date.parse(iso + 'T12:00:00Z');
+  return (isNaN(b)) ? NaN : Math.round((b - a) / 86400000);
+}
+function dayColourFor(brand, iso){
+  var n = dayNumber(iso); if(isNaN(n)) return null;
+  if(brand === 'goude'){ var w = (((n % 2) + 2) % 2 === 0) ? 'mint' : 'navy';
+    return {world:w, name:(w === 'mint' ? 'Mint ground' : 'Navy ground')}; }
+  var L = TRIOS.core, i = ((n % L.length) + L.length) % L.length;
+  return {trioMood:'core', trioIndex:i, name:L[i][0]};
+}
+/* the calendar date a queue row publishes on */
+function weekMonday(){
+  if(S.brand === 'goude'){
+    var t = Date.parse(S.meta && S.meta.date || '');
+    if(!isNaN(t)){ var d = new Date(t); return mondayOf(d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate())); }
+  } else {
+    var first = S.items.filter(function(it){ return /^\d{4}-\d{2}-\d{2}$/.test(it && it.date || ''); })[0];
+    if(first) return mondayOf(first.date);
+  }
+  return '';
+}
+function rowDate(q){
+  if(!q) return '';
+  var it = S.items[q.itemIndex];
+  if(S.brand === 'gabes' && it && /^\d{4}-\d{2}-\d{2}$/.test(it.date || '')) return it.date;
+  var mon = weekMonday(); if(!mon) return '';
+  var i = DAYS.map(function(d){ return d.toLowerCase(); }).indexOf(String(q.day).toLowerCase());
+  return i < 0 ? '' : isoAdd(mon, i);
+}
+var DAYCOL_ON = true;
+try { DAYCOL_ON = (localStorage.getItem('studio.daycolours') !== 'off'); } catch(e){}
+function applyDayColour(q){
+  if(!DAYCOL_ON || !q) return null;
+  var c = dayColourFor(S.brand, rowDate(q)); if(!c) return null;
+  if(c.world) S.world = c.world;
+  if(c.trioMood){ S.trioMood = c.trioMood; S.trioIndex = c.trioIndex; }
+  return c;
+}
+function renderDayColBtn(){
+  var b = $('dayColBtn'); if(!b) return;
+  var gb = (S.brand === 'gabes');
+  b.textContent = (gb ? 'day colours: ' : 'Day colours: ') + (DAYCOL_ON ? 'on' : 'off');
+  b.title = gb ? 'a new core trio each day, in order' : 'mint and navy grounds, every other day';
+}
+function autoStatus(msg, isErr){ var el = $('autoStatus'); if(!el) return; el.textContent = msg || ''; el.classList.toggle('err', !!isErr); }
+
+var SLOTS = null;
+function loadSlots(){
+  if(SLOTS) return Promise.resolve(SLOTS);
+  return fetch('slots.json', {cache:'no-store'}).then(function(r){ if(!r.ok) throw new Error('slots.json ' + r.status); return r.json(); })
+    .then(function(j){ SLOTS = j || {}; return SLOTS; });
+}
+function blobToDataUrl(b){
+  return new Promise(function(res, rej){ var r = new FileReader(); r.onload = function(){ res(r.result); }; r.onerror = rej; r.readAsDataURL(b); });
+}
+function renderBlob(f){ return new Promise(function(res){ renderToBlob(f, res); }); }
+function queueAdd(body){
+  return fetch('queue.php', {method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'}, body:JSON.stringify(body)})
+    .then(function(r){ return r.text(); })
+    .then(function(t){ var j = null; try { j = JSON.parse(t); } catch(e){}
+      return j || {ok:false, error:'the server returned something other than a result: ' + t.slice(0, 120).replace(/\s+/g, ' ')}; });
+}
+function slotKey(q){ return String(q.slot); }
+function rowBody(q, pid, caption, images, xMode, thread, via){
+  return {action:'add', brand:S.brand, platform:pid, caption:caption, images:images,
+          x_mode:xMode, thread:thread, slot:q.day + ' ' + q.slot, slot_key:slotKey(q),
+          date:rowDate(q), issue:(S.meta && S.meta.no) ? S.meta.no : '',
+          colour:(S.brand === 'goude' ? worldNow().name : trioNow().name),
+          statement:S.card.statement, via:via || 'studio'};
+}
+
+/* The whole week: every row, every mapped network from slots.json, single
+   cards, generated captions fitted to each network. One plan, N renders.
+   Rows whose slot has passed are refused by the server and counted, not
+   retried. Hand edits are not carried: a card someone edited goes in with
+   "Queue for its slot" from the send bar. */
+var QUEUEING = false;
+function queueWeek(via){
+  if(QUEUEING){ toast('already queueing'); return Promise.resolve(null); }
+  if(!S.queue.length){ toast('load a source first'); return Promise.resolve(null); }
+  QUEUEING = true;
+  var btn = $('queueWeekBtn'); if(btn) btn.disabled = true;
+  var keep = {qIndex:S.qIndex, angle:S.angle, card:JSON.parse(JSON.stringify(S.card)), layout:S.layout, format:S.format,
+              mode:S.mode, world:S.world, trioMood:S.trioMood, trioIndex:S.trioIndex, xMode:S.xMode,
+              cap:$('capText').value, lastGen:S.lastGen};
+  var tally = {queued:0, slots:{}, skipped:[], failed:[]};
+  return loadSlots().then(function(cfg){
+    var conf = cfg[S.brand] || {};
+    var ids = formatsNow().map(function(f){ return f.id; });
+    var pids = (conf.platforms || []).filter(function(p){ return ids.indexOf(p) !== -1 && channelFor(S.brand, p); });
+    if(!pids.length) throw new Error('no network in slots.json is mapped in channels.json for this side');
+    S.mode = 'single'; S._drawSlide = null; S.xMode = 'short';
+    var rows = S.queue.map(function(q, i){ return i; });
+    var r = 0, p = 0;
+    function step(){
+      if(r >= rows.length) return Promise.resolve();
+      var idx = rows[r], q = S.queue[idx];
+      if(p === 0) selectQueue(idx);
+      var pid = pids[p];
+      S.format = pid;
+      setCaption(genCaption());
+      var fails = runChecks().filter(function(c){ return c.level === 'fail'; });
+      if(fails.length && fixCaption()) fails = runChecks().filter(function(c){ return c.level === 'fail'; });
+      autoStatus('queueing ' + q.day + ' ' + q.slot + ', ' + pid + ' ...');
+      var job;
+      if(fails.length){ tally.skipped.push(q.day + ' ' + q.slot + ' ' + pid + ': ' + fails[0].msg); job = Promise.resolve(); }
+      else {
+        var caption = ($('capText').value || '').trim();
+        job = renderBlob(fmtNow()).then(blobToDataUrl).then(function(d){
+          return queueAdd(rowBody(q, pid, caption, [d], pid === 'x' ? 'short' : '', null, via));
+        }).then(function(res){
+          if(res.ok){ tally.queued++; tally.slots[q.day + ' ' + q.slot] = 1; }
+          else tally.failed.push(q.day + ' ' + q.slot + ' ' + pid + ': ' + res.error);
+        });
+      }
+      return job.then(function(){ p++; if(p >= pids.length){ p = 0; r++; } return step(); });
+    }
+    return step();
+  }).then(function(){
+    var n = Object.keys(tally.slots).length;
+    var passed = tally.failed.filter(function(m){ return /has passed/.test(m); }).length;
+    var already = tally.failed.filter(function(m){ return /already scheduled/.test(m); }).length;
+    var other = tally.failed.filter(function(m){ return !/has passed|already scheduled/.test(m); });
+    var msg = tally.queued + ' posts across ' + n + ' slots are waiting in approvals. Nothing posts until someone approves it.'
+      + (passed ? ' ' + passed + ' skipped because their slot has passed.' : '')
+      + (already ? ' ' + already + ' already scheduled, left alone.' : '')
+      + (tally.skipped.length ? ' ' + tally.skipped.length + ' held by the checks (first: ' + tally.skipped[0] + ').' : '')
+      + (other.length ? ' ' + other.length + ' refused by the server (first: ' + other[0] + ').' : '');
+    autoStatus(msg, !!other.length || (!tally.queued && !passed && !already));
+    toast(tally.queued + ' posts queued for approval', 6000);
+    if(tally.queued) queueAdd({action:'notify', brand:S.brand});
+    return tally;
+  }).catch(function(e){
+    autoStatus('the week was not queued: ' + e.message, true);
+    tally.error = e.message; return tally;
+  }).then(function(t){
+    S.mode = keep.mode; S.format = keep.format; S.xMode = keep.xMode;
+    S.qIndex = keep.qIndex; S.angle = keep.angle; S.card = keep.card; S.layout = keep.layout;
+    S.world = keep.world; S.trioMood = keep.trioMood; S.trioIndex = keep.trioIndex;
+    $('capText').value = keep.cap; S.lastGen = keep.lastGen;
+    syncFields(); renderSegs(); renderQueue(); draw(); updateCapMeta();
+    QUEUEING = false; if(btn) btn.disabled = false;
+    window.__STUDIO_AUTO = {done:true, result:t};
+    return t;
+  });
+}
+
+/* The card on screen, as edited, for the selected row's slot: the way a
+   hand-touched post or a carousel joins the queue. */
+function queueOne(){
+  var q = S.queue[S.qIndex];
+  if(!q){ toast('pick a row in the week first'); return; }
+  if(!rowDate(q)){ sendStatus('no date for this row; cannot find its slot.', true); return; }
+  var f = fmtNow();
+  var fails = runChecks().filter(function(c){ return c.level === 'fail'; });
+  if(fails.length && fixCaption()) fails = runChecks().filter(function(c){ return c.level === 'fail'; });
+  if(fails.length){ sendStatus('not queued: ' + fails[0].msg, true); return; }
+  if(!channelFor(S.brand, f.id)){ sendStatus('not queued: no ' + f.name + ' channel mapped for this side.', true); return; }
+  var caption = ($('capText').value || '').trim();
+  var xMode = (f.id === 'x') ? S.xMode : '';
+  var thread = (xMode === 'thread') ? threadParts(caption) : null;
+  sendStatus('rendering for the queue ...', false);
+  var frames = (S.mode === 'carousel' && S.slides.length)
+    ? new Promise(function(res){ slidesToBlobs(f, res); }).then(function(bs){ return bs.slice(0, (PLATFORM[f.id] || PLATFORM.linkedin).frames[1]); })
+    : renderBlob(f).then(function(b){ return [b]; });
+  frames.then(function(bs){ return Promise.all(bs.map(blobToDataUrl)); })
+    .then(function(urls){ return queueAdd(rowBody(q, f.id, thread ? thread[0] : caption, urls, xMode, thread, 'hand')); })
+    .then(function(res){
+      if(!res.ok){ sendStatus('not queued: ' + res.error, true); return; }
+      sendStatus(res.post.label + ' for ' + q.day + ' ' + q.slot + ' is waiting in approvals (replaces any earlier one for that slot). It posts only once approved.', false);
+      toast('queued for approval');
+    }).catch(function(e){ sendStatus('not queued: ' + e.message, true); });
+}
+
+/* headless: ?auto=queue&brand=goude|gabes loads the newest source and queues it */
+function autoRun(){
+  var u = new URLSearchParams(location.search);
+  if(u.get('auto') !== 'queue') return;
+  var t0 = Date.now();
+  var iv = setInterval(function(){
+    if(S.queue.length && !S.busy){ clearInterval(iv); queueWeek('headless'); }
+    else if(Date.now() - t0 > 90000){ clearInterval(iv); window.__STUDIO_AUTO = {done:true, result:{error:'no source loaded in 90 seconds'}}; }
+  }, 500);
 }
 
 function currentItem(){
@@ -3186,6 +3398,12 @@ function applyBrand(brand, first){
     : 'Type a path, or open the page in another tab, select all, copy, and paste it below.';
   $('capTitle').textContent = gb ? 'paste this under it.' : 'Paste this under it.';
   $('dlAllBtn').textContent = gb ? 'download all' : 'Download all';
+  /* STUDIO_AUTOPOST_2026-10-13 */
+  $('queueWeekBtn').textContent = gb ? 'queue the week for approval' : 'Queue the week for approval';
+  $('queueOneBtn').textContent = gb ? 'queue for its slot' : 'Queue for its slot';
+  $('approveLink').textContent = gb ? 'open approvals' : 'Open approvals';
+  $('approveLink').href = 'approve.php?brand=' + brand;
+  autoStatus(''); renderDayColBtn();
   $('postOmniRow').style.display = '';  // both brands; gabes fails loudly server-side until its channels exist
   document.title = (brand === 'goude') ? 'The Studio: Goude Group' : 'the studio: >gabes';
   applyRoom(roomFor(brand), false);
@@ -3425,6 +3643,15 @@ function bind(){
 
   $('dlBtn').addEventListener('click', download);
   $('dlAllBtn').addEventListener('click', downloadAll);
+  /* STUDIO_AUTOPOST_2026-10-13 */
+  $('queueWeekBtn').addEventListener('click', function(){ queueWeek('studio'); });
+  $('queueOneBtn').addEventListener('click', queueOne);
+  $('dayColBtn').addEventListener('click', function(){
+    DAYCOL_ON = !DAYCOL_ON;
+    try { localStorage.setItem('studio.daycolours', DAYCOL_ON ? 'on' : 'off'); } catch(e){}
+    renderDayColBtn();
+    if(DAYCOL_ON && S.qIndex >= 0){ applyDayColour(S.queue[S.qIndex]); renderSegs(); draw(); }
+  });
   $('copyImgBtn').addEventListener('click', copyImage);
   $('fitCapBtn').addEventListener('click', function(){
     if(fitCaptionToChannel()) toast('caption fitted to ' + fmtNow().name);
@@ -3490,8 +3717,10 @@ function bind(){
 
 function boot(){
   bind();
-  applyBrand('goude', true);
-  loadChannels(); loadLog();
+  /* STUDIO_AUTOPOST_2026-10-13: ?brand=gabes opens that side; ?auto=queue queues it */
+  var ub = new URLSearchParams(location.search).get('brand');
+  applyBrand(ub === 'gabes' ? 'gabes' : 'goude', true);
+  loadChannels(); loadLog(); renderDayColBtn(); autoRun();
 }
 
 if(document.fonts && document.fonts.ready){

@@ -6,3 +6,5 @@ package-lock.json
 omnisocials-key*.txt
 
 studio/data/posts.jsonl
+slack-webhook.txt
+studio/data/queue/

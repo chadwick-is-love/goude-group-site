@@ -54,7 +54,10 @@ def build_sandbox():
     root = tempfile.mkdtemp(prefix="gabes-test-")
     studio = os.path.join(root, "studio")
     os.makedirs(studio)
-    for f in ("push.php", "omnisocials.php", "channels.json"):
+    files = ["push.php", "omnisocials.php", "channels.json"]
+    if MODE == "patched" and os.path.exists(os.path.join(REPO, "studio", "lib_post.php")):
+        files.append("lib_post.php")   # STUDIO_AUTOPOST_2026-10-13: push.php's body lives here now
+    for f in files:
         if MODE == "patched":
             src = open(os.path.join(REPO, "studio", f), encoding="utf-8").read()
         else:

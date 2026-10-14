@@ -35,7 +35,7 @@ Require valid-user
 #    Kept as a second line of defence - it must hold even if the auth block
 #    above is ever removed or misconfigured.
 # ---------------------------------------------------------------------------
-<FilesMatch "(omnisocials-key[-a-z]*\.txt|\.htpasswd)$">
+<FilesMatch "(omnisocials-key[-a-z]*\.txt|slack-webhook\.txt|\.htpasswd)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>
