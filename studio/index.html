@@ -847,7 +847,8 @@ var GD_FORMATS = [
   {id:'x',        w:1600, h:900,  ratio:'16:9', name:'X',         maxChars:280},
   {id:'ig_story', w:1080, h:1920, ratio:'9:16', name:'IG story',  maxChars:140},
   {id:'facebook', w:1080, h:1080, ratio:'1:1',  name:'Facebook',  maxChars:1000},
-  {id:'threads',  w:1080, h:1350, ratio:'4:5',  name:'Threads',   maxChars:500}
+  {id:'threads',  w:1080, h:1350, ratio:'4:5',  name:'Threads',   maxChars:500},
+  {id:'tiktok',   w:1080, h:1920, ratio:'9:16', name:'TikTok',    maxChars:900}
 ];
 
 /* STUDIO_PARITY_2026-09-26 ------------------------------------------------
@@ -865,7 +866,9 @@ var PLATFORM = {
   x:        {max:280,   house:280,  short:280, longCap:280,  fold:0,   frames:[1,4],  link:true, premium:25000, threadMax:25},
   ig_story: {max:140,   house:140,  short:140, longCap:140,  fold:0,   frames:[1,10], link:false},
   facebook: {max:63206, house:1000, short:300, longCap:3000, fold:480, frames:[1,10], link:true},
-  threads:  {max:500,   house:500,  short:300, longCap:500,  fold:0,   frames:[1,10], link:true}
+  threads:  {max:500,   house:500,  short:300, longCap:500,  fold:0,   frames:[1,10], link:true},
+  /* STUDIO_TIKTOK_2026-10-14: photo carousel, 1 to 35 images, 9:16, links not clickable */
+  tiktok:   {max:4000,  house:900,  short:300, longCap:2200, fold:0,   frames:[1,35], link:false}
 };
 var LENGTHS = [{id:'short',name:'Short'},{id:'standard',name:'Standard'},{id:'long',name:'Long'}];
 var XMODES  = [{id:'short',name:'280'},{id:'long',name:'Long (Premium)'},{id:'thread',name:'Thread'}];
@@ -1061,7 +1064,8 @@ var GB_FORMATS = [
   {id:'x',        w:1600, h:900,  ratio:'16:9', name:'x',         maxChars:280},
   {id:'ig_story', w:1080, h:1920, ratio:'9:16', name:'ig story',  maxChars:140},
   {id:'facebook', w:1080, h:1080, ratio:'1:1',  name:'facebook',  maxChars:1000},
-  {id:'threads',  w:1080, h:1350, ratio:'4:5',  name:'threads',   maxChars:500}
+  {id:'threads',  w:1080, h:1350, ratio:'4:5',  name:'threads',   maxChars:500},
+  {id:'tiktok',   w:1080, h:1920, ratio:'9:16', name:'tiktok',    maxChars:900}
 ];
 function formatsNow(){ return (S.brand === 'gabes') ? GB_FORMATS : GD_FORMATS; }
 function fmtNow(){ var L = formatsNow(); return L.filter(function(f){return f.id===S.format;})[0] || L[0]; }
@@ -1568,7 +1572,7 @@ var GOUDE = {
     var M=Math.round(76*s), Mv=Math.round((wide?52:76)*s), maxW=W-M*2, left=M;
     /* STUDIO_PARITY_2026-09-26: a story keeps its type clear of Instagram's
        own top bar and reply bar, so nothing on the card sits under the UI. */
-    var story=(f.id==='ig_story'), Mt=story?Math.round(250*s):Mv, Mb=story?Math.round(300*s):Mv;
+    var story=(f.id==='ig_story' || f.id==='tiktok'), Mt=story?Math.round(250*s):Mv, Mb=story?Math.round(300*s):Mv;
 
     var topY = Mt + Math.round(16*s), ruleTopY = topY + Math.round(24*s);
     if(S.toggles.wordmark || S.toggles.stamp){
@@ -2037,7 +2041,7 @@ var GABES = {
     var pad    = W*0.075;
     /* STUDIO_PARITY_2026-09-26: a story keeps clear of Instagram's top bar
        and reply bar, the same as the Goude side. */
-    var story  = (f.id === 'ig_story');
+    var story  = (f.id === 'ig_story' || f.id === 'tiktok');
     var padT   = story ? H*0.13 : pad, padB = story ? H*0.16 : pad;
     var kickPx = Math.max(W*0.026, 13);
     var footPx = Math.max(W*0.022, 12);
