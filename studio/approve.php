@@ -1,8 +1,10 @@
 <?php
 /* approve.php - STUDIO_AUTOPOST_2026-10-13. The approval page for the queue.
    One row per slot: the card, the statement, every network it goes to.
-   Approve schedules the row at its slot time; nothing posts from here
-   otherwise. Same login as the folder. */
+   STUDIO_HANDSOFF_2026-10-15: a slot is scheduled in OmniSocials when it is
+   queued, so this page is where a slot is stopped (Cancel) or sent back to
+   the Studio to change (the new version replaces it). Waiting only fills if
+   slots.json schedule_on_add is turned off. Same login as the folder. */
 $by = $_SERVER['REMOTE_USER'] ?? ($_SERVER['REDIRECT_REMOTE_USER'] ?? '');
 if ($by === '') { http_response_code(401); exit('not authenticated'); }
 header('Cache-Control: no-store');
@@ -90,7 +92,7 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 <div class="top">
   <div>
     <h1>The week, before it posts.</h1>
-    <p class="lede">Each row is one slot: the card and every network it goes to. Every slot posts on its own: about 90 minutes before its time it approves itself, unless someone rejects it first. Approve sends it early; Reject stops it.</p>
+    <p class="lede">Each row is one slot: the card and every network it goes to. A slot is scheduled the moment it is queued and posts on its own at its time. Cancel stops it. Change in the Studio sends a new version that replaces it.</p>
   </div>
   <div class="brands" id="brands">
     <button type="button" data-brand="goude">Goude</button>
@@ -100,8 +102,8 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 <div class="rule"></div>
 <div class="bar">
   <div class="tabs" id="tabs">
-    <button type="button" data-st="pending" class="on">Waiting</button>
-    <button type="button" data-st="scheduled">Scheduled</button>
+    <button type="button" data-st="scheduled" class="on">Scheduled</button>
+    <button type="button" data-st="pending">Waiting</button>
     <button type="button" data-st="">Everything</button>
   </div>
   <button class="btn" type="button" id="all">Approve all</button>
@@ -117,7 +119,7 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 
 <script>
 var BRAND = (new URLSearchParams(location.search).get('brand') === 'gabes') ? 'gabes' : 'goude';
-var STATUS = 'pending';
+var STATUS = 'scheduled';
 var ROWS = [];
 function $(id){ return document.getElementById(id); }
 function esc(t){ return String(t == null ? '' : t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
@@ -154,11 +156,11 @@ function groups(){
 function render(){
   var G = groups(), list = $('list'), lastDay = '';
   var pending = ROWS.filter(function(r){ return r.status === 'pending'; });
-  $('all').disabled = !pending.length;
+  $('all').disabled = !pending.length; $('all').style.display = pending.length ? '' : 'none';
   $('all').textContent = pending.length ? ('Approve all ' + pending.length) : 'Approve all';
   $('count').textContent = ROWS.length ? (G.length + ' slot' + (G.length === 1 ? '' : 's') + ', ' + ROWS.length + ' post' + (ROWS.length === 1 ? '' : 's')) : '';
   if(!G.length){
-    list.innerHTML = '<p class="empty">' + (STATUS === 'pending' ? 'Nothing waiting. Queue a week from the Studio and it lands here.' : 'Nothing here yet.') + '</p>';
+    list.innerHTML = '<p class="empty">' + (STATUS === 'pending' ? 'Nothing waiting. Queued slots go straight to Scheduled.' : (STATUS === 'scheduled' ? 'Nothing scheduled. Queue the week from the Studio and it lands here.' : 'Nothing here yet.')) + '</p>';
     return;
   }
   G.forEach(function(g){
@@ -178,11 +180,12 @@ function render(){
         + '<pre>' + esc(p.caption) + '</pre>'
         + (p.error ? '<p class="err">' + esc(p.error) + '</p>' : '') + '</details>';
     }).join('');
-    row.innerHTML = '<div class="grid' + (thumb === '<div></div>' ? ' nothumb' : '') + '">' + thumb + '<div><div class="when">' + esc(fmtWhen(g.at)) + '</div>' + (g.status === 'pending' ? '<div class="meta">Posts on its own unless rejected before ' + esc(fmtClock(g.at - AUTO_MIN*60)) + '</div>' : (g.posts.some(function(x){ return x.auto_approved; }) ? '<div class="meta">Approved automatically</div>' : ''))
+    row.innerHTML = '<div class="grid' + (thumb === '<div></div>' ? ' nothumb' : '') + '">' + thumb + '<div><div class="when">' + esc(fmtWhen(g.at)) + '</div>' + (g.status === 'pending' ? '<div class="meta">Posts on its own unless rejected before ' + esc(fmtClock(g.at - AUTO_MIN*60)) + '</div>' : (g.status === 'scheduled' && g.at > Date.now()/1000 ? '<div class="meta">Scheduled. Cancel before ' + esc(fmtClock(g.at - 120)) + ' to stop it.</div>' : ''))
       + '<button class="statement open" type="button">' + esc(g.statement || '') + '</button>'
       + '<div class="meta">' + esc(g.posts.length + ' network' + (g.posts.length === 1 ? '' : 's') + (g.colour ? ' · ' + g.colour : '') + (lead.issue ? ' · ' + lead.issue : '')) + '</div></div></div>'
       + '<div class="nets">' + nets + '</div>'
       + (g.status === 'pending' ? '<div class="acts"><button class="btn" type="button" data-act="approve">Approve</button><button class="btn ghost" type="button" data-act="reject">Reject</button><a class="btn ghost" href="' + studioLink(g, lead.platform) + '">Change in the Studio</a></div>' : '')
+      + ((g.status === 'failed' || g.status === 'unknown') ? '<div class="acts"><button class="btn ghost" type="button" data-act="reject">Clear this slot</button><a class="btn ghost" href="' + studioLink(g, lead.platform) + '">Change in the Studio</a></div>' : '')
       + (g.status === 'scheduled' && g.at > Date.now()/1000 + 120 ? '<div class="acts"><button class="btn ghost" type="button" data-act="cancel">Cancel this slot</button><a class="btn ghost" href="' + studioLink(g, lead.platform) + '">Change in the Studio</a></div>' : '')
       + '<p class="err" style="display:none"></p>';
     Array.prototype.forEach.call(row.querySelectorAll('[data-act]'), function(b){
@@ -218,7 +221,7 @@ function openRead(g, row){
     }
     $('qrFrames').innerHTML = fr;
     $('qrCap').textContent = p.caption || '';
-    $('qrNote').textContent = (p.status === 'pending') ? '' : (p.frames_kept ? ('Scheduled as post ' + ((p.result && p.result.post_id) || '') + '. To change it, cancel it in OmniSocials first, then queue the new version.') : ('This post is ' + p.status + '; its frames are with OmniSocials now.'));
+    $('qrNote').textContent = (p.status === 'pending') ? '' : (p.frames_kept ? ('Scheduled as post ' + ((p.result && p.result.post_id) || '') + '. To stop it, cancel the slot. To change it, change it in the Studio and queue it again; the new version replaces this one.') : ('This post is ' + p.status + '; its frames are with OmniSocials now.'));
     var foot = $('qrFoot'); foot.innerHTML = '';
     if(g.status === 'pending'){
       var a1 = document.createElement('button'); a1.className = 'btn'; a1.type = 'button'; a1.textContent = 'Approve this slot';
@@ -243,7 +246,7 @@ function decide(act, ids, row){
   if(act === 'cancel' && !confirm('Cancel this slot on every network? The posts are deleted in OmniSocials and the slot can be queued again.')) return;
   var btns = row ? row.querySelectorAll('button') : [$('all')];
   Array.prototype.forEach.call(btns, function(b){ b.disabled = true; });
-  if(row) row.querySelector('.acts .btn').textContent = (act === 'approve') ? 'Scheduling ...' : (act === 'cancel' ? 'Cancelling ...' : 'Rejecting ...');
+  if(row) row.querySelector('.acts .btn').textContent = (act === 'approve') ? 'Scheduling ...' : (act === 'cancel' ? 'Cancelling ...' : 'Clearing ...');
   fetch('queue.php', {method:'POST', credentials:'same-origin', headers:{'Content-Type':'application/json'}, body:JSON.stringify({action:act, ids:ids})})
     .then(function(r){ return r.text(); })
     .then(function(t){

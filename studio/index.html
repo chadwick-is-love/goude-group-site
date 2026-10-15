@@ -967,6 +967,9 @@ function sentencesLoose(t){
 function firstLoose(t,n){ return sentencesLoose(t).slice(0,n).join(' '); }
 function lower(t){ return clean(t).toLowerCase(); }
 function caps(t){ return clean(t).toUpperCase(); }
+/* the play often opens on its own label ("You, today: open ..."); the card
+   already says "Do this instead:", so the label goes (Kemmet, 2026-10-15) */
+function playText(t){ return String(t||'').replace(/^\s*(?:you(?:r [a-z ]{1,24})?(?:,\s*[a-z ]{1,16})?|owner|today|this week)\s*:\s+(?=\S)/i, ''); }
 function firstDoNot(t){
   var ss = sentences(t);
   for(var i=0;i<ss.length;i++){ if(/^(do not|don't|never|stop)\b/i.test(ss[i])) return ss[i]; }
@@ -974,6 +977,26 @@ function firstDoNot(t){
 }
 /* STUDIO_PARITY_2026-09-26: the number, pulled from any text. Shared so the
    >gabes number angle reads figures the same way the Briefing side does. */
+/* STUDIO_FIGURE_2026-10-15 (Kemmet's audit): the bare-number fallback took
+   the "31," out of "August 31," and the Thursday caption went live as
+   "31,. Stop paying...". A bare number now has to read as a quantity: not a
+   day after a month name, not a year, not a single digit, no trailing comma. */
+var MONTH_RE = /(?:jan|feb|mar|apr|may|jun|jul|aug|sep|sept|oct|nov|dec)[a-z]*\.?\s*$/i;
+function bareFigure(pool){
+  pool = String(pool||''); var re = /\d[\d,]*(?:\.\d+)?/g, m;
+  while((m = re.exec(pool))){
+    var n = m[0].replace(/[,.]+$/, ''), digits = n.replace(/,/g, '');
+    var before = pool.slice(Math.max(0, m.index - 14), m.index), after = pool.slice(m.index + m[0].length, m.index + m[0].length + 6);
+    if(digits.length < 2) continue;
+    if(MONTH_RE.test(before)) continue;                 /* August 31 */
+    if(/^(19|20)\d\d$/.test(digits)) continue;           /* 2026 */
+    if(/^(st|nd|rd|th)\b/i.test(after)) continue;       /* 31st */
+    if(/(no\.|number|issue|#)\s*$/i.test(before)) continue;
+    if(/^[a-z]/i.test(after)) continue;                  /* 4o, 5G */
+    return n;
+  }
+  return '';
+}
 function extractFigureFrom(pool){
   pool = String(pool||''); var m;
   m = pool.match(/\$\s?(\d[\d,]*(?:\.\d+)?)\s*(billion|million|trillion)/i);
@@ -984,8 +1007,7 @@ function extractFigureFrom(pool){
   if(m) return m[1] + '%';
   m = pool.match(/\$\s?(\d[\d,]*(?:\.\d+)?)/);
   if(m) return '$' + m[1];
-  m = pool.match(/\b(\d[\d,]{1,}(?:\.\d+)?)\b/);
-  return m ? m[1] : '';
+  return bareFigure(pool);
 }
 /* STUDIO_SEQUENCE_2026-09-26: a signal's body is the condition, the cost and
    the fix, then do this / not this. Most pages set them as three paragraphs;
@@ -1340,8 +1362,7 @@ var GOUDE = {
     if(m) return '$' + m[1];
     m = pool.match(/(\d[\d,]*(?:\.\d+)?)\s+(points|basis points)/i);
     if(m) return m[1] + ' pts';
-    m = pool.match(/(\d[\d,]*(?:\.\d+)?)/);
-    return m ? m[1] : '';
+    return bareFigure(pool);
   },
 
   issueTag:function(){
@@ -1363,7 +1384,7 @@ var GOUDE = {
       p.figure = GOUDE.extractFigure(it); p.statement = head2 || head1;
       p.support = firstSentences(it.changes,1); p.layout = 'figure';
     } else if(angle === 'mistake'){
-      p.statement = firstDoNot(it.notdo) || head1; p.support = it.play ? 'Do this instead: ' + firstSentences(it.play,1) : firstSentences(it.changes,1);
+      p.statement = firstDoNot(it.notdo) || head1; p.support = it.play ? 'Do this instead: ' + firstSentences(playText(it.play),1) : firstSentences(it.changes,1);
       p.kicker = caps(GOUDE.issueTag() + ' · What not to do');
     } else if(angle === 'line'){
       p.statement = it.pull || head1; p.support = head1; p.layout = 'quote';
@@ -1390,7 +1411,7 @@ var GOUDE = {
       action = 'It runs in the page. Nothing to download, no email, no signup.';
     } else if(angle === 'mistake'){
       hook = firstDoNot(it.notdo); body = moved1 + '\n\n' + changes2;
-      action = it.play ? 'Do this instead: ' + it.play : '';
+      action = it.play ? 'Do this instead: ' + playText(it.play) : '';
     } else if(angle === 'line'){
       hook = it.pull; body = firstSentences(it.headline,2) + '\n\n' + firstSentences(it.changes,1);
       action = it.play || '';
@@ -1447,7 +1468,7 @@ var GOUDE = {
       action = 'It runs in the page. Nothing to download, no email, no signup.';
       shortHook = hook;
     } else if(angle === 'mistake'){
-      hook = firstDoNot(it.notdo); action = it.play ? 'Do this instead: ' + it.play : ''; shortHook = hook;
+      hook = firstDoNot(it.notdo); action = it.play ? 'Do this instead: ' + playText(it.play) : ''; shortHook = hook;
     } else if(angle === 'line'){
       hook = it.pull; shortHook = it.pull;
     } else if(angle === 'figure'){
@@ -1472,7 +1493,7 @@ var GOUDE = {
     var lead = GOUDE.buildPost(it,'statement'); lead.support = hs.slice(1).join(' ');
     var what = {kicker:caps(T + ' · What happened'), statement:firstSentences(it.moved,2), support:'', layout:'statement', foot:'goudegroup.com/briefing', footR:''};
     var cost = {kicker:caps(T + ' · What it costs'), statement:firstSentences(it.changes,2), support:'', layout:'statement', foot:'goudegroup.com/briefing', footR:''};
-    var mistake = GOUDE.buildPost(it,'mistake'); mistake.support = it.play ? 'Do this instead: ' + firstSentences(it.play,1) : '';
+    var mistake = GOUDE.buildPost(it,'mistake'); mistake.support = it.play ? 'Do this instead: ' + firstSentences(playText(it.play),1) : '';
     var tool = it.toolName ? GOUDE.buildPost(it,'instrument') : null;
     var fallbacks = [GOUDE.buildPost(it,'line'), GOUDE.buildPost(it,'figure')];
     /* STUDIO_SET_2026-09-26: each card carries its role so the set can name it */
@@ -1492,7 +1513,7 @@ var GOUDE = {
     var T = GOUDE.issueTag();
     var one = GOUDE.buildPost(it,'statement'); one.support = ''; one.role = 'headline';
     var two = {kicker:caps(T + ' · The payoff'), statement: head2 || firstSentences(it.changes,2) || firstSentences(it.moved,2),
-               support: it.play ? 'Do this: ' + firstSentences(it.play,1) : (it.toolName ? 'The tool: ' + it.toolName : ''),
+               support: it.play ? 'Do this: ' + firstSentences(playText(it.play),1) : (it.toolName ? 'The tool: ' + it.toolName : ''),
                layout:'statement', foot:'goudegroup.com/briefing', footR:'A working tool in every article', role:'payoff'};
     if(!two.statement){ two.statement = firstSentences(it.changes,1) || head1; }
     return [one, two];
@@ -2667,8 +2688,19 @@ function queueWeek(via){
   var keep = {qIndex:S.qIndex, angle:S.angle, card:JSON.parse(JSON.stringify(S.card)), layout:S.layout, format:S.format,
               mode:S.mode, world:S.world, trioMood:S.trioMood, trioIndex:S.trioIndex, xMode:S.xMode,
               cap:$('capText').value, lastGen:S.lastGen, slides:S.slides, slideIndex:S.slideIndex};
-  var tally = {queued:0, slots:{}, skipped:[], failed:[]};
+  var tally = {queued:0, slots:{}, skipped:[], failed:[], held:0};
+  /* STUDIO_HANDSOFF_2026-10-15: a week run fills gaps. A slot and network
+     already scheduled, being posted, rejected or cancelled is left alone and
+     not even rendered, so a run that starts hours late (or twice) only does
+     what is still missing. A hand edit replaces with "Queue for its slot". */
+  var have = {};
   return loadSlots().then(function(cfg){
+    return fetch('queue.php?action=list&brand=' + S.brand, {cache:'no-store', credentials:'same-origin'})
+      .then(function(r){ return r.json(); })
+      .then(function(j){ (j && j.posts || []).forEach(function(r){ if(/^(scheduled|posting|pending|rejected|cancelled|unknown)$/.test(r.status)) have[r.key] = r.status; }); })
+      .catch(function(){})
+      .then(function(){ return cfg; });
+  }).then(function(cfg){
     var conf = cfg[S.brand] || {};
     var ids = formatsNow().map(function(f){ return f.id; });
     var pids = (conf.platforms || []).filter(function(p){ return ids.indexOf(p) !== -1 && channelFor(S.brand, p); });
@@ -2676,6 +2708,7 @@ function queueWeek(via){
     S._drawSlide = null; S.xMode = 'short';
     var rows = S.queue.map(function(q, i){ return i; });
     var r = 0, p = 0, rowSet = [], rowLead = '';
+    var todayNY = new Date().toLocaleDateString('en-CA', {timeZone:'America/New_York'});
     function step(){
       if(r >= rows.length) return Promise.resolve();
       var idx = rows[r], q = S.queue[idx];
@@ -2688,6 +2721,14 @@ function queueWeek(via){
         rowLead = rowSet.length ? rowSet[0].card.statement : S.card.statement;
       }
       var pid = pids[p];
+      /* a day already gone is not rendered at all; today's passed slots are
+         still refused by the server and counted there */
+      if(rowDate(q) && rowDate(q) < todayNY){
+        tally.failed.push(q.day + ' ' + q.slot + ' ' + pid + ': the slot has passed'); p++; if(p >= pids.length){ p = 0; r++; } return step();
+      }
+      if(have[S.brand + '|' + pid + '|' + rowDate(q) + '|' + slotKey(q)]){
+        tally.held++; p++; if(p >= pids.length){ p = 0; r++; } return step();
+      }
       S.format = pid;
       /* CK 2026-10-14: a carousel wherever the row has more than one thing to
          say, in the set's fixed order; a single card only when one card says
@@ -2723,13 +2764,14 @@ function queueWeek(via){
     var passed = tally.failed.filter(function(m){ return /has passed/.test(m); }).length;
     var already = tally.failed.filter(function(m){ return /already scheduled/.test(m); }).length;
     var other = tally.failed.filter(function(m){ return !/has passed|already scheduled/.test(m); });
-    var msg = tally.queued + ' posts across ' + n + ' slots are queued. Each posts on its own unless someone rejects it on approvals first.'
+    var msg = (tally.queued ? tally.queued + ' posts across ' + n + ' slots are scheduled. Each posts on its own at its time; cancel one on the review page to stop it.' : 'Nothing new to schedule.')
+      + (tally.held ? ' ' + tally.held + ' already queued, left alone.' : '')
       + (passed ? ' ' + passed + ' skipped because their slot has passed.' : '')
       + (already ? ' ' + already + ' already scheduled, left alone.' : '')
       + (tally.skipped.length ? ' ' + tally.skipped.length + ' held by the checks (first: ' + tally.skipped[0] + ').' : '')
       + (other.length ? ' ' + other.length + ' refused by the server (first: ' + other[0] + ').' : '');
-    autoStatus(msg, !!other.length || (!tally.queued && !passed && !already));
-    toast(tally.queued + ' posts queued for approval', 6000);
+    autoStatus(msg, !!other.length || (!tally.queued && !passed && !already && !tally.held));
+    toast(tally.queued + ' posts scheduled', 6000);
     if(tally.queued) queueAdd({action:'notify', brand:S.brand});
     return tally;
   }).catch(function(e){
@@ -2771,11 +2813,11 @@ function queueOne(){
       })()
     : renderBlob(f).then(function(b){ return [b]; });
   frames.then(function(bs){ return Promise.all(bs.map(blobToDataUrl)); })
-    .then(function(urls){ return queueAdd(rowBody(q, f.id, thread ? thread[0] : caption, urls, xMode, thread, 'hand')); })
+    .then(function(urls){ var b = rowBody(q, f.id, thread ? thread[0] : caption, urls, xMode, thread, 'hand'); b.replace = true; return queueAdd(b); })
     .then(function(res){
       if(!res.ok){ sendStatus('not queued: ' + res.error, true); return; }
-      sendStatus(res.post.label + ' for ' + q.day + ' ' + q.slot + ' is queued (replaces any earlier one for that slot). It posts on its own unless rejected on approvals.', false);
-      toast('queued for approval');
+      sendStatus(res.post.label + ' for ' + q.day + ' ' + q.slot + ' is scheduled for its slot and replaces the earlier version. Cancel it on the review page to stop it.', false);
+      toast('scheduled for its slot');
     }).catch(function(e){ sendStatus('not queued: ' + e.message, true); });
 }
 
@@ -2819,7 +2861,7 @@ function deepLink(){
     } else if(S.mode !== 'single'){ setMode('single'); }
     renderSegs(); setCaption(genCaption()); draw();
     var ed = $('editor'); if(ed && ed.scrollIntoView) ed.scrollIntoView({behavior:'smooth', block:'start'});
-    sendStatus('editing ' + q.day + ' ' + q.slot + ' on ' + fmtNow().name + '. Change anything, then press "Queue for its slot" to replace the waiting post.', false);
+    sendStatus('editing ' + q.day + ' ' + q.slot + ' on ' + fmtNow().name + '. Change anything, then press "Queue for its slot" to replace the scheduled post.', false);
   }, 400);
 }
 
@@ -2852,6 +2894,27 @@ function foldTo(t, cap){
   }
   var w = slice.lastIndexOf(' ');
   return (w > cap * 0.45 ? slice.slice(0, w) : slice).replace(/[\s,;:]+$/, '');
+}
+
+/* STUDIO_FOLD_2026-10-15 (Kemmet's audit): four captions went out or were
+   booked ending mid-sentence ("...search "is optimizing for the"), because a
+   body paragraph with no sentence end in reach was cut at a word. A caption
+   body now folds only on a paragraph or a sentence end; with neither in
+   reach the paragraph is dropped whole. Returns '' when nothing fits. */
+function foldSentences(t, cap){
+  t = String(t == null ? '' : t);
+  if(!cap || t.length <= cap) return t;
+  var slice = t.slice(0, cap + 1), best = -1, m;
+  var re = /\n\s*\n|[.!?]["'\u201d\u2019)]?(?=\s)/g;
+  while((m = re.exec(slice))){
+    var end = /^\n/.test(m[0]) ? m.index : m.index + m[0].length;
+    if(end <= cap) best = end;
+  }
+  if(best < 1) return '';
+  var out = t.slice(0, best).replace(/\s+$/, '');
+  /* "U.S." or "No. 13" are not sentence ends worth stopping on */
+  if(/\b(?:[A-Z]\.[A-Z]|No|Mr|Ms|Dr|vs|St|Inc|Co)\.$/.test(out)) return foldSentences(t, best - 2);
+  return out;
 }
 
 /* ============================================================
@@ -2897,7 +2960,7 @@ function composeCaption(parts, cap, L, length){
     var trial = out.concat([body[i]]);
     if(L(J(trial.concat(action, close))) <= cap){ out = trial; continue; }
     var room = cap - L(J(out.concat(action, close))) - 2;
-    if(room > 90){ var cut = foldTo(body[i], room); if(cut && L(cut) <= room && cut.length > 40) out.push(cut); }
+    if(room > 90){ var cut = foldSentences(body[i], room); if(cut && L(cut) <= room && cut.length > 40) out.push(cut); }
     break;
   }
   if(action.length && L(J(out.concat(action, close))) <= cap) out = out.concat(action);
@@ -2961,7 +3024,7 @@ function foldKeepClose(t, cap, L){
   var paras = t.split(/\n\s*\n/), at = -1;
   for(var i=paras.length-1;i>=0;i--){ URL_RE.lastIndex = 0; if(URL_RE.test(paras[i])){ at = i; break; } }
   URL_RE.lastIndex = 0;
-  if(at <= 0) return foldTo(t, cap);
+  if(at <= 0) return foldSentences(t, cap) || foldTo(t, cap);
   var tail = paras.slice(at).join('\n\n'), head = paras.slice(0, at).join('\n\n');
   var room = cap - L(tail) - 2;
   if(room < 40){
@@ -2969,8 +3032,8 @@ function foldKeepClose(t, cap, L){
     URL_RE.lastIndex = 0;
     tail = urlOnly; room = cap - L(tail) - 2;
   }
-  var h = foldTo(head, Math.max(20, room));
-  while(L(h) > room && h.length > 20) h = foldTo(h, h.length - 10);
+  var h = foldSentences(head, Math.max(20, room)) || foldTo(head, Math.max(20, room));
+  while(L(h) > room && h.length > 20) h = foldSentences(h, h.length - 10) || foldTo(h, h.length - 10);
   return (h + '\n\n' + tail).trim();
 }
 function fixCaption(){

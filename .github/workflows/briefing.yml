@@ -1,6 +1,6 @@
 name: The Briefing
 
-# Publishes the weekly issue at 12:01 AM Eastern every Monday.
+# Publishes the weekly issue every Monday (cron at 12:01 AM Eastern; any Monday start publishes once).
 #
 # Runs on Chadwick's Claude subscription via CLAUDE_CODE_OAUTH_TOKEN, not on metered
 # API credit. The commit comes from the GitHub runner, so it never touches the sandbox
@@ -32,20 +32,31 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     steps:
-      - name: Is it actually 12am Monday in New York
+      # BRIEFING_LATE_START_2026-10-15 (Kemmet's audit): GitHub starts the
+      # Monday cron 5 to 8 hours late on this repo, and the old guard only
+      # accepted 00:xx, so every run since at least 09-07 skipped and still
+      # showed success. Now any start on Monday New York time publishes,
+      # unless the live issue already carries today's date (a hand publish,
+      # or the other DST twin got there first). studio/cron.php on
+      # Hostinger's clock also starts this workflow on Monday if the date is
+      # missing, so the issue lands near 00:20 instead of mid-morning.
+      - uses: actions/checkout@v4
+
+      - name: Is it Monday in New York, and is this issue still unpublished
         id: clock
         run: |
-          LOCAL=$(TZ=America/New_York date '+%u %H')
+          DOW=$(TZ=America/New_York date '+%u')
+          TODAY=$(TZ=America/New_York date '+%B %-d, %Y')
           echo "New York time: $(TZ=America/New_York date)"
-          if [ "${{ github.event_name }}" = "schedule" ] && [ "$LOCAL" != "1 00" ]; then
-            echo "Not Monday 00:xx in New York (got '$LOCAL'). This is the other DST cron; skipping."
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$DOW" != "1" ]; then
+            echo "Not Monday in New York; skipping."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          elif [ "$DOW" = "1" ] && grep -A2 'class="mast-meta"' briefing/index.html | grep -q "$TODAY" && [ "${{ inputs.dry_run }}" != "true" ]; then
+            echo "briefing/index.html already carries $TODAY; nothing to publish."
             echo "skip=true" >> "$GITHUB_OUTPUT"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
-
-      - uses: actions/checkout@v4
-        if: steps.clock.outputs.skip != 'true'
 
       - uses: actions/setup-node@v4
         if: steps.clock.outputs.skip != 'true'
