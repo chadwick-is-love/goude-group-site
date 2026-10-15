@@ -79,7 +79,7 @@ function c_open_slots($brand, array $dates) {
             if ($at === null || $at < time() + 1200) continue;
             $has = false;
             foreach ($rows as $r) {
-                if ($r['date'] === $date && $r['slot_key'] === $slot && $r['status'] !== 'missed') { $has = true; break; }
+                if ($r['date'] === $date && $r['slot_key'] === $slot && !in_array($r['status'], ['missed', 'rejected', 'failed'], true)) { $has = true; break; }
             }
             if (!$has) $open[] = $date . ' ' . $slot;
         }
