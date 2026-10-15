@@ -5,7 +5,7 @@
  */
 (function () {
   'use strict';
-  var AGENT_ID = '';
+  var AGENT_ID = 'agent_6801m50s4y1dff4rsysrnsjg26tp';
   var SDK = 'https://cdn.jsdelivr.net/npm/@elevenlabs/client@1.26.0/dist/lib.iife.js';
   var BOOK = 'https://calendly.com/gabrielle-goudegroup/30min';
   var LEADS = 'https://formspree.io/f/xrenkbwg';
@@ -160,7 +160,9 @@
           var role = m.role || (m.source === 'ai' ? 'agent' : 'user');
           if (role === 'agent') typing.classList.remove('on');
           if (role === 'user' && kind === 'text') return; /* already shown when sent */
-          add(role === 'agent' ? 'agent' : 'user', m.message);
+          /* The voice model's delivery tags ([warm], [laugh]) are for speech, never the page. */
+          var text = role === 'agent' ? String(m.message || '').replace(/\[[a-z][a-z ]{0,24}\]\s*/gi, '').trim() : m.message;
+          if (text) add(role === 'agent' ? 'agent' : 'user', text);
         },
         onModeChange: function (m) { if (kind === 'voice') stateEl.textContent = m.mode === 'speaking' ? 'Speaking' : 'Listening'; },
         onDisconnect: function () {
