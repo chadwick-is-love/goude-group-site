@@ -2690,14 +2690,15 @@ function queueWeek(via){
               cap:$('capText').value, lastGen:S.lastGen, slides:S.slides, slideIndex:S.slideIndex};
   var tally = {queued:0, slots:{}, skipped:[], failed:[], held:0};
   /* STUDIO_HANDSOFF_2026-10-15: a week run fills gaps. A slot and network
-     already scheduled, being posted, rejected or cancelled is left alone and
+     already scheduled, being posted or cancelled is left alone (a cleared or
+     rejected one is filled again) and
      not even rendered, so a run that starts hours late (or twice) only does
      what is still missing. A hand edit replaces with "Queue for its slot". */
   var have = {};
   return loadSlots().then(function(cfg){
     return fetch('queue.php?action=list&brand=' + S.brand, {cache:'no-store', credentials:'same-origin'})
       .then(function(r){ return r.json(); })
-      .then(function(j){ (j && j.posts || []).forEach(function(r){ if(/^(scheduled|posting|pending|rejected|cancelled|unknown)$/.test(r.status)) have[r.key] = r.status; }); })
+      .then(function(j){ (j && j.posts || []).forEach(function(r){ if(/^(scheduled|posting|pending|cancelled|unknown)$/.test(r.status)) have[r.key] = r.status; }); })
       .catch(function(){})
       .then(function(){ return cfg; });
   }).then(function(cfg){
