@@ -9,6 +9,7 @@
   var SDK = 'https://cdn.jsdelivr.net/npm/@elevenlabs/client@1.26.0/dist/lib.iife.js';
   var BOOK = 'https://calendly.com/gabrielle-goudegroup/30min';
   var LEADS = 'https://formspree.io/f/xrenkbwg';
+  var EXAMPLE = 'https://roofing-company-review.vercel.app/';
   if (!AGENT_ID) return;
 
   var css = [
@@ -112,6 +113,11 @@
       add('note', '', 'Booking page: <a href="' + BOOK + '" target="_blank" rel="noopener">pick a 30 minute time</a>');
       track('agent_booking_opened');
       return w ? 'The booking page opened in a new tab.' : 'A booking link is now showing in the chat for them to click.';
+    },
+    show_example: function () {
+      add('note', '', 'An example Operating Review, for a fictional roofing company: <a href="' + EXAMPLE + '" target="_blank" rel="noopener">open the example</a>');
+      track('agent_example_shown');
+      return 'The example link is now showing in the chat.';
     },
     save_contact: function (p) {
       p = p || {};
