@@ -1,20 +1,21 @@
-# STUDIO_AUTOPOST_2026-10-13.
+# STUDIO_AUTOPOST_2026-10-13, made late-proof 2026-10-15 (Kemmet's audit).
 # Needs two repository secrets: STUDIO_USER and STUDIO_PASS, a Studio login.
 #
-# Queues posts for approval only. Nothing reaches a feed until someone
-# approves it on goudegroup.com/studio/approve.php.
-#   Goude:   Monday 06:05 New York, after the Briefing publishes at 00:01.
-#   >gabes:  weekdays 09:20 New York, after the day's signal publishes at 09:00.
-# GitHub cron is UTC only, so both DST offsets are scheduled and a guard drops
-# the run whose New York hour is wrong.
+# Each run opens the Studio headless and fills gaps: every slot and network
+# not yet queued is scheduled in OmniSocials; anything already scheduled,
+# rejected or cancelled is left alone. So a run can start hours late, or
+# twice, and still only do what is missing.
+#
+# GitHub fires scheduled jobs on this repo hours late, so these crons are the
+# fallback. The on-time trigger is studio/cron.php on Hostinger's cron, which
+# starts this workflow (workflow_dispatch) when a slot is open.
+#   >gabes: weekdays from 09:20 New York (the signal publishes at 9:00)
+#   Goude:  weekdays from 06:05 New York (the Briefing publishes Monday)
 name: Studio autoqueue
 
 on:
   schedule:
-    - cron: '5 10 * * 1'      # 06:05 New York during EDT  (goude)
-    - cron: '5 11 * * 1'      # 06:05 New York during EST  (goude)
-    - cron: '20 13 * * 1-5'   # 09:20 New York during EDT  (gabes)
-    - cron: '20 14 * * 1-5'   # 09:20 New York during EST  (gabes)
+    - cron: '17,47 10-22 * * 1-5'   # every 30 minutes through the New York working day (both DST offsets; the step below drops runs outside it)
   workflow_dispatch:
     inputs:
       brand:
@@ -36,21 +37,22 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Pick the brand, drop the wrong DST twin
+      - name: Pick the brands
         id: pick
         run: |
           LOCAL=$(TZ=America/New_York date +%H:%M)
-          BRAND=""
+          DOW=$(TZ=America/New_York date +%u)
+          BRANDS=""
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            BRAND="${{ github.event.inputs.brand }}"
-          else
-            case "$LOCAL" in
-              06:0*|06:1*) BRAND=goude ;;
-              09:2*|09:3*) BRAND=gabes ;;
-            esac
+            BRANDS="${{ github.event.inputs.brand }}"
+          elif [ "$DOW" -le 5 ]; then
+            # a late start still does the job: each run fills whatever is open
+            if [[ "$LOCAL" > "06:04" && "$LOCAL" < "17:01" ]]; then BRANDS="goude"; fi
+            if [[ "$LOCAL" > "09:19" && "$LOCAL" < "17:31" ]]; then BRANDS="$BRANDS gabes"; fi
           fi
-          echo "New York time $LOCAL, brand '${BRAND:-none}'"
-          echo "brand=$BRAND" >> "$GITHUB_OUTPUT"
+          BRANDS=$(echo $BRANDS)
+          echo "New York time $LOCAL, brands '${BRANDS:-none}'"
+          echo "brand=$BRANDS" >> "$GITHUB_OUTPUT"
       - uses: actions/setup-node@v4
         if: steps.pick.outputs.brand != ''
         with:
@@ -60,9 +62,14 @@ jobs:
         run: |
           npm install --no-save playwright@1.48.2
           npx playwright install --with-deps chromium
-      - name: Queue for approval
+      - name: Fill the open slots
         if: steps.pick.outputs.brand != ''
         env:
           STUDIO_USER: ${{ secrets.STUDIO_USER }}
           STUDIO_PASS: ${{ secrets.STUDIO_PASS }}
-        run: node scripts/studio-autoqueue.mjs "${{ steps.pick.outputs.brand }}"
+        run: |
+          rc=0
+          for b in ${{ steps.pick.outputs.brand }}; do
+            echo "== $b"; node scripts/studio-autoqueue.mjs "$b" || rc=1
+          done
+          exit $rc

@@ -8,3 +8,5 @@ omnisocials-key*.txt
 studio/data/posts.jsonl
 slack-webhook.txt
 studio/data/queue/
+studio/github-dispatch-token.txt
+studio/data/cron-state.json

@@ -1,7 +1,9 @@
 // studio-autoqueue.mjs - STUDIO_AUTOPOST_2026-10-13
 // Opens the Studio headless, lets it load the newest source for one brand,
-// and queues every row it can for approval (?auto=queue). Nothing posts from
-// here: every post waits on goudegroup.com/studio/approve.php for a person.
+// and fills the open slots (?auto=queue): each slot and network not queued
+// yet is scheduled in OmniSocials for its time (2026-10-15); anything already
+// scheduled, rejected or cancelled is left alone. Stop a post by cancelling
+// it on goudegroup.com/studio/approve.php.
 //
 //   STUDIO_USER=... STUDIO_PASS=... node scripts/studio-autoqueue.mjs goude
 //   STUDIO_URL overrides https://goudegroup.com/studio/ (the test rig uses it)
