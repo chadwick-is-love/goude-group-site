@@ -205,6 +205,8 @@
   }
 
   launch.addEventListener('click', function () { loadSdk().catch(function () {}); open(); });
+  /* The /gabrielle/ test page sets this so the panel is open on arrival. */
+  if (window.GG_AGENT_AUTOOPEN) { loadSdk().catch(function () {}); setTimeout(open, 300); }
   launch.addEventListener('pointerenter', function () { loadSdk().catch(function () {}); }, { once: true });
   $('.gg-x').addEventListener('click', close);
   root.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
