@@ -61,6 +61,8 @@ function c_dispatch($workflow, array $inputs, $why) {
         CURLOPT_POSTFIELDS => json_encode(['ref' => 'main', 'inputs' => (object)$inputs])]);
     $resp = curl_exec($ch); $code = curl_getinfo($ch, CURLINFO_HTTP_CODE); curl_close($ch);
     c_log("started $workflow " . json_encode($inputs) . " ($why): HTTP $code" . ($code === 204 ? '' : ' ' . substr((string)$resp, 0, 200)));
+    $st = c_state(); $st['last_dispatch'] = ['at' => time(), 'workflow' => $workflow, 'inputs' => $inputs, 'http' => $code,
+        'error' => $code === 204 ? '' : substr((string)$resp, 0, 160)]; c_state_save($st);
     return $code === 204;
 }
 // Due and not started inside $gapMin minutes: start it and remember when.
@@ -86,6 +88,11 @@ function c_open_slots($brand, array $dates) {
     }
     return $open;
 }
+
+// heartbeat: when this last ran and whether the token file is there (never
+// its contents), shown at the foot of the review page so a silent cron or
+// a missing token is visible without a shell
+$hb = c_state(); $hb['last_run'] = time(); $hb['token_present'] = (c_token() !== ''); c_state_save($hb);
 
 // 1. backstop
 $a = q_autoapprove();

@@ -63,7 +63,9 @@ if ($action === 'list') {
     $status = preg_replace('/[^a-z]/', '', $_GET['status'] ?? '');
     $rows = q_all($brand, $status);
     foreach ($rows as &$r) unset($r['request']);
-    q_out(['ok' => true, 'count' => count($rows), 'posts' => $rows, 'now' => time(), 'schedule_on_add' => q_schedule_on_add()]);
+    $cron = @json_decode(@file_get_contents(q_dir() . '/../cron-state.json'), true);
+    $cron = is_array($cron) ? array_intersect_key($cron, array_flip(['last_run', 'token_present', 'last_dispatch'])) : null;
+    q_out(['ok' => true, 'count' => count($rows), 'posts' => $rows, 'now' => time(), 'schedule_on_add' => q_schedule_on_add(), 'cron' => $cron, 'cron_path' => __DIR__ . '/cron.php']);
 }
 
 if ($action === 'img') {

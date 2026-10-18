@@ -86,6 +86,7 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 .qr-note{font-size:13px;color:var(--soft);margin-top:10px}
 .qr-foot{display:flex;gap:8px;flex-wrap:wrap;padding:12px 16px;border-top:1.5px solid var(--ink)}
 .qr-foot a.btn{text-decoration:none;display:inline-flex;align-items:center}
+.clock{margin:28px 0 8px;font-size:12px;opacity:.7}.clock.bad{opacity:1;color:#8a1f11;font-weight:600}
 </style>
 </head>
 <body>
@@ -110,6 +111,7 @@ h1{font-family:"Playfair Display",Georgia,serif;font-weight:600;font-size:34px;l
 </div>
 <div class="count" id="count"></div>
 <div id="list"></div>
+<p class="clock" id="clock"></p>
 <div class="qr" id="qr" role="dialog" aria-modal="true" aria-label="Quick read">
   <div class="qr-top"><div class="qr-when" id="qrWhen"></div><button class="qr-x" type="button" id="qrX">Close</button></div>
   <div class="qr-tabs" id="qrTabs"></div>
@@ -141,8 +143,18 @@ function load(){
     .then(function(r){ return r.json(); })
     .then(function(j){
       if(!j.ok){ $('count').textContent = j.error || 'could not load the queue'; return; }
-      ROWS = j.posts || []; render();
+      ROWS = j.posts || []; render(); clock(j);
     }).catch(function(e){ $('count').textContent = 'could not load the queue: ' + e.message; });
+}
+/* the server clock (studio/cron.php on Hostinger's cron): when it last ran,
+   whether its GitHub token is in place, and its last start of a queue run */
+function clock(j){
+  var c = j.cron, el = $('clock'), ago = function(t){ var m = Math.round((j.now - t) / 60); return m < 60 ? m + ' min ago' : Math.round(m / 60) + ' h ago'; };
+  if(!c || !c.last_run){ el.textContent = 'Server clock: has not run yet. In hPanel, Cron Jobs, the job must run exactly: /usr/bin/php ' + j.cron_path; el.className = 'clock bad'; return; }
+  var late = (j.now - c.last_run) > 1800, d = c.last_dispatch;
+  el.textContent = 'Server clock: last ran ' + ago(c.last_run) + (c.token_present ? '' : '. No github-dispatch-token.txt in studio/, so it cannot start a queue run')
+    + (d ? '. Last started ' + d.workflow.replace('.yml','') + (d.inputs && d.inputs.brand ? ' (' + d.inputs.brand + ')' : '') + ' ' + ago(d.at) + (d.http === 204 ? '' : ', refused by GitHub (' + d.http + '): ' + d.error) : '') + '.';
+  el.className = 'clock' + ((late || !c.token_present || (d && d.http !== 204)) ? ' bad' : '');
 }
 function groups(){
   var g = [], by = {};
