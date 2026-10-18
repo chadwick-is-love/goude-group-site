@@ -150,7 +150,7 @@ function load(){
    whether its GitHub token is in place, and its last start of a queue run */
 function clock(j){
   var c = j.cron, el = $('clock'), ago = function(t){ var m = Math.round((j.now - t) / 60); return m < 60 ? m + ' min ago' : Math.round(m / 60) + ' h ago'; };
-  if(!c || !c.last_run){ el.textContent = 'Server clock: has not run yet. Check the Cron Jobs entry in hPanel.'; el.className = 'clock bad'; return; }
+  if(!c || !c.last_run){ el.textContent = 'Server clock: has not run yet. In hPanel, Cron Jobs, the job must run exactly: /usr/bin/php ' + j.cron_path; el.className = 'clock bad'; return; }
   var late = (j.now - c.last_run) > 1800, d = c.last_dispatch;
   el.textContent = 'Server clock: last ran ' + ago(c.last_run) + (c.token_present ? '' : '. No github-dispatch-token.txt in studio/, so it cannot start a queue run')
     + (d ? '. Last started ' + d.workflow.replace('.yml','') + (d.inputs && d.inputs.brand ? ' (' + d.inputs.brand + ')' : '') + ' ' + ago(d.at) + (d.http === 204 ? '' : ', refused by GitHub (' + d.http + '): ' + d.error) : '') + '.';
