@@ -2457,7 +2457,7 @@ function selectSource(i){
     buildQueue();
     $('queue').classList.add('on');
     $('issueStamp').textContent = (S.meta.no || '') + (S.meta.date ? '  ·  ' + S.meta.date : '');
-    selectQueue(0);
+    loadRowSet(0);
     setStatus('loaded ' + (S.meta.no || 'it') + ': ' + S.items.length + (S.brand==='goude'?' stories, ':' signals, ') + S.queue.length + ' posts ready.', false);
   }, function(e){
     S.busy = false; if(S.brand !== brand) return;
@@ -2848,22 +2848,39 @@ function deepLink(){
     var idx = -1;
     S.queue.forEach(function(q, i){ if(idx < 0 && rowDate(q) === date && String(q.slot).toLowerCase() === String(slot).toLowerCase()) idx = i; });
     if(idx < 0){ sendStatus('that slot is not in this week any more.', true); return; }
-    var q = S.queue[idx], am = /^am$/i.test(String(q.slot));
-    selectQueue(idx);
+    var q = S.queue[idx];
     if(pid && formatsNow().some(function(f){ return f.id === pid; })) S.format = pid;
-    var it = S.items[q.itemIndex], eng = E();
-    var list = am ? eng.storySlides(it) : eng.pairSlides(it);
-    if(!am && list.length > 1){ S.angle = (S.brand === 'gabes') ? 'hook' : 'statement'; }
-    if(list.length > 1){
-      S.lastBuild = am ? 'story' : 'pair'; S.slideCount = 5;
-      setSlides(list, am ? 'the morning set' : 'the pair');
-      var fcap = Math.min(MAX_SLIDES, (PLATFORM[S.format] || PLATFORM.linkedin).frames[1]);
-      if(S.slides.length > fcap){ S.slides = fitSet(S.slides, fcap); selectSlide(0); }
-    } else if(S.mode !== 'single'){ setMode('single'); }
-    renderSegs(); setCaption(genCaption()); draw();
+    loadRowSet(idx);
     var ed = $('editor'); if(ed && ed.scrollIntoView) ed.scrollIntoView({behavior:'smooth', block:'start'});
     sendStatus('editing ' + q.day + ' ' + q.slot + ' on ' + fmtNow().name + '. Change anything, then press "Queue for its slot" to replace the scheduled post.', false);
   }, 400);
+}
+
+/* STUDIO_ROW_SET_2026-10-19: picking a row loads the set that row posts as,
+   the same set the week run and the review page's edit link build. Before
+   this, a row click swapped only the card text: the editor stayed in single
+   mode (or kept the previous row's slides), so "Queue for its slot" and
+   "Post" replaced a scheduled five-page LinkedIn document with one image.
+   That is how single cards reached the Goude LinkedIn page. */
+function loadRowSet(idx){
+  if(idx < 0 || idx >= S.queue.length) return;
+  var q = S.queue[idx], am = /^am$/i.test(String(q.slot));
+  selectQueue(idx);
+  var list = setForRow(q).map(function(sl){
+    var c = sl.card; return {kicker:c.kicker, statement:c.statement, figure:c.figure, support:c.support,
+      foot:c.foot, footR:c.footR, stack:c.stack, layout:sl.layout, angle:sl.angle, role:sl.role};
+  });
+  if(list.length > 1){
+    if(!am) S.angle = (S.brand === 'gabes') ? 'hook' : 'statement';
+    S.lastBuild = am ? 'story' : 'pair'; S.slideCount = 5;
+    setSlides(list, am ? 'the morning set' : 'the pair');
+    var fcap = Math.min(MAX_SLIDES, (PLATFORM[S.format] || PLATFORM.linkedin).frames[1]);
+    if(S.slides.length > fcap){ S.slides = fitSet(S.slides, fcap); selectSlide(0); }
+  } else {
+    S.slides = []; S.slideIndex = -1;
+    if(S.mode !== 'single') setMode('single');
+  }
+  renderSegs(); setCaption(genCaption()); draw();
 }
 
 /* headless: ?auto=queue&brand=goude|gabes loads the newest source and queues it */
@@ -3863,7 +3880,7 @@ function loadFromUrl(raw){
     S.items = out.items; S.meta = out.meta; srcDone(true);
     buildQueue(); $('queue').classList.add('on');
     $('issueStamp').textContent = (S.meta.no||'') + (S.meta.date ? '  ·  ' + S.meta.date : '');
-    selectQueue(0);
+    loadRowSet(0);
     setStatus('loaded ' + (S.meta.no || 'the issue') + ': ' + S.items.length + ' stories, ' + S.queue.length + ' posts ready.', false);
   }).catch(function(e){
     setStatus('could not read it: ' + e.message, true);
@@ -3879,7 +3896,7 @@ function loadFromPaste(){
   var out = GOUDE.parseDoc(doc, absoluteUrl($('srcUrl').value || '/briefing/'));
   if(!out.items.length){ setStatus('could not find any stories in that. copy the whole issue page.', true); return; }
   S.items = out.items; S.meta = out.meta; srcDone(true);
-  buildQueue(); $('queue').classList.add('on'); selectQueue(0);
+  buildQueue(); $('queue').classList.add('on'); loadRowSet(0);
   setStatus('loaded from paste: ' + out.items.length + ' stories.', false);
 }
 
@@ -3911,7 +3928,7 @@ function gabesFromPaste(txt){
     meta = {no:'pasted signal', date:it.date, title:'', lede:'', engine:'', url:'https://gabes.ai/letter/', kind:'signal'};
   }
   S.items = items; S.meta = meta; srcDone(true);
-  buildQueue(); $('queue').classList.add('on'); selectQueue(0);
+  buildQueue(); $('queue').classList.add('on'); loadRowSet(0);
   $('issueStamp').textContent = meta.no;
   setStatus('loaded from paste: ' + items.length + ' signal' + (items.length > 1 ? 's' : '') + '.', false);
 }
@@ -3938,7 +3955,7 @@ function bind(){
   });
   $('qgrid').addEventListener('click', function(e){
     var r = e.target.closest('[data-q]');
-    if(r) selectQueue(parseInt(r.getAttribute('data-q'),10));
+    if(r) loadRowSet(parseInt(r.getAttribute('data-q'),10));
   });
   $('angles').addEventListener('click', function(e){
     var b = e.target.closest('[data-angle]');
