@@ -28,6 +28,7 @@ $EXACT = array(
 $PREFIX = array(
     'https://gabes.ai/letter/issues/',
     'https://gabes.ai/letter/signals/',
+    'https://gabes.ai/letter/studio/',   /* STUDIO_PACK_2026-10-20: issue packs and their photographs */
 );
 
 $u = isset($_GET['u']) ? (string) $_GET['u'] : '';
@@ -79,7 +80,17 @@ if ($body === false) {
     exit;
 }
 
-$isJson = (substr($u, -5) === '.json');
+/* STUDIO_PACK_2026-10-20: photographs pass through same-origin so the
+   canvas that draws them can still export the slide. */
+$ext = strtolower(pathinfo(parse_url($u, PHP_URL_PATH), PATHINFO_EXTENSION));
+$IMG = array('webp' => 'image/webp', 'png' => 'image/png', 'jpg' => 'image/jpeg', 'jpeg' => 'image/jpeg');
+if (isset($IMG[$ext])) {
+    header('Content-Type: ' . $IMG[$ext]);
+    header('Cache-Control: private, max-age=3600');
+    echo $body;
+    exit;
+}
+$isJson = ($ext === 'json');
 header('Content-Type: ' . ($isJson ? 'application/json' : 'text/html') . '; charset=utf-8');
 header('Cache-Control: no-store');
 echo $body;
