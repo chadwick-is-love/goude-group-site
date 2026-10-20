@@ -895,7 +895,7 @@ var GD_WORLDS = [
 ];
 
 var GD_LAYOUTS = [{id:'statement',name:'Statement'},{id:'figure',name:'Figure'},{id:'quote',name:'Quote'},{id:'tool',name:'Tool'}];
-var GB_LAYOUTS = [{id:'card',name:'card'},{id:'quote',name:'quote'},{id:'week',name:'the week'},{id:'action',name:'do this'}];
+var GB_LAYOUTS = [{id:'card',name:'card'},{id:'quote',name:'quote'},{id:'week',name:'the week'},{id:'action',name:'do this'},{id:'image',name:'the picture'}];
 
 var ALIGNS     = [{id:'left',name:'Left'},{id:'center',name:'Centred'}];
 var GD_WEIGHTS = [{id:'400',name:'Light'},{id:'500',name:'Book'},{id:'600',name:'Bold'}];
@@ -1715,7 +1715,26 @@ var GOUDE = {
 
 var GB_SIGNALS_URL = 'https://gabes.ai/letter/signals/index.json';
 var GB_ISSUES_URL  = 'https://gabes.ai/letter/issues/index.json';
-var GB_FEED = {signals:[], issues:[], byDate:{}};
+/* STUDIO_PACK_2026-10-20: CK, the issue's photograph is the first slide with
+   the headline, then the condition, the cost, the fix and do this. An issue
+   pack is the week the letter built, every signal carrying its photograph
+   (a cutout on its own ground), its trio and the full body. It lives on
+   gabes.ai/letter/studio/, unlinked, and reads through fetch.php so the
+   canvas stays clean and the slides export. */
+var GB_PACKS_URL   = 'https://gabes.ai/letter/studio/index.json';
+var GB_PACK_BASE   = 'https://gabes.ai/letter/studio/';
+var GB_FEED = {signals:[], issues:[], packs:[], byDate:{}};
+var GB_IMG = {};
+function gbImage(url){
+  if(!url) return Promise.resolve(null);
+  if(GB_IMG[url] && GB_IMG[url].complete && GB_IMG[url].naturalWidth) return Promise.resolve(GB_IMG[url]);
+  return new Promise(function(res){
+    var im = new Image();
+    im.onload = function(){ GB_IMG[url] = im; res(im); };
+    im.onerror = function(){ res(null); };
+    im.src = viaFetcher(url);
+  });
+}
 
 function mondayOf(iso){
   var d = new Date(iso + 'T12:00:00Z');
@@ -1742,7 +1761,7 @@ var GABES = {
   fieldSub:'layout, alignment, weight, size. the trio up top paints the room and the card: never more than three colours on the surface.',
   postSub:'angle changes the shape of the card and the caption under it. every field is yours to overwrite.',
   footNote:'<b>house rules this side enforces:</b> lowercase everywhere, never a weight above medium, exactly three colours, no em dashes, no contractions in the lines it writes. the ask is always the letter, never a comment.',
-  tabs:[{id:'signal', name:'the signal'},{id:'letter', name:'the letter'}],
+  tabs:[{id:'signal', name:'the signal'},{id:'letter', name:'the letter'},{id:'issue', name:'the issue, with pictures'}],
   layouts:GB_LAYOUTS,
   weights:GB_WEIGHTS,
   angles:[
@@ -1767,10 +1786,12 @@ var GABES = {
     if(GB_FEED.signals.length) return Promise.resolve(GB_FEED);
     return Promise.all([
       fetch(viaFetcher(GB_SIGNALS_URL)).then(function(r){ if(!r.ok) throw new Error('signals '+r.status); return r.json(); }),
-      fetch(viaFetcher(GB_ISSUES_URL)).then(function(r){ if(!r.ok) throw new Error('issues '+r.status); return r.json(); })
+      fetch(viaFetcher(GB_ISSUES_URL)).then(function(r){ if(!r.ok) throw new Error('issues '+r.status); return r.json(); }),
+      fetch(viaFetcher(GB_PACKS_URL)).then(function(r){ return r.ok ? r.json() : {packs:[]}; }).catch(function(){ return {packs:[]}; })
     ]).then(function(res){
       GB_FEED.signals = (res[0].signals || []).slice();
       GB_FEED.issues  = (res[1].issues  || []).slice();
+      GB_FEED.packs   = (res[2].packs   || []).slice();
       GB_FEED.byDate = {};
       GB_FEED.signals.forEach(function(sg){ GB_FEED.byDate[sg.date] = sg; });
       return GB_FEED;
@@ -1779,6 +1800,11 @@ var GABES = {
 
   loadSources:function(tab){
     return GABES.ensureFeed().then(function(F){
+      if(tab === 'issue'){
+        return F.packs.slice().sort(function(a,b){ return b.n - a.n; }).map(function(pk, i){
+          return {no:'no. ' + pk.n, date:pk.range, tag:(pk.status || (i === 0 ? 'newest' : '')), kind:'pack', pack:pk};
+        });
+      }
       if(tab === 'letter'){
         return F.issues.map(function(is, i){
           return {no:'no. ' + is.n, date:is.range, tag:(is.current?'current':''), kind:'letter', issue:is};
@@ -1805,6 +1831,26 @@ var GABES = {
   },
 
   loadSource:function(src){
+    if(src.kind === 'pack'){
+      return fetch(viaFetcher(GB_PACK_BASE + src.pack.file)).then(function(r){ if(!r.ok) throw new Error('pack ' + r.status); return r.json(); }).then(function(pk){
+        var trios = [];
+        var items = (pk.signals || []).map(function(sg, i){
+          var t = sg.trio || [];
+          if(t.length === 3) trios.push([lower(sg.day || ('signal ' + (i+1))) + ' · no. ' + pk.n, t[0], t[1], t[2]]);
+          return {date:sg.date, day:sg.day || '', lane:sg.lane || '', hook:sg.hook || '',
+                  short:firstLoose(sg.hook || '', 1), line:sg.line || '',
+                  condition:sg.condition || '', cost:sg.cost || '', fix:sg.fix || '',
+                  doThis:sg.doThis || '', notThis:sg.notThis || '', accent:sg.accent || '', enriched:true,
+                  image:sg.image ? GB_PACK_BASE + sg.image : '', imageOx:+sg.ox || 0,
+                  trioIndex:(t.length === 3 ? trios.length - 1 : -1), source:sg.source || '',
+                  url:'https://gabes.ai/letter/' + (sg.url || pk.page || '')};
+        });
+        TRIOS.issue = trios;   /* the issue's own trios, one per signal, exactly as the letter wears them */
+        var meta = {no:'no. ' + pk.n, date:pk.range, title:pk.title || '', lede:'', engine:'',
+                    url:'https://gabes.ai/letter/' + (pk.page || ''), kind:'pack'};
+        return Promise.all(items.map(function(it){ return gbImage(it.image); })).then(function(){ return {items:items, meta:meta}; });
+      });
+    }
     return GABES.ensureFeed().then(function(F){
       var items, meta;
       if(src.kind === 'letter'){
@@ -1962,6 +2008,8 @@ var GABES = {
     var ln = lower(it.lane || 'the signal');
     function card(k, st){ return st ? {kicker:'> ' + ln, statement:lower(firstLoose(st,2)), support:'', layout:'card', foot:'gabes.ai/letter', footR:''} : null; }
     var hook = GABES.buildPost(it,'hook');
+    /* STUDIO_PACK_2026-10-20: with a photograph, slide one is the picture and the headline */
+    if(it.image && GB_IMG[it.image]){ hook.layout = 'image'; hook.image = it.image; if(it.accent) hook.figure = lower(it.accent); hook.imageOx = it.imageOx || 0; hook.support = ''; }
     /* STUDIO_GABES_SET_2026-10-14: CK, the set ends on what to do, and that
        card looks different. With a do this / not this, the fix keeps its own
        slide and the action closes; without one, the action is the fix. */
@@ -2032,6 +2080,39 @@ var GABES = {
      the line under it at one size for the whole set: the smallest size every
      body slide fits at, so they match and all still fit. */
   BODY_ROLES:{condition:1, cost:1, fix:1, extra:1, payoff:1},
+  drawPicture:function(ctx, f, im, head, accent, pad, maxW, zoneTop, zoneBot, ratio, trackEm){
+    var W = f.w, H = f.h, wide = (ratio === '16:9'), tall = (ratio === '9:16');
+    var headline = lower(S.card.statement || '');
+    var toks = GABES.tokens(headline, S.card.figure || '');
+    /* the headline takes the foot; the picture takes everything above it */
+    var hpx = W * (wide ? 0.042 : tall ? 0.066 : 0.060) * (S.scale/100), lines, lh = 1.04;
+    var hW = wide ? maxW * 0.62 : maxW;
+    var budget = (zoneBot - zoneTop) * (wide ? 0.5 : 0.36);
+    for(var g = 0; g < 40; g++){
+      ctx.font = '500 ' + hpx + 'px ' + OUTFIT;
+      lines = GABES.wrapTokens(ctx, toks, hW, hpx*trackEm);
+      if(lines.length*hpx*lh <= budget || hpx <= W*0.028) break;
+      hpx *= 0.95;
+    }
+    var blockH = lines.length*hpx*lh;
+    var hTop = zoneBot - blockH;
+    /* the picture: contain-fit into the space above the headline, never cropped */
+    var gap = W * (wide ? 0.02 : 0.04);
+    var boxT = zoneTop, boxB = wide ? zoneBot : (hTop - gap), boxL = pad, boxR = wide ? (W - pad - hW - gap*2) : (W - pad);
+    if(wide){ boxL = pad + hW + gap*2; boxR = W - pad; }
+    var bw = boxR - boxL, bh = boxB - boxT;
+    var sc = Math.min(bw / im.naturalWidth, bh / im.naturalHeight);
+    var dw = im.naturalWidth*sc, dh = im.naturalHeight*sc;
+    var ox = (S.card.imageOx || 0) / 100 * dw;   /* shift by the share the shadow takes so the object is centred */
+    var dx = boxL + (bw - dw)/2 + ox, dy = boxT + (bh - dh)/2;
+    ctx.drawImage(im, dx, dy, dw, dh);
+    /* the headline */
+    ctx.font = '500 ' + hpx + 'px ' + OUTFIT;
+    for(var i = 0; i < lines.length; i++){
+      GABES.drawTokenLine(ctx, lines[i], pad, hTop + hpx*0.82 + i*hpx*lh, hpx*trackEm, head, accent);
+    }
+    setLS(ctx,0);
+  },
   bodyText:function(t){ return lower(t).replace(/^\s*the (condition|cost|fix|read|knife) is\s+/, ''); },
   labelFor:function(role){ return ({condition:'the condition.', cost:'the cost.', fix:'the fix.', extra:'and.', payoff:'the payoff.'})[role] || ''; },
   bodyFit:function(ctx, text, maxW, availH, maxPx, minPx, trackEm){
@@ -2286,6 +2367,12 @@ var GABES = {
     if(S._drawSlide && S._drawSlide.i > 0 && GABES.BODY_ROLES[slideRole] && S.layout === 'card'){
       GABES.drawBody(ctx, f, head, accent, pad, maxW, zoneTop, zoneBot, ratio, slideRole); return;
     }
+
+    /* STUDIO_PACK_2026-10-20: the picture slide. The cutout sits whole on the
+       ground (never cropped), centred on the object, not its shadow; the
+       headline anchors to the foot below it, the accent phrase in the charge. */
+    var picture = (S.layout === 'image' && S.card.image && GB_IMG[S.card.image]) ? GB_IMG[S.card.image] : null;
+    if(picture){ return GABES.drawPicture(ctx, f, picture, head, accent, pad, maxW, zoneTop, zoneBot, ratio, trackEm); }
 
     /* the hook */
     var wt = S.weight || '500';
@@ -2604,7 +2691,12 @@ function rowDate(q){
 var DAYCOL_ON = true;
 try { DAYCOL_ON = (localStorage.getItem('studio.daycolours') !== 'off'); } catch(e){}
 function applyDayColour(q){
-  if(!DAYCOL_ON || !q) return null;
+  if(!q) return null;
+  var itq = (S.brand === 'gabes') ? S.items[q.itemIndex] : null;
+  if(itq && itq.trioIndex >= 0 && TRIOS.issue && TRIOS.issue[itq.trioIndex]){
+    S.trioMood = 'issue'; S.trioIndex = itq.trioIndex; return {trioMood:'issue', trioIndex:itq.trioIndex, name:TRIOS.issue[itq.trioIndex][0]};
+  }
+  if(!DAYCOL_ON) return null;
   var c = dayColourFor(S.brand, rowDate(q)); if(!c) return null;
   if(c.world) S.world = c.world;
   if(c.trioMood){ S.trioMood = c.trioMood; S.trioIndex = c.trioIndex; }
@@ -2868,7 +2960,7 @@ function loadRowSet(idx){
   selectQueue(idx);
   var list = setForRow(q).map(function(sl){
     var c = sl.card; return {kicker:c.kicker, statement:c.statement, figure:c.figure, support:c.support,
-      foot:c.foot, footR:c.footR, stack:c.stack, layout:sl.layout, angle:sl.angle, role:sl.role};
+      foot:c.foot, footR:c.footR, stack:c.stack, image:c.image || '', imageOx:c.imageOx || 0, layout:sl.layout, angle:sl.angle, role:sl.role};
   });
   if(list.length > 1){
     if(!am) S.angle = (S.brand === 'gabes') ? 'hook' : 'statement';
@@ -3146,6 +3238,7 @@ function applyPost(post){
   S.card.figure = post.figure || ''; S.card.support = post.support || '';
   S.card.foot = post.foot; S.card.footR = post.footR || '';
   S.card.stack = post.stack || [];
+  S.card.image = post.image || ''; S.card.imageOx = post.imageOx || 0;
   S.layout = post.layout;
   syncFields();
   setCaption(genCaption());   /* STUDIO_PARITY_2026-09-26: built for the platform and length on screen */
@@ -3609,7 +3702,7 @@ function postOmniSocials(){
    ============================================================ */
 function postToSlide(p){
   return {card:{kicker:p.kicker || '', statement:p.statement || '', figure:p.figure || '', support:p.support || '',
-                foot:p.foot || '', footR:p.footR || '', stack:p.stack || []},
+                foot:p.foot || '', footR:p.footR || '', stack:p.stack || [], image:p.image || '', imageOx:p.imageOx || 0},
           layout:p.layout || E().defaults.layout, angle:p.angle || S.angle, role:p.role || ''};
 }
 /* STUDIO_SET_2026-09-26: the line above the card and the tag on the editor
