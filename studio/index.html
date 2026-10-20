@@ -2529,7 +2529,10 @@ function renderTiles(){
   });
 }
 
-function selectSource(i){
+/* STUDIO_SRC_OPEN_2026-10-20: CK, the weeks closed on their own. The list
+   folds only when someone picks a tile; loading the first source on its own
+   (a tab switch, the first visit) leaves the list open to choose from. */
+function selectSource(i, picked){
   if(S.busy) return Promise.resolve();
   var src = S.sources[i];
   if(!src) return Promise.resolve();
@@ -2540,7 +2543,7 @@ function selectSource(i){
   return E().loadSource(src).then(function(out){
     if(S.brand !== brand){ S.busy = false; return; }
     S.items = out.items; S.meta = out.meta;
-    S.busy = false; renderTiles(); srcDone(true);
+    S.busy = false; renderTiles(); if(picked) srcDone(true);
     buildQueue();
     $('queue').classList.add('on');
     $('issueStamp').textContent = (S.meta.no || '') + (S.meta.date ? '  ·  ' + S.meta.date : '');
@@ -4044,7 +4047,7 @@ function bind(){
   });
   $('tiles').addEventListener('click', function(e){
     var t = e.target.closest('[data-src-i]');
-    if(t) selectSource(parseInt(t.getAttribute('data-src-i'),10));
+    if(t) selectSource(parseInt(t.getAttribute('data-src-i'),10), true);
   });
   $('qgrid').addEventListener('click', function(e){
     var r = e.target.closest('[data-q]');
