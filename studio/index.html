@@ -2595,8 +2595,9 @@ function buildQueue(){
       var p = eng.buildPost(it, a);
       return p.statement && !isDup(p.statement, used);
     })[0] || pair[1];
+    /* ONE_POST_A_DAY_2026-10-26 (CK): one post a day, the morning carousel.
+       The afternoon pair (headline then payoff) no longer runs on either side. */
     S.queue.push({day:day, slot:eng.slotLabel('AM'), itemIndex:i, angle:pair[0]});
-    S.queue.push({day:day, slot:eng.slotLabel('PM'), itemIndex:i, angle:pmAngle});
   }
   renderQueue();
 }
@@ -2746,8 +2747,8 @@ function rowBody(q, pid, caption, images, xMode, thread, via){
    "Queue for its slot" from the send bar. */
 /* The set a row posts as. Morning: the full story in its fixed order
    (Goude: lead, what happened, what it costs, the mistake, the tool;
-   >gabes: hook, condition, cost, fix, do this / not this). Afternoon: the
-   pair, headline then payoff. Duplicates are already dropped by
+   >gabes: hook, condition, cost, fix, do this / not this). That is the one
+   post of the day (2026-10-26); the afternoon pair is retired. Duplicates are already dropped by
    distinctSlides, so a row that only has one thing to say comes back as
    one card and posts single. */
 /* A network that takes fewer frames than the set keeps the first and the

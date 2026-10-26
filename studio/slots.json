@@ -1,5 +1,5 @@
 {
-  "_note": "STUDIO_AUTOPOST_2026-10-13. When each queued post publishes, per brand, in New York time. queue.php reads this; the Studio reads platforms. Edit times here, nowhere else. Slot keys match the queue rows (Goude AM/PM, >gabes am/pm). Times are a first default awaiting Chadwick's ruling. >gabes AM sits at noon because a signal only exists once it publishes at 9:00 ET, and the headless run queues it at 9:20. auto_approve_minutes: a pending post approves itself this many minutes before its time unless someone rejects it (CK 2026-10-14). schedule_on_add (CK and Kemmet 2026-10-15): a queued post is scheduled in OmniSocials at once and Cancel on the review page stops it; set false to go back to the approve step.",
+  "_note": "STUDIO_AUTOPOST_2026-10-13. When each queued post publishes, per brand, in New York time. queue.php reads this; the Studio reads platforms. Edit times here, nowhere else. Slot keys match the queue rows (Goude AM/PM, >gabes am/pm). Times are a first default awaiting Chadwick's ruling. >gabes AM sits at noon because a signal only exists once it publishes at 9:00 ET, and the headless run queues it at 9:20. auto_approve_minutes: a pending post approves itself this many minutes before its time unless someone rejects it (CK 2026-10-14). schedule_on_add (CK and Kemmet 2026-10-15): a queued post is scheduled in OmniSocials at once and Cancel on the review page stops it; set false to go back to the approve step. ONE_POST_A_DAY_2026-10-26 (CK): one post a day per side, the morning carousel only; the afternoon pair slot is gone. A scheduled post whose slot is no longer listed here is cancelled on the next autoapprove run.",
   "timezone": "America/New_York",
   "auto_approve_minutes": 90,
   "schedule_on_add": true,
@@ -13,8 +13,7 @@
       "threads"
     ],
     "slots": {
-      "AM": "08:30",
-      "PM": "12:30"
+      "AM": "08:30"
     }
   },
   "gabes": {
@@ -25,8 +24,7 @@
       "tiktok"
     ],
     "slots": {
-      "am": "12:00",
-      "pm": "18:00"
+      "am": "12:00"
     }
   }
 }
