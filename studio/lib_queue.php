@@ -252,13 +252,38 @@ function q_cancel($id, $by) {
     return ['id' => $id, 'ok' => true, 'status' => 'cancelled', 'post_id' => $pid, 'already_gone' => ($st === 404)];
 }
 
+// ONE_POST_A_DAY_2026-10-26: a post whose slot has been taken out of
+// slots.json is retired. Scheduled ones are deleted in OmniSocials through
+// q_cancel; pending ones never reached OmniSocials and are just closed.
+// Runs inside q_autoapprove, so the hourly GitHub job and the Hostinger cron
+// both clean up after a slot is removed.
+function q_retire_orphans() {
+    $cfg = q_slots(); $done = [];
+    foreach (q_all() as $row) {
+        $brand = $row['brand'] ?? ''; $slot = (string)($row['slot_key'] ?? '');
+        if ($slot === '' || !isset($cfg[$brand]['slots']) || array_key_exists($slot, $cfg[$brand]['slots'])) continue;
+        if ((int)$row['publish_at'] < time() + 120) continue;
+        if ($row['status'] === 'scheduled') {
+            $res = q_cancel($row['id'], 'slot retired');
+        } elseif ($row['status'] === 'pending') {
+            $row['status'] = 'cancelled'; $row['cancelled_by'] = 'slot retired'; $row['updated_at'] = gmdate('c');
+            q_save($row); q_drop_images($row);
+            $res = ['id' => $row['id'], 'ok' => true, 'status' => 'cancelled'];
+        } else continue;
+        $res['brand'] = $brand; $res['slot'] = $row['date'] . ' ' . $slot . ' ' . $row['platform'] . ' retired';
+        $done[] = $res;
+        if (count($done) >= 40) break;
+    }
+    return $done;
+}
+
 // Approve every pending post inside the window. With schedule_on_add on,
 // nothing should be pending; this stays as the backstop for rows that were
 // queued with it off.
 function q_autoapprove() {
     $cfg = q_slots();
     $win = max(15, min(720, (int)($cfg['auto_approve_minutes'] ?? 90))) * 60;
-    $done = [];
+    $done = q_retire_orphans();
     foreach (q_all('', 'pending') as $row) {
         if ((int)$row['publish_at'] > time() + $win) continue;
         if (count($done) >= 30) break;
