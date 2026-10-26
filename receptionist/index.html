@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Call the Receptionist | The Goude Group</title>
+<meta name="description" content="A live AI phone receptionist. Call it, book a time, ask for a person. It answers in about a second.">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta property="og:title" content="Call it. It picks up.">
+<meta property="og:description" content="A live AI phone receptionist from The Goude Group. Call it and try to trip it up.">
+<meta property="og:url" content="https://goudegroup.com/receptionist/">
+<meta property="og:image" content="https://goudegroup.com/og-image.png">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+/* ============================================================
+   DEMO SETTINGS. Fill these in once Kemmet has the Retell number.
+   NUMBER: the demo line in E.164 form, e.g. "+16155550142".
+   Leave it empty and the page shows "going live today" instead.
+   RETELL: optional web widget. Public key from Retell's dashboard
+   (Settings, Public keys), plus the voice agent id and/or chat
+   agent id. Leave publicKey empty and no widget loads.
+   ============================================================ */
+window.DEMO = {
+  NUMBER: "",
+  RETELL: { publicKey: "", voiceAgentId: "", chatAgentId: "", whiteLabel: "" }
+};
+</script>
+<style>
+:root{
+  --navy:#071426; --navy-2:#0e2341; --navy-3:#163257;
+  --baby:#a9d8ef; --baby-2:#c6e4f4; --baby-3:#7fc0e2;
+  --display:"Playfair Display",Georgia,"Times New Roman",serif;
+  --body:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--navy)}
+body{background:var(--navy);color:var(--baby);font-family:var(--body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:max(16px,4vw)}
+.label{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+h1,h2,h3{font-family:var(--display);font-weight:500;letter-spacing:-.025em;line-height:1;text-wrap:balance}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+
+/* fields */
+.f-navy{background:var(--navy);color:var(--baby)}
+.f-baby{background:var(--baby);color:var(--navy)}
+.f-baby ::selection{background:var(--navy);color:var(--baby)}
+
+/* header */
+header.top{position:sticky;top:0;z-index:20;background:var(--navy);border-bottom:1px solid rgba(169,216,239,.22)}
+header.top .wrap{display:flex;align-items:center;gap:16px;padding-block:14px}
+.wordmark{font-family:var(--display);font-size:22px;letter-spacing:-.02em;text-decoration:none;color:var(--baby)}
+.live{margin-left:auto;display:flex;align-items:center;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--baby);box-shadow:0 0 0 0 rgba(169,216,239,.7);animation:pulse 1.8s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(169,216,239,.7)}80%,100%{box-shadow:0 0 0 14px rgba(169,216,239,0)}}
+
+/* hero */
+.hero{position:relative;padding-block:clamp(56px,9vw,120px) clamp(48px,7vw,96px);overflow:hidden}
+.hero .eyebrow{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:clamp(24px,4vw,44px)}
+.hero h1{font-size:clamp(56px,11.5vw,184px);line-height:.88;letter-spacing:-.045em}
+.hero h1 .two{display:block;color:var(--baby-2);padding-left:clamp(0px,8vw,140px)}
+.hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--baby),var(--baby-3),var(--baby-2),var(--baby));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sheen 7s linear infinite}
+@keyframes sheen{to{background-position:300% 0}}
+.hero .lede{max-width:46ch;font-size:clamp(18px,1.6vw,22px);margin-top:clamp(28px,4vw,48px)}
+
+.callbox{margin-top:clamp(36px,5vw,64px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(20px,3vw,40px);align-items:end;border-top:2px solid var(--baby);padding-top:clamp(18px,2.4vw,28px)}
+.number{display:block;font-family:var(--display);font-size:clamp(44px,8.6vw,136px);line-height:.95;letter-spacing:-.03em;text-decoration:none;color:var(--baby);font-variant-numeric:lining-nums tabular-nums;word-break:keep-all}
+.number:hover{color:var(--baby-2)}
+.number.pending{font-size:clamp(34px,5.6vw,88px);color:var(--baby-3)}
+.callbox .sub{margin-top:12px;font-size:15px;color:var(--baby-2)}
+.actions{display:flex;flex-direction:column;gap:10px;align-items:stretch;min-width:240px}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:10px;border-radius:999px;padding:16px 26px;font:600 16px/1 var(--body);text-decoration:none;border:2px solid var(--baby);background:transparent;color:var(--baby);cursor:pointer;transition:background .2s,color .2s}
+.btn.solid{background:var(--baby);color:var(--navy)}
+.btn.solid:hover{background:var(--baby-2);border-color:var(--baby-2)}
+.btn.ghost:hover{background:var(--navy-3)}
+.btn[hidden]{display:none}
+
+/* waveform: colour motion only */
+.wave{position:absolute;right:max(16px,4vw);top:clamp(40px,7vw,90px);display:flex;gap:6px;align-items:center;height:120px;opacity:.9}
+.wave i{display:block;width:7px;border-radius:4px;background:var(--baby-3);height:var(--h);animation:wave 1.4s ease-in-out infinite;animation-delay:var(--d)}
+@keyframes wave{0%,100%{transform:scaleY(.25);background:var(--navy-3)}50%{transform:scaleY(1);background:var(--baby)}}
+
+/* sections */
+section{padding-block:clamp(64px,9vw,128px)}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(36px,5vw,64px)}
+.sec-head h2{font-size:clamp(40px,6.4vw,96px);line-height:.92}
+.sec-head p{font-size:clamp(17px,1.4vw,20px);max-width:48ch}
+
+/* try it */
+.tries{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--navy)}
+.try{padding:clamp(20px,2.4vw,30px) clamp(16px,2vw,26px) clamp(26px,3vw,36px) 0;border-right:1px solid rgba(7,20,38,.25);display:flex;flex-direction:column;gap:14px;min-width:0}
+.try+.try{padding-left:clamp(16px,2vw,26px)}
+.try:last-child{border-right:0}
+.try .n{font-family:var(--display);font-size:clamp(52px,6vw,88px);line-height:.8}
+.try q{font-family:var(--display);font-size:clamp(23px,2.2vw,31px);line-height:1.12;quotes:"\201C" "\201D"}
+.try p{font-size:15.5px}
+.try .watch{margin-top:auto;padding-top:14px;border-top:1px solid rgba(7,20,38,.25);font-size:14px;font-weight:600}
+
+/* after the call */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--baby)}
+.step{padding:clamp(20px,2.4vw,30px) clamp(16px,2vw,26px) 0 0;min-width:0}
+.step+.step{padding-left:clamp(16px,2vw,26px);border-left:1px solid rgba(169,216,239,.25)}
+.step .t{font-family:var(--display);font-size:clamp(44px,5vw,76px);line-height:.9;color:var(--baby-2)}
+.step h3{font-size:clamp(22px,2vw,28px);margin:16px 0 10px}
+.step p{font-size:15.5px;color:var(--baby-2)}
+
+/* yours */
+.yours{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:start}
+.yours h2{font-size:clamp(40px,6.4vw,96px);line-height:.92}
+.facts{border-top:2px solid var(--navy)}
+.facts div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;padding:16px 0;border-bottom:1px solid rgba(7,20,38,.25);align-items:baseline}
+.facts b{font-family:var(--display);font-weight:500;font-size:clamp(26px,2.6vw,36px);white-space:nowrap}
+.yours .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.f-baby .btn{border-color:var(--navy);color:var(--navy)}
+.f-baby .btn.solid{background:var(--navy);color:var(--baby)}
+.f-baby .btn.solid:hover{background:var(--navy-3);border-color:var(--navy-3)}
+
+footer{padding-block:40px 56px;font-size:14px;color:var(--baby-2);border-top:1px solid rgba(169,216,239,.22)}
+footer .wrap{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap}
+
+@media (max-width:980px){
+  .tries,.flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .try:nth-child(2){border-right:0}
+  .try:nth-child(3){padding-left:0}
+  .try:nth-child(n+3){border-top:1px solid rgba(7,20,38,.25)}
+  .step:nth-child(3){padding-left:0;border-left:0}
+  .step:nth-child(n+3){margin-top:28px}
+  .sec-head,.yours{grid-template-columns:minmax(0,1fr)}
+  .wave{opacity:.35}
+}
+@media (max-width:640px){
+  .callbox{grid-template-columns:minmax(0,1fr)}
+  .actions{min-width:0}
+  .tries,.flow{grid-template-columns:minmax(0,1fr)}
+  .try,.try+.try{padding-left:0;border-right:0}
+  .try+.try{border-top:1px solid rgba(7,20,38,.25)}
+  .step,.step+.step{padding-left:0;border-left:0}
+  .step+.step{margin-top:28px}
+  .wave{display:none}
+  .live .label{font-size:11px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="wordmark" href="/">The Goude Group</a>
+    <div class="live"><span class="dot" aria-hidden="true"></span><span class="label">Answering now</span></div>
+  </div>
+</header>
+
+<main>
+  <section class="hero f-navy">
+    <div class="wave" aria-hidden="true">
+      <i style="--h:40px;--d:0s"></i><i style="--h:90px;--d:.1s"></i><i style="--h:60px;--d:.2s"></i><i style="--h:120px;--d:.3s"></i><i style="--h:70px;--d:.4s"></i><i style="--h:100px;--d:.5s"></i><i style="--h:50px;--d:.6s"></i><i style="--h:110px;--d:.7s"></i><i style="--h:44px;--d:.8s"></i>
+    </div>
+    <div class="wrap">
+      <div class="eyebrow"><span class="label">Live demo</span><span class="label">AI phone receptionist</span></div>
+      <h1>Call it.<span class="two">It <em>picks up.</em></span></h1>
+      <p class="lede">The receptionist that answers every call in about a second, books the appointment, and puts a person on the line the moment the caller asks for one. Day, night, weekends, overflow.</p>
+
+      <div class="callbox">
+        <div>
+          <a class="number" id="number" href="#">Loading</a>
+          <p class="sub" id="numberSub">Tap to call from your phone. It answers for The Goude Group.</p>
+        </div>
+        <div class="actions">
+          <a class="btn solid" id="callBtn" href="#">Call the receptionist</a>
+          <button class="btn ghost" id="webBtn" type="button" hidden>Talk to it in the browser</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-baby" id="try">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Try to trip it up.</h2>
+        <p>Four things to say on the call. The last one is the one owners remember: a real person's phone rings while the caller is still on the line.</p>
+      </div>
+      <div class="tries">
+        <div class="try">
+          <span class="n">1</span>
+          <q>Can I get a time with someone this week?</q>
+          <p>It checks the calendar and offers real open slots, then books the one you pick.</p>
+          <span class="watch">Watch for: the confirmation it reads back</span>
+        </div>
+        <div class="try">
+          <span class="n">2</span>
+          <q>What do you actually do, and what does it cost?</q>
+          <p>It answers from approved material only. Anything it was not given, it takes down for the team instead of guessing.</p>
+          <span class="watch">Watch for: no made-up answers</span>
+        </div>
+        <div class="try">
+          <span class="n">3</span>
+          <q>Sorry, wait, actually</q>
+          <p>Cut it off mid-sentence. It stops, listens, and picks up from what you said.</p>
+          <span class="watch">Watch for: how fast it yields</span>
+        </div>
+        <div class="try">
+          <span class="n">4</span>
+          <q>Can I talk to a person?</q>
+          <p>It hands you to a live person on the spot. The hottest lead is the one still on the phone.</p>
+          <span class="watch">Watch for: the live transfer</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-navy" id="after">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Then the work nobody sees.</h2>
+        <p>Every call leaves a trail the owner can read in a minute, and nothing waits on someone remembering to call back.</p>
+      </div>
+      <div class="flow">
+        <div class="step"><span class="t">1s</span><h3>Answered</h3><p>Every call, including the ones that land at 9 at night or while the front desk is on the other line.</p></div>
+        <div class="step"><span class="t">Booked</span><h3>On the calendar</h3><p>The appointment goes straight onto the business calendar, with the caller's details attached.</p></div>
+        <div class="step"><span class="t">Sent</span><h3>A written summary</h3><p>Who called, what they wanted, what was booked. Recorded and transcribed, with consent where the law requires it.</p></div>
+        <div class="step"><span class="t">Counted</span><h3>Every month</h3><p>Calls answered, bookings made, people transferred. The numbers, not a feeling that it is working.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="f-baby" id="yours">
+    <div class="wrap yours">
+      <div>
+        <h2>Put it on your line.</h2>
+        <div class="cta">
+          <a class="btn solid" href="https://calendly.com/gabrielle-goudegroup/30min">Book a call</a>
+          <a class="btn" href="#try">Call it again</a>
+        </div>
+      </div>
+      <div class="facts">
+        <div><span>Written with you: services, hours, rules, what it never says</span><b>1 call</b></div>
+        <div><span>From kickoff to answering your line</span><b>21 days</b></div>
+        <div><span>Locations on one receptionist, routed by line</span><b>Any</b></div>
+        <div><span>Your phone number stays yours</span><b>Kept</b></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>The Goude Group, Franklin, Tennessee</span>
+    <span>This demo agent answers for The Goude Group. Calls may be recorded with your consent.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var D = window.DEMO || {}, num = (D.NUMBER || "").replace(/[^\d+]/g, "");
+  var a = document.getElementById("number"), sub = document.getElementById("numberSub"), call = document.getElementById("callBtn");
+  function pretty(n){
+    var d = n.replace(/\D/g, "");
+    if (d.length === 11 && d[0] === "1") d = d.slice(1);
+    return d.length === 10 ? "(" + d.slice(0,3) + ") " + d.slice(3,6) + "‑" + d.slice(6) : n;
+  }
+  if (num) {
+    var tel = "tel:" + (num[0] === "+" ? num : "+1" + num);
+    a.textContent = pretty(num); a.href = tel; call.href = tel;
+    [a, call].forEach(function(el){ el.addEventListener("click", function(){ try{ gtag("event","demo_call",{number:num}); }catch(e){} }); });
+  } else {
+    a.textContent = "Going live today"; a.classList.add("pending"); a.removeAttribute("href");
+    sub.textContent = "The demo line is being switched on. Check back shortly, or book a call below.";
+    call.textContent = "Book a call instead"; call.href = "https://calendly.com/gabrielle-goudegroup/30min";
+  }
+
+  /* Retell web widget, styled to the page. Loads only when a public key is set. */
+  var R = D.RETELL || {};
+  if (R.publicKey && (R.voiceAgentId || R.chatAgentId)) {
+    var s = document.createElement("script");
+    s.id = "retell-widget"; s.type = "module"; s.src = "https://dashboard.retellai.com/retell-widget-v2.js";
+    if (R.chatAgentId) { s.setAttribute("data-public-key", R.publicKey); s.setAttribute("data-agent-id", R.chatAgentId); }
+    if (R.voiceAgentId) { s.setAttribute("data-voice-public-key", R.publicKey); s.setAttribute("data-voice-agent-id", R.voiceAgentId); }
+    s.setAttribute("data-title", "The Goude Group");
+    s.setAttribute("data-bot-name", "Receptionist");
+    s.setAttribute("data-theme-color", "#071426");
+    s.setAttribute("data-component-color", "#a9d8ef");
+    s.setAttribute("data-fab-text", "Talk to the receptionist");
+    s.setAttribute("data-show-ai-popup", "false");
+    if (R.whiteLabel) s.setAttribute("data-white-label", R.whiteLabel);
+    document.head.appendChild(s);
+    var web = document.getElementById("webBtn"); web.hidden = false;
+    web.addEventListener("click", function(){
+      var fab = document.querySelector("retell-widget, #retell-chat-widget button, [class*='retell'] button");
+      if (fab && fab.click) fab.click(); else alert("Use the button at the bottom right of the page.");
+    });
+  }
+})();
+</script>
+</body>
+</html>
