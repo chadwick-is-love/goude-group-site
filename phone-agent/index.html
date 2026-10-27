@@ -32,9 +32,12 @@
    RETELL: optional web widget. Public key from Retell's dashboard
    (Settings, Public keys), plus the voice agent id and/or chat
    agent id. Leave publicKey empty and no widget loads.
+   Since 2026-10-27 the page uses OUR Gabrielle widget instead (one script
+   tag at the end of the page, served by goude-agent-widget.vercel.app; the
+   Retell key stays on that server). Keep RETELL empty so only one widget loads.
    ============================================================ */
 window.DEMO = {
-  NUMBER: "",
+  NUMBER: "+16152377969",
   RETELL: { publicKey: "", voiceAgentId: "", chatAgentId: "", whiteLabel: "" }
 };
 </script>
@@ -308,5 +311,6 @@ footer .wrap{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap}
   }
 })();
 </script>
+<script src="https://goude-agent-widget.vercel.app/widget.js" defer></script>
 </body>
 </html>
