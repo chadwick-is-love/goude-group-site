@@ -2,13 +2,604 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,follow">
-<title>The Goude Group</title>
-<link rel="canonical" href="https://goudegroup.com/">
-<meta http-equiv="refresh" content="0; url=/">
-<script>location.replace("/");</script>
-<style>html,body{background:#071426;color:#a9d8ef;font:16px Inter,system-ui,sans-serif;margin:0}a{color:inherit}p{padding:24px}</style>
+<title>Trading Desk | The Goude Group</title>
+<meta name="description" content="A member trading platform built by The Goude Group. Live chart, P&L, positions, setups, sessions and a desk assistant in one console.">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap">
+<script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+<style>
+:root{
+  --bg:#c6e4f4; --sh-d:rgba(52,104,148,.36); --sh-l:rgba(238,250,255,.96); --edge:rgba(255,255,255,.5);
+  --ink:#071426; --ink-2:#0d2240; --ink-3:#3f6788; --ink-4:#8cb7d3;
+  --accent:#14558a; --accent-2:#a9d8ef;
+  --deep:#071426; --deep-2:#0d2240; --deep-fg:#eaf6fd; --deep-mute:rgba(201,232,248,.68);
+  --up:#0b6b4f; --down:#a3233d; --warn:#9a5a08;
+  --raised:11px 11px 24px var(--sh-d), -11px -11px 24px var(--sh-l);
+  --raised-sm:5px 5px 12px var(--sh-d), -5px -5px 12px var(--sh-l);
+  --raised-xl:20px 20px 44px var(--sh-d), -20px -20px 44px var(--sh-l);
+  --pressed:inset 8px 8px 16px var(--sh-d), inset -8px -8px 16px var(--sh-l);
+  --pressed-sm:inset 3px 3px 7px var(--sh-d), inset -3px -3px 7px var(--sh-l);
+  --f-display:"Playfair Display", Georgia, serif;
+  --f-body:"Inter", "Helvetica Neue", Arial, sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  --logo-filter:none;
+  color-scheme:light;
+}
+:root[data-skin="cream"]{
+  --bg:#f3efe4; --sh-d:rgba(122,140,164,.38); --sh-l:rgba(255,255,255,.98); --edge:rgba(255,255,255,.75);
+  --ink-3:#4a6a86; --ink-4:#a9bfd0;
+}
+:root[data-skin="navy"]{
+  --bg:#0d2240; --sh-d:rgba(2,8,18,.7); --sh-l:rgba(98,150,205,.13); --edge:rgba(169,216,239,.08);
+  --ink:#eaf6fd; --ink-2:#c6e4f4; --ink-3:#7fa9c9; --ink-4:#355a7e;
+  --accent:#a9d8ef; --accent-2:#14558a;
+  --deep:#c6e4f4; --deep-2:#a9d8ef; --deep-fg:#071426; --deep-mute:rgba(7,20,38,.66);
+  --up:#5fd3a6; --down:#ff8fa3; --warn:#ffc37a;
+  --logo-filter:invert(1) brightness(1.05);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;transition:background .35s ease,color .35s ease}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.num{font-family:var(--f-mono);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.up{color:var(--up)}.down{color:var(--down)}.warn{color:var(--warn)}
+.label{font-family:var(--f-mono);font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;margin:0;letter-spacing:-.015em;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1440px;margin:0 auto;padding:22px max(16px,env(safe-area-inset-left,0px)) 96px max(16px,env(safe-area-inset-right,0px))}
+
+/* top bar */
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px 24px;flex-wrap:wrap;padding:6px 4px 26px}
+.brand{display:flex;align-items:center;gap:18px;min-width:0}
+.brand img{height:34px;width:auto;display:block;filter:var(--logo-filter)}
+.brand .div{width:1px;height:28px;background:var(--ink-4)}
+.brand .prod{display:flex;flex-direction:column;line-height:1.1}
+.brand .prod b{font-family:var(--f-display);font-size:1.25rem;font-weight:700}
+.bar-r{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.live{display:inline-flex;align-items:center;gap:9px;padding:9px 16px;border-radius:999px;box-shadow:var(--pressed-sm);font-family:var(--f-mono);font-size:.74rem;font-weight:700;letter-spacing:.12em;color:var(--ink-2)}
+.live i{width:9px;height:9px;border-radius:50%;background:var(--up);box-shadow:0 0 0 0 var(--up);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--up) 55%,transparent)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.skins{display:inline-flex;gap:4px;padding:5px;border-radius:999px;box-shadow:var(--pressed-sm)}
+.skins button{border:0;background:transparent;border-radius:999px;min-height:34px;padding:0 12px 0 6px;display:inline-flex;align-items:center;gap:7px;font-size:.8rem;font-weight:600;color:var(--ink-3);cursor:pointer}
+.skins button i{width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ink-3) 45%,transparent)}
+.skins button[aria-pressed="true"]{background:var(--bg);box-shadow:var(--raised-sm);color:var(--ink)}
+.me{width:42px;height:42px;border-radius:50%;box-shadow:var(--raised-sm);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-weight:700;font-size:1rem}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;padding:34px 38px;border-radius:40px;box-shadow:var(--raised-xl);margin-bottom:30px}
+.hello .date{margin-bottom:10px}
+.hello h1{font-size:clamp(2.3rem,5.2vw,4.4rem);font-weight:800;line-height:.98;letter-spacing:-.035em}
+.hello h1 em{font-style:italic;font-weight:500;color:var(--accent)}
+.hello p{margin-top:14px;color:var(--ink-2);font-size:1.02rem;max-width:58ch}
+.heads{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:28px}
+.head{padding:18px 20px;border-radius:24px;box-shadow:var(--pressed)}
+.head b{display:block;font-family:var(--f-mono);font-weight:700;font-size:clamp(1.25rem,2.2vw,1.85rem);letter-spacing:-.03em;margin-top:8px;transition:color .3s}
+.head span.s{font-size:.82rem;color:var(--ink-3)}
+.bigclock{display:flex;flex-direction:column;align-items:center;gap:12px}
+.clock{width:240px;height:240px;border-radius:50%;box-shadow:var(--raised-xl);display:flex;align-items:center;justify-content:center;border:1px solid var(--edge)}
+.clock-in{width:204px;height:204px;border-radius:50%;box-shadow:var(--pressed);position:relative}
+.clock-in .nm{position:absolute;width:24px;height:24px;margin:-12px 0 0 -12px;display:flex;align-items:center;justify-content:center;font-family:var(--f-mono);font-weight:600;font-size:.72rem;color:var(--ink-3)}
+.clock-in .nm.q{font-family:var(--f-display);font-size:1.15rem;font-weight:700;color:var(--ink)}
+.hand{position:absolute;left:50%;bottom:50%;transform-origin:50% 100%;border-radius:4px}
+.hand.h{width:6px;height:25%;margin-left:-3px;background:var(--ink)}
+.hand.m{width:4px;height:36%;margin-left:-2px;background:var(--ink-2)}
+.hand.s{width:2px;height:41%;margin-left:-1px;background:var(--accent);transition:transform .2s cubic-bezier(.4,2.3,.6,1)}
+.pip{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--bg);box-shadow:var(--raised-sm);left:50%;top:50%;transform:translate(-50%,-50%)}
+.zones{display:flex;gap:16px}
+.zone{text-align:center;padding:8px 14px;border-radius:16px;box-shadow:var(--raised-sm);min-width:92px}
+.zone b{display:block;font-family:var(--f-mono);font-size:.95rem}
+.zone span{font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.zone .o{color:var(--up)} .zone .c{color:var(--ink-3)}
+
+/* grid */
+.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:28px}
+.card{position:relative;border-radius:32px;box-shadow:var(--raised);padding:24px 26px;display:flex;flex-direction:column;gap:18px;min-width:0;background:var(--bg);transition:background .35s ease}
+.c8{grid-column:span 8}.c4{grid-column:span 4}.c6{grid-column:span 6}.c12{grid-column:span 12}.c5{grid-column:span 5}.c7{grid-column:span 7}
+.card-h{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card-h h2{font-size:1.45rem}
+.card-h .sub{margin-top:4px;font-size:.88rem;color:var(--ink-3)}
+.x{width:38px;height:38px;flex:none;border:0;border-radius:50%;background:var(--bg);box-shadow:var(--raised-sm);cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink-2)}
+.x:active,.x[aria-pressed="true"]{box-shadow:var(--pressed-sm)}
+.x svg{width:15px;height:15px}
+.card.full{position:fixed;inset:max(14px,env(safe-area-inset-top,0px)) 14px 14px 14px;z-index:60;overflow:auto;box-shadow:var(--raised-xl)}
+.scrim{position:fixed;inset:0;z-index:55;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+
+/* chart card */
+.tabs{display:flex;gap:6px;padding:5px;border-radius:999px;box-shadow:var(--pressed-sm);flex-wrap:wrap;align-self:flex-start}
+.tabs button{border:0;background:transparent;border-radius:999px;min-height:36px;padding:0 16px;font-family:var(--f-mono);font-weight:700;font-size:.8rem;color:var(--ink-3);cursor:pointer}
+.tabs button[aria-pressed="true"]{background:var(--bg);box-shadow:var(--raised-sm);color:var(--ink)}
+.quote{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
+.quote .px{font-family:var(--f-mono);font-weight:700;font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.04em;line-height:1}
+.quote .ch{font-family:var(--f-mono);font-weight:600;font-size:1rem}
+.quote .nm{color:var(--ink-3);font-size:.9rem}
+.chart-well{border-radius:24px;box-shadow:var(--pressed);padding:10px}
+.chart{position:relative;height:430px}
+.card.full .chart{height:calc(100vh - 290px)}
+.chart .lw{position:absolute;inset:0}
+.legend{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:.82rem;color:var(--ink-2)}
+.legend i{display:inline-block;width:18px;height:3px;border-radius:2px;margin-right:8px;vertical-align:middle}
+.tfs{display:flex;gap:16px}
+.tfs button{border:0;background:none;padding:6px 0;font-family:var(--f-mono);font-size:.8rem;font-weight:700;color:var(--ink-3);border-bottom:2px solid transparent;cursor:pointer}
+.tfs button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.chart-foot{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+
+/* deep card */
+.deep{background:var(--deep);color:var(--deep-fg);box-shadow:var(--raised);overflow:hidden}
+.deep .label{color:var(--deep-mute)}
+.deep h2{font-size:1.7rem;line-height:1.15}
+.deep p{color:var(--deep-mute);font-size:.98rem}
+.deep .brief{display:flex;flex-direction:column;gap:14px}
+.deep .brief div{padding-left:16px;border-left:2px solid color-mix(in srgb,var(--deep-fg) 25%,transparent);font-size:.95rem;line-height:1.45}
+.deep .brief b{color:var(--deep-fg);font-weight:600}
+.deep .glow{position:absolute;right:-90px;top:-90px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent-2) 55%,transparent),transparent 70%);pointer-events:none}
+.deep-btn{align-self:flex-start;border:0;border-radius:999px;padding:12px 20px;font-weight:600;background:var(--deep-fg);color:var(--deep);cursor:pointer}
+
+/* P&L */
+.pnl-big{font-family:var(--f-mono);font-weight:700;font-size:clamp(2.4rem,4.6vw,3.6rem);letter-spacing:-.05em;line-height:1}
+.ring-row{display:grid;grid-template-columns:auto minmax(0,1fr);gap:24px;align-items:center}
+.ring{width:132px;height:132px;border-radius:50%;box-shadow:var(--raised);display:flex;align-items:center;justify-content:center;position:relative}
+.ring svg{width:112px;height:112px;transform:rotate(-90deg)}
+.ring .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .in b{font-family:var(--f-mono);font-size:1.45rem}
+.ring .in span{font-size:.7rem;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase}
+.kv{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 18px;margin:0}
+.kv dt{font-size:.78rem;color:var(--ink-3)}
+.kv dd{margin:2px 0 0;font-family:var(--f-mono);font-weight:700;font-size:1.05rem}
+
+/* positions */
+.tbl-well{border-radius:24px;box-shadow:var(--pressed);padding:6px 14px;overflow:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th{font-family:var(--f-mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);font-weight:700;text-align:left;padding:12px 10px;white-space:nowrap}
+td{padding:14px 10px;border-top:1px solid color-mix(in srgb,var(--ink-3) 18%,transparent);white-space:nowrap;font-size:.94rem}
+th.r,td.r{text-align:right}
+td.tk b{font-family:var(--f-mono);font-weight:700}
+td.tk span{display:block;font-size:.76rem;color:var(--ink-3)}
+td.m{font-family:var(--f-mono)}
+.side{display:inline-block;font-family:var(--f-mono);font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:4px 9px;border-radius:999px;box-shadow:var(--raised-sm)}
+.flash-up{animation:fu .7s ease}.flash-down{animation:fd .7s ease}
+@keyframes fu{0%{background:color-mix(in srgb,var(--up) 22%,transparent)}100%{background:transparent}}
+@keyframes fd{0%{background:color-mix(in srgb,var(--down) 22%,transparent)}100%{background:transparent}}
+
+/* ledger */
+.ledger-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:26px;align-items:end}
+.ytd b{display:block;font-family:var(--f-display);font-weight:800;font-size:clamp(3.2rem,7vw,5.4rem);line-height:.9;letter-spacing:-.04em;color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.stat{padding:14px 16px;border-radius:20px;box-shadow:var(--raised-sm)}
+.stat b{display:block;font-family:var(--f-mono);font-size:1.25rem;margin-top:4px}
+.eq{height:230px;position:relative}
+.card.full .eq{height:calc(100vh - 330px)}
+.eq .lw{position:absolute;inset:0}
+
+/* sessions */
+.sessions{display:flex;flex-direction:column;gap:12px}
+.sess{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:16px;align-items:center;padding:14px 16px;border-radius:20px;box-shadow:var(--pressed-sm)}
+.sess.now{box-shadow:var(--raised-sm)}
+.sess .t{font-family:var(--f-mono);font-weight:700;font-size:.9rem}
+.sess h3{font-family:var(--f-body);font-weight:600;font-size:1rem;letter-spacing:0}
+.sess p{font-size:.82rem;color:var(--ink-3)}
+.pill{font-family:var(--f-mono);font-size:.7rem;font-weight:700;letter-spacing:.08em;padding:6px 11px;border-radius:999px;white-space:nowrap}
+.pill.done{color:var(--ink-3);box-shadow:var(--pressed-sm)}
+.pill.soon{color:var(--bg);background:var(--accent)}
+.pill.later{color:var(--ink-2);box-shadow:var(--raised-sm)}
+
+/* setups */
+.setups{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.setup{padding:20px;border-radius:26px;box-shadow:var(--raised-sm);display:flex;flex-direction:column;gap:14px}
+.setup-h{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.setup-h b{font-family:var(--f-mono);font-size:1.15rem}
+.setup .why{font-size:.9rem;color:var(--ink-2);line-height:1.45}
+.lad{display:flex;flex-direction:column;gap:2px;border-radius:18px;box-shadow:var(--pressed-sm);padding:8px 14px}
+.lad div{display:flex;justify-content:space-between;padding:6px 0;font-size:.86rem}
+.lad div span{color:var(--ink-3)}
+.lad div b{font-family:var(--f-mono)}
+.rr{height:10px;border-radius:999px;box-shadow:var(--pressed-sm);position:relative;overflow:hidden}
+.rr i{position:absolute;top:2px;bottom:2px;border-radius:999px}
+.setup-f{display:flex;justify-content:space-between;font-size:.8rem;color:var(--ink-3)}
+.setup-f b{font-family:var(--f-mono);color:var(--ink)}
+
+/* challenge + watch */
+.watch{display:flex;flex-direction:column}
+.w{display:grid;grid-template-columns:minmax(0,1fr) 90px auto;gap:14px;align-items:center;padding:12px 4px;border-bottom:1px solid color-mix(in srgb,var(--ink-3) 16%,transparent)}
+.w:last-child{border-bottom:0}
+.w b{font-family:var(--f-mono)}
+.w span{display:block;font-size:.76rem;color:var(--ink-3)}
+.w svg{width:100%;height:28px;display:block}
+.w .r{text-align:right;font-family:var(--f-mono);font-size:.92rem}
+.days{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:8px}
+.day{aspect-ratio:1;border-radius:10px;box-shadow:var(--pressed-sm)}
+.day.g{box-shadow:var(--raised-sm);background:color-mix(in srgb,var(--up) 26%,var(--bg))}
+.day.r{box-shadow:var(--raised-sm);background:color-mix(in srgb,var(--down) 24%,var(--bg))}
+.day.t{box-shadow:var(--raised-sm);outline:2px solid var(--accent);outline-offset:2px}
+
+/* assistant */
+.fab{position:fixed;right:max(20px,env(safe-area-inset-right,0px));bottom:max(20px,env(safe-area-inset-bottom,0px));z-index:70;border:0;border-radius:999px;padding:0 22px 0 8px;min-height:60px;display:flex;align-items:center;gap:12px;background:var(--deep);color:var(--deep-fg);font-weight:600;cursor:pointer;box-shadow:0 18px 40px -12px color-mix(in srgb,var(--deep) 70%,transparent)}
+.fab i{width:44px;height:44px;border-radius:50%;background:var(--deep-fg);color:var(--deep);display:flex;align-items:center;justify-content:center;font-family:var(--f-display);font-style:italic;font-weight:700;font-size:1.25rem}
+.asst{position:fixed;right:max(20px,env(safe-area-inset-right,0px));bottom:96px;z-index:71;width:min(420px,calc(100vw - 32px));max-height:min(620px,calc(100vh - 130px));border-radius:30px;background:var(--bg);box-shadow:var(--raised-xl);display:flex;flex-direction:column;overflow:hidden}
+.asst-h{padding:20px 22px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.asst-h h3{font-size:1.3rem}
+.asst-log{flex:1;overflow:auto;padding:4px 22px 10px;display:flex;flex-direction:column;gap:12px}
+.msg{padding:12px 16px;border-radius:20px;font-size:.92rem;line-height:1.45;max-width:90%}
+.msg.a{box-shadow:var(--pressed-sm);align-self:flex-start}
+.msg.u{background:var(--deep);color:var(--deep-fg);align-self:flex-end}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 22px 20px}
+.chips button{border:0;background:var(--bg);box-shadow:var(--raised-sm);border-radius:999px;padding:9px 14px;font-size:.82rem;font-weight:600;color:var(--accent);cursor:pointer}
+.chips button:active{box-shadow:var(--pressed-sm)}
+.typing span{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--ink-3);margin-right:4px;animation:bl 1s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes bl{0%,100%{opacity:.25}50%{opacity:1}}
+
+.foot{margin-top:48px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--ink-3);padding:0 6px}
+.foot a{color:var(--ink-2)}
+[hidden]{display:none!important}
+
+@media (max-width:1180px){.c8,.c4,.c6,.c5,.c7{grid-column:span 12}.setups{grid-template-columns:1fr 1fr}.heads{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:860px){.hero{grid-template-columns:1fr;padding:26px 22px}.bigclock{flex-direction:row;justify-content:space-between;flex-wrap:wrap}.clock{width:170px;height:170px}.clock-in{width:144px;height:144px}.clock-in .nm{display:none}.clock-in .nm.q{display:flex}.zones{flex-direction:column;gap:10px}.ledger-top{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.tabs button{padding:0 10px;min-height:32px}.bigclock{justify-content:center;gap:18px}.zones{flex-direction:row;flex-wrap:wrap;justify-content:center}.zone{min-width:86px}.grid{gap:20px}.card{padding:20px 16px;border-radius:26px}.setups{grid-template-columns:1fr}.chart{height:320px}.brand .div,.brand .prod .label{display:none}.skins button span{display:none}.skins button{padding:0 6px}.ring-row{grid-template-columns:1fr;justify-items:start}.fab span{display:none}.fab{padding:0 8px}.hello h1{font-size:2.2rem}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
-<body><p>This page has moved. <a href="/">Go to The Goude Group</a>.</p></body>
+<body>
+<div class="wrap">
+
+  <header class="bar">
+    <div class="brand">
+      <a href="/" aria-label="The Goude Group"><img src="/goude-logo.png" alt="The Goude Group"></a>
+      <span class="div" aria-hidden="true"></span>
+      <div class="prod"><b>Trading Desk</b><span class="label">Member platform</span></div>
+    </div>
+    <div class="bar-r">
+      <span class="live"><i aria-hidden="true"></i>LIVE <span id="feed-time" class="num"></span></span>
+      <span class="skins" role="group" aria-label="Colour">
+        <button type="button" data-skin="blue" aria-pressed="true"><i style="background:#c6e4f4"></i><span>Baby blue</span></button>
+        <button type="button" data-skin="cream" aria-pressed="false"><i style="background:#f3efe4"></i><span>Cream</span></button>
+        <button type="button" data-skin="navy" aria-pressed="false"><i style="background:#0d2240"></i><span>Navy</span></button>
+      </span>
+      <span class="me" aria-label="Member">MR</span>
+    </div>
+  </header>
+
+  <section class="hero" aria-label="Today">
+    <div class="hello">
+      <div class="label date" id="today"></div>
+      <h1><span id="greet">Good morning</span>, <em>Marcus.</em></h1>
+      <p id="hero-line">You are green on the day and inside your risk budget. The desk has two setups armed and the room is on the calendar below.</p>
+      <div class="heads">
+        <div class="head"><span class="label">Today P&amp;L</span><b id="h-pnl" class="up">+$0.00</b><span class="s" id="h-pnl-s">realized and open</span></div>
+        <div class="head"><span class="label">Account equity</span><b id="h-eq">$0</b><span class="s">funded account, 200K tier</span></div>
+        <div class="head"><span class="label">Win rate, 30d</span><b>68.4%</b><span class="s">54 of 79 trades</span></div>
+        <div class="head"><span class="label">Open risk</span><b id="h-risk">1.2%</b><span class="s">of a 5.0% open-risk cap</span></div>
+      </div>
+    </div>
+    <div class="bigclock">
+      <div class="clock" aria-hidden="true"><div class="clock-in" id="clock"></div></div>
+      <div class="zones" id="zones"></div>
+    </div>
+  </section>
+
+  <main class="grid">
+
+    <section class="card c8" id="card-chart">
+      <div class="card-h">
+        <div class="tabs" role="group" aria-label="Instrument" id="syms"></div>
+        <button class="x" type="button" data-expand aria-label="Expand chart"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 2h4v4M6 14H2v-4M14 2l-5 5M2 14l5-5"/></svg></button>
+      </div>
+      <div class="quote"><span class="px" id="q-px">0</span><span class="ch" id="q-ch">0</span><span class="nm" id="q-nm"></span></div>
+      <div class="chart-well"><div class="chart"><div class="lw" id="chart"></div></div></div>
+      <div class="chart-foot">
+        <div class="legend"><span><i style="background:var(--accent)"></i>20 EMA</span><span><i style="background:var(--warn)"></i>VWAP</span><span><i style="background:var(--up)"></i>Target</span><span><i style="background:var(--down)"></i>Stop</span></div>
+        <div class="tfs" role="group" aria-label="Timeframe" id="tfs"></div>
+      </div>
+    </section>
+
+    <section class="card c4 deep" id="card-brief">
+      <span class="glow" aria-hidden="true"></span>
+      <div class="card-h"><div><span class="label">Morning briefing</span><h2 style="margin-top:8px">Trend day risk is high. Trade the plan, not the tape.</h2></div></div>
+      <div class="brief">
+        <div><b>Overnight.</b> Index futures held the prior day high through London. Dollar softer, yields flat into the data.</div>
+        <div><b>Calendar.</b> Consumer confidence at 10:00 ET. Treasury auction at 13:00 ET. No size into either print.</div>
+        <div><b>Your read.</b> Three green days in a row. Your edge fades after 11:30 ET, so the desk will flag any entry after that.</div>
+        <div><b>Rule of the day.</b> One reload per setup. If the stop is hit twice, the setup is done.</div>
+      </div>
+      <button class="deep-btn" type="button" id="brief-ask">Ask the desk about it</button>
+    </section>
+
+    <section class="card c5" id="card-pnl">
+      <div class="card-h"><div><span class="label">Profit and loss</span><h2 style="margin-top:6px">Today, live</h2></div><button class="x" type="button" data-expand aria-label="Expand"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 2h4v4M6 14H2v-4M14 2l-5 5M2 14l5-5"/></svg></button></div>
+      <div class="pnl-big up" id="pnl-big">+$0.00</div>
+      <div class="ring-row">
+        <div class="ring" aria-label="Daily target progress">
+          <svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--ink-4)" stroke-opacity=".35" stroke-width="10"/><circle id="ring-arc" cx="60" cy="60" r="50" fill="none" stroke="var(--accent)" stroke-width="10" stroke-linecap="round" stroke-dasharray="314.16" stroke-dashoffset="314.16" style="transition:stroke-dashoffset .6s ease"/></svg>
+          <div class="in"><b id="ring-pct">0%</b><span>of target</span></div>
+        </div>
+        <dl class="kv">
+          <div><dt>Realized</dt><dd id="k-real" class="up">+$1,412.50</dd></div>
+          <div><dt>Open</dt><dd id="k-open">$0</dd></div>
+          <div><dt>Daily target</dt><dd>$3,000</dd></div>
+          <div><dt>Max loss today</dt><dd>$4,000</dd></div>
+          <div><dt>Trades today</dt><dd>4</dd></div>
+          <div><dt>Commission</dt><dd>$38.40</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="card c7" id="card-pos">
+      <div class="card-h"><div><span class="label">Open positions</span><h2 style="margin-top:6px">Marked to the tick</h2></div><button class="x" type="button" data-expand aria-label="Expand"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 2h4v4M6 14H2v-4M14 2l-5 5M2 14l5-5"/></svg></button></div>
+      <div class="tbl-well"><table>
+        <thead><tr><th>Instrument</th><th>Side</th><th class="r">Qty</th><th class="r">Entry</th><th class="r">Mark</th><th class="r">Stop</th><th class="r">Open P&amp;L</th></tr></thead>
+        <tbody id="pos"></tbody>
+      </table></div>
+    </section>
+
+    <section class="card c12" id="card-ledger">
+      <div class="card-h"><div><span class="label">Portfolio ledger</span><h2 style="margin-top:6px">Year to date</h2></div><button class="x" type="button" data-expand aria-label="Expand"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 2h4v4M6 14H2v-4M14 2l-5 5M2 14l5-5"/></svg></button></div>
+      <div class="ledger-top">
+        <div class="ytd"><b id="ytd">+38.4%</b><span class="label">return, Jan 2 to today</span></div>
+        <div class="stats">
+          <div class="stat"><span class="label">Profit factor</span><b>2.31</b></div>
+          <div class="stat"><span class="label">Avg winner</span><b class="up">+$842</b></div>
+          <div class="stat"><span class="label">Avg loser</span><b class="down">&minus;$396</b></div>
+          <div class="stat"><span class="label">Max drawdown</span><b class="down">&minus;6.8%</b></div>
+        </div>
+      </div>
+      <div class="chart-well"><div class="eq"><div class="lw" id="equity"></div></div></div>
+    </section>
+
+    <section class="card c4" id="card-sess">
+      <div class="card-h"><div><span class="label">Today's sessions</span><h2 style="margin-top:6px">The room</h2></div></div>
+      <div class="sessions" id="sessions"></div>
+    </section>
+
+    <section class="card c8" id="card-setups">
+      <div class="card-h"><div><span class="label">Active setups</span><h2 style="margin-top:6px">Armed for the open</h2><p class="sub">Every setup carries its entry, target, invalidation and reward to risk before it reaches you.</p></div></div>
+      <div class="setups" id="setups"></div>
+    </section>
+
+    <section class="card c6" id="card-watch">
+      <div class="card-h"><div><span class="label">Watchlist</span><h2 style="margin-top:6px">What the desk is tracking</h2></div></div>
+      <div class="watch" id="watch"></div>
+    </section>
+
+    <section class="card c6" id="card-chal">
+      <div class="card-h"><div><span class="label">30 day consistency challenge</span><h2 style="margin-top:6px">Day 18 of 30</h2><p class="sub">Green days count when you stay inside your risk rules. You are on pace to clear the funded tier.</p></div></div>
+      <div class="days" id="days"></div>
+      <dl class="kv" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+        <div><dt>Green days</dt><dd class="up">13</dd></div>
+        <div><dt>Rule breaks</dt><dd>1</dd></div>
+        <div><dt>Rank in cohort</dt><dd>7 of 212</dd></div>
+      </dl>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>Trading Desk is a member platform built by <a href="/">The Goude Group</a>. Figures on this page are simulated for demonstration.</span>
+    <span>Charts drawn with <a href="https://www.tradingview.com/" target="_blank" rel="noopener">TradingView</a> Lightweight Charts. Not investment advice.</span>
+  </footer>
+</div>
+
+<button class="fab" type="button" id="fab" aria-expanded="false" aria-controls="asst"><i>G</i><span>Ask the desk</span></button>
+<section class="asst" id="asst" hidden aria-label="Desk assistant">
+  <div class="asst-h"><div><span class="label">Desk assistant</span><h3 style="margin-top:4px">What do you need?</h3></div><button class="x" type="button" id="asst-x" aria-label="Close"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3l10 10M13 3L3 13"/></svg></button></div>
+  <div class="asst-log" id="log"></div>
+  <div class="chips" id="chips"></div>
+</section>
+
+<script>
+(() => {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const el = (t, c, x) => { const e = document.createElement(t); if (c) e.className = c; if (x !== undefined) e.textContent = x; return e; };
+  const css = (n) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const store = { get(k) { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} } };
+  let seed = 20261027; const rnd = () => { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+  const gauss = () => { let u = 0, v = 0; while (!u) u = rnd(); while (!v) v = rnd(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+  const money = (n, sign = true) => (sign ? (n > 0 ? '+' : n < 0 ? '−' : '') : (n < 0 ? '−' : '')) + '$' + Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const money0 = (n) => '$' + Math.round(n).toLocaleString('en-US');
+  const fmt = (n, d) => n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+
+  /* ---------- skin ---------- */
+  function skin(k) { document.documentElement.dataset.skin = k === 'blue' ? '' : k; if (k === 'blue') delete document.documentElement.dataset.skin; $$('[data-skin]').forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.skin === k))); store.set('gd-skin', k); restyle(); }
+  $$('.skins [data-skin]').forEach((b) => b.addEventListener('click', () => skin(b.dataset.skin)));
+
+  /* ---------- date, greeting, clocks ---------- */
+  const NY = 'America/New_York';
+  const z = (tz) => { const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', { timeZone: tz, hour12: false, weekday: 'short', hour: 'numeric', minute: 'numeric', second: 'numeric' }).formatToParts(new Date()).map((x) => [x.type, x.value])); return { h: (+p.hour) % 24, m: +p.minute, s: +p.second, wd: p.weekday }; };
+  $('#today').textContent = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', timeZone: NY }) + '  /  New York';
+  const nh = z(NY).h; $('#greet').textContent = nh < 12 ? 'Good morning' : nh < 17 ? 'Good afternoon' : 'Good evening';
+  const ci = $('#clock');
+  for (let n = 1; n <= 12; n++) { const a = (n * 30 - 90) * Math.PI / 180, t = el('span', 'nm' + (n % 3 ? '' : ' q'), String(n)); t.style.left = 50 + 39 * Math.cos(a) + '%'; t.style.top = 50 + 39 * Math.sin(a) + '%'; ci.append(t); }
+  ['h', 'm', 's'].forEach((k) => ci.append(el('div', 'hand ' + k))); ci.append(el('div', 'pip'));
+  const ZONES = [{ c: 'New York', tz: NY, o: [570, 960] }, { c: 'London', tz: 'Europe/London', o: [480, 990] }, { c: 'Tokyo', tz: 'Asia/Tokyo', o: [540, 900] }];
+  ZONES.forEach((q) => { const d = el('div', 'zone'); d.append(el('span', '', q.c), el('b'), el('span')); $('#zones').append(d); q.el = d; });
+  function tick() {
+    const t = z(NY), [h, m, s] = $$('.hand', ci);
+    h.style.transform = `rotate(${(t.h % 12) * 30 + t.m * .5}deg)`; m.style.transform = `rotate(${t.m * 6 + t.s * .1}deg)`; s.style.transform = `rotate(${t.s * 6}deg)`;
+    ZONES.forEach((q) => { const x = z(q.tz), mins = x.h * 60 + x.m, open = !['Sat', 'Sun'].includes(x.wd) && mins >= q.o[0] && mins < q.o[1]; q.el.children[1].textContent = `${String(x.h).padStart(2, '0')}:${String(x.m).padStart(2, '0')}`; q.el.children[2].textContent = open ? 'Open' : 'Closed'; q.el.children[2].className = open ? 'o' : 'c'; });
+    $('#feed-time').textContent = `${String(t.h).padStart(2, '0')}:${String(t.m).padStart(2, '0')}:${String(t.s).padStart(2, '0')}`;
+  }
+  tick(); setInterval(tick, 1000);
+
+  /* ---------- instruments and simulated feed ---------- */
+  const SYMS = [
+    { k: 'ES', nm: 'E-mini S&P 500, Dec', px: 5918.25, tick: .25, vol: .0009, dp: 2, pv: 50 },
+    { k: 'NQ', nm: 'E-mini Nasdaq 100, Dec', px: 21184.5, tick: .25, vol: .0012, dp: 2, pv: 20 },
+    { k: 'GC', nm: 'Gold, Dec', px: 2742.6, tick: .1, vol: .0008, dp: 1, pv: 100 },
+    { k: 'BTC', nm: 'Bitcoin, spot', px: 71240, tick: 1, vol: .0018, dp: 0, pv: 1 },
+    { k: 'CL', nm: 'Crude oil, Dec', px: 71.42, tick: .01, vol: .0016, dp: 2, pv: 1000 },
+  ];
+  const TFS = [['1m', 60], ['5m', 300], ['15m', 900], ['1h', 3600]];
+  const snap = (v, t) => Math.round(v / t) * t;
+  function build(sym, step, n) {
+    const now = Math.floor(Date.now() / 1000), start = Math.floor(now / step) * step - (n - 1) * step;
+    let p = sym.px * (1 - 0.012), out = [], drift = .00004;
+    for (let i = 0; i < n; i++) {
+      const o = p, sc = sym.vol * Math.sqrt(step / 300);
+      const c = o * (1 + drift * (step / 300) + gauss() * sc);
+      const hi = Math.max(o, c) * (1 + Math.abs(gauss()) * sc * .5), lo = Math.min(o, c) * (1 - Math.abs(gauss()) * sc * .5);
+      out.push({ time: start + i * step, open: snap(o, sym.tick), high: snap(hi, sym.tick), low: snap(lo, sym.tick), close: snap(c, sym.tick), v: Math.round(800 + rnd() * 2400) });
+      p = c;
+    }
+    const k = sym.px / out.at(-1).close; out.forEach((b) => { ['open', 'high', 'low', 'close'].forEach((f) => b[f] = snap(b[f] * k, sym.tick)); });
+    return out;
+  }
+  const DATA = {}; SYMS.forEach((s) => { DATA[s.k] = {}; TFS.forEach(([t, st]) => DATA[s.k][t] = build(s, st, 240)); s.open = DATA[s.k]['1h'].at(-8).open; s.last = s.px; });
+  const ema = (b, n) => { const k = 2 / (n + 1); let e = b[0].close; return b.map((x) => (e = x.close * k + e * (1 - k), { time: x.time, value: e })); };
+  const vwap = (b) => { let pv = 0, v = 0; return b.map((x) => { const tp = (x.high + x.low + x.close) / 3; pv += tp * x.v; v += x.v; return { time: x.time, value: pv / v }; }); };
+
+  /* ---------- positions ---------- */
+  const POS = [
+    { s: 'ES', side: 'LONG', q: 2, e: 5904.5, st: 5889.0 },
+    { s: 'NQ', side: 'LONG', q: 1, e: 21142.0, st: 21080.0 },
+    { s: 'GC', side: 'SHORT', q: 1, e: 2748.3, st: 2758.0 },
+    { s: 'CL', side: 'LONG', q: 1, e: 71.18, st: 70.84 },
+  ];
+  const REAL = 1412.5;
+  const symOf = (k) => SYMS.find((s) => s.k === k);
+  POS.forEach((p) => { const tr = el('tr'); const sy = symOf(p.s);
+    const tk = el('td', 'tk'); tk.append(el('b', '', p.s), el('span', '', sy.nm)); const sd = el('td'); sd.append(el('span', 'side ' + (p.side === 'LONG' ? 'up' : 'down'), p.side));
+    tr.append(tk, sd, el('td', 'r m', String(p.q)), el('td', 'r m', fmt(p.e, sy.dp)), el('td', 'r m'), el('td', 'r m', fmt(p.st, sy.dp)), el('td', 'r m')); $('#pos').append(tr); p.tr = tr; });
+  function openPnl() { return POS.reduce((a, p) => { const sy = symOf(p.s); return a + (sy.last - p.e) * (p.side === 'LONG' ? 1 : -1) * p.q * sy.pv; }, 0); }
+  function renderMoney() {
+    POS.forEach((p) => { const sy = symOf(p.s), pl = (sy.last - p.e) * (p.side === 'LONG' ? 1 : -1) * p.q * sy.pv; const c = p.tr.children; const prev = p.prev ?? pl;
+      c[4].textContent = fmt(sy.last, sy.dp); c[6].textContent = money(pl); c[6].className = 'r m ' + (pl >= 0 ? 'up' : 'down');
+      if (pl !== prev) { c[6].classList.remove('flash-up', 'flash-down'); void c[6].offsetWidth; c[6].classList.add(pl > prev ? 'flash-up' : 'flash-down'); } p.prev = pl; });
+    const op = openPnl(), tot = REAL - 38.4 + op;
+    $('#k-open').textContent = money(op); $('#k-open').className = op >= 0 ? 'up' : 'down';
+    [$('#pnl-big'), $('#h-pnl')].forEach((e) => { e.textContent = money(tot); e.className = e.className.replace(/\b(up|down)\b/g, '').trim() + ' ' + (tot >= 0 ? 'up' : 'down'); });
+    $('#h-eq').textContent = money0(184320 + tot);
+    const pctT = Math.max(0, Math.min(1, tot / 3000)); $('#ring-pct').textContent = Math.round(pctT * 100) + '%'; $('#ring-arc').style.strokeDashoffset = String(314.16 * (1 - pctT));
+    const risk = POS.reduce((a, p) => { const sy = symOf(p.s); return a + Math.abs(sy.last - p.st) * p.q * sy.pv; }, 0) / 184320 * 100; $('#h-risk').textContent = risk.toFixed(1) + '%';
+  }
+
+  /* ---------- main chart ---------- */
+  let cur = SYMS.find((s) => s.k === (store.get('gd-sym') || 'ES')) || SYMS[0], tf = store.get('gd-tf') || '5m', chart, cs, es, vs, vol, lines = [];
+  const opts = () => ({ autoSize: true, layout: { background: { type: 'solid', color: 'transparent' }, textColor: css('--ink-3'), fontFamily: 'JetBrains Mono, Menlo, monospace', fontSize: 12 },
+    grid: { vertLines: { color: 'transparent' }, horzLines: { color: css('--sh-d').replace(/[\d.]+\)$/, '0.14)') } },
+    rightPriceScale: { borderVisible: false }, timeScale: { borderVisible: false, timeVisible: true, secondsVisible: false, rightOffset: 4 }, crosshair: { mode: 0 } });
+  function draw() {
+    if (!window.LightweightCharts) return;
+    if (chart) chart.remove();
+    chart = LightweightCharts.createChart($('#chart'), opts());
+    const up = css('--up'), dn = css('--down');
+    cs = chart.addCandlestickSeries({ upColor: up, downColor: dn, wickUpColor: up, wickDownColor: dn, borderVisible: false, priceLineColor: css('--accent'), priceFormat: { type: 'price', precision: cur.dp, minMove: cur.tick } });
+    vol = chart.addHistogramSeries({ priceFormat: { type: 'volume' }, priceScaleId: 'v', lastValueVisible: false, priceLineVisible: false });
+    vol.priceScale().applyOptions({ scaleMargins: { top: .84, bottom: 0 } }); cs.priceScale().applyOptions({ scaleMargins: { top: .06, bottom: .2 } });
+    es = chart.addLineSeries({ color: css('--accent'), lineWidth: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
+    vs = chart.addLineSeries({ color: css('--warn'), lineWidth: 2, lineStyle: 2, priceLineVisible: false, lastValueVisible: false, crosshairMarkerVisible: false });
+    const b = DATA[cur.k][tf];
+    cs.setData(b); vol.setData(b.map((x) => ({ time: x.time, value: x.v, color: (x.close >= x.open ? up : dn) + '44' }))); es.setData(ema(b, 20)); vs.setData(vwap(b));
+    const p = POS.find((q) => q.s === cur.k);
+    if (p) { cs.createPriceLine({ price: p.e, color: css('--ink-3'), lineWidth: 1, lineStyle: 2, title: 'Entry' }); cs.createPriceLine({ price: p.st, color: dn, lineWidth: 2, title: 'Stop' }); cs.createPriceLine({ price: snap(p.e + (p.e - p.st) * 2.2 * (p.side === 'LONG' ? 1 : 1), cur.tick), color: up, lineWidth: 2, title: 'Target' }); }
+    chart.timeScale().setVisibleLogicalRange({ from: b.length - 110, to: b.length + 4 });
+    quote();
+  }
+  function quote() { const ch = cur.last - cur.open, pc = ch / cur.open * 100; $('#q-px').textContent = fmt(cur.last, cur.dp); $('#q-ch').textContent = `${ch >= 0 ? '+' : '−'}${fmt(Math.abs(ch), cur.dp)}  ${ch >= 0 ? '+' : '−'}${Math.abs(pc).toFixed(2)}%`; $('#q-ch').className = 'ch ' + (ch >= 0 ? 'up' : 'down'); $('#q-nm').textContent = cur.nm; }
+  SYMS.forEach((s) => { const b = el('button', '', s.k); b.type = 'button'; b.setAttribute('aria-pressed', String(s === cur)); b.addEventListener('click', () => { cur = s; store.set('gd-sym', s.k); $$('#syms button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); draw(); }); $('#syms').append(b); });
+  TFS.forEach(([t]) => { const b = el('button', '', t); b.type = 'button'; b.setAttribute('aria-pressed', String(t === tf)); b.addEventListener('click', () => { tf = t; store.set('gd-tf', t); $$('#tfs button').forEach((x) => x.setAttribute('aria-pressed', String(x === b))); draw(); }); $('#tfs').append(b); });
+
+  /* ---------- equity curve ---------- */
+  let eqc, eqs;
+  const EQ = (() => { const out = []; let v = 133100; const d0 = new Date(Date.UTC(new Date().getUTCFullYear(), 0, 2)); const days = Math.floor((Date.now() - d0) / 864e5); for (let i = 0, k = 0; i <= days; i++) { const d = new Date(d0.getTime() + i * 864e5); if ([0, 6].includes(d.getUTCDay())) continue; v *= 1 + .00145 + gauss() * .0088; out.push({ time: d.toISOString().slice(0, 10), value: v }); k++; } const s = 184320 / out.at(-1).value; out.forEach((x) => x.value = Math.round(x.value * s)); return out; })();
+  $('#ytd').textContent = '+' + ((EQ.at(-1).value / EQ[0].value - 1) * 100).toFixed(1) + '%';
+  function drawEq() {
+    if (!window.LightweightCharts) return; if (eqc) eqc.remove();
+    eqc = LightweightCharts.createChart($('#equity'), { ...opts(), timeScale: { borderVisible: false, rightOffset: 2 }, handleScroll: false, handleScale: false });
+    const a = css('--accent'); eqs = eqc.addAreaSeries({ lineColor: a, lineWidth: 3, topColor: a + '55', bottomColor: a + '00', priceLineVisible: false, priceFormat: { type: 'price', precision: 0, minMove: 1 } });
+    eqs.setData(EQ); eqc.timeScale().fitContent();
+  }
+
+  function restyle() { draw(); drawEq(); }
+
+  /* ---------- live ticks ---------- */
+  function step() {
+    SYMS.forEach((s) => { s.last = snap(s.last * (1 + gauss() * s.vol * .18 + .000012), s.tick); TFS.forEach(([t, st]) => { const b = DATA[s.k][t], now = Math.floor(Date.now() / 1000), bt = Math.floor(now / st) * st; let last = b.at(-1);
+      if (bt > last.time) { last = { time: bt, open: last.close, high: last.close, low: last.close, close: last.close, v: 0 }; b.push(last); }
+      last.close = s.last; last.high = Math.max(last.high, s.last); last.low = Math.min(last.low, s.last); last.v += Math.round(20 + rnd() * 90); }); });
+    if (cs) { const b = DATA[cur.k][tf], l = b.at(-1); cs.update(l); vol.update({ time: l.time, value: l.v, color: (l.close >= l.open ? css('--up') : css('--down')) + '44' }); const e = ema(b.slice(-60), 20).at(-1); es.update(e); }
+    quote(); renderMoney(); renderWatch();
+  }
+
+  /* ---------- sessions ---------- */
+  function sessions() {
+    const t = z(NY), now = t.h * 60 + t.m, wk = ['Sat', 'Sun'].includes(t.wd);
+    const hm = (m) => { const h = Math.floor(m / 60), mm = m % 60; return `${((h + 11) % 12) + 1}:${String(mm).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`; };
+    const span = (m) => (m >= 60 ? `${Math.floor(m / 60)}h ${m % 60}m` : `${m}m`);
+    const S = [[480, 525, 'Pre-market prep', 'Levels, calendar and the plan for the open'], [540, 565, 'Setup review', 'Two setups armed, one passed on'], [570, 690, 'Live trading room', 'Screen share with the head trader, entries called live'], [975, 1020, 'Recap and Q&A', 'Every trade from the room, graded'], [1080, 1125, 'Psychology circle', 'Small group, members only']];
+    const box = $('#sessions'); box.replaceChildren(); let flagged = false;
+    S.forEach(([a, b, h3, p]) => { let k, pill;
+      if (wk) { k = 'later'; pill = 'Monday'; }
+      else if (now >= b) { k = 'done'; pill = 'Done'; }
+      else if (now >= a) { k = 'soon'; pill = 'Live now'; }
+      else if (!flagged) { k = 'soon'; pill = `Live in ${span(a - now)}`; }
+      else { k = 'later'; pill = 'Later'; }
+      if (k === 'soon') flagged = true;
+      const d = el('div', 'sess' + (k === 'soon' ? ' now' : '')); const c = el('div'); c.append(el('h3', '', h3), el('p', '', p)); d.append(el('span', 't', hm(a)), c, el('span', 'pill ' + k, pill)); box.append(d); });
+    if (!flagged && !wk) { const f = box.firstChild; f.classList.add('now'); f.lastChild.className = 'pill soon'; f.lastChild.textContent = 'Tomorrow'; }
+  }
+  sessions(); setInterval(sessions, 30000);
+
+  /* ---------- setups ---------- */
+  [['NQ', 'LONG', 'Opening range reclaim', 'Overnight low held twice. A reclaim of the opening range high with volume puts the prior day high in play.', 21196.0, 21148.0, 21312.0],
+   ['GC', 'SHORT', 'Failed breakout', 'Rejected at the weekly high on falling volume. Short the retest; done above the high.', 2746.8, 2758.0, 2718.5],
+   ['BTC', 'LONG', 'Higher low', 'Third higher low since Thursday, holding the 20 EMA on the hourly. Size down into the weekend.', 71080, 69950, 73650]
+  ].forEach(([k, side, title, why, en, st, tg]) => { const sy = symOf(k), rr = Math.abs(tg - en) / Math.abs(en - st);
+    const d = el('article', 'setup'); const h = el('div', 'setup-h'); h.append(el('b', '', k), el('span', 'side ' + (side === 'LONG' ? 'up' : 'down'), side));
+    const lad = el('div', 'lad'); [['Target', tg, 'up'], ['Entry', en, ''], ['Invalidation', st, 'down']].forEach(([l, v, c]) => { const r = el('div'); r.append(el('span', '', l), el('b', c, fmt(v, sy.dp))); lad.append(r); });
+    const bar = el('div', 'rr'), r1 = el('i'), r2 = el('i'); const w = 1 / (1 + rr) * 100; r1.style.cssText = `left:2px;width:calc(${w}% - 3px);background:var(--down)`; r2.style.cssText = `left:calc(${w}% + 1px);right:2px;background:var(--up)`; bar.append(r1, r2);
+    const f = el('div', 'setup-f'); const a = el('span'); a.append('Reward to risk '); a.append(el('b', '', rr.toFixed(1) + 'R')); f.append(a, el('span', '', 'Armed 8:52 AM'));
+    d.append(h, el('h3', '', title), el('p', 'why', why), lad, bar, f); $('#setups').append(d); });
+
+  /* ---------- watchlist ---------- */
+  const WL = ['ES', 'NQ', 'GC', 'BTC', 'CL'];
+  WL.forEach((k) => { const s = symOf(k), r = el('div', 'w'), a = el('div'); a.append(el('b', '', k), el('span', '', s.nm)); r.append(a, el('div', 'sp'), el('div', 'r')); $('#watch').append(r); s.w = r; });
+  function spark(vals, color) { const ns = 'http://www.w3.org/2000/svg', svg = document.createElementNS(ns, 'svg'); svg.setAttribute('viewBox', '0 0 100 28'); svg.setAttribute('preserveAspectRatio', 'none'); const lo = Math.min(...vals), hi = Math.max(...vals), sp = hi - lo || 1; const p = document.createElementNS(ns, 'path'); p.setAttribute('d', 'M' + vals.map((v, i) => `${(i / (vals.length - 1) * 100).toFixed(2)} ${(25 - (v - lo) / sp * 22).toFixed(2)}`).join(' L')); p.setAttribute('fill', 'none'); p.setAttribute('stroke', color); p.setAttribute('stroke-width', '2'); p.setAttribute('vector-effect', 'non-scaling-stroke'); svg.append(p); return svg; }
+  let wTick = 0;
+  function renderWatch() { if (wTick++ % 3) return; WL.forEach((k) => { const s = symOf(k), ch = (s.last - s.open) / s.open * 100, c = ch >= 0 ? css('--up') : css('--down'); s.w.children[1].replaceChildren(spark(DATA[k]['15m'].slice(-48).map((b) => b.close), c)); const r = s.w.children[2]; r.replaceChildren(document.createTextNode(fmt(s.last, s.dp))); const sp = el('span', ch >= 0 ? 'up' : 'down', `${ch >= 0 ? '+' : '−'}${Math.abs(ch).toFixed(2)}%`); r.append(sp); }); }
+
+  /* ---------- challenge ---------- */
+  const DAYS = 'gggrgggg-ggggg-ggt'.split(''); for (let i = 0; i < 30; i++) { const c = DAYS[i] || ''; $('#days').append(el('span', 'day' + (c === 'g' ? ' g' : c === 'r' ? ' r' : c === 't' ? ' t' : ''))); }
+
+  /* ---------- expand ---------- */
+  let scrim = null;
+  $$('[data-expand]').forEach((b) => b.addEventListener('click', () => { const c = b.closest('.card'), on = !c.classList.contains('full');
+    $$('.card.full').forEach((x) => x.classList.remove('full')); scrim?.remove(); scrim = null;
+    if (on) { c.classList.add('full'); scrim = el('div', 'scrim'); scrim.addEventListener('click', () => b.click()); document.body.append(scrim); }
+    b.setAttribute('aria-pressed', String(on)); document.body.style.overflow = on ? 'hidden' : ''; }));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') { const f = $('.card.full [data-expand]'); if (f) f.click(); else if (!$('#asst').hidden) toggleAsst(false); } });
+
+  /* ---------- assistant ---------- */
+  const log = $('#log');
+  function say(t, who) { const m = el('div', 'msg ' + who, t); log.append(m); log.scrollTop = log.scrollHeight; return m; }
+  function answer(q) {
+    const op = openPnl(), tot = REAL - 38.4 + op;
+    const A = {
+      'Today P&L': `You are ${money(tot)} on the day: ${money(REAL)} realized, ${money(op)} open across ${POS.length} positions, after $38.40 in commission. That is ${Math.round(Math.max(0, tot) / 30)}% of your $3,000 target with ${money0(4000 + Math.min(0, tot))} of room before the daily max loss.`,
+      'My portfolio': `Equity is ${money0(184320 + tot)}, up ${$('#ytd').textContent} this year with a 2.31 profit factor. Largest open exposure is NQ. Your worst stretch this year was a 6.8% drawdown in March; you are 0.9% off the equity high today.`,
+      'Markets now': `${SYMS.map((s) => `${s.k} ${fmt(s.last, s.dp)} (${s.last >= s.open ? '+' : '−'}${Math.abs((s.last - s.open) / s.open * 100).toFixed(2)}%)`).join(', ')}. Breadth is positive and the VIX is soft, so the tape favours buying dips over chasing.`,
+      'Daily focus': `One thing today: no new entries after 11:30 ET. Your last 40 trades after 11:30 return 0.4R on average against 1.6R before it. The desk will flag any order you stage after that time.`,
+      'Morning briefing': `Index futures held yesterday's high overnight. Data at 10:00 and an auction at 13:00. You have two armed setups, NQ long on an opening range reclaim and gold short on the retest. Rule of the day: one reload per setup.`,
+    };
+    return A[q] || 'The desk does not have a read on that yet.';
+  }
+  function ask(q) { say(q, 'u'); const t = say('', 'a'); t.innerHTML = '<span class="typing"><span></span><span></span><span></span></span>'; setTimeout(() => { t.textContent = answer(q); log.scrollTop = log.scrollHeight; }, 650); }
+  ['Today P&L', 'My portfolio', 'Markets now', 'Daily focus', 'Morning briefing'].forEach((q) => { const b = el('button', '', q); b.type = 'button'; b.addEventListener('click', () => ask(q)); $('#chips').append(b); });
+  say($('#greet').textContent + ', Marcus. Ask for your numbers, the market, or the plan. Everything here reads your live account.', 'a');
+  function toggleAsst(on) { $('#asst').hidden = !on; $('#fab').setAttribute('aria-expanded', String(on)); }
+  $('#fab').addEventListener('click', () => toggleAsst($('#asst').hidden));
+  $('#asst-x').addEventListener('click', () => toggleAsst(false));
+  $('#brief-ask').addEventListener('click', () => { toggleAsst(true); ask('Morning briefing'); });
+
+  /* ---------- go ---------- */
+  const sk = store.get('gd-skin'); if (sk && sk !== 'blue') skin(sk); else restyle();
+  renderMoney(); renderWatch(); wTick = 0;
+  setInterval(step, 1000);
+})();
+</script>
+</body>
 </html>
