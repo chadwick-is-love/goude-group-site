@@ -76,6 +76,30 @@ function x_len($t) {
     return $n;
 }
 
+// X_NO_LINK_2026-10-28: OmniSocials charges 20 credits for every X post that
+// carries a link, and the account holds none, so every Goude X post since
+// 10-20 was refused ("This post needs 20 credits for X link posts"). The card
+// image already prints goudegroup.com/briefing, so X captions go out with the
+// typed link removed: any sentence carrying a link is dropped, since on these
+// cards it is the call to action. To restore links on X: top up OmniSocials credits and
+// remove the x_strip_links calls in studio_post().
+function x_strip_links($t) {
+    $re = '~(https?://\S+|www\.\S+|\b[a-z0-9-]+\.(?:com|ai|org|net|io|co)(?:/\S*)?)~i';
+    $out = [];
+    foreach (explode("\n", (string)$t) as $line) {
+        if (!preg_match($re, $line)) { $out[] = rtrim($line); continue; }
+        // Drop each sentence on the line that carries a link: on these cards
+        // that sentence is always the call to action pointing at the link.
+        $keep = [];
+        foreach (preg_split('/(?<=[.!?])\s+/', trim($line)) as $sent) {
+            if (!preg_match($re, $sent)) $keep[] = $sent;
+        }
+        $out[] = implode(' ', $keep);
+    }
+    $t = preg_replace("/\n{3,}/", "\n\n", implode("\n", $out));
+    return trim($t);
+}
+
 function studio_log_append($row) {
     $dir = __DIR__ . '/data';
     if (!is_dir($dir)) @mkdir($dir, 0750, true);
@@ -153,6 +177,10 @@ function studio_post(array $in, $by, array $opt = []) {
     }
     if (preg_match('/(^|\s)#[A-Za-z0-9_]+/', $caption)) {
         studio_fail('the caption has a hashtag. House rule: no hashtags on any network.');
+    }
+    if ($k === 'x') {
+        $caption = x_strip_links($caption);
+        if (is_array($thread)) $thread = array_map('x_strip_links', $thread);
     }
     $threadParts = [];
     if ($k === 'x' && $xMode === 'thread') {
