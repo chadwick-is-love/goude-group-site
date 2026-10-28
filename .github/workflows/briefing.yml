@@ -95,12 +95,15 @@ jobs:
             Follow the instructions in scripts/prompts/write-issue.md exactly.
             Produce build/topics.json and nothing else. Do not edit any HTML,
             do not run the assembler or the gates, do not commit anything.
+            You have no shell in this step. Write build/topics.json directly
+            with the Write tool, complete, in one file. Do not write a script
+            to generate it. Read files with Read, Glob and Grep.
           # BRIEFING_TOOLS_2026-10-28: without --allowedTools the action runs in
           # default permission mode and denies WebSearch and WebFetch, so the step
           # researches nothing and writes no topics.json (dry run 40743950027).
           # No Bash: this step reads outside pages, and the runner can push to main.
           claude_args: |
-            --max-turns 60
+            --max-turns 90
             --allowedTools "WebSearch,WebFetch,Read,Write,Edit,Glob,Grep"
 
       - name: Did the writing step produce anything
