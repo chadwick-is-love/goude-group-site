@@ -116,10 +116,10 @@ section{padding-block:clamp(64px,9vw,128px)}
 .try .watch{margin-top:auto;padding-top:14px;border-top:1px solid rgba(7,20,38,.25);font-size:14px;font-weight:600}
 
 /* after the call */
-.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--baby)}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border-top:2px solid var(--baby);container-type:inline-size}
 .step{padding:clamp(20px,2.4vw,30px) clamp(16px,2vw,26px) 0 0;min-width:0}
 .step+.step{padding-left:clamp(16px,2vw,26px);border-left:1px solid rgba(169,216,239,.25)}
-.step .t{font-family:var(--display);font-size:clamp(44px,5vw,76px);line-height:.9;color:var(--baby-2)}
+.step .t{display:block;white-space:nowrap;font-family:var(--display);font-size:min(76px,calc((25cqi - 52px) / 4.4));line-height:.9;color:var(--baby-2)}
 .step h3{font-size:clamp(22px,2vw,28px);margin:16px 0 10px}
 .step p{font-size:15.5px;color:var(--baby-2)}
 
@@ -144,6 +144,7 @@ footer .wrap{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap}
   .try:nth-child(n+3){border-top:1px solid rgba(7,20,38,.25)}
   .step:nth-child(3){padding-left:0;border-left:0}
   .step:nth-child(n+3){margin-top:28px}
+  .step .t{font-size:min(76px,calc((50cqi - 52px) / 4.4))}
   .sec-head,.yours{grid-template-columns:minmax(0,1fr)}
   .wave{opacity:.35}
 }
@@ -155,6 +156,7 @@ footer .wrap{display:flex;gap:24px;justify-content:space-between;flex-wrap:wrap}
   .try+.try{border-top:1px solid rgba(7,20,38,.25)}
   .step,.step+.step{padding-left:0;border-left:0}
   .step+.step{margin-top:28px}
+  .step .t{font-size:min(76px,calc(100cqi / 4.9))}
   .wave{display:none}
   .live .label{font-size:11px}
 }
