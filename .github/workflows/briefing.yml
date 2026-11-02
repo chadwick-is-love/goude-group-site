@@ -135,7 +135,16 @@ jobs:
       - name: Publish
         id: publish
         if: steps.clock.outputs.skip != 'true' && inputs.dry_run != true
+        env:
+          PUSH_TOKEN: ${{ github.token }}
         run: |
+          # BRIEFING_PUSH_2026-11-02: claude-code-action points git at its own
+          # app token and revokes it when the step ends, so a plain push here
+          # fails "Invalid username or token" (run 41489118812). Push with the
+          # workflow's GITHUB_TOKEN (contents: write) instead.
+          git config --local --unset-all http.https://github.com/.extraheader || true
+          git config --local --unset-all credential.helper || true
+          git remote set-url origin "https://x-access-token:${PUSH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           ISSUE=$(node -p "require('./.briefing-build.json').issue")
           SUMMARY=$(node -p "require('./.briefing-build.json').headlines.map(h=>h.domain).join(', ')")
           rm -rf .briefing-build.json build
