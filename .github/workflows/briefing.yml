@@ -98,6 +98,9 @@ jobs:
             You have no shell in this step. Write build/topics.json directly
             with the Write tool, complete, in one file. Do not write a script
             to generate it. Read files with Read, Glob and Grep.
+            This run is unattended: nobody can answer a question. Never end
+            your turn with options or a question. Decide, keep researching
+            within your turn budget, and always finish by writing the file.
           # BRIEFING_TOOLS_2026-10-28: without --allowedTools the action runs in
           # default permission mode and denies WebSearch and WebFetch, so the step
           # researches nothing and writes no topics.json (dry run 40743950027).

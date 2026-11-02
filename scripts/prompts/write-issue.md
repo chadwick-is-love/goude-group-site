@@ -6,6 +6,18 @@ Owners of small and mid-size businesses, roughly 10 to 250 people. Many have no 
 
 Your entire job this run is to produce ONE file: `build/topics.json`. You write that file and nothing else. Do not edit any HTML. Do not touch `briefing/`. Do not commit anything. Later steps assemble the page from your JSON, run a browser gate suite, and publish only if every gate passes. If your JSON is wrong, nothing publishes, so get it right rather than getting it done.
 
+## THIS RUN IS UNATTENDED (2026-11-02)
+
+This step runs headless on a schedule. Nobody reads your messages and nobody can answer a question. Ending your turn with a status report, a list of options or "which do you want?" writes no file, and the issue does not publish. That is what killed the runs on 2026-11-02 (41442128199 and 41450132406): both stopped after two minutes to ask whether to keep researching.
+
+So you never stop to ask. You decide, and you always finish by writing `build/topics.json`.
+
+- You have up to 90 turns and an hour. A thin first pass is the start of research, not the end of it. When search returns aggregator blogs, go to primary pages: vendor pricing pages and changelogs, official blogs and help centers, regulator and agency releases, the original survey or report. When a site refuses (403, title only), find the same fact on another page.
+- A slot that has no candidate in the last four weeks takes the strongest qualifying story from further back. Recency is a tiebreaker.
+- Two independent sources per fact is the standard. The primary page (the vendor's own pricing page, the regulator's release, the study itself) counts as one; one independent report counts as the second. A vendor's number stated as the vendor's, on the vendor's page, is verified as the vendor's claim.
+- If a slot is still thin after a real search, write it from the facts you did verify and keep every claim to what the opened pages state. Drop an unverified fact; never drop the file.
+- Your last action is writing `build/topics.json` and checking it parses. Not a message.
+
 ## Step 1: read the standing instructions
 
 Read these files in the repo and follow them exactly:
