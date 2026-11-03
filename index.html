@@ -203,6 +203,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;justif
 footer nav{display:flex;gap:20px}
 
 /* homepage additions */
+.hero .hero-row{grid-template-columns:1fr;gap:40px}
+.hcalc{background:var(--navy-2);padding:clamp(20px,2.8vw,40px);border-top:2px solid var(--baby);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:8px 56px;align-items:start}
+.hcalc>.k{grid-column:1/-1}
+@media (max-width:860px){.hcalc{grid-template-columns:1fr}}
+.hcalc>.k{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;color:var(--baby-2);margin-bottom:10px}
+.hcalc .inputs{border-top:1px solid var(--rule)}
+.hcalc .slider{padding:12px 0}
+.hcalc .slider small{font-size:12.5px}
+.hcalc .out{background:none;padding:12px 0 0}
+.hcalc .out .big{font-size:clamp(56px,8vw,128px);color:var(--cream)}
+.hcalc .out .rows{margin-top:18px}
+.f-green{background:#0a2417;color:#d8f7c9;--ink:#d8f7c9;--muted:#bfe8b0;--hi:#f2fdea;--bg:#0a2417;--panel:#123a24;--range:#d8f7c9;--rule:rgba(216,247,201,.3);--rule-2:rgba(216,247,201,.14)}
+.f-mint{background:#d8f7c9;color:#0a2417;--ink:#0a2417;--muted:#2c5a3f;--hi:#0a2417;--bg:#d8f7c9;--panel:#c4efb1;--range:#0a2417;--rule:rgba(10,36,23,.24);--rule-2:rgba(10,36,23,.1)}
 .hnav{margin-left:auto;display:flex;gap:24px;font-size:14px;font-weight:500}
 .hnav a{text-decoration:none}
 .hnav a:hover{text-decoration:underline;text-underline-offset:4px}
@@ -299,10 +312,24 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
     <h1 class="rv">The company outgrew the way it <span class="lit">runs.</span></h1>
     <div class="hero-row">
       <p class="lede rv">We find where a growing business loses hours and margin, rank every fix by what it returns, then build and run the systems that win it back. Inside the software you already pay for, by a team that stays.</p>
-      <div class="meter rv" aria-live="off">
-        <span class="k">Repeat work, paid for since you opened this page</span>
-        <b id="tick">$0.00</b>
-        <span id="tick-note">Six team leads, nine hours a week each on chasing, re-entering and reporting, at $85 an hour. Set your own numbers below.</span>
+      <div class="hcalc rv">
+        <span class="k">Put a number on the repeat work</span>
+        <div class="inputs">
+        <div class="slider"><label for="s-leads">Team leads and managers</label><output id="o-leads">6</output><input id="s-leads" type="range" min="2" max="30" step="1" value="6"><small>The people running a team, a department or a location.</small></div>
+        <div class="slider"><label for="s-hours">Hours a week each on repeat work</label><output id="o-hours">9</output><input id="s-hours" type="range" min="2" max="25" step="1" value="9"><small>Chasing updates, re-entering data, building reports, answering the same question twice.</small></div>
+        <div class="slider"><label for="s-rate">Loaded cost per hour</label><output id="o-rate">$85</output><input id="s-rate" type="range" min="35" max="250" step="5" value="85"><small>Salary, taxes and benefits, divided by hours worked.</small></div>
+      </div>
+        <div class="out" aria-live="polite">
+        <span class="k">A year of repeat work, counted at 70 percent</span>
+        <div class="big" id="o-year">$0</div>
+        <p class="sub" id="o-sub">Pay most companies already spend, spread across people who were hired to do something else.</p>
+        <div class="rows">
+          <div><span>Hours a year</span><b id="o-hy">0</b></div>
+          <div><span>Full-time roles that equals</span><b id="o-fte">0</b></div>
+          <div><span>Before the 70 percent haircut</span><b id="o-c70">$0</b></div>
+        </div>
+        <p class="fine">Fifty working weeks, 2,000 hours to a role. We count 70 percent because a freed hour is not a paid-out hour. An estimate from the inputs shown, not a promise of savings.</p>
+      </div>
       </div>
     </div>
     <nav class="paths" aria-label="Ways to work with us">
@@ -330,37 +357,11 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
   </div>
 </section>
 
-<section class="f-navy" id="math">
-  <div class="wrap">
-    <div class="head">
-      <div><span class="label rv">02 / The math</span><h2 class="rv">Put a number on the repeat work.</h2></div>
-      <p class="rv">Move the sliders to your business. We count 70 percent of the time, because a freed hour is not a paid-out hour. The Review does this for every fix we recommend, with your real costs, in front of you.</p>
-    </div>
-    <div class="calc">
-      <div class="inputs">
-        <div class="slider"><label for="s-leads">Team leads and managers</label><output id="o-leads">6</output><input id="s-leads" type="range" min="2" max="30" step="1" value="6"><small>The people running a team, a department or a location.</small></div>
-        <div class="slider"><label for="s-hours">Hours a week each on repeat work</label><output id="o-hours">9</output><input id="s-hours" type="range" min="2" max="25" step="1" value="9"><small>Chasing updates, re-entering data, building reports, answering the same question twice.</small></div>
-        <div class="slider"><label for="s-rate">Loaded cost per hour</label><output id="o-rate">$85</output><input id="s-rate" type="range" min="35" max="250" step="5" value="85"><small>Salary, taxes and benefits, divided by hours worked.</small></div>
-      </div>
-      <div class="out" aria-live="polite">
-        <span class="k">A year of repeat work, counted conservatively</span>
-        <div class="big" id="o-year">$0</div>
-        <p class="sub" id="o-sub">Pay most companies already spend, spread across people who were hired to do something else.</p>
-        <div class="rows">
-          <div><span>Hours a year</span><b id="o-hy">0</b></div>
-          <div><span>Full-time roles that equals</span><b id="o-fte">0</b></div>
-          <div><span>Before the 70 percent haircut</span><b id="o-c70">$0</b></div>
-        </div>
-        <p class="fine">Fifty working weeks, 2,000 hours to a role. An estimate from the inputs shown, not a promise of savings.</p>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="f-cream" id="review">
+<section class="f-green" id="review">
   <div class="wrap">
     <div class="head">
-      <div><span class="label rv">03 / The Operational Review</span><h2 class="rv">We read the whole business, then rank every fix in hours and dollars.</h2></div>
+      <div><span class="label rv">02 / The Operational Review</span><h2 class="rv">We read the whole business, then rank every fix in hours and dollars.</h2></div>
       <p class="rv">Two to three weeks. It costs your leadership five or six hours in total and ends with a plan you can run the company from, and a proposal to build it. Most clients move into a retainer from here.</p>
     </div>
     <div class="weeks">
@@ -385,7 +386,7 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
 <section class="f-navy" id="retainer">
   <div class="wrap">
     <div class="head">
-      <div><span class="label rv">04 / The retainer</span><h2 class="rv">Then we build it, in order of return, and we stay.</h2></div>
+      <div><span class="label rv">03 / The retainer</span><h2 class="rv">Then we build it, in order of return, and we stay.</h2></div>
       <p class="rv">The retainer gives the business a full AI department without hiring one. We take the roadmap a few systems at a time, highest return first, and run everything we build alongside your team.</p>
     </div>
     <div class="dept">
@@ -415,7 +416,7 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
 <section class="f-cream" id="touches">
   <div class="wrap">
     <div class="head">
-      <div><span class="label rv">05 / What it touches</span><h2 class="rv">The whole operation, built into the software you already pay for.</h2></div>
+      <div><span class="label rv">04 / What it touches</span><h2 class="rv">The whole operation, built into the software you already pay for.</h2></div>
       <p class="rv">For most companies the biggest single build is one view of the business: every tool you run, reporting into one dashboard the owner actually opens.</p>
     </div>
     <div class="areas">
@@ -441,17 +442,17 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
   </div>
 </section>
 
-<section class="f-navy" id="work">
+<section class="f-green" id="work">
   <div class="wrap">
     <div class="head">
-      <div><span class="label rv">06 / Past work</span><h2 class="rv">Built for the trades, and well past them.</h2></div>
+      <div><span class="label rv">05 / Past work</span><h2 class="rv">Built for the trades, and well past them.</h2></div>
       <p class="rv">We work with a lot of trade businesses, and the same team has built for private capital, accounting, events, media and sales. Clients are described by industry until they agree to be named.</p>
     </div>
     <div class="ledger">
-      <div class="row rv"><span class="idx">01</span><div><h3>Commercial roofing contractor</h3><p class="who">Owner-led, crews in the field, an office running on spreadsheets and memory</p></div><p class="what">A full Operational Review with fourteen builds ranked by the hours and dollars they return, sequenced over twelve months. At the centre, a custom app for crews and the office that carries six of those builds in one place.</p><span class="tag">Review to retainer</span></div>
+      <div class="row rv"><span class="idx">01</span><div><h3>Roofing</h3><p class="who">Owner-led, crews in the field, an office running on spreadsheets and memory</p></div><p class="what">A full Operational Review with fourteen builds ranked by the hours and dollars they return, sequenced over twelve months. At the centre, a custom app for crews and the office that carries six of those builds in one place.</p><span class="tag">Review to retainer</span></div>
       <div class="row rv"><span class="idx">02</span><div><h3>Private investment membership</h3><p class="who">High-net-worth members, high ticket, white-glove expectations</p></div><p class="what">Payment to signed contract to portal access, automated end to end and built for 100 new members a month. Every failure routes to a person. Nothing fails silently.</p><span class="tag">Custom build</span></div>
       <div class="row rv"><span class="idx">03</span><div><h3>Bookkeeping and accounting practices</h3><p class="who">Built with an accounting partner for her client firms</p></div><p class="what">A reconciliation engine, a revenue recognition workbook, payroll intake and a team scorecard: the work that eats a practice's month.</p><span class="tag">Partner channel</span></div>
-      <div class="row rv"><span class="idx">04</span><div><h3>Event production company</h3><p class="who">Multi-event operator with a growing client roster</p></div><p class="what">A CRM and texting compliance audit, then phase one of an intake system so every inquiry is captured, qualified and assigned without the owner touching it.</p><span class="tag">Audit to build</span></div>
+      <div class="row rv"><span class="idx">04</span><div><h3>Event management</h3><p class="who">Multi-event operator with a growing client roster</p></div><p class="what">A CRM and texting compliance audit, then phase one of an intake system so every inquiry is captured, qualified and assigned without the owner touching it.</p><span class="tag">Audit to build</span></div>
       <div class="row rv"><span class="idx">05</span><div><h3>Sales training organization</h3><p class="who">Trains and places sales teams</p></div><p class="what">Phase one of a sales automation system across the pipeline for their prospects and clients, delivered under a formal statement of work.</p><span class="tag">Phased build</span></div>
     </div>
     <p class="note rv">We quote results only from systems with a month of real use behind them, so this page does not carry numbers we cannot show you.</p>
@@ -461,7 +462,7 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
 <section class="f-cream" id="ours">
   <div class="wrap">
     <div class="head">
-      <div><span class="label rv">07 / Run on ourselves first</span><h2 class="rv">Nothing is sold to a client until it runs our own business.</h2></div>
+      <div><span class="label rv">06 / Run on ourselves first</span><h2 class="rv">Nothing is sold to a client until it runs our own business.</h2></div>
       <p class="rv">The systems we build for clients start inside The Goude Group. You are buying something that already works on a Monday morning.</p>
     </div>
     <div class="own">
@@ -476,7 +477,7 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
 <section class="f-navy" id="who">
   <div class="wrap">
     <div class="head">
-      <div><span class="label rv">08 / Who we serve</span><h2 class="rv">Three ways in.</h2></div>
+      <div><span class="label rv">07 / Who we serve</span><h2 class="rv">Three ways in.</h2></div>
       <p class="rv">The same team and the same systems, set up for the way your business runs.</p>
     </div>
     <div class="doors">
@@ -487,10 +488,10 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
   </div>
 </section>
 
-<section class="f-cream" id="free">
+<section class="f-mint" id="free">
   <div class="wrap">
     <div class="head">
-      <div><span class="label rv">09 / Free, no form</span><h2 class="rv">Use our tools before you use us.</h2></div>
+      <div><span class="label rv">08 / Free, no form</span><h2 class="rv">Use our tools before you use us.</h2></div>
       <p class="rv">Nothing below asks for an email. Each one is a working piece of what we build.</p>
     </div>
     <div class="own three">
@@ -503,7 +504,7 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
 
 <section class="f-navy close" id="start">
   <div class="wrap">
-    <span class="label rv" style="color:var(--baby-2)">10 / How it starts</span>
+    <span class="label rv" style="color:var(--baby-2)">09 / How it starts</span>
     <h2 class="rv" style="margin-top:22px">Two meetings, then a plan.</h2>
     <div class="steps">
       <div class="rv"><span class="when">Meeting one</span><h3>Thirty minutes</h3><p>On video with our partner lead: where the business is stretched, what is growing, what is breaking. Nothing to prepare.</p></div>
@@ -544,10 +545,6 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
   var money = function(n){ return '$' + Math.round(n).toLocaleString('en-US'); };
   var s = { leads:$('s-leads'), hours:$('s-hours'), rate:$('s-rate') };
 
-  function perSecond(){
-    // repeat-work cost per working second (50 weeks, 40 hours)
-    return (+s.leads.value) * (+s.hours.value) * (+s.rate.value) / (40 * 3600);
-  }
   function calc(){
     var l=+s.leads.value, h=+s.hours.value, r=+s.rate.value;
     $('o-leads').textContent = l; $('o-hours').textContent = h; $('o-rate').textContent = '$' + r;
@@ -557,18 +554,10 @@ footer .fbase{flex-basis:100%;display:flex;flex-wrap:wrap;gap:8px 20px;justify-c
     $('o-fte').textContent = (hy/2000).toFixed(1);
     $('o-c70').textContent = money(year);
     $('o-sub').textContent = 'That is ' + (hy/2000).toFixed(1) + ' full-time roles of pay most companies already spend, spread across people who were hired to do something else.';
-    $('tick-note').textContent = l + ' team leads, ' + h + ' hours a week each on chasing, re-entering and reporting, at $' + r + ' an hour. Set your own numbers below.';
   }
   ['leads','hours','rate'].forEach(function(k){ s[k].addEventListener('input', calc); });
   calc();
 
-  var t0 = performance.now(), tick = $('tick');
-  function frame(now){
-    var v = perSecond() * (now - t0) / 1000;
-    tick.textContent = '$' + v.toLocaleString('en-US',{minimumFractionDigits:2, maximumFractionDigits:2});
-    if (!document.hidden) requestAnimationFrame(frame); else setTimeout(function(){ requestAnimationFrame(frame); }, 500);
-  }
-  if (reduce) { tick.textContent = money(perSecond()*3600) + ' an hour'; } else { requestAnimationFrame(frame); }
 })();
 </script>
 <!-- LeadConnector chat widget, carried from the previous homepage -->
