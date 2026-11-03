@@ -1,0 +1,12 @@
+# goudegroup.com
+# Search engines and AI search tools (Googlebot, Bingbot, OAI-SearchBot,
+# ChatGPT-User, PerplexityBot, ClaudeBot and others) may read the public site.
+User-agent: *
+Allow: /
+Disallow: /studio/
+Disallow: /agent/
+Disallow: /social/
+Disallow: /scripts/
+Disallow: /.github/
+
+Sitemap: https://goudegroup.com/sitemap.xml
