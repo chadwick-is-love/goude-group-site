@@ -124,6 +124,13 @@ jobs:
         if: steps.clock.outputs.skip != 'true'
         run: node scripts/assemble-issue.mjs
 
+      # SEO_ARTICLE_PAGES_2026-11-05: every article gets its own page under
+      # /briefing/archive/no-NNN/<slug>/ and the sitemap is rebuilt, so search
+      # and AI search can rank articles, not just the issue.
+      - name: Article pages and sitemap
+        if: steps.clock.outputs.skip != 'true'
+        run: node scripts/article-pages.mjs
+
       - name: Install Playwright
         if: steps.clock.outputs.skip != 'true'
         run: npm install --no-save playwright@1.49.0 && npx playwright install --with-deps chromium
@@ -152,7 +159,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           # Explicit paths only. "git add -A" would sweep node_modules from the
           # Playwright install into a repo that clean-syncs to the live web root.
-          git add briefing index.html
+          git add briefing index.html sitemap.xml
           git commit -m "Briefing No. 00${ISSUE}: ${SUMMARY}"
           git push
           echo "issue=$ISSUE" >> "$GITHUB_OUTPUT"

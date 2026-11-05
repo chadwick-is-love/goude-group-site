@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OpenAI shuts off custom GPTs December 11. Keep your instructions outside ChatGPT | The Briefing No. 013 | Goude Group</title>
+<meta name="description" content="On September 11 OpenAI said it will retire custom GPTs and replace them with plugins. The date is December 11, 2026, on every ChatGPT plan." />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/archive/no-013/openai-shuts-off-custom-gpts-december-11-keep-your/" />
+<meta property="og:title" content="OpenAI shuts off custom GPTs December 11. Keep your instructions outside ChatGPT." />
+<meta property="og:description" content="On September 11 OpenAI said it will retire custom GPTs and replace them with plugins. The date is December 11, 2026, on every ChatGPT plan." />
+<meta property="og:image" content="https://goudegroup.com/briefing/og/no-013.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-promise{margin-top:32px;padding-top:19px;border-top:1px solid var(--navy)}
+.mast-promise p{font-size:15.5px;line-height:1.6;color:var(--navy);max-width:76ch}
+.mast-promise p b{font-weight:700}
+@media(max-width:620px){.mast-promise{margin-top:26px}.mast-promise p{font-size:14.5px}}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:22px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.passnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:26px 0 16px;max-width:80ch}
+.passnote b{color:var(--navy);font-weight:700}
+.passrow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.arch-link:hover{background:var(--navy);color:var(--mint)}
+.remind{margin-top:26px;border-top:1px solid var(--navy-faint);padding-top:22px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.remind p{font-size:13.5px;line-height:1.55;color:var(--navy-soft);max-width:46ch;margin:0;flex:1 1 300px}
+.remind p b{color:var(--navy);font-weight:700}
+.signup.inline{margin-top:0;flex:1 1 330px;max-width:420px}
+.signup.inline input{padding:12px 14px;font-size:14px}
+.signup.inline button{padding:12px 20px;font-size:11px}
+.signup-done{font-size:14px;line-height:1.55;color:var(--navy)}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* actions row: go deeper + send */
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.deep-toggle{
+  display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+.share{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE FREE TOOL (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+.pass-it{max-width:var(--maxw);margin:44px auto 0;border-top:1px solid var(--navy-hair);padding-top:24px}
+.pass-it .label{opacity:.5;display:block;margin-bottom:12px}
+.pass-it p{font-size:13.5px;line-height:1.6;color:var(--navy-soft);max-width:74ch;margin-bottom:18px}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  nav{padding:16px 5vw}
+  nav.scrolled{padding-top:12px;padding-bottom:12px}
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  header.masthead{min-height:74vh;padding-top:112px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .passrow{flex-direction:column;align-items:stretch}
+  .passrow .share,.passrow .arch-link{width:100%;justify-content:center}
+  .signup{flex-wrap:wrap}
+  .signup input{flex:1 1 100%}
+  .signup button{width:100%}
+}
+
+/* ---------- THE FREE TOOL, AS A DRAWER ---------- */
+/* the same silhouette as Go deeper and Send this one, filled rather than
+   outlined, because it is the one thing on the page we want pressed */
+.tool-open{
+  display:inline-flex;align-items:center;gap:11px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  background:var(--navy);color:var(--mint);
+  transition:background .25s ease,color .25s ease;
+}
+.tool-open:hover{background:transparent;color:var(--navy)}
+.tool-open .tk{white-space:nowrap}
+.tool-open .tnm{font-weight:400;letter-spacing:.1em;opacity:.72;white-space:nowrap}
+.tool-open .tar{font-size:14px;line-height:1;transition:transform .25s ease}
+.tool-open:hover .tar{transform:translateX(4px)}
+@media(max-width:620px){.tool-open .tnm{display:none}}
+
+.scrim{
+  position:fixed;inset:0;z-index:80;background:rgba(6,22,43,.20);
+  opacity:0;transition:opacity .32s ease;
+}
+.scrim.on{opacity:1}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:90;
+  width:min(94vw,468px);
+  background:var(--mint-deep);
+  border-left:2.5px solid var(--navy);
+  box-shadow:-26px 0 60px rgba(6,22,43,.26);
+  transform:translateX(102%);
+  /* hidden outright when closed, or the shadow paints a band down the page
+     edge and the inputs stay in the tab order */
+  visibility:hidden;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s linear .38s;
+  display:flex;flex-direction:column;
+  overscroll-behavior:contain;
+}
+.drawer.on{
+  transform:translateX(0);visibility:visible;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s;
+}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 14px;border-bottom:1px solid var(--navy-hair);flex:none;
+}
+.drawer-head .dh-k{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.55}
+.drawer-x{font-size:26px;line-height:1;padding:0 4px;opacity:.55;transition:opacity .2s ease}
+.drawer-x:hover{opacity:1}
+.drawer-body{padding:22px 24px 40px;overflow-y:auto;flex:1 1 auto}
+.drawer-body .tool{box-shadow:none;background:transparent;padding:0;border-radius:0}
+@media(max-width:620px){
+  .drawer{width:100vw;border-left:0;box-shadow:none}
+  .tool-open{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .drawer{transition:transform 0s, visibility 0s}
+  .scrim{transition:none}
+  .tool-open:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<link rel="canonical" href="https://goudegroup.com/briefing/archive/no-013/openai-shuts-off-custom-gpts-december-11-keep-your/" />
+<style>.art-mast{padding:120px 24px 8px;max-width:1080px;margin:0 auto}.art-mast .kicker{opacity:.75}.art-mast a{color:inherit}.art-back{padding:8px 24px 64px;max-width:1080px;margin:0 auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"OpenAI shuts off custom GPTs December 11. Keep your instructions outside ChatGPT.","description":"On September 11 OpenAI said it will retire custom GPTs and replace them with plugins. The date is December 11, 2026, on every ChatGPT plan.","url":"https://goudegroup.com/briefing/archive/no-013/openai-shuts-off-custom-gpts-december-11-keep-your/","mainEntityOfPage":"https://goudegroup.com/briefing/archive/no-013/openai-shuts-off-custom-gpts-december-11-keep-your/","datePublished":"2026-10-12","image":"https://goudegroup.com/briefing/og/no-013.png","isPartOf":{"@type":"PublicationIssue","issueNumber":"13","name":"The Briefing, No. 013","url":"https://goudegroup.com/briefing/archive/no-013/"},"author":{"@type":"Organization","name":"The Goude Group","url":"https://goudegroup.com/"},"publisher":{"@type":"Organization","name":"The Goude Group","url":"https://goudegroup.com/","logo":{"@type":"ImageObject","url":"https://goudegroup.com/goude-logo.png"}}}</script>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence &middot; No. 013</span></div>
+</nav>
+
+<header class="art-mast"><div class="kicker">The Briefing &middot; No. 013 &middot; October 12, 2026 &middot; Price</div></header>
+
+<section class="topic open" id="t3">
+  <div class="topic-inner">
+    <div class="kicker"><span>03 / Price</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>OpenAI shuts off custom GPTs December 11. Keep your instructions outside ChatGPT.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>On September 11 OpenAI said it will retire custom GPTs and replace them with plugins. The date is December 11, 2026, on every ChatGPT plan. After that, GPTs and their pages go dark. Enterprise workspaces stop creating new GPTs on October 26, and approved deferrals run to February 11, 2027. A migrate button in My GPTs turns instructions into a skill and knowledge files into reference files.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Your seat price does not move. What you get for it does. Custom actions, the part that pushes data into your CRM or calendar, do not transfer. Neither does the model you picked or the people you shared it with. Every migrated plugin starts private. If your intake bot or quote helper runs on a GPT, someone on your team owes it hours before December, or it stops working.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not wait for the banner; list every GPT your team opens this week, including public ones someone else built. Do not assume a migrated plugin behaves the same; OpenAI itself tells you to retest prompts, file use and output formats. Do not leave your only copy of the instructions inside ChatGPT. Do not pay a developer to rebuild a custom action before you check whether a ready-made app already does the job.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="pr" aria-controls="dw-pr" aria-expanded="false"><span class="tk">Free tool</span><span class="tnm">The Rebuild Bill</span><span class="tar">&rarr;</span></button>
+      <button class="deep-toggle" data-deep="t3" aria-expanded="true">Close <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t3" data-title="OpenAI shuts off custom GPTs December 11. Keep your instructions outside ChatGPT."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Sep 11</span><span>OpenAI announces it will retire custom GPTs in favor of plugins that run across ChatGPT and Codex. Choosing to create a new GPT now offers you a plugin instead.</span></div>
+            <div class="tape-row"><span class="d">Sep 22</span><span>OpenAI's target date for the migration tool and the in-product banner. Its FAQ says availability varies by account and workspace, so check My GPTs yourself instead of waiting for a notice.</span></div>
+            <div class="tape-row"><span class="d">Oct 5</span><span>Trade coverage reports builder pushback: plugins do not replicate a GPT's dedicated environment, and sharing is harder. Custom actions, the chosen model and sharing settings do not carry over to the plugin.</span></div>
+            <div class="tape-row"><span class="d">Oct 26</span><span>Enterprise workspaces lose the ability to create new custom GPTs. Enterprise customers with an approved deferral keep their existing GPTs running until February 11, 2027, two months past everyone else.</span></div>
+            <div class="tape-row"><span class="d">Dec 11</span><span>Custom GPTs retire on every ChatGPT plan and their pages become inaccessible. Past conversations stay readable. Any GPT your team has not migrated and tested by then stops doing its job.</span></div>
+          </div>
+          <h3>You rent what you build inside</h3>
+          <p>The lesson is bigger than one migration. A custom GPT is instructions, files and a connection, stored on OpenAI's shelf under OpenAI's terms. Three months' notice was all it took to end the format. The instructions are the valuable part, and they are plain text. The custom actions are the fragile part, because rebuilding one can mean a custom MCP server, which is developer work. Public GPTs are the trap nobody counts. If your team leans on one somebody else built, you cannot migrate it. Only the account that created it can.</p>
+          <p>Do it in two passes. This week, copy every GPT's instructions and knowledge files into a shared folder you own, in Google Drive or SharePoint. That copy also works in Claude Projects or a Gemini Gem, so you stop depending on one vendor's format. Then migrate the GPTs that save real hours and let the rest go. The trade-off is staff time now against a broken tool in December. Migration is one button. Testing is not. Budget an hour or two per GPT, more if it has actions. On Enterprise, building plugins in Work burns credits, per OpenAI's own FAQ.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>You, today: open My GPTs on each work account and list every GPT your team uses, who built it and what it does. Include public ones.</li>
+            <li>Your office manager: copy each GPT's instructions and knowledge files into a shared Google Drive or SharePoint folder by Friday.</li>
+            <li>Paste into ChatGPT or Claude: "Here are the instructions for a custom GPT my team uses. Rewrite them as a standalone prompt that works in any AI tool, list every outside system it connects to, and flag anything that depends on a custom action."</li>
+            <li>Whoever built each GPT: publish the latest version, click Migrate to plugin, then run the same five real tasks through old and new and compare.</li>
+            <li>For any GPT with a custom action, check the ChatGPT app directory, Zapier or Make for a ready-made connection before you pay anyone to rebuild it.</li>
+            <li>Run The Rebuild Bill on this page to price the migration in staff hours against what you lose each week after December 11.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://help.openai.com/en/articles/20001519-custom-gpt-retirement-and-migration-faq" target="_blank" rel="noopener">OpenAI Help Center: custom GPT retirement and migration FAQ</a> &middot; <a href="https://virtualizationreview.com/articles/2026/09/28/openai-to-retire-custom-gpts-replace-them-with-plugins.aspx" target="_blank" rel="noopener">Virtualization Review: OpenAI to retire custom GPTs, replace them with plugins</a> &middot; <a href="https://campustechnology.com/articles/2026/10/05/openai-discontinuing-custom-gpts-and-moving-to-plugin-architecture.aspx" target="_blank" rel="noopener">Campus Technology: what carries over and what breaks in the move to plugins</a> &middot; <a href="https://help.openai.com/en/articles/11391654-chatgpt-business-release-notes" target="_blank" rel="noopener">OpenAI Help Center: ChatGPT Business release notes, September 11 entry</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Anything built inside one vendor's product runs on that vendor's terms, and those terms just ended a working format with three months' notice.</p></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="art-back"><p>One of five articles in <a href="https://goudegroup.com/briefing/archive/no-013/">The Briefing, No. 013</a>. Every article carries a free tool that runs in the page. <a href="/briefing/archive/">Every issue</a></p></div>
+
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm" data-src="close section">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="pass-it">
+    <span class="label">Back issue</span>
+    <p>This is back issue No. 013. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      &copy; 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" data-tool-close hidden></div>
+<div class="drawers">
+  <aside class="drawer" id="dw-wn" role="dialog" aria-modal="false" aria-label="The Quote Chaser" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="wn">
+            <span class="tlabel">writes the sequence</span>
+            <span class="tname">The Quote Chaser</span>
+            <span class="tsub">Five answers. It writes your AI follow-up sequence for unsold estimates, the prompt and the house rules.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="wn-co">Company name</label><input id="wn-co" type="text" placeholder="e.g. Harbor Mechanical" /></div>
+              <div><label class="fl" for="wn-what">What you quote</label><input id="wn-what" type="text" placeholder="e.g. AC replacements" /></div>
+              <div><label class="fl" for="wn-amt">Typical estimate value in dollars</label><input id="wn-amt" type="number" inputmode="numeric" min="0" placeholder="e.g. 9000" /></div>
+              <div><label class="fl" for="wn-ch">How you follow up</label>
+                <select id="wn-ch"><option value="tx">Text</option><option value="em">Email</option><option value="both">Text, then email</option></select>
+              </div>
+              <div><label class="fl" for="wn-own">Who approves the messages</label><input id="wn-own" type="text" placeholder="e.g. Dana, office manager" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="wn">Write the sequence</button>
+            <div class="out" id="wn-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="wn-out" style="display:none" id="wn-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-bw" role="dialog" aria-modal="false" aria-label="The Lockdown" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="bw">
+            <span class="tlabel">writes the checklist</span>
+            <span class="tname">The Lockdown</span>
+            <span class="tsub">Four answers. It writes the ad account lockdown checklist for everyone who runs your ads.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="bw-co">Company name</label><input id="bw-co" type="text" placeholder="e.g. Harbor Mechanical" /></div>
+              <div><label class="fl" for="bw-own">Who approves new ad tools and users</label><input id="bw-own" type="text" placeholder="e.g. Dana, operations manager" /></div>
+              <div><label class="fl" for="bw-ag">Your agency or freelancer, if any</label><input id="bw-ag" type="text" placeholder="e.g. Northside Digital" /></div>
+              <div><label class="fl" for="bw-accts">Your ad accounts, one per line</label><textarea id="bw-accts" rows="4" placeholder="Google Ads
+Meta Business
+TikTok Ads"></textarea></div>
+            </div>
+            <button class="tbtn" type="button" data-build="bw">Write the checklist</button>
+            <div class="out" id="bw-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="bw-out" style="display:none" id="bw-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-pr" role="dialog" aria-modal="false" aria-label="The Rebuild Bill" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="pr">
+            <span class="tlabel">live</span>
+            <span class="tname">The Rebuild Bill</span>
+            <span class="tsub">Four numbers. It prices moving your custom GPTs before December 11 against losing them.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="pr-n">Custom GPTs your team uses</label><input id="pr-n" type="number" inputmode="numeric" min="0" placeholder="e.g. 6" data-live="pr" /></div>
+              <div><label class="fl" for="pr-hrs">Hours each one saves a week</label><input id="pr-hrs" type="number" inputmode="numeric" min="0" placeholder="e.g. 3" data-live="pr" /></div>
+              <div><label class="fl" for="pr-mig">Hours to migrate and test each</label><input id="pr-mig" type="number" inputmode="numeric" min="0" placeholder="e.g. 2" data-live="pr" /></div>
+              <div><label class="fl" for="pr-rate">Hourly cost of the person doing it</label><input id="pr-rate" type="number" inputmode="numeric" min="0" placeholder="e.g. 45" data-live="pr" /></div>
+            </div>
+            <div class="readout" id="pr-readout" style="display:none">
+              <div class="big" id="pr-big">$0</div>
+              <div class="cap" id="pr-cap"></div>
+            </div>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-sk" role="dialog" aria-modal="false" aria-label="The Pitch Reply" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="sk">
+            <span class="tlabel">writes the reply</span>
+            <span class="tname">The Pitch Reply</span>
+            <span class="tsub">Five answers. It writes the email that makes an AI search agency show its math before you sign.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="sk-co">Company name</label><input id="sk-co" type="text" placeholder="e.g. Harbor Roofing" /></div>
+              <div><label class="fl" for="sk-ag">Agency name</label><input id="sk-ag" type="text" placeholder="e.g. Bright Signal Media" /></div>
+              <div><label class="fl" for="sk-fee">Monthly fee they quoted</label><input id="sk-fee" type="number" inputmode="numeric" min="0" placeholder="e.g. 1500" /></div>
+              <div><label class="fl" for="sk-sell">What you sell and where</label><input id="sk-sell" type="text" placeholder="e.g. roof repair in Franklin, TN" /></div>
+              <div><label class="fl" for="sk-claim">Their main promise</label>
+                <select id="sk-claim"><option value="rank">Track and raise our rank in AI answers</option><option value="files">Build llms.txt and AI-ready files</option><option value="content">Rewrite our pages for AI</option><option value="mentions">Get us mentioned and cited across the web</option><option value="other">Something else</option></select>
+              </div>
+            </div>
+            <button class="tbtn" type="button" data-build="sk">Write the reply</button>
+            <div class="out" id="sk-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="sk-out" style="display:none" id="sk-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-st" role="dialog" aria-modal="false" aria-label="The Channel Brief" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="st">
+            <span class="tlabel">writes the channel brief</span>
+            <span class="tname">The Channel Brief</span>
+            <span class="tsub">Five answers. It writes the setup spec, pinned house rules and starter prompts for one @ChatGPT channel.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="st-co">Company name</label><input id="st-co" type="text" placeholder="e.g. Harbor Mechanical" /></div>
+              <div><label class="fl" for="st-chan">Channel name</label><input id="st-chan" type="text" placeholder="e.g. job-updates" /></div>
+              <div><label class="fl" for="st-job">The one job this channel does</label>
+                <select id="st-job"><option value="upd">Customer updates from crew notes</option><option value="quote">Quote follow-ups</option><option value="faq">Staff answers from our policies</option><option value="recap">End of day recap for the owner</option></select>
+              </div>
+              <div><label class="fl" for="st-src">What it can read, one per line</label><textarea id="st-src" rows="4" placeholder="2026 price sheet
+Warranty terms"></textarea></div>
+              <div><label class="fl" for="st-own">Who owns the channel</label><input id="st-own" type="text" placeholder="e.g. Dana, office manager" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="st">Write the brief</button>
+            <div class="out" id="st-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="st-out" style="display:none" id="st-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+</div>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+const ISSUE_URL='https://goudegroup.com/briefing/archive/no-013/';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, shares */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-share],[data-tool-open],[data-tool-close]');
+  if(!t) return;
+
+  if(t.hasAttribute('data-tool-close')){ closeDrawer(); return; }
+  if(t.dataset.toolOpen){ openDrawer(t.dataset.toolOpen,t); return; }
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ copyText(box.textContent,()=>{
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }); }
+    return;
+  }
+  if(t.dataset.share){ doShare(t); return; }
+});
+
+/* ---------- the free tool, as a drawer ---------- */
+const scrim=document.querySelector('.scrim');
+let openTool=null, lastOpener=null;
+function openDrawer(pre,btn){
+  if(openTool===pre){ closeDrawer(); return; }
+  if(openTool) closeDrawer(true);
+  const d=document.getElementById('dw-'+pre);
+  if(!d) return;
+  openTool=pre; lastOpener=btn||null;
+  scrim.hidden=false;
+  requestAnimationFrame(()=>{ scrim.classList.add('on'); d.classList.add('on'); });
+  d.setAttribute('aria-hidden','false');
+  if(btn) btn.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+  const f=d.querySelector('input,textarea,select,button');
+  if(f) setTimeout(()=>f.focus({preventScroll:true}),340);
+}
+function closeDrawer(quiet){
+  if(!openTool) return;
+  const d=document.getElementById('dw-'+openTool);
+  if(d){ d.classList.remove('on'); d.setAttribute('aria-hidden','true'); }
+  const b=document.querySelector('[data-tool-open="'+openTool+'"]');
+  if(b) b.setAttribute('aria-expanded','false');
+  openTool=null;
+  if(!quiet){
+    scrim.classList.remove('on');
+    setTimeout(()=>{ if(!openTool) scrim.hidden=true; },340);
+    document.body.style.overflow='';
+    if(lastOpener) lastOpener.focus({preventScroll:true});
+  }
+  lastOpener=null;
+}
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+
+/* ---------- sharing ---------- */
+function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
+function flash(btn,msg){
+  const sl=btn.querySelector('.sl'); if(!sl) return;
+  const o=sl.textContent; sl.textContent=msg||'Link copied';
+  setTimeout(()=>{ sl.textContent=o; },1600);
+}
+function copyText(text,done){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,()=>legacyCopy(text,done));
+  }else{ legacyCopy(text,done); }
+}
+function legacyCopy(text,done){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(err){}
+  document.body.removeChild(ta);
+  if(done) done();
+}
+function doShare(btn){
+  const url=shareLink(btn.dataset.share);
+  const title=btn.dataset.title||document.title;
+  if(navigator.share){
+    navigator.share({title:title,url:url}).catch(()=>{});
+  }else{
+    copyText(url,()=>flash(btn,'Link copied'));
+  }
+}
+/* a link ending in #tN lands with that article's go-deeper open */
+function openFromHash(){
+  const h=(location.hash||'').replace('#','');
+  if(!/^t[1-5]$/.test(h)) return;
+  const topic=document.getElementById(h);
+  if(!topic||topic.classList.contains('open')) return;
+  topic.classList.add('open');
+  const b=topic.querySelector('.deep-toggle');
+  if(b){ b.setAttribute('aria-expanded','true'); b.firstChild.textContent='Close '; }
+  setTimeout(()=>{ topic.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+addEventListener('hashchange',openFromHash);
+openFromHash();
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='pr') calc_pr();
+});
+document.addEventListener('change',e=>{
+  const el=e.target.closest('select[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='pr') calc_pr();
+});
+
+function calc_pr(){
+  const n=parseFloat($('#pr-n').value)||0;
+  const hrs=parseFloat($('#pr-hrs').value)||0;
+  const mig=parseFloat($('#pr-mig').value)||0;
+  const rate=parseFloat($('#pr-rate').value)||0;
+  const ro=$('#pr-readout');
+  if(!n||!hrs||!mig||!rate){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const cost=n*mig*rate;
+  const weekly=n*hrs*rate;
+  const days=Math.max(1,Math.ceil(mig/hrs*5));
+  $('#pr-big').textContent=money(cost);
+  $('#pr-cap').innerHTML='Moving and testing your <b>'+n+' GPTs</b> costs about <b>'+money(cost)+'</b> in staff time, once. Letting them die on December 11 costs <b>'+money(weekly)+' a week</b> in hours your team saves today. The rebuild pays for itself in about <b>'+days+' working days</b>. Copy the instructions out this week, then migrate only the ones that earn it.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  if(kind==='wn'){
+const co=v('wn-co')||'[Company]';
+    const what=v('wn-what')||'[what you quote]';
+    const amt=parseFloat(v('wn-amt'))||0;
+    const who=v('wn-own')||'[name]';
+    const ch=v('wn-ch');
+    let chan='text';
+    if(ch==='em') chan='email'; else if(ch==='both') chan='text first, then email';
+    const big=amt?'$'+Math.round(amt*2).toLocaleString('en-US'):'[twice your typical job]';
+    const out=
+'ESTIMATE FOLLOW-UP SEQUENCE · '+co+'\n\n'+
+'Why this exists: a customer who asked for a price on '+what+' already wants the work. Most go quiet because nobody follows up. This sequence follows up every time, and a person still owns the price.\n\n'+
+'1. WHO GETS IT. Every estimate not sold 2 days after sending, from the last 90 days. Estimates over '+big+' get a phone call from '+who+' instead.\n\n'+
+'2. THE SEQUENCE, by '+chan+'\n'+
+'  Day 2: Check they got the estimate. Ask one question.\n'+
+'  Day 7: Answer the question you hear most on this job: [warranty, timing, financing].\n'+
+'  Day 21: Last note. Offer a time to talk. No pressure.\n'+
+'  Stop the moment they reply, book or say no.\n\n'+
+'3. THE PROMPT. Paste into ChatGPT or Claude with the estimate notes:\n'+
+'  "You write follow-up messages for '+co+'. Here is an estimate for '+what+': [paste notes]. Write the day 2, day 7 and day 21 messages. Under 300 characters each. Plain words. One question per message. Never offer a discount or change the price."\n\n'+
+'4. HOUSE RULES\n'+
+'  · '+who+' approves the first 50 messages before any go out unattended.\n'+
+'  · AI never changes price, scope or dates. Those go to a person.\n'+
+'  · One sequence per customer. Turn off any older campaign that messages the same list.\n'+
+'  · Message only numbers and addresses the customer gave you for contact.\n'+
+'  · Replies after hours get answered by [name] before 9am.\n\n'+
+'5. THE SCORE. After 30 days, count: estimates chased [  ], replies [  ], jobs booked [  ], revenue booked [$  ].\n\n'+
+'Owner: '+who+'. Review date: [date plus 30 days].\n\n'+
+'---\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'· Pull the unsold list from [ServiceTitan, Jobber, Housecall Pro, your spreadsheet].\n'+
+'· Check your texting consent wording with [whoever handles your legal].\n'+
+'· Pick the tool that sends: [ServiceTitan Virtual Agent, Zapier, Make, your CRM].\n';
+    show('wn-out','wn-copy',out); return;
+  }
+  if(kind==='bw'){
+const co=v('bw-co')||'[Company]';
+const who=v('bw-own')||'[name]';
+const ag=v('bw-ag')||'[agency or freelancer, or none]';
+const raw=($('#bw-accts').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+const items=raw.length?raw:['Google Ads','Meta Business (Facebook and Instagram ads)','[other ad account]'];
+let rows='';
+items.forEach(s=>{ rows+='  · '+s+'\n    Admins today: [names]   Passkey on every admin: [yes/no]   Billing card: [last 4]\n'; });
+const out=
+'AD ACCOUNT LOCKDOWN · '+co+'\n\n'+
+'Why this exists: fake AI ad tools are stealing ad logins with a fake Google sign-in window and a live operator who relays our text codes in real time. A stolen ad account spends our card and can take weeks or months to recover.\n\n'+
+'1. THE ACCOUNTS AND WHO CAN TOUCH THEM\n'+rows+'\n'+
+'2. PASSKEYS. Every admin creates a passkey on the Google account tied to our ads: Google Account, Passkeys and security keys, Create a passkey. Text codes stay as a backup only. Done by: [date].\n\n'+
+'3. ONE PERSON, ONE LOGIN. No shared logins, including '+ag+'. Each person at the agency gets their own access, so we can remove one without resetting everyone.\n\n'+
+'4. THE CONNECT RULE. Any AI tool, beta invite or audit that asks to connect an ad account is an access request. It goes to '+who+' first. We find the vendor by typing its address ourselves, never from the email or ad.\n\n'+
+'5. THE DRAG TEST. Before signing in through any pop-up, drag it outside the browser. A real window moves. A fake one is stuck inside the page. Stuck means close the tab and tell '+who+'.\n\n'+
+'6. WEEKLY CHECK. Every [day], '+who+' opens Admin, Access and security in Google Ads and the people list in Meta. Any user, partner or card we did not add gets removed the same day.\n\n'+
+'7. IF SOMEONE ALREADY TYPED A PASSWORD OR CODE. Tell '+who+' within the hour. Change the password, remove unknown users, check spend and recovery details on every account that login reaches.\n\n'+
+'Owner of this checklist: '+who+'. Review date: [date plus 90 days].\n\n'+
+'---\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'· Ask '+ag+' which logins they use for our accounts and whether any are shared.\n'+
+'· Set a daily spend cap you could live with if the account were taken tonight: [amount].\n'+
+'· Decide who is the second admin if '+who+' is out: [name].\n';
+    show('bw-out','bw-copy',out); return;
+  }
+  if(kind==='sk'){
+const co=v('sk-co')||'[Company]';
+    const ag=v('sk-ag')||'[Agency]';
+    const feeRaw=parseFloat(v('sk-fee'))||0;
+    const fee=feeRaw?'$'+Math.round(feeRaw).toLocaleString('en-US'):'[monthly fee]';
+    const yr=feeRaw?'$'+Math.round(feeRaw*12).toLocaleString('en-US'):'[fee times 12]';
+    const sell=v('sk-sell')||'[what you sell, where]';
+    const cl=v('sk-claim');
+    let pitch='AI search optimization';
+    let ask='Name each tactic in the proposal that Google does not already cover in its guide, and show one result from a client our size.';
+    if(cl==='rank'){ pitch='tracking our rank in AI answers'; ask='Published testing found ChatGPT and Google AI return the same brand list less than once in 100 runs. How many runs per prompt do you use, and why does a position number mean anything?'; }
+    else if(cl==='files'){ pitch='llms.txt and AI-ready files for our site'; ask='Google says Google Search does not use llms.txt or AI text files. Which named AI tool reads the files you plan to build, and how will we see that it does?'; }
+    else if(cl==='content'){ pitch='rewriting our content for AI'; ask='Google says you do not need to write in a special way for generative AI search, or chop pages into chunks. What will you change that ordinary good pages do not already do?'; }
+    else if(cl==='mentions'){ pitch='getting us mentioned and cited across the web'; ask='Google says seeking inauthentic mentions is less helpful than it looks. List every site you would place us on, and whether we pay those sites.'; }
+    const out=
+'Subject: Questions before we sign · '+ag+'\n\n'+
+'Hi [name],\n\n'+
+'Thanks for the proposal for '+pitch+' at '+fee+' a month, which is '+yr+' a year. Before '+co+' signs, please answer these in writing.\n\n'+
+'1. Google\'s own guide says optimizing for generative AI search "is still SEO." Which line items go beyond standard SEO, and what evidence shows they work?\n\n'+
+'2. '+ask+'\n\n'+
+'3. Which prompts will you track for '+sell+'? List them, with the tools and how often each one runs.\n\n'+
+'4. Search Console already shows our impressions in AI Overviews and AI Mode for free. What will you report beyond that?\n\n'+
+'5. How will you tie any change to calls, forms or booked jobs, not impressions?\n\n'+
+'6. What are the cancellation terms, and who owns the pages and files you create?\n\n'+
+'If the answers hold up, we will keep talking. If not, this budget goes to our Google Business Profile and our own service pages.\n\n'+
+'Thanks,\n[Your name]\n'+co+'\n\n'+
+'---\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'· Open the generative AI report in Search Console first. AI impressions this month: [number].\n'+
+'· Check robots.txt allows OAI-SearchBot, or ChatGPT search leaves you out: [yes/no].\n'+
+'· Ask your last ten customers how they found you. ChatGPT: [count]. Google: [count]. Referral: [count].\n'+
+'· If they quote a result, ask for the client\'s name and call them.\n';
+    show('sk-out','sk-copy',out); return;
+  }
+  if(kind==='st'){
+const co=v('st-co')||'[Company]';
+    const ch0=v('st-chan')||'job-updates';
+    const ch='#'+ch0.replace(/^#/,'');
+    const who=v('st-own')||'[name]';
+    const jb=v('st-job');
+    let use='customer updates written from the crew notes and photos posted here';
+    let p1='@ChatGPT, write a customer update from the notes and photos above. Two short paragraphs, plain words: what we did today, what happens next. Put [CHECK] on anything you are unsure of.';
+    let p2='@ChatGPT, list what is missing from this thread before we can update the customer. Short list, no guessing.';
+    if(jb==='quote'){ use='follow-ups on quotes we sent and have not heard back on'; p1='@ChatGPT, write a short follow-up for the quote described above. Friendly, one question, no discount offered. Put [CHECK] on any price or date.'; p2='@ChatGPT, from this thread, list the open quotes with customer first name, amount and days since sent.'; }
+    else if(jb==='faq'){ use='answers to staff questions, taken only from our connected policy documents'; p1='@ChatGPT, answer this from our policy documents only. Quote the section you used. If it is not in there, say so.'; p2='@ChatGPT, turn the answer above into three lines a new hire can follow.'; }
+    else if(jb==='recap'){ use='an end of day recap for the owner from what was posted here today'; p1='@ChatGPT, recap today in this channel for the owner. Jobs moved, problems, decisions needed. Eight lines max.'; p2='@ChatGPT, from today, list anything a customer is waiting on, with who owns it.'; }
+    const raw=($('#st-src').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+    const items=raw.length?raw:['[price sheet or rate card]','[warranty or policy document]'];
+    let rows='';
+    items.forEach(s=>{ rows+='    · '+s+' (view only)\n'; });
+    const out=
+'CHANNEL BRIEF · '+co+' · '+ch+'\n\n'+
+'What this channel is for: '+use+'. Tag @ChatGPT here. It reads only the sources listed below, and everyone in this channel sees its replies.\n\n'+
+'1. SETUP (admin, once)\n'+
+'  · ChatGPT admin console, Agents, Add, connect Slack or Teams.\n'+
+'  · Surface set to Selected channels only: '+ch+'. No guests, no shared client channels.\n'+
+'  · Connected sources, through an account that can only view them:\n'+rows+
+'  · Nothing that sends email, posts outside '+ch+' or edits files.\n\n'+
+'2. HOUSE RULES (pin this)\n'+
+'  · Give it the context every time: customer first name, job or order number, what happened.\n'+
+'  · No card numbers, bank details, Social Security numbers or medical details in this channel.\n'+
+'  · Nothing it writes goes to a customer until a person reads it.\n'+
+'  · If it does not know, it writes [CHECK] and a person fills it in.\n\n'+
+'3. STARTER PROMPTS (copy, paste, edit)\n'+
+'  "'+p1+'"\n\n'+
+'  "'+p2+'"\n\n'+
+'4. REVIEW\n'+
+'  Owner: '+who+'. After two weeks, count the drafts the team kept with light edits. Decide: tighten this brief, add a second channel, or switch it off. Review date: [date].\n\n'+
+'---\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'· Confirm in your admin console that your plan includes @ChatGPT for Slack or Teams.\n'+
+'· Channel limits do not cover direct messages to @ChatGPT. Decide: [allow DMs or not].\n'+
+'· Set a spend cap on the surface before launch: [amount].\n'+
+'· Check each connected account cannot open payroll or HR folders: [checked by].\n';
+    show('st-out','st-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* newsletter: the reminder row under the contents and the form in the close section */
+document.querySelectorAll('form.signup').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=form.querySelector('input[type=email]').value.trim();
+    if(!email) return;
+    const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+    fetch(NEWSLETTER_ENDPOINT,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:email,source:'Briefing No. 013',placement:form.getAttribute('data-src')||''})
+    }).catch(()=>{}).finally(()=>{
+      form.innerHTML='<p class="signup-done">On the list. No. 014 comes your way next week.</p>';
+    });
+  });
+});
+</script>
+</body>
+</html>

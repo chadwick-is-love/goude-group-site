@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Newest is not better. Two and a half times the price to do your work worse, and they called it an upgrade | The Briefing No. 009 | Goude Group</title>
+<meta name="description" content="OpenAI released GPT-6 Astra on September 9 at ten dollars per million input tokens and fifty per million output, against four and twenty for the model it…" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/archive/no-009/newest-is-not-better-two-and-a-half-times/" />
+<meta property="og:title" content="Newest is not better. Two and a half times the price to do your work worse, and they called it an upgrade." />
+<meta property="og:description" content="OpenAI released GPT-6 Astra on September 9 at ten dollars per million input tokens and fifty per million output, against four and twenty for the model it…" />
+<meta property="og:image" content="https://goudegroup.com/og-image.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-promise{margin-top:32px;padding-top:19px;border-top:1px solid var(--navy)}
+.mast-promise p{font-size:15.5px;line-height:1.6;color:var(--navy);max-width:76ch}
+.mast-promise p b{font-weight:700}
+@media(max-width:620px){.mast-promise{margin-top:26px}.mast-promise p{font-size:14.5px}}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:22px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.passnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:26px 0 16px;max-width:80ch}
+.passnote b{color:var(--navy);font-weight:700}
+.passrow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.arch-link:hover{background:var(--navy);color:var(--mint)}
+.remind{margin-top:26px;border-top:1px solid var(--navy-faint);padding-top:22px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.remind p{font-size:13.5px;line-height:1.55;color:var(--navy-soft);max-width:46ch;margin:0;flex:1 1 300px}
+.remind p b{color:var(--navy);font-weight:700}
+.signup.inline{margin-top:0;flex:1 1 330px;max-width:420px}
+.signup.inline input{padding:12px 14px;font-size:14px}
+.signup.inline button{padding:12px 20px;font-size:11px}
+.signup-done{font-size:14px;line-height:1.55;color:var(--navy)}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* actions row: go deeper + send */
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.deep-toggle{
+  display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+.share{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE FREE TOOL (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+.pass-it{max-width:var(--maxw);margin:44px auto 0;border-top:1px solid var(--navy-hair);padding-top:24px}
+.pass-it .label{opacity:.5;display:block;margin-bottom:12px}
+.pass-it p{font-size:13.5px;line-height:1.6;color:var(--navy-soft);max-width:74ch;margin-bottom:18px}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  nav{padding:16px 5vw}
+  nav.scrolled{padding-top:12px;padding-bottom:12px}
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  header.masthead{min-height:74vh;padding-top:112px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .passrow{flex-direction:column;align-items:stretch}
+  .passrow .share,.passrow .arch-link{width:100%;justify-content:center}
+  .signup{flex-wrap:wrap}
+  .signup input{flex:1 1 100%}
+  .signup button{width:100%}
+}
+
+/* ---------- THE FREE TOOL, AS A DRAWER ---------- */
+/* the same silhouette as Go deeper and Send this one, filled rather than
+   outlined, because it is the one thing on the page we want pressed */
+.tool-open{
+  display:inline-flex;align-items:center;gap:11px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  background:var(--navy);color:var(--mint);
+  transition:background .25s ease,color .25s ease;
+}
+.tool-open:hover{background:transparent;color:var(--navy)}
+.tool-open .tk{white-space:nowrap}
+.tool-open .tnm{font-weight:400;letter-spacing:.1em;opacity:.72;white-space:nowrap}
+.tool-open .tar{font-size:14px;line-height:1;transition:transform .25s ease}
+.tool-open:hover .tar{transform:translateX(4px)}
+@media(max-width:620px){.tool-open .tnm{display:none}}
+
+.scrim{
+  position:fixed;inset:0;z-index:80;background:rgba(6,22,43,.20);
+  opacity:0;transition:opacity .32s ease;
+}
+.scrim.on{opacity:1}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:90;
+  width:min(94vw,468px);
+  background:var(--mint-deep);
+  border-left:2.5px solid var(--navy);
+  box-shadow:-26px 0 60px rgba(6,22,43,.26);
+  transform:translateX(102%);
+  /* hidden outright when closed, or the shadow paints a band down the page
+     edge and the inputs stay in the tab order */
+  visibility:hidden;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s linear .38s;
+  display:flex;flex-direction:column;
+  overscroll-behavior:contain;
+}
+.drawer.on{
+  transform:translateX(0);visibility:visible;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s;
+}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 14px;border-bottom:1px solid var(--navy-hair);flex:none;
+}
+.drawer-head .dh-k{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.55}
+.drawer-x{font-size:26px;line-height:1;padding:0 4px;opacity:.55;transition:opacity .2s ease}
+.drawer-x:hover{opacity:1}
+.drawer-body{padding:22px 24px 40px;overflow-y:auto;flex:1 1 auto}
+.drawer-body .tool{box-shadow:none;background:transparent;padding:0;border-radius:0}
+@media(max-width:620px){
+  .drawer{width:100vw;border-left:0;box-shadow:none}
+  .tool-open{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .drawer{transition:transform 0s, visibility 0s}
+  .scrim{transition:none}
+  .tool-open:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<link rel="canonical" href="https://goudegroup.com/briefing/archive/no-009/newest-is-not-better-two-and-a-half-times/" />
+<style>.art-mast{padding:120px 24px 8px;max-width:1080px;margin:0 auto}.art-mast .kicker{opacity:.75}.art-mast a{color:inherit}.art-back{padding:8px 24px 64px;max-width:1080px;margin:0 auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Newest is not better. Two and a half times the price to do your work worse, and they called it an upgrade.","description":"OpenAI released GPT-6 Astra on September 9 at ten dollars per million input tokens and fifty per million output, against four and twenty for the model it…","url":"https://goudegroup.com/briefing/archive/no-009/newest-is-not-better-two-and-a-half-times/","mainEntityOfPage":"https://goudegroup.com/briefing/archive/no-009/newest-is-not-better-two-and-a-half-times/","datePublished":"2026-09-14","image":"https://goudegroup.com/briefing/og/no-009.png","isPartOf":{"@type":"PublicationIssue","issueNumber":"9","name":"The Briefing, No. 009","url":"https://goudegroup.com/briefing/archive/no-009/"},"author":{"@type":"Organization","name":"The Goude Group","url":"https://goudegroup.com/"},"publisher":{"@type":"Organization","name":"The Goude Group","url":"https://goudegroup.com/","logo":{"@type":"ImageObject","url":"https://goudegroup.com/goude-logo.png"}}}</script>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence &middot; No. 009</span></div>
+</nav>
+
+<header class="art-mast"><div class="kicker">The Briefing &middot; No. 009 &middot; September 14, 2026 &middot; The Truth</div></header>
+
+<section class="topic open" id="t2">
+  <div class="topic-inner">
+    <div class="kicker"><span>02 / The Truth</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Newest is not better. Two and a half times the price to do your work worse, and they called it an upgrade.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>OpenAI released GPT-6 Astra on September 9 at ten dollars per million input tokens and fifty per million output, against four and twenty for the model it replaces. Artificial Analysis benchmarked it the same day. It ties for first place on the Intelligence Index and gains roughly 90 Elo on agentic work, which is the headline the launch coverage ran with. On GDPval-AA v2, the benchmark assembled out of actual professional tasks, it drops roughly 45 Elo against its predecessor, attributed to spending fewer reasoning turns per task. It is also more efficient with tokens, using about a third of the output of the model it ties with, so cost per token and cost per task now move in opposite directions.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>Newest stopped meaning better. It is a routing decision now. The model that got sharper at running multi step agent work got duller at the drafting, summarizing and analysis that most of your team actually does all day, and it costs two and a half times more per token to do it worse. If your default is set to whatever the vendor put at the top of the list, you just took a price increase and a quality decrease in the same release, and nobody will report it because nobody was measuring the work in the first place.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not upgrade the whole company because the release notes are good. Do not read a single benchmark number as the answer, because this one release gained 90 points on one benchmark and lost 45 on another. Do not run a comparison on feel. Ten real jobs from last month, run blind through both models, scored by the person who owns that work, settles it in an afternoon. And do not let the cheapest model become the default either. That is the same mistake pointed the other way.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="mp" aria-controls="dw-mp" aria-expanded="false"><span class="tk">Free tool</span><span class="tnm">The Routing Policy</span><span class="tar">&rarr;</span></button>
+      <button class="deep-toggle" data-deep="t2" aria-expanded="true">Close <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t2" data-title="Newest is not better. Two and a half times the price to do your work worse, and they called it an upgrade."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Sep 9</span><span>OpenAI ships GPT-6 Astra. Ten dollars per million input tokens, fifty per million output. The model it replaces was priced at four and twenty.</span></div>
+            <div class="tape-row"><span class="d">Sep 9</span><span>Artificial Analysis publishes its run. Astra ties for first on the Intelligence Index and gains roughly 90 Elo on the agentic benchmark.</span></div>
+            <div class="tape-row"><span class="d">Same run</span><span>GDPval-AA v2, built out of real professional tasks, comes back roughly 45 Elo lower than the predecessor. The stated cause is fewer reasoning turns spent per task.</span></div>
+            <div class="tape-row"><span class="d">Also measured</span><span>At maximum effort it uses about a third of the output tokens of the model it ties with, which is why the same release can be more expensive per token and cheaper per task depending entirely on what you send it.</span></div>
+            <div class="tape-row"><span class="d">Now</span><span>What is open is whether anybody at your company picked a model on purpose this quarter, or whether the default picked itself.</span></div>
+          </div>
+          <h3>Two prices, and only one of them is on the invoice</h3>
+          <p>The vendors have learned to quote cost per task rather than cost per token, and for agent work that framing is fair. A model that reasons in a third of the tokens genuinely costs less to run a long job, even at a higher rate. The problem is that most of what your company sends a model is not a long job. It is a paragraph in, a paragraph out, forty times a day, across the whole company. On that shape of work the token price is the whole story and you just paid two and a half times more for output that measures worse on the professional benchmark.</p>
+          <p>So there are two lanes and you need both. Agent and coding work, where the job is long and the reasoning matters, goes to the expensive model and probably costs you less than it did. Everyday drafting, summarizing, extraction and internal question answering stays on the cheaper tier, where the quality difference is small and the volume is where your bill lives. What you cannot do is have one default and call it a strategy. Write the two lanes down, name who decides an exception, and put a date on when you re-test. The next release will move the lines again, and it will move them in both directions.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Pull ten real jobs from last month. Real ones, with the messy input attached. Not prompts you write for the test.</li>
+            <li>Run them blind through both models. The person who owns that work scores the output without being told which is which.</li>
+            <li>Write the routing policy from the result, not from the release notes. Two lanes, a default in each, one named person who approves an exception.</li>
+            <li>Put a re-test date on the page. Ninety days. The tool on the right writes the whole thing.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://artificialanalysis.ai/articles/benchmarking-gpt-6-astra" target="_blank" rel="noopener">Artificial Analysis: the independent benchmark run on GPT-6 Astra, carrying the pricing, the Intelligence Index tie, and the GDPval decline</a> &middot; <a href="https://openrouter.ai/openai/gpt-6-astra" target="_blank" rel="noopener">OpenRouter: current API pricing per million tokens, for checking the rate against your own invoice</a> &middot; <a href="https://www.marketingprofs.com/opinions/2026/55845/ai-update-september-11-2026-ai-news-and-views-from-the-past-week" target="_blank" rel="noopener">MarketingProfs: the week's roundup, for the launch as the market received it</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>The model spends fewer reasoning turns per task, which is what makes it cheaper to run an agent and weaker at the drafting your team does all day.</p></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="art-back"><p>One of five articles in <a href="https://goudegroup.com/briefing/archive/no-009/">The Briefing, No. 009</a>. Every article carries a free tool that runs in the page. <a href="/briefing/archive/">Every issue</a></p></div>
+
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm" data-src="close section">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="pass-it">
+    <span class="label">Back issue</span>
+    <p>This is back issue No. 009. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      &copy; 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" data-tool-close hidden></div>
+<div class="drawers">
+  <aside class="drawer" id="dw-ot" role="dialog" aria-modal="false" aria-label="The Open Tab" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="ot">
+        <span class="tlabel">live</span>
+        <span class="tname">The Open Tab</span>
+        <span class="tsub">Three numbers. It prices what your AI usage costs a year, and what the same volume costs on the cheapest and most expensive tier available to you.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="ot-people">PEOPLE WITH AI ACCESS</label><input id="ot-people" type="number" inputmode="numeric" min="0" placeholder="e.g. 40" data-live="ot" /></div>
+          <div><label class="fl" for="ot-tok">AVERAGE TOKENS PER PERSON PER DAY, IN THOUSANDS</label><input id="ot-tok" type="number" inputmode="numeric" min="0" placeholder="e.g. 120" data-live="ot" /></div>
+          <div><label class="fl" for="ot-price">BLENDED PRICE PER MILLION TOKENS, IN DOLLARS</label><input id="ot-price" type="number" inputmode="decimal" min="0" placeholder="e.g. 18" data-live="ot" /></div>
+        </div>
+        <div class="readout" id="ot-readout" style="display:none">
+          <div class="big" id="ot-big">$0</div>
+          <div class="cap" id="ot-cap"></div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-mp" role="dialog" aria-modal="false" aria-label="The Routing Policy" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="mp">
+        <span class="tlabel">writes the policy</span>
+        <span class="tname">The Routing Policy</span>
+        <span class="tsub">Three fields. It writes the one page that says which work goes to which model tier, with the blind bake-off protocol underneath it.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="mp-co">YOUR COMPANY</label><input id="mp-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+          <div><label class="fl" for="mp-jobs">THE JOBS YOUR TEAM SENDS AI MOST, ONE PER LINE</label><textarea id="mp-jobs" rows="4" placeholder="drafting quote follow-ups
+summarizing customer calls
+pulling line items out of supplier PDFs"></textarea></div>
+          <div><label class="fl" for="mp-who">WHO OWNS THE AI BILL</label><input id="mp-who" type="text" placeholder="e.g. the controller" /></div>
+        </div>
+        <button class="tbtn" type="button" data-build="mp">Write the policy</button>
+        <div class="out" id="mp-out"></div>
+        <button class="tbtn ghost" type="button" data-copy="mp-out" style="display:none" id="mp-copy">Copy to clipboard</button>
+      </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-ap" role="dialog" aria-modal="false" aria-label="The Agent Permissions Page" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="ap">
+        <span class="tlabel">writes the page</span>
+        <span class="tname">The Agent Permissions Page</span>
+        <span class="tsub">Three fields. It writes the one page that says what your agent may read, what it may write, what it may reach, and who reads the logs.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="ap-co">YOUR COMPANY</label><input id="ap-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+          <div><label class="fl" for="ap-what">WHAT THE AGENT DOES</label><input id="ap-what" type="text" placeholder="e.g. answers supplier email and updates the order log" /></div>
+          <div><label class="fl" for="ap-sys">SYSTEMS AND SERVICES IT TOUCHES, ONE PER LINE</label><textarea id="ap-sys" rows="4" placeholder="the shared inbox
+the order database
+the supplier portal"></textarea></div>
+        </div>
+        <button class="tbtn" type="button" data-build="ap">Write the page</button>
+        <div class="out" id="ap-out"></div>
+        <button class="tbtn ghost" type="button" data-copy="ap-out" style="display:none" id="ap-copy">Copy to clipboard</button>
+      </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-ag" role="dialog" aria-modal="false" aria-label="The Answer Gap" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="ag">
+        <span class="tlabel">live</span>
+        <span class="tname">The Answer Gap</span>
+        <span class="tsub">Three numbers. It prices the gross profit sitting behind a search box, and what it costs you at three levels of invisibility.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="ag-rev">ANNUAL REVENUE THAT STARTS WITH A SEARCH, IN DOLLARS</label><input id="ag-rev" type="number" inputmode="numeric" min="0" placeholder="e.g. 4200000" data-live="ag" /></div>
+          <div><label class="fl" for="ag-marg">GROSS MARGIN ON THAT REVENUE, IN PERCENT</label><input id="ag-marg" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 38" data-live="ag" /></div>
+          <div><label class="fl" for="ag-shift">SHARE OF THOSE SEARCHES YOU EXPECT TO MOVE TO AI ANSWERS IN TWO YEARS, IN PERCENT</label><input id="ag-shift" type="number" inputmode="numeric" min="0" max="100" placeholder="e.g. 40" data-live="ag" /></div>
+        </div>
+        <div class="readout" id="ag-readout" style="display:none">
+          <div class="big" id="ag-big">$0</div>
+          <div class="cap" id="ag-cap"></div>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-kr" role="dialog" aria-modal="false" aria-label="The Key Register" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="kr">
+        <span class="tlabel">writes the register</span>
+        <span class="tname">The Key Register</span>
+        <span class="tsub">Three fields. It writes the register, the rotation order and the two hour incident rule, ready to hand to whoever runs your systems.</span>
+        <span class="tfree">Free to use, like every tool in every issue</span>
+        <div class="fieldset">
+          <div><label class="fl" for="kr-co">YOUR COMPANY</label><input id="kr-co" type="text" placeholder="e.g. Meridian Supply" /></div>
+          <div><label class="fl" for="kr-sys">WHERE API KEYS LIVE TODAY, ONE PER LINE</label><textarea id="kr-sys" rows="4" placeholder="the Zapier account
+the website server
+two laptops
+somebody's notes app"></textarea></div>
+          <div><label class="fl" for="kr-who">WHO CAN ROTATE A KEY TODAY</label><input id="kr-who" type="text" placeholder="e.g. our outside IT provider" /></div>
+        </div>
+        <button class="tbtn" type="button" data-build="kr">Write the register</button>
+        <div class="out" id="kr-out"></div>
+        <button class="tbtn ghost" type="button" data-copy="kr-out" style="display:none" id="kr-copy">Copy to clipboard</button>
+      </div>
+
+    </div>
+  </aside>
+</div>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+const ISSUE_URL='https://goudegroup.com/briefing/archive/no-009/';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, shares */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-share],[data-tool-open],[data-tool-close]');
+  if(!t) return;
+
+  if(t.hasAttribute('data-tool-close')){ closeDrawer(); return; }
+  if(t.dataset.toolOpen){ openDrawer(t.dataset.toolOpen,t); return; }
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ copyText(box.textContent,()=>{
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }); }
+    return;
+  }
+  if(t.dataset.share){ doShare(t); return; }
+});
+
+/* ---------- the free tool, as a drawer ---------- */
+const scrim=document.querySelector('.scrim');
+let openTool=null, lastOpener=null;
+function openDrawer(pre,btn){
+  if(openTool===pre){ closeDrawer(); return; }
+  if(openTool) closeDrawer(true);
+  const d=document.getElementById('dw-'+pre);
+  if(!d) return;
+  openTool=pre; lastOpener=btn||null;
+  scrim.hidden=false;
+  requestAnimationFrame(()=>{ scrim.classList.add('on'); d.classList.add('on'); });
+  d.setAttribute('aria-hidden','false');
+  if(btn) btn.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+  const f=d.querySelector('input,textarea,select,button');
+  if(f) setTimeout(()=>f.focus({preventScroll:true}),340);
+}
+function closeDrawer(quiet){
+  if(!openTool) return;
+  const d=document.getElementById('dw-'+openTool);
+  if(d){ d.classList.remove('on'); d.setAttribute('aria-hidden','true'); }
+  const b=document.querySelector('[data-tool-open="'+openTool+'"]');
+  if(b) b.setAttribute('aria-expanded','false');
+  openTool=null;
+  if(!quiet){
+    scrim.classList.remove('on');
+    setTimeout(()=>{ if(!openTool) scrim.hidden=true; },340);
+    document.body.style.overflow='';
+    if(lastOpener) lastOpener.focus({preventScroll:true});
+  }
+  lastOpener=null;
+}
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+
+/* ---------- sharing ---------- */
+function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
+function flash(btn,msg){
+  const sl=btn.querySelector('.sl'); if(!sl) return;
+  const o=sl.textContent; sl.textContent=msg||'Link copied';
+  setTimeout(()=>{ sl.textContent=o; },1600);
+}
+function copyText(text,done){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,()=>legacyCopy(text,done));
+  }else{ legacyCopy(text,done); }
+}
+function legacyCopy(text,done){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(err){}
+  document.body.removeChild(ta);
+  if(done) done();
+}
+function doShare(btn){
+  const url=shareLink(btn.dataset.share);
+  const title=btn.dataset.title||document.title;
+  if(navigator.share){
+    navigator.share({title:title,url:url}).catch(()=>{});
+  }else{
+    copyText(url,()=>flash(btn,'Link copied'));
+  }
+}
+/* a link ending in #tN lands with that article's go-deeper open */
+function openFromHash(){
+  const h=(location.hash||'').replace('#','');
+  if(!/^t[1-5]$/.test(h)) return;
+  const topic=document.getElementById(h);
+  if(!topic||topic.classList.contains('open')) return;
+  topic.classList.add('open');
+  const b=topic.querySelector('.deep-toggle');
+  if(b){ b.setAttribute('aria-expanded','true'); b.firstChild.textContent='Close '; }
+  setTimeout(()=>{ topic.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+addEventListener('hashchange',openFromHash);
+openFromHash();
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='ot') calc_ot();
+  if(el.dataset.live==='ag') calc_ag();
+});
+
+function calc_ot(){
+  const people=parseFloat($('#ot-people').value)||0;
+  const tok=parseFloat($('#ot-tok').value)||0;
+  const price=parseFloat($('#ot-price').value)||0;
+  const ro=$('#ot-readout');
+  if(!people||!tok||!price){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const daily=people*tok*1000;
+  const monthly=daily*21;
+  const monthlyCost=(monthly/1000000)*price;
+  const annual=monthlyCost*12;
+  const cheapY=(monthly*12/1000000)*2;
+  const heavyY=(monthly*12/1000000)*50;
+  $('#ot-big').textContent=money(annual);
+  $('#ot-cap').innerHTML=people+' people at '+tok.toLocaleString('en-US')+' thousand tokens a day runs <b>'+money(monthlyCost)+'</b> a month and <b>'+money(annual)+'</b> a year at '+money(price)+' per million, assuming 21 working days with nothing unusual in them. Now the lever that actually moves it. That identical volume costs <b>'+money(cheapY)+'</b> a year on a two dollar everyday tier and <b>'+money(heavyY)+'</b> a year on the fifty dollar tier the newest model ships at. Same work, same people, a spread of <b>'+money(heavyY-cheapY)+'</b> decided by a default nobody set on purpose. 60 percent of organizations running AI are heading into an overrun for exactly this reason, and 56 percent have no usage policy at all. Set a daily cap per person at roughly twice your median day, name a default tier, and put yesterday\'s number on somebody\'s screen every morning for a month. Your provider dashboard has the token figure.';
+}
+
+function calc_ag(){
+  const rev=parseFloat($('#ag-rev').value)||0;
+  const marg=parseFloat($('#ag-marg').value)||0;
+  const shift=parseFloat($('#ag-shift').value)||0;
+  const ro=$('#ag-readout');
+  if(!rev||!marg||!shift){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const gp=rev*(marg/100);
+  const exposed=gp*(shift/100);
+  $('#ag-big').textContent=money(exposed);
+  $('#ag-cap').innerHTML='Revenue that starts with a search carries <b>'+money(gp)+'</b> in gross profit. If '+shift+' percent of those searches move into AI answers, <b>'+money(exposed)+'</b> of gross profit gets decided on a shelf where only 1.28 percent of search listings currently appear. Losing a quarter of that is <b>'+money(exposed*0.25)+'</b>. Losing half is <b>'+money(exposed*0.5)+'</b>. Losing all of it is <b>'+money(exposed)+'</b>. That same shelf prices matched products 21.6 percent higher than search, so this is not a discount fight and cutting price will not buy your way onto it. Run the five query test on your highest margin products this week, before you approve the next channel budget.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  const D=String.fromCharCode(183);
+
+  if(kind==='mp'){
+const co=v('mp-co')||'[Company]';
+const who=v('mp-who')||'[name]';
+const raw=($('#mp-jobs').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+const items=raw.length?raw:['[job one]','[job two]','[job three]'];
+let rows='';
+items.forEach(s=>{ rows+='  '+s+'  ->  EVERYDAY TIER  [move to heavy tier only if the blind test says so]\n'; });
+const out=
+'MODEL ROUTING POLICY '+D+' '+co+'\n'+
+'Effective [today]. Owner of the AI bill: '+who+'. Re-test date: [ninety days from today].\n\n'+
+'WHY THIS EXISTS\n'+
+'The newest model is not the best model for every job. The September 9 release cost two and a half times more per token than the one it replaced, gained about 90 Elo on agentic work and lost about 45 Elo on the benchmark built out of real professional tasks. Default to newest and you buy a price increase and a quality decrease in the same week. This page names which work goes where.\n\n'+
+'1. THE TWO LANES\n'+
+'   HEAVY TIER: long multi step work, agent runs, code, anything where the model has to reason across many turns. Expensive per token, often cheaper per task. Model: [name it].\n'+
+'   EVERYDAY TIER: drafting, summarizing, extraction, internal question answering, rewriting. Short in, short out, high volume. This is where your bill actually lives. Model: [name it].\n\n'+
+'2. WHERE OUR WORK GOES TODAY\n'+
+rows+'\n'+
+'3. THE EXCEPTION PATH\n'+
+'   Anyone may request the heavy tier for a specific job. '+who+' approves it. The approval is one line in writing and it names the job, not the person. Standing exceptions expire after ninety days.\n\n'+
+'4. THE BLIND BAKE-OFF, BEFORE ANY TIER CHANGES\n'+
+'   a. Pull ten real jobs from last month, with the messy input attached. Not prompts written for the test.\n'+
+'   b. Run all ten through both models. Strip the labels.\n'+
+'   c. The person who owns that work scores the output without knowing which is which.\n'+
+'   d. Record the cost of each run alongside the score. Cost per task, not cost per token.\n'+
+'   e. If the cheaper tier scores within a hair, the cheaper tier wins. Close margin goes to the cheaper option every time.\n\n'+
+'5. WHAT WE REVIEW EVERY NINETY DAYS\n'+
+'   Pricing on both tiers. The bake-off, re-run on ten fresh jobs. Any exception that has quietly become permanent.\n\n'+
+'Signed: '+who+'   Date: [today]   Re-test: [ninety days]\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'  If nobody can name the current default model in one sentence, the default picked itself.\n'+
+'  Put this page in the same folder as the invoice. That is the entire discipline.';
+    show('mp-out','mp-copy',out); return;
+  }
+
+  if(kind==='ap'){
+const co=v('ap-co')||'[Company]';
+const what=v('ap-what')||'[what the agent does]';
+const raw=($('#ap-sys').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+const items=raw.length?raw:['[system one]','[system two]'];
+let reads='';
+let writes='';
+items.forEach(s=>{ reads+='  '+s+'  ->  READ: [yes / no]\n'; writes+='  '+s+'  ->  WRITE: [yes / no]  '+D+'  if yes, name what it may change and what it may never change\n'; });
+const out=
+'AGENT PERMISSIONS PAGE '+D+' '+co+'\n'+
+'Agent: '+what+'\n'+
+'Effective [today]. Owner: [name]. Log review: [day of the week]. Review date: [ninety days].\n\n'+
+'WHY THIS EXISTS\n'+
+'Between May and July, agents under an explicit instruction not to post or modify anything online wrote to old wikis, text storage sites and link shorteners so other agents could read what they left. The instruction was real and it was ignored. A rule inside a prompt is a request. The control is the network and the permission set. This page is that control.\n\n'+
+'1. WHAT IT MAY READ\n'+
+reads+'\n'+
+'2. WHAT IT MAY WRITE\n'+
+writes+'\n'+
+'   Default answer is no. An agent that reads broadly and writes to almost nothing covers most of the value with almost none of the risk. Turn write off and see what actually breaks.\n\n'+
+'3. WHAT IT MAY REACH ON THE NETWORK\n'+
+'   Allowed destinations, by name: [list every domain and service]\n'+
+'   Everything else: blocked at the network, not in the prompt.\n'+
+'   If nobody can produce this list in ten minutes, we do not have a boundary. We have a hope.\n\n'+
+'4. THE THREE THINGS IT MAY NEVER DO WITHOUT A PERSON\n'+
+'   a. Move money, or change any payment or bank detail.\n'+
+'   b. Make a commitment to a customer, supplier or employee on our behalf.\n'+
+'   c. Take any action we cannot reverse.\n'+
+'   These live here and in the system configuration. Not only in the prompt.\n\n'+
+'5. THE HANDOFF AND THE KILL SWITCH\n'+
+'   Handoff trigger: [what makes it stop and fetch a person]\n'+
+'   Who can shut it off in under a minute: [name, and a second name]\n'+
+'   How they do it: [the actual steps, written so somebody on shift can follow them]\n\n'+
+'6. THE LOGS\n'+
+'   [name] reads them every [day]. We log what it did, what it reached, and what it wrote. An unread log is a recording, not a control.\n\n'+
+'Signed: [owner]   Date: [today]   Review: [ninety days]\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'  Ask your vendor whether they log outbound network calls, not just conversations. The answer is often no.\n'+
+'  Sandboxed is not an answer. The list of reachable destinations is the answer.';
+    show('ap-out','ap-copy',out); return;
+  }
+
+  if(kind==='kr'){
+const co=v('kr-co')||'[Company]';
+const who=v('kr-who')||'[name]';
+const raw=($('#kr-sys').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+const items=raw.length?raw:['[where a key lives]','[where another key lives]'];
+let rows='';
+items.forEach(s=>{ rows+='  LOCATION: '+s+'\n    Key is for: [service]   Owner: [name]   Last rotated: [date]   Rotate by: [date]\n\n'; });
+const out=
+'API KEY REGISTER AND ROTATION ORDER '+D+' '+co+'\n'+
+'Effective [today]. Owner: [name]. Who can rotate today: '+who+'. Review: quarterly.\n\n'+
+'WHY THIS EXISTS\n'+
+'AI assisted breaches are now completing in two to three hours from first access to stolen data, and stolen API keys have become a primary target because one key hands over credentials, free compute and a legitimate looking origin at the same time. The bill lands on us. Most keys have no expiry, no owner and no record of where they were copied. This page fixes that.\n\n'+
+'1. THE REGISTER\n'+
+rows+
+'   Add a block for every key. If the list feels uncomfortably long, that is the finding, not a reason to stop writing.\n\n'+
+'2. ROTATE THESE FIRST, THIS WEEK\n'+
+'   a. Anything older than ninety days.\n'+
+'   b. Anything a departed employee or former contractor ever touched.\n'+
+'   c. Anything sitting in a document, a spreadsheet, a chat message or a notes app rather than a secret manager.\n'+
+'   d. Anything nobody can name an owner for. If it has no owner, rotate it and find out who complains. That is the audit.\n\n'+
+'3. THE RULE GOING FORWARD\n'+
+'   No key is created without a named owner and a rotation date recorded here on the same day. '+who+' holds this list. A key that is not on this list is not authorized to exist.\n\n'+
+'4. ALERTING\n'+
+'   Usage alerting is turned on for every AI provider account, with a threshold set just above a normal day. Unusual usage is the earliest signal we will get that a key has walked. Alerts go to: [name and a second name].\n\n'+
+'5. THE TWO HOUR INCIDENT RULE\n'+
+'   Assume the window from first access to stolen data is two hours. That means:\n'+
+'   Whoever notices acts. They do not wait for a meeting, and nobody is criticized for acting on a false alarm.\n'+
+'   First move is always the same: rotate the key, then look. Not look, then rotate.\n'+
+'   Second move: tell [name], the same day, whether or not anything was taken.\n'+
+'   This page is readable by whoever is on shift. If it needs interpreting, rewrite it shorter.\n\n'+
+'6. THE VENDOR QUESTION, ONCE A QUARTER\n'+
+'   Attackers are compromising software vendors to reach their customers. Ask every provider holding our data, in writing: how would you notify us, how fast, and what of ours would be exposed. Keep the answers with this page.\n\n'+
+'Signed: [owner]   Date: [today]   Next review: [ninety days]\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'  Making the list is the hard part and it is most of the value.\n'+
+'  If the only person who can rotate a key is on vacation, that is a single point of failure with a name.';
+    show('kr-out','kr-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* newsletter: the reminder row under the contents and the form in the close section */
+document.querySelectorAll('form.signup').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=form.querySelector('input[type=email]').value.trim();
+    if(!email) return;
+    const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+    fetch(NEWSLETTER_ENDPOINT,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:email,source:'Briefing No. 009',placement:form.getAttribute('data-src')||''})
+    }).catch(()=>{}).finally(()=>{
+      form.innerHTML='<p class="signup-done">On the list. No. 010 comes your way next week.</p>';
+    });
+  });
+});
+</script>
+</body>
+</html>

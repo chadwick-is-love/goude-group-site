@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AI can fake a voice you trust. Call the number on file | The Briefing No. 015 | Goude Group</title>
+<meta name="description" content="On September 25 Reuters reported that Fideuram, the private bank of Intesa Sanpaolo, sent about €95 million overseas after a WhatsApp message from a fake CEO…" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/archive/no-015/ai-can-fake-a-voice-you-trust-call-the/" />
+<meta property="og:title" content="AI can fake a voice you trust. Call the number on file." />
+<meta property="og:description" content="On September 25 Reuters reported that Fideuram, the private bank of Intesa Sanpaolo, sent about €95 million overseas after a WhatsApp message from a fake CEO…" />
+<meta property="og:image" content="https://goudegroup.com/briefing/og/no-015.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-promise{margin-top:32px;padding-top:19px;border-top:1px solid var(--navy)}
+.mast-promise p{font-size:15.5px;line-height:1.6;color:var(--navy);max-width:76ch}
+.mast-promise p b{font-weight:700}
+@media(max-width:620px){.mast-promise{margin-top:26px}.mast-promise p{font-size:14.5px}}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:22px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.passnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:26px 0 16px;max-width:80ch}
+.passnote b{color:var(--navy);font-weight:700}
+.passrow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.arch-link:hover{background:var(--navy);color:var(--mint)}
+.remind{margin-top:26px;border-top:1px solid var(--navy-faint);padding-top:22px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.remind p{font-size:13.5px;line-height:1.55;color:var(--navy-soft);max-width:46ch;margin:0;flex:1 1 300px}
+.remind p b{color:var(--navy);font-weight:700}
+.signup.inline{margin-top:0;flex:1 1 330px;max-width:420px}
+.signup.inline input{padding:12px 14px;font-size:14px}
+.signup.inline button{padding:12px 20px;font-size:11px}
+.signup-done{font-size:14px;line-height:1.55;color:var(--navy)}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* actions row: go deeper + send */
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.deep-toggle{
+  display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+.share{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE FREE TOOL (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+.pass-it{max-width:var(--maxw);margin:44px auto 0;border-top:1px solid var(--navy-hair);padding-top:24px}
+.pass-it .label{opacity:.5;display:block;margin-bottom:12px}
+.pass-it p{font-size:13.5px;line-height:1.6;color:var(--navy-soft);max-width:74ch;margin-bottom:18px}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  nav{padding:16px 5vw}
+  nav.scrolled{padding-top:12px;padding-bottom:12px}
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  header.masthead{min-height:74vh;padding-top:112px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .passrow{flex-direction:column;align-items:stretch}
+  .passrow .share,.passrow .arch-link{width:100%;justify-content:center}
+  .signup{flex-wrap:wrap}
+  .signup input{flex:1 1 100%}
+  .signup button{width:100%}
+}
+
+/* ---------- THE FREE TOOL, AS A DRAWER ---------- */
+/* the same silhouette as Go deeper and Send this one, filled rather than
+   outlined, because it is the one thing on the page we want pressed */
+.tool-open{
+  display:inline-flex;align-items:center;gap:11px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  background:var(--navy);color:var(--mint);
+  transition:background .25s ease,color .25s ease;
+}
+.tool-open:hover{background:transparent;color:var(--navy)}
+.tool-open .tk{white-space:nowrap}
+.tool-open .tnm{font-weight:400;letter-spacing:.1em;opacity:.72;white-space:nowrap}
+.tool-open .tar{font-size:14px;line-height:1;transition:transform .25s ease}
+.tool-open:hover .tar{transform:translateX(4px)}
+@media(max-width:620px){.tool-open .tnm{display:none}}
+
+.scrim{
+  position:fixed;inset:0;z-index:80;background:rgba(6,22,43,.20);
+  opacity:0;transition:opacity .32s ease;
+}
+.scrim.on{opacity:1}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:90;
+  width:min(94vw,468px);
+  background:var(--mint-deep);
+  border-left:2.5px solid var(--navy);
+  box-shadow:-26px 0 60px rgba(6,22,43,.26);
+  transform:translateX(102%);
+  /* hidden outright when closed, or the shadow paints a band down the page
+     edge and the inputs stay in the tab order */
+  visibility:hidden;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s linear .38s;
+  display:flex;flex-direction:column;
+  overscroll-behavior:contain;
+}
+.drawer.on{
+  transform:translateX(0);visibility:visible;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s;
+}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 14px;border-bottom:1px solid var(--navy-hair);flex:none;
+}
+.drawer-head .dh-k{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.55}
+.drawer-x{font-size:26px;line-height:1;padding:0 4px;opacity:.55;transition:opacity .2s ease}
+.drawer-x:hover{opacity:1}
+.drawer-body{padding:22px 24px 40px;overflow-y:auto;flex:1 1 auto}
+.drawer-body .tool{box-shadow:none;background:transparent;padding:0;border-radius:0}
+@media(max-width:620px){
+  .drawer{width:100vw;border-left:0;box-shadow:none}
+  .tool-open{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .drawer{transition:transform 0s, visibility 0s}
+  .scrim{transition:none}
+  .tool-open:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<link rel="canonical" href="https://goudegroup.com/briefing/archive/no-015/ai-can-fake-a-voice-you-trust-call-the/" />
+<style>.art-mast{padding:120px 24px 8px;max-width:1080px;margin:0 auto}.art-mast .kicker{opacity:.75}.art-mast a{color:inherit}.art-back{padding:8px 24px 64px;max-width:1080px;margin:0 auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"AI can fake a voice you trust. Call the number on file.","description":"On September 25 Reuters reported that Fideuram, the private bank of Intesa Sanpaolo, sent about €95 million overseas after a WhatsApp message from a fake CEO…","url":"https://goudegroup.com/briefing/archive/no-015/ai-can-fake-a-voice-you-trust-call-the/","mainEntityOfPage":"https://goudegroup.com/briefing/archive/no-015/ai-can-fake-a-voice-you-trust-call-the/","datePublished":"2026-10-26","image":"https://goudegroup.com/briefing/og/no-015.png","isPartOf":{"@type":"PublicationIssue","issueNumber":"15","name":"The Briefing, No. 015","url":"https://goudegroup.com/briefing/archive/no-015/"},"author":{"@type":"Organization","name":"The Goude Group","url":"https://goudegroup.com/"},"publisher":{"@type":"Organization","name":"The Goude Group","url":"https://goudegroup.com/","logo":{"@type":"ImageObject","url":"https://goudegroup.com/goude-logo.png"}}}</script>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence &middot; No. 015</span></div>
+</nav>
+
+<header class="art-mast"><div class="kicker">The Briefing &middot; No. 015 &middot; October 26, 2026 &middot; Beware</div></header>
+
+<section class="topic open" id="t2">
+  <div class="topic-inner">
+    <div class="kicker"><span>02 / Beware</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>AI can fake a voice you trust. Call the number on file.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>On September 25 Reuters reported that Fideuram, the private bank of Intesa Sanpaolo, sent about €95 million overseas after a WhatsApp message from a fake CEO and a confirming call in a lawyer's AI-cloned voice. About €53 million is back. In April the FBI's 2025 crime report counted 22,364 complaints that mentioned AI and $893 million in losses, and said criminals use voice cloning to request wire payments.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The phone call was your safety check. A cloned voice turns it into the scam's closing step. The insurance side is worse than most owners assume. Many cyber and crime policies cap fraudulent transfer losses at $250,000 or less, and some only pay if staff confirmed the bank change on a separate call. A Texas builder lost $874,863 to a fake steel vendor. The insurer paid $250,000 and the court said that was all.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not call the number in the email, the text or the invoice. The Texas builder did exactly that and reached the fraudster. Do not let one person change a payee's bank details and also send the first payment. Do not treat a familiar voice or a face on video as proof; urgency and secrecy are the tell. Do not assume your cyber policy covers a payment your own staff sent. Find the social engineering limit this week.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="bv" aria-controls="dw-bv" aria-expanded="false"><span class="tk">Free tool</span><span class="tnm">The Callback Rule</span><span class="tar">&rarr;</span></button>
+      <button class="deep-toggle" data-deep="t2" aria-expanded="true">Close <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t2" data-title="AI can fake a voice you trust. Call the number on file."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Feb</span><span>Fideuram's then chairman gets a WhatsApp message that appears to come from Intesa Sanpaolo's CEO, asking for urgent help with an overseas deal. A follow-up call in a lawyer's AI-cloned voice confirms it. Transfers go mainly to China and Hong Kong.</span></div>
+            <div class="tape-row"><span class="d">Mar 9</span><span>A federal court in Texas rules for the insurer in Perry and Perry Builders v. Cowbell. A fake steel vendor took $874,863.70 in two ACH payments a minute apart. The policy's cyber crime limit was $250,000, and that is all it paid.</span></div>
+            <div class="tape-row"><span class="d">Apr</span><span>The FBI's 2025 Internet Crime Report counts 22,364 complaints mentioning AI and $893 million in losses. Business email compromise with an AI component cost over $30 million. The report says criminals use voice cloning to request wire payments.</span></div>
+            <div class="tape-row"><span class="d">Jun 22</span><span>Insurance Journal reports that cyber and crime policies often cap fraudulent transfer losses at $250,000 or less, that many standard cyber policies exclude social engineering, and that some require a separate confirming call before a bank change.</span></div>
+            <div class="tape-row"><span class="d">Sep 25</span><span>Reuters reports the Fideuram loss at about €95 million. Roughly €53 million is recovered; about €36 million moved into crypto and is untraced. Milan prosecutors are investigating one foreign national. Both banks decline to comment.</span></div>
+          </div>
+          <h3>The phone call is the target</h3>
+          <p>Payment fraud runs on one trick: get a real employee to send real money. For years the defense was a phone call. AI voice cloning goes straight at that defense. The scammer supplies the email, the new bank details and the phone number, then answers in a voice that sounds right. Perry and Perry Builders did call. The office manager dialed the number in the fraudulent message and reached the fraudster. No AI was named in that case, and none was needed. Add a cloned voice and even a careful bookkeeper hears confirmation. The weak point is where the phone number came from.</p>
+          <p>The fix costs nothing and slows you down a little. Every bank change or new payee gets a call to a number you already had: the vendor record in QuickBooks, a signed contract, last year's invoice. A second person approves the first payment to any changed account. Any call from you asking to move money needs a code phrase you agreed in person. Then call your broker and get the social engineering limit in writing, plus any callback condition. The trade-off is a vendor waiting a day for a first payment. That beats learning your limit after the wire clears.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>You, today: pull your cyber and crime policies and find the line for social engineering, fraudulent instruction or funds transfer fraud. Write down the limit, the retention and any callback condition.</li>
+            <li>Your bookkeeper, this week: for your top 20 vendors, record a phone number from a source you trust, a signed contract or an old invoice, in QuickBooks or Xero. That is the only number staff call to confirm a change.</li>
+            <li>Call your banker and ask for dual approval on new payees and changed accounts in your business banking portal. The person who takes a request never approves it.</li>
+            <li>Agree a code phrase in person with everyone who can move money. A call from you asking for a payment without it gets a polite no and a callback to your cell.</li>
+            <li>Paste any payment-change email into ChatGPT or Claude: "This email asks us to change where we send payments. List every sign it is a fraud attempt, which details I should verify and how, and write a short reply saying we will confirm by calling the number we already have on file."</li>
+            <li>Run The Callback Rule on this page to write the one-page rule, name the second approver and post it next to whoever pays the bills.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://gulfnews.com/world/europe/ai-voice-cloning-scam-hits-italian-bank-fake-executives-trigger-95m-overseas-transfers-1.500688692" target="_blank" rel="noopener">Gulf News, citing Reuters: Fideuram's €95 million loss, the AI-cloned lawyer's voice, recovery and investigation</a> &middot; <a href="https://www.ic3.gov/AnnualReport/Reports/2025_IC3Report.pdf" target="_blank" rel="noopener">FBI IC3: 2025 Internet Crime Report, AI complaints, losses and voice cloning in wire fraud</a> &middot; <a href="https://www.insurancejournal.com/magazines/mag-features/2026/06/22/874411.htm" target="_blank" rel="noopener">Insurance Journal: fraud sublimits, cyber exclusions and callback conditions on transfer cover</a> &middot; <a href="https://www.propertyinsurancecoveragelaw.com/blog/cyber-fraud-limits-coverage" target="_blank" rel="noopener">Merlin Law Group: Perry and Perry Builders v. Cowbell, the fake steel vendor and the $250,000 limit</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>A phone call used to settle a payment question. Now the caller can be generated, and many policies cap this loss at $250,000 or less.</p></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="art-back"><p>One of five articles in <a href="https://goudegroup.com/briefing/archive/no-015/">The Briefing, No. 015</a>. Every article carries a free tool that runs in the page. <a href="/briefing/archive/">Every issue</a></p></div>
+
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm" data-src="close section">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="pass-it">
+    <span class="label">Back issue</span>
+    <p>This is back issue No. 015. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      &copy; 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" data-tool-close hidden></div>
+<div class="drawers">
+  <aside class="drawer" id="dw-wa" role="dialog" aria-modal="false" aria-label="The Retainer Review" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="wa">
+            <span class="tlabel">writes the test</span>
+            <span class="tname">The Retainer Review</span>
+            <span class="tsub">Seven answers. It writes the 60-day plan to test one outside job in house, the hours bar it has to beat, and the scope note to your vendor.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="wa-co">YOUR COMPANY</label><input id="wa-co" type="text" placeholder="e.g. Reign City Creative" /></div>
+              <div><label class="fl" for="wa-svc">THE OUTSIDE JOB TO TEST</label>
+                <select id="wa-svc"><option value="mkt">Marketing: social posts and email</option><option value="rep">Monthly reporting and dashboards</option><option value="book">Bookkeeping: categorizing transactions</option></select>
+              </div>
+              <div><label class="fl" for="wa-vend">WHO DOES IT TODAY</label><input id="wa-vend" type="text" placeholder="e.g. the agency or bookkeeper's name" /></div>
+              <div><label class="fl" for="wa-fee">WHAT YOU PAY THEM A MONTH, IN DOLLARS</label><input id="wa-fee" type="number" inputmode="numeric" min="0" placeholder="e.g. 2000" /></div>
+              <div><label class="fl" for="wa-rate">HOURLY COST OF THE PERSON WHO WOULD DO IT, IN DOLLARS</label><input id="wa-rate" type="number" inputmode="numeric" min="0" placeholder="e.g. 35" /></div>
+              <div><label class="fl" for="wa-tool">THE AI YOU ALREADY PAY FOR</label>
+                <select id="wa-tool"><option value="ChatGPT">ChatGPT</option><option value="Claude">Claude</option><option value="Gemini">Gemini</option><option value="Copilot">Copilot</option></select>
+              </div>
+              <div><label class="fl" for="wa-own">WHO OWNS THE TEST</label><input id="wa-own" type="text" placeholder="e.g. the office manager's name" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="wa">Write the review</button>
+            <div class="out" id="wa-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="wa-out" style="display:none" id="wa-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-bv" role="dialog" aria-modal="false" aria-label="The Callback Rule" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="bv">
+            <span class="tlabel">writes the rule</span>
+            <span class="tname">The Callback Rule</span>
+            <span class="tsub">Five inputs. It writes the one-page payment rule for your team: who calls which number, who approves, and what happens when money goes out wrong.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="bv-co">Company name</label><input id="bv-co" type="text" placeholder="e.g. Harbor Mechanical" /></div>
+              <div><label class="fl" for="bv-rev">Second approver for payments</label><input id="bv-rev" type="text" placeholder="e.g. Dana, operations manager" /></div>
+              <div><label class="fl" for="bv-amt">Payments above this amount need two approvals</label><input id="bv-amt" type="number" inputmode="numeric" min="0" placeholder="e.g. 5000" /></div>
+              <div><label class="fl" for="bv-src">Where your trusted vendor phone numbers live</label>
+                <select id="bv-src"><option value="qb">Vendor records in QuickBooks or Xero</option><option value="ct">Signed contracts and past invoices</option><option value="bk">A phone list the owner keeps</option></select>
+              </div>
+              <div><label class="fl" for="bv-bank">Bank you pay vendors from</label><input id="bv-bank" type="text" placeholder="e.g. Chase, Truist, Regions" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="bv">Write the rule</button>
+            <div class="out" id="bv-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="bv-out" style="display:none" id="bv-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-px" role="dialog" aria-modal="false" aria-label="The Shrink Gauge" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="px">
+            <span class="tlabel">live</span>
+            <span class="tname">The Shrink Gauge</span>
+            <span class="tsub">Three numbers. It names the plan that keeps your Pro users doing the same work after October 30 and prices it for the year.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="px-seats">ChatGPT Pro 200 seats you pay for</label><input id="px-seats" type="number" inputmode="numeric" min="0" placeholder="e.g. 3" data-live="px" /></div>
+              <div><label class="fl" for="px-use">Share of the old Pro limit your heaviest user hits, in percent</label><input id="px-use" type="number" inputmode="numeric" min="0" placeholder="e.g. 40" data-live="px" /></div>
+              <div><label class="fl" for="px-plus">Google AI Plus seats that need Pro models (0 if none)</label><input id="px-plus" type="number" inputmode="numeric" min="0" placeholder="e.g. 2" data-live="px" /></div>
+            </div>
+            <div class="readout" id="px-readout" style="display:none">
+              <div class="big" id="px-big">$0</div>
+              <div class="cap" id="px-cap"></div>
+            </div>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-sn" role="dialog" aria-modal="false" aria-label="The Trial Run" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="sn">
+            <span class="tlabel">writes the trial</span>
+            <span class="tname">The Trial Run</span>
+            <span class="tsub">Seven answers. It writes a 60-day AI trial for one role, with the task list, the Friday log, the day-60 decision rule and what you tell the person.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="sn-co">Company name</label><input id="sn-co" type="text" placeholder="e.g. Harbor Roofing" /></div>
+              <div><label class="fl" for="sn-role">Role you were pitched to replace</label><input id="sn-role" type="text" placeholder="e.g. Office manager" /></div>
+              <div><label class="fl" for="sn-who">Person in the role now</label><input id="sn-who" type="text" placeholder="e.g. Dana" /></div>
+              <div><label class="fl" for="sn-tasks">Tasks that eat the week, one per line with hours</label><textarea id="sn-tasks" rows="4" placeholder="e.g. Invoices, 8
+Scheduling, 6
+Customer emails, 5"></textarea></div>
+              <div><label class="fl" for="sn-tool">AI tool for the trial</label>
+                <select id="sn-tool"><option value="chatgpt">ChatGPT</option><option value="claude">Claude</option><option value="copilot">Microsoft Copilot</option><option value="gemini">Gemini</option><option value="vendor">A vendor's AI agent</option></select>
+              </div>
+              <div><label class="fl" for="sn-start">Trial start date</label><input id="sn-start" type="text" placeholder="e.g. Nov 2" /></div>
+              <div><label class="fl" for="sn-money">Where freed hours go</label><input id="sn-money" type="text" placeholder="e.g. follow-ups on open quotes" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="sn">Write the trial</button>
+            <div class="out" id="sn-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="sn-out" style="display:none" id="sn-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-sw" role="dialog" aria-modal="false" aria-label="The Intake Flow" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="sw">
+            <span class="tlabel">writes the flow</span>
+            <span class="tname">The Intake Flow</span>
+            <span class="tsub">Seven answers. It writes the Workspace Studio flow spec, the exact Decide and Extract prompts, the draft reply and the Monday check.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="sw-co">Company name</label><input id="sw-co" type="text" placeholder="e.g. Harbor Mechanical" /></div>
+              <div><label class="fl" for="sw-inbox">The inbox your leads land in</label><input id="sw-inbox" type="text" placeholder="e.g. info@harbormech.com" /></div>
+              <div><label class="fl" for="sw-work">Work you quote, one per line</label><textarea id="sw-work" rows="3" placeholder="AC replacement
+Duct cleaning
+Maintenance plan"></textarea></div>
+              <div><label class="fl" for="sw-area">Your service area</label><input id="sw-area" type="text" placeholder="e.g. Hillsborough and Pasco counties" /></div>
+              <div><label class="fl" for="sw-who">Who gets the lead in Chat</label><input id="sw-who" type="text" placeholder="e.g. Mike, estimator" /></div>
+              <div><label class="fl" for="sw-prom">When you call a new lead back</label>
+                <select id="sw-prom"><option value="same">Same day</option><option value="one">Within one business day</option><option value="two">Within two business days</option></select>
+              </div>
+              <div><label class="fl" for="sw-fields">Details to pull from each email, one per line</label><textarea id="sw-fields" rows="4" placeholder="Name
+Phone
+Address
+Job type
+Timeline"></textarea></div>
+            </div>
+            <button class="tbtn" type="button" data-build="sw">Write the flow</button>
+            <div class="out" id="sw-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="sw-out" style="display:none" id="sw-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+</div>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+const ISSUE_URL='https://goudegroup.com/briefing/archive/no-015/';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, shares */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-share],[data-tool-open],[data-tool-close]');
+  if(!t) return;
+
+  if(t.hasAttribute('data-tool-close')){ closeDrawer(); return; }
+  if(t.dataset.toolOpen){ openDrawer(t.dataset.toolOpen,t); return; }
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ copyText(box.textContent,()=>{
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }); }
+    return;
+  }
+  if(t.dataset.share){ doShare(t); return; }
+});
+
+/* ---------- the free tool, as a drawer ---------- */
+const scrim=document.querySelector('.scrim');
+let openTool=null, lastOpener=null;
+function openDrawer(pre,btn){
+  if(openTool===pre){ closeDrawer(); return; }
+  if(openTool) closeDrawer(true);
+  const d=document.getElementById('dw-'+pre);
+  if(!d) return;
+  openTool=pre; lastOpener=btn||null;
+  scrim.hidden=false;
+  requestAnimationFrame(()=>{ scrim.classList.add('on'); d.classList.add('on'); });
+  d.setAttribute('aria-hidden','false');
+  if(btn) btn.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+  const f=d.querySelector('input,textarea,select,button');
+  if(f) setTimeout(()=>f.focus({preventScroll:true}),340);
+}
+function closeDrawer(quiet){
+  if(!openTool) return;
+  const d=document.getElementById('dw-'+openTool);
+  if(d){ d.classList.remove('on'); d.setAttribute('aria-hidden','true'); }
+  const b=document.querySelector('[data-tool-open="'+openTool+'"]');
+  if(b) b.setAttribute('aria-expanded','false');
+  openTool=null;
+  if(!quiet){
+    scrim.classList.remove('on');
+    setTimeout(()=>{ if(!openTool) scrim.hidden=true; },340);
+    document.body.style.overflow='';
+    if(lastOpener) lastOpener.focus({preventScroll:true});
+  }
+  lastOpener=null;
+}
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+
+/* ---------- sharing ---------- */
+function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
+function flash(btn,msg){
+  const sl=btn.querySelector('.sl'); if(!sl) return;
+  const o=sl.textContent; sl.textContent=msg||'Link copied';
+  setTimeout(()=>{ sl.textContent=o; },1600);
+}
+function copyText(text,done){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,()=>legacyCopy(text,done));
+  }else{ legacyCopy(text,done); }
+}
+function legacyCopy(text,done){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(err){}
+  document.body.removeChild(ta);
+  if(done) done();
+}
+function doShare(btn){
+  const url=shareLink(btn.dataset.share);
+  const title=btn.dataset.title||document.title;
+  if(navigator.share){
+    navigator.share({title:title,url:url}).catch(()=>{});
+  }else{
+    copyText(url,()=>flash(btn,'Link copied'));
+  }
+}
+/* a link ending in #tN lands with that article's go-deeper open */
+function openFromHash(){
+  const h=(location.hash||'').replace('#','');
+  if(!/^t[1-5]$/.test(h)) return;
+  const topic=document.getElementById(h);
+  if(!topic||topic.classList.contains('open')) return;
+  topic.classList.add('open');
+  const b=topic.querySelector('.deep-toggle');
+  if(b){ b.setAttribute('aria-expanded','true'); b.firstChild.textContent='Close '; }
+  setTimeout(()=>{ topic.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+addEventListener('hashchange',openFromHash);
+openFromHash();
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='px') calc_px();
+});
+document.addEventListener('change',e=>{
+  const el=e.target.closest('select[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='px') calc_px();
+});
+
+function calc_px(){
+  const seats=parseFloat($('#px-seats').value)||0;
+  let use=parseFloat($('#px-use').value)||0;
+  const plus=parseFloat($('#px-plus').value)||0;
+  const ro=$('#px-readout');
+  if(!seats||!use){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  if(use>100) use=100;
+  if(use<1) use=1;
+  const units=20*use/100;
+  let plan=500; let name='Pro 500';
+  if(units<=5){ plan=100; name='Pro 100'; } else if(units<=10){ plan=200; name='Pro 200'; }
+  const keepYr=seats*plan*12;
+  const nowYr=seats*200*12;
+  const gap=keepYr-nowYr;
+  const plusYr=plus*15*12;
+  let move='';
+  if(gap<0) move=' Move them to <b>'+name+'</b> before the next billing date and you save <b>'+money(-gap)+' a year</b>.';
+  else if(gap>0) move=' That is <b>'+money(gap)+' a year</b> more than today, so spend the <b>$2,500</b> credit grant first and decide in January.';
+  else move=' Pro 200 still fits at <b>$0</b> extra, but the same seat now holds half the work, so check again after your first heavy week in November.';
+  let plusNote='';
+  if(plus>0) plusNote=' Keeping Pro models on your Google AI Plus seats adds <b>'+money(plusYr)+' a year</b> after November 13.';
+  $('#px-big').textContent=money(keepYr)+'/yr';
+  $('#px-cap').innerHTML='Doing the same work after October 30 takes <b>'+name+'</b> for each seat, about <b>'+money(keepYr)+' a year</b> across <b>'+seats.toLocaleString('en-US')+'</b> seats, against <b>'+money(nowYr)+'</b> on Pro 200 today.'+move+plusNote+' Sort your Pro users before October 30.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  if(kind==='wa'){
+const co=v('wa-co')||'[Company]';
+    const vend=v('wa-vend')||'[vendor name]';
+    const who=v('wa-own')||'[name]';
+    const tl=v('wa-tool')||'ChatGPT';
+    const svc=v('wa-svc');
+    const fee=parseFloat(v('wa-fee'))||0;
+    const rate=parseFloat(v('wa-rate'))||0;
+    const feeS=fee?'$'+Math.round(fee).toLocaleString('en-US'):'$[monthly fee]';
+    const hrs=(fee&&rate)?Math.round(fee/rate)+' staff hours':'[monthly fee divided by hourly cost] staff hours';
+    let job='social posts and the monthly marketing email';
+    let keep='Paid ad spend decisions, brand changes and anything a customer complains about.';
+    let prompt='"Here are the last three months of posts and emails '+vend+' wrote for us: [paste]. List every repeating piece, how often it ships and what facts it needs. Then write one reusable prompt per piece that produces the same thing from this month\'s facts, in the same tone."';
+    if(svc==='rep'){
+      job='the monthly performance report';
+      keep='Any number that moves more than [10]% month to month, and every decision the report feeds.';
+      prompt='"Here are the last three monthly reports '+vend+' sent us: [paste]. List each chart and table, the source it pulls from and the one sentence of commentary each needs. Then write a prompt that builds the same report from this month\'s exports: [paste]."';
+    } else if(svc==='book'){
+      job='transaction categorizing before month end';
+      keep='Reconciliation sign off, payroll, sales tax and anything the CPA files. The ledger stays with a person.';
+      prompt='"Here are last month\'s bank transactions and the categories '+vend+' assigned: [paste]. Learn the pattern. Categorize this month\'s list: [paste]. Mark anything you are unsure of with a question mark and say why. Do not invent categories."';
+    }
+    const out=
+'60-DAY RETAINER REVIEW · '+co+'\n\n'+
+'Why this exists: firms using AI across several jobs are cutting outside services, marketing most. We test one job in house before we change any contract.\n\n'+
+'1. THE JOB. '+job.charAt(0).toUpperCase()+job.slice(1)+', today done by '+vend+' at '+feeS+' a month. Owner of the test: '+who+'.\n\n'+
+'2. THE BAR. The retainer buys '+hrs+' a month at our cost. In house wins only if our hours, checking included, plus the '+tl+' seat come in under that.\n\n'+
+'3. THE RUN. Days 1 to 60, '+vend+' keeps delivering. We produce the same work on the same deadlines in '+tl+' and compare side by side. Nothing of ours ships during the test.\n\n'+
+'4. THE FIRST PROMPT. Paste into '+tl+':\n'+
+'  '+prompt+'\n\n'+
+'5. STAYS WITH A PERSON\n'+
+'  · '+keep+'\n'+
+'  · '+who+' reviews every output for the full 60 days.\n\n'+
+'6. THE LOG. Each week: hours spent [ ], errors caught [ ], deadline met [yes/no].\n\n'+
+'7. DAY 60 DECISION. Keep the vendor, cut the scope or bring it in house. Scope cuts beat cancellations: keep '+vend+' on the judgment work.\n\n'+
+'NOTE TO '+vend.toUpperCase()+', SEND ON DAY 60 ONLY\n'+
+'We are moving '+job+' in house from [date]. We want to keep you on [remaining scope] at a revised fee of $[amount]. Let us find 20 minutes this week to set it.\n\n'+
+'Start date: [date]. Review date: [date plus 60 days].\n\n'+
+'---\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'· Check the contract notice period before day 60: [days].\n'+
+'· Customer lists and bank data go only into a paid business seat, never a free account.\n'+
+'· If the log shows more hours than the bar, keep the vendor and stop the test.\n';
+    show('wa-out','wa-copy',out); return;
+  }
+  if(kind==='bv'){
+const co=v('bv-co')||'[Company]';
+const who=v('bv-rev')||'[second approver]';
+const bank=v('bv-bank')||'[your bank]';
+const n=parseFloat((v('bv-amt')||'').replace(/[^0-9.]/g,''));
+const amt=isNaN(n)?'$[amount]':'$'+Math.round(n).toLocaleString('en-US');
+const s=v('bv-src');
+let srcLine='the vendor record in QuickBooks or Xero';
+if(s==='ct') srcLine='a signed contract or an invoice we paid before this request';
+else if(s==='bk') srcLine='the vendor phone list the owner keeps';
+const out=
+'PAYMENT CALLBACK RULE · '+co+'\n\n'+
+'Why this exists: scammers now use AI to clone the voice of a boss, a lawyer or a vendor. In 2026 a bank sent about €95 million after one of those calls. A Texas builder lost $874,863 after calling the number in a fake vendor email. Some insurance policies only pay if we can show we checked.\n\n'+
+'1. WHAT THIS COVERS. Any new payee, any change to a payee\'s bank details, and any urgent or confidential request to move money, by email, text, WhatsApp, phone or video.\n\n'+
+'2. CALL THE NUMBER WE ALREADY HAD. Confirm every request above by calling a number taken from '+srcLine+'. Never use a number, link or contact that arrived with the request. If no trusted number exists, the payment waits.\n\n'+
+'3. TWO PEOPLE. No first payment to a new or changed account, and no payment over '+amt+', leaves '+bank+' until '+who+' approves it in the bank portal. The person who took the request does not approve it.\n\n'+
+'4. THE CODE PHRASE. Any request from the owner by phone or video to move money must include the code phrase. It is agreed in person and never written down, here or anywhere. No phrase, no payment, and a callback to the owner\'s cell.\n\n'+
+'5. URGENCY IS THE SIGNAL. A request marked urgent, confidential or do not tell anyone gets slower, not faster. Nobody is ever in trouble for checking.\n\n'+
+'6. IF MONEY WENT OUT. Call the '+bank+' fraud line within the hour and ask for a recall. Tell '+who+' and the owner. File a report at ic3.gov. Call our insurance broker the same day.\n\n'+
+'Owner of this rule: [name]. Review date: [date plus 90 days].\n\n'+
+'---\n'+
+'NOTES TO YOURSELF, DELETE BEFORE POSTING\n'+
+'· Ask our broker in writing for our social engineering limit, our retention, and whether coverage requires a callback.\n'+
+'· List the [number] vendors we pay most and confirm each has a trusted number on file.\n'+
+'· Ask '+bank+' to switch on dual approval for new payees and changed accounts.\n';
+    show('bv-out','bv-copy',out); return;
+  }
+  if(kind==='sn'){
+const co=v('sn-co')||'[Company]';
+const role=v('sn-role')||'[role]';
+const who=v('sn-who')||'[name]';
+const start=v('sn-start')||'[start date]';
+const goal=v('sn-money')||'[work that brings in money, e.g. follow-ups on open quotes]';
+const t=v('sn-tool');
+let tool='ChatGPT';
+if(t==='claude'){ tool='Claude'; }
+else if(t==='copilot'){ tool='Microsoft Copilot'; }
+else if(t==='gemini'){ tool='Gemini'; }
+else if(t==='vendor'){ tool='the vendor\'s AI agent'; }
+const raw=($('#sn-tasks').value||'').split(/\n/).map(s=>s.trim()).filter(Boolean);
+let rows='';
+let total=0;
+raw.forEach(s=>{
+  const m=s.match(/(\d+(\.\d+)?)\s*(h|hr|hrs|hours)?\s*$/i);
+  const h=m?parseFloat(m[1]):0;
+  total+=h;
+  const name=m?s.slice(0,m.index).replace(/[,:\s]+$/,''):s;
+  rows+='  · '+(name||s)+': '+(h?h+' hrs':'[hours]')+' a week now. The AI drafts [what]. '+who+' checks [what].\n';
+});
+if(!rows){ rows='  · [Task]: [hours] a week now. The AI drafts [what]. '+who+' checks [what].\n'; }
+const base=total?total+' hours a week':'[total] hours a week';
+const bar=total?(Math.round(total*0.25*10)/10)+' hours':'[a quarter of the total] hours';
+let vend='';
+if(t==='vendor'){
+  vend='5. QUESTIONS FOR THE VENDOR, IN WRITING BEFORE DAY 1\n'+
+  '  · Who checks the agent\'s work, and how many hours a week does that take?\n'+
+  '  · What happens, and who pays, when it sends a wrong price or a wrong date to a customer?\n'+
+  '  · Can we export every log and cancel inside 60 days?\n\n';
+}
+const out=
+'60-DAY AI TRIAL · '+co+' · '+role+'\n\n'+
+'Why this exists: employers who cut staff for AI keep hiring the role back, because the tool needed more checking than promised. We test it beside '+who+' first and decide on our numbers.\n\n'+
+'1. THE RULE. No headcount change during the trial. Trial runs from '+start+' for 60 days. Tool: '+tool+'.\n\n'+
+'2. THE TASKS. '+who+' spends about '+base+' on these today.\n'+
+rows+'\n'+
+'3. THE FRIDAY LOG. Every Friday '+who+' writes down three numbers:\n'+
+'  · Hours the AI saved this week: [  ]\n'+
+'  · Hours spent checking or fixing its work: [  ]\n'+
+'  · Mistakes caught before a customer saw them: [  ]\n\n'+
+'4. THE DECISION, DAY 60. Net hours freed is saved minus checking, averaged over the last four weeks. If it is '+bar+' a week or more, keep '+who+' and move those hours to '+goal+'. If it is less, end the tool, not the person.\n\n'+
+vend+
+'WHAT WE TELL '+who.toUpperCase()+': "We are testing '+tool+' on part of your week for 60 days. You run it, you log it, and you tell us where it is wrong. Your log decides whether we keep it."\n\n'+
+'Owner: [your name]. Review date: [start date plus 60 days].\n\n'+
+'---\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'· Write down the exceptions only '+who+' knows (pricing, problem customers, vendor quirks) this week.\n'+
+'· If you plan a smaller team anyway, use attrition, not a layoff: [date of next likely opening].\n'+
+'· Salary and burden for this role: [$ a year]. The AI quote: [$ a year]. Add the checking hours to the AI column.\n';
+    show('sn-out','sn-copy',out); return;
+  }
+  if(kind==='sw'){
+const co=v('sw-co')||'[Company]';
+    const inbox=v('sw-inbox')||'[leads inbox, e.g. info@yourco.com]';
+    const area=v('sw-area')||'[service area]';
+    const who=v('sw-who')||'[estimator]';
+    const prom=v('sw-prom');
+    const when=prom==='same'?'today':(prom==='two'?'within two business days':'within one business day');
+    const workRaw=($('#sw-work').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+    const work=workRaw.length?workRaw:['[service one]','[service two]'];
+    const fRaw=($('#sw-fields').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+    const flds=fRaw.length?fRaw:['Name','Phone','Address','Job type','Timeline'];
+    let fRows='';
+    flds.forEach(s=>{ fRows+='  · '+s+'\n'; });
+    const out=
+'INTAKE FLOW · '+co+' · Google Workspace Studio\n\n'+
+'Why this exists: every new request for work lands in one Sheet, gets a label, reaches '+who+' in Chat and has a reply waiting in Drafts. Nobody retypes a lead.\n\n'+
+'1. STARTER\n'+
+'  When I get an email, sent to '+inbox+'. Skip Replies: ON.\n\n'+
+'2. DECIDE\n'+
+'  "Read this email: [email body]. Answer yes only if a person or business is asking '+co+' to quote, schedule or do paid work such as '+work.join(', ')+'. Answer no for vendors, job seekers, invoices, newsletters and spam."\n'+
+'  If NO: add label Not a lead. Stop.\n\n'+
+'3. EXTRACT\n'+
+'  From [email body], pull out:\n'+fRows+
+'  Write "missing" for any field the email does not state. Never guess.\n\n'+
+'4. DECIDE, NESTED UNDER YES\n'+
+'  "Is this address outside '+area+'?" If YES: add label Check this, notify '+who+' in Chat, stop. If NO: go on.\n\n'+
+'5. ACTIONS\n'+
+'  · Add a row to the Leads sheet: date, '+flds.join(', ')+', subject.\n'+
+'  · Add label New lead.\n'+
+'  · Notify '+who+' in Chat: name, job type, phone.\n'+
+'  · Draft an email (DRAFT ONLY, never Send):\n'+
+'    "Thanks for reaching out to '+co+'. We got your request about [job type] and '+who+' will call you '+when+'. If anything changes before then, reply here."\n\n'+
+'6. TEST\n'+
+'  A test run takes real actions. Forward three old emails to your own seat first: one real lead, one vendor pitch, one spam. Check each row, label and draft before pointing the flow at '+inbox+'.\n\n'+
+'7. THE MONDAY CHECK\n'+
+'  [Owner] reads every row from the last week against its email. Two wrong calls of the same kind: rewrite the Decide question, not the flow.\n\n'+
+'---\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SHARING\n'+
+'· Do not use Ask a Gem. It is closed to new flows and stops working no sooner than March 1, 2027.\n'+
+'· Limits: 25 flows per person, 25 active Gmail flows, a daily run cap Google does not publish.\n'+
+'· Gemini does not see your other steps. Paste the email body or the Extract variables into every prompt.\n';
+    show('sw-out','sw-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* newsletter: the reminder row under the contents and the form in the close section */
+document.querySelectorAll('form.signup').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=form.querySelector('input[type=email]').value.trim();
+    if(!email) return;
+    const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+    fetch(NEWSLETTER_ENDPOINT,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:email,source:'Briefing No. 015',placement:form.getAttribute('data-src')||''})
+    }).catch(()=>{}).finally(()=>{
+      form.innerHTML='<p class="signup-done">On the list. No. 016 comes your way next week.</p>';
+    });
+  });
+});
+</script>
+</body>
+</html>
