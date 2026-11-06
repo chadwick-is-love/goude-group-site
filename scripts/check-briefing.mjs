@@ -41,7 +41,13 @@ function serve(root) {
 function pagePaths() {
   const out = ['/', '/briefing/', '/briefing/archive/'];
   for (const d of fs.readdirSync(path.join(ROOT, 'briefing/archive'))) {
-    if (/^no-\d{3}$/.test(d)) out.push(`/briefing/archive/${d}/`);
+    if (!/^no-\d{3}$/.test(d)) continue;
+    const dir = path.join(ROOT, 'briefing/archive', d);
+    if (fs.existsSync(path.join(dir, 'index.html'))) out.push(`/briefing/archive/${d}/`);
+    // article pages written by article-pages.mjs get the same source checks
+    for (const a of fs.readdirSync(dir)) {
+      if (fs.existsSync(path.join(dir, a, 'index.html'))) out.push(`/briefing/archive/${d}/${a}/`);
+    }
   }
   return out;
 }
