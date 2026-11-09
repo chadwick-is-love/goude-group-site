@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MS9CVFY5YT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MS9CVFY5YT');
+</script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your next Copilot seat arrives with the meter already running, and every new agent is approved before anyone asks you | The Briefing No. 010 | Goude Group</title>
+<meta name="description" content="Microsoft posted on September 16 that from November 2, new Microsoft 365 Copilot Business licenses bought through a reseller ship with pay-as-you-go billing…" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/favicon.png" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://goudegroup.com/briefing/archive/no-010/your-next-copilot-seat-arrives-with-the-meter-already/" />
+<meta property="og:title" content="Your next Copilot seat arrives with the meter already running, and every new agent is approved before anyone asks you." />
+<meta property="og:description" content="Microsoft posted on September 16 that from November 2, new Microsoft 365 Copilot Business licenses bought through a reseller ship with pay-as-you-go billing…" />
+<meta property="og:image" content="https://goudegroup.com/briefing/og/no-010.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --mint:#d8f7c9;
+  --mint-deep:#c7efb2;
+  --mint-line:#a9dd90;
+  --navy:#06162b;          /* dark dark blue: the one writing color */
+  --navy-soft:rgba(6,22,43,.62);
+  --navy-hair:rgba(6,22,43,.20);
+  --navy-faint:rgba(6,22,43,.10);
+  --cream:#fbf8f1;         /* used only inside the dark console, for input legibility */
+  --nm-dark:rgba(131,175,110,.34);   /* neumorphic shadow: deeper mint, bottom-right */
+  --nm-light:rgba(244,255,233,.6);   /* neumorphic highlight: near-white mint, top-left */
+  --display:'Playfair Display',Georgia,serif;
+  --system:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --maxw:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--system);
+  background:var(--mint);
+  color:var(--navy);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+input,textarea,select{font-family:inherit}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.0;letter-spacing:-.02em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 6vw}
+.kicker{
+  font-family:var(--system);font-size:11.5px;font-weight:700;
+  letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.label{font-family:var(--system);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+
+/* ---------- NAV ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 6vw;background:transparent;border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,padding .3s ease;
+}
+nav.scrolled{background:rgba(216,247,201,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--navy-faint);padding-top:15px;padding-bottom:15px}
+.brand{display:inline-flex;align-items:center}
+.brand img{height:34px;width:auto;display:block}
+.nav-tag{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase}
+.nav-right{display:flex;align-items:center;gap:24px}
+.nav-arch{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--navy-hair);padding-bottom:2px;transition:border-color .2s ease}
+.nav-arch:hover{border-color:var(--navy)}
+
+/* ---------- MASTHEAD ---------- */
+header.masthead{
+  min-height:90vh;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:150px 6vw 66px;position:relative;
+}
+.masthead-inner{max-width:var(--maxw);margin:0 auto;width:100%}
+.masthead .kicker{margin-bottom:30px}
+.masthead h1{font-size:clamp(66px,12.5vw,196px);letter-spacing:-.045em;line-height:.86}
+.masthead h1 .kern-fi{letter-spacing:-.135em}
+.mast-row{
+  display:flex;justify-content:space-between;align-items:flex-end;gap:44px;
+  margin-top:clamp(38px,5.5vh,64px);flex-wrap:wrap;
+}
+.mast-meta{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;line-height:2.2;text-align:right}
+.standfirst{max-width:452px}
+.standfirst p{font-size:clamp(16px,1.2vw,18.5px);line-height:1.6;font-weight:400}
+.standfirst p + p{margin-top:13px}
+.mast-promise{margin-top:32px;padding-top:19px;border-top:1px solid var(--navy)}
+.mast-promise p{font-size:15.5px;line-height:1.6;color:var(--navy);max-width:76ch}
+.mast-promise p b{font-weight:700}
+@media(max-width:620px){.mast-promise{margin-top:26px}.mast-promise p{font-size:14.5px}}
+.mast-rule{height:1.5px;background:var(--navy);margin-top:22px;opacity:.9}
+
+/* ---------- READING KEY ---------- */
+.readkey{padding:30px 6vw 0}
+.readkey-inner{
+  max-width:var(--maxw);margin:0 auto;display:flex;gap:38px;flex-wrap:wrap;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+}
+.readkey-inner span b{font-weight:700}
+.readkey-inner span{opacity:.5}
+.readkey-inner span b{opacity:1;display:inline}
+
+/* ---------- CONTENTS ---------- */
+.contents{padding:70px 6vw 96px}
+.contents-inner{max-width:var(--maxw);margin:0 auto}
+.contents .label{margin-bottom:26px;display:block}
+.toc{display:block;border-top:1.5px solid var(--navy)}
+.toc a{
+  display:flex;align-items:baseline;gap:28px;
+  padding:20px 6px;border-bottom:1px solid var(--navy-hair);
+  transition:background .2s ease,padding-left .2s ease;
+}
+.toc a:hover{background:var(--mint-deep);padding-left:14px}
+.toc .n{font-family:var(--system);font-size:12px;font-weight:700;letter-spacing:.12em;min-width:32px}
+.toc .t{font-family:var(--display);font-size:clamp(20px,2.3vw,29px);letter-spacing:-.018em;line-height:1.12}
+.toc .go{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;opacity:.6}
+.toc .tk{margin-left:18px;font-family:var(--system);font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;
+  border:1px solid var(--navy-hair);border-radius:999px;padding:4px 9px;opacity:.62}
+.toc a:hover .tk{opacity:1;background:var(--navy);color:var(--mint);border-color:var(--navy)}
+.passnote{font-size:13.5px;line-height:1.55;color:var(--navy-soft);margin:26px 0 16px;max-width:80ch}
+.passnote b{color:var(--navy);font-weight:700}
+.passrow{display:flex;gap:12px;align-items:stretch;flex-wrap:wrap}
+.arch-link{display:inline-flex;align-items:center;gap:10px;font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;transition:background .25s ease,color .25s ease}
+.arch-link:hover{background:var(--navy);color:var(--mint)}
+.remind{margin-top:26px;border-top:1px solid var(--navy-faint);padding-top:22px;
+  display:flex;gap:26px;align-items:center;flex-wrap:wrap}
+.remind p{font-size:13.5px;line-height:1.55;color:var(--navy-soft);max-width:46ch;margin:0;flex:1 1 300px}
+.remind p b{color:var(--navy);font-weight:700}
+.signup.inline{margin-top:0;flex:1 1 330px;max-width:420px}
+.signup.inline input{padding:12px 14px;font-size:14px}
+.signup.inline button{padding:12px 20px;font-size:11px}
+.signup-done{font-size:14px;line-height:1.55;color:var(--navy)}
+
+/* ---------- TOPIC ---------- */
+.topic{padding:92px 6vw 34px}
+.topic-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:30px}
+.topic .kicker .rt{margin-left:auto;letter-spacing:.16em;font-weight:700;opacity:.55}
+.topic h2{font-size:clamp(35px,4.9vw,66px);max-width:19ch;margin-top:26px;letter-spacing:-.028em}
+
+/* the brief: three sharp reads */
+.brief{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.2vw,50px);
+  margin-top:clamp(34px,4.4vh,52px);
+}
+.brief > div{border-top:1.5px solid var(--navy);padding-top:16px}
+.brief .label{display:block;margin-bottom:12px;opacity:.55}
+.brief p{font-size:15.5px;line-height:1.58;font-weight:400}
+
+/* actions row: go deeper + send */
+.actions{margin-top:38px;display:flex;align-items:stretch;gap:12px;flex-wrap:wrap}
+.deep-toggle{
+  display:inline-flex;align-items:center;gap:13px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 26px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.deep-toggle:hover{background:var(--navy);color:var(--mint)}
+.deep-toggle .arrow{transition:transform .3s ease;font-size:14px;line-height:1}
+.topic.open .deep-toggle .arrow{transform:rotate(45deg)}
+.share{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  transition:background .25s ease,color .25s ease;
+}
+.share:hover{background:var(--navy);color:var(--mint)}
+.share svg{width:14px;height:14px;display:block;flex:none}
+
+.deep{display:none;margin-top:44px}
+.topic.open .deep{display:block;animation:deepIn .45s ease both}
+@keyframes deepIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.deep-grid{
+  display:grid;grid-template-columns:minmax(0,1.55fr) minmax(320px,1fr);
+  gap:clamp(34px,4.4vw,72px);align-items:start;
+}
+.deep-main h3{font-family:var(--display);font-weight:500;font-size:clamp(21px,2.1vw,27px);letter-spacing:-.02em;margin:38px 0 13px}
+.deep-main h3:first-child{margin-top:0}
+.deep-main p{font-size:16px;line-height:1.66;max-width:60ch}
+.deep-main p + p{margin-top:13px}
+.deep-main ol{margin:16px 0 0 0;list-style:none;counter-reset:play}
+.deep-main ol li{counter-increment:play;position:relative;padding:13px 0 13px 44px;border-top:1px solid var(--navy-hair);font-size:15.5px;line-height:1.55;max-width:62ch}
+.deep-main ol li:first-child{border-top:0}
+.deep-main ol li::before{content:counter(play,decimal-leading-zero);position:absolute;left:0;top:14px;font-family:var(--system);font-size:11px;font-weight:700;letter-spacing:.06em;opacity:.5}
+.tape{border-top:1.5px solid var(--navy);margin-top:8px}
+.tape-row{display:grid;grid-template-columns:82px 1fr;gap:18px;padding:12px 2px;border-bottom:1px solid var(--navy-faint);font-size:14.5px;line-height:1.5}
+.tape-row .d{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding-top:2px}
+.sources{margin-top:30px;border-top:1px solid var(--navy-hair);padding-top:14px}
+.sources .label{display:block;margin-bottom:9px;opacity:.55}
+.sources p{font-size:12px;line-height:1.8;max-width:none}
+.sources a{border-bottom:1px solid var(--navy-hair);transition:border-color .2s ease}
+.sources a:hover{border-color:var(--navy)}
+
+.deep-aside{position:sticky;top:104px}
+.pull{border-left:2.5px solid var(--navy);padding:2px 0 2px 20px;margin-bottom:30px}
+.pull p{font-family:var(--display);font-size:clamp(19px,1.85vw,23px);line-height:1.28;letter-spacing:-.012em}
+
+/* ---------- THE FREE TOOL (tone-on-tone, neumorphic) ---------- */
+.tool{background:var(--mint);color:var(--navy);border-radius:18px;padding:28px 26px 26px;
+  box-shadow:inset 3px 3px 7px var(--nm-dark), inset -3px -3px 7px var(--nm-light)}
+.tool .tlabel{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--navy);opacity:.5;display:block;margin-bottom:11px}
+.tool .tname{display:block;font-family:var(--display);font-size:23px;letter-spacing:-.015em;line-height:1.1;color:var(--navy)}
+.tool .tsub{display:block;font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:9px}
+.tool .tfree{display:block;margin-top:11px;padding-top:10px;border-top:1px solid var(--navy-faint);
+  font-family:var(--system);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy-soft)}
+.tool .fieldset{margin-top:20px;display:flex;flex-direction:column;gap:14px}
+.tool label.fl{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);opacity:.6;display:block;margin-bottom:7px}
+.tool input,.tool textarea,.tool select{
+  width:100%;background:var(--mint);border:none;border-radius:11px;
+  color:var(--navy);font-size:14px;padding:12px 13px;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light);
+  transition:box-shadow .2s ease;
+}
+.tool textarea{resize:vertical;min-height:52px;line-height:1.45}
+.tool input:focus,.tool textarea:focus,.tool select:focus{outline:none;box-shadow:inset 3px 3px 6px var(--nm-dark), inset -3px -3px 6px var(--nm-light)}
+.tool input::placeholder,.tool textarea::placeholder{color:var(--navy-soft);opacity:.55}
+.tool select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2306162b' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;padding-right:32px}
+.tool .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool .tbtn{
+  width:100%;margin-top:18px;background:var(--mint);color:var(--navy);border-radius:11px;padding:14px;
+  font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);
+  transition:box-shadow .18s ease;
+}
+.tool .tbtn:hover{box-shadow:3px 3px 6px var(--nm-dark), -3px -3px 6px var(--nm-light)}
+.tool .tbtn:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .tbtn.ghost{margin-top:10px;box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .tbtn.ghost:hover{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+/* live readout */
+.tool .readout{margin-top:22px;padding-top:20px;border-top:1px solid var(--navy-faint)}
+.tool .readout .big{font-family:var(--display);font-size:clamp(30px,3.4vw,44px);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+.tool .readout .cap{font-size:12.5px;line-height:1.5;color:var(--navy-soft);margin-top:10px}
+.tool .readout .cap b{color:var(--navy);font-weight:700}
+.tool .out{margin-top:18px;background:var(--mint);border:none;border-radius:11px;padding:16px;font-size:12.5px;line-height:1.55;white-space:pre-wrap;color:var(--navy);max-height:230px;overflow:auto;display:none;
+  box-shadow:inset 2px 2px 4px var(--nm-dark), inset -2px -2px 4px var(--nm-light)}
+.tool .out.show{display:block}
+.tool .emailcap{margin-top:18px;padding-top:16px;border-top:1px solid var(--navy-faint);display:none}
+.tool .emailcap.show{display:block}
+.tool .emailcap .er{display:grid;grid-template-columns:1fr auto;gap:8px}
+.tool .emailcap .er button{background:var(--mint);color:var(--navy);border-radius:11px;padding:0 16px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;
+  box-shadow:2px 2px 5px var(--nm-dark), -2px -2px 5px var(--nm-light);transition:box-shadow .18s ease}
+.tool .emailcap .er button:active{box-shadow:inset 2px 2px 5px var(--nm-dark), inset -2px -2px 5px var(--nm-light)}
+.tool .microcopy{font-size:10.5px;line-height:1.45;color:var(--navy-soft);opacity:.8;margin-top:9px}
+.tool .done{font-size:12.5px;color:var(--navy);font-weight:600;margin-top:10px;display:none}
+.tool .done.show{display:block}
+
+/* ---------- CLOSE ---------- */
+.close-field{padding:118px 6vw 100px}
+.close-inner{max-width:var(--maxw);margin:0 auto;border-top:2px solid var(--navy);padding-top:34px;
+  display:grid;grid-template-columns:minmax(0,1.3fr) minmax(300px,440px);gap:clamp(44px,6vw,116px);align-items:end}
+.close-inner .label{opacity:.55;display:block;margin-bottom:14px}
+.close-inner h2{font-size:clamp(37px,5.2vw,72px);max-width:15ch;letter-spacing:-.03em}
+.close-copy p{font-size:16.5px;line-height:1.6}
+.signup{margin-top:28px;display:flex;gap:10px;width:100%;max-width:440px}
+.signup input{
+  flex:1;font-size:14.5px;padding:14px 15px;border-radius:3px;
+  background:transparent;border:1.5px solid var(--navy);color:var(--navy);
+}
+.signup input::placeholder{color:var(--navy-soft)}
+.signup button{
+  background:var(--navy);color:var(--mint);padding:14px 22px;border-radius:3px;
+  font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background .2s ease;
+}
+.signup button:hover{background:#0a2340}
+.pass-it{max-width:var(--maxw);margin:44px auto 0;border-top:1px solid var(--navy-hair);padding-top:24px}
+.pass-it .label{opacity:.5;display:block;margin-bottom:12px}
+.pass-it p{font-size:13.5px;line-height:1.6;color:var(--navy-soft);max-width:74ch;margin-bottom:18px}
+.partner{max-width:var(--maxw);margin:0 auto;padding:0 0 4px}
+.partner-note{border-top:1px solid var(--navy-hair);margin-top:44px;padding-top:20px;
+  display:flex;gap:26px;align-items:baseline;flex-wrap:wrap;font-size:13.5px;line-height:1.6;color:var(--navy-soft)}
+.partner-note .label{opacity:.5;white-space:nowrap}
+.partner-note p{max-width:70ch}
+.partner-note a{font-weight:700;color:var(--navy);border-bottom:1px solid var(--navy-hair)}
+.partner-note a:hover{border-bottom-color:var(--navy)}
+
+/* ---------- FOOTER ---------- */
+footer{background:var(--navy);color:var(--mint);padding:58px 6vw 46px}
+.foot-grid{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-grid .brand img{height:50px;filter:invert(1) brightness(1.15)}
+.foot-meta{font-size:13px;letter-spacing:.02em;line-height:1.85;text-align:right;color:rgba(216,247,201,.9)}
+.foot-meta a{border-bottom:1px solid rgba(216,247,201,.32)}
+
+/* ---------- RESPONSIVE ---------- */
+@media(max-width:960px){
+  .brief{grid-template-columns:1fr;gap:26px}
+  .deep-grid{grid-template-columns:1fr}
+  .deep-aside{position:static;margin-top:36px}
+  .close-inner{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+  nav{padding:16px 5vw}
+  nav.scrolled{padding-top:12px;padding-bottom:12px}
+  .nav-right{gap:14px}
+  .nav-tag{display:none}
+  header.masthead{min-height:74vh;padding-top:112px}
+  .toc .go{display:none}
+  .brief p{font-size:16px}
+  .deep-main p{font-size:16.5px}
+  .foot-meta{font-size:14px;text-align:left}
+  .tool .row2{grid-template-columns:1fr}
+  .actions{flex-direction:column;align-items:stretch}
+  .actions .deep-toggle,.actions .share{width:100%;justify-content:center}
+  .passrow{flex-direction:column;align-items:stretch}
+  .passrow .share,.passrow .arch-link{width:100%;justify-content:center}
+  .signup{flex-wrap:wrap}
+  .signup input{flex:1 1 100%}
+  .signup button{width:100%}
+}
+
+/* ---------- THE FREE TOOL, AS A DRAWER ---------- */
+/* the same silhouette as Go deeper and Send this one, filled rather than
+   outlined, because it is the one thing on the page we want pressed */
+.tool-open{
+  display:inline-flex;align-items:center;gap:11px;
+  font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  padding:15px 22px;border:1.5px solid var(--navy);border-radius:2px;
+  background:var(--navy);color:var(--mint);
+  transition:background .25s ease,color .25s ease;
+}
+.tool-open:hover{background:transparent;color:var(--navy)}
+.tool-open .tk{white-space:nowrap}
+.tool-open .tnm{font-weight:400;letter-spacing:.1em;opacity:.72;white-space:nowrap}
+.tool-open .tar{font-size:14px;line-height:1;transition:transform .25s ease}
+.tool-open:hover .tar{transform:translateX(4px)}
+@media(max-width:620px){.tool-open .tnm{display:none}}
+
+.scrim{
+  position:fixed;inset:0;z-index:80;background:rgba(6,22,43,.20);
+  opacity:0;transition:opacity .32s ease;
+}
+.scrim.on{opacity:1}
+.drawer{
+  position:fixed;top:0;right:0;bottom:0;z-index:90;
+  width:min(94vw,468px);
+  background:var(--mint-deep);
+  border-left:2.5px solid var(--navy);
+  box-shadow:-26px 0 60px rgba(6,22,43,.26);
+  transform:translateX(102%);
+  /* hidden outright when closed, or the shadow paints a band down the page
+     edge and the inputs stay in the tab order */
+  visibility:hidden;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s linear .38s;
+  display:flex;flex-direction:column;
+  overscroll-behavior:contain;
+}
+.drawer.on{
+  transform:translateX(0);visibility:visible;
+  transition:transform .38s cubic-bezier(.22,.71,.24,1), visibility 0s;
+}
+.drawer-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 14px;border-bottom:1px solid var(--navy-hair);flex:none;
+}
+.drawer-head .dh-k{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;opacity:.55}
+.drawer-x{font-size:26px;line-height:1;padding:0 4px;opacity:.55;transition:opacity .2s ease}
+.drawer-x:hover{opacity:1}
+.drawer-body{padding:22px 24px 40px;overflow-y:auto;flex:1 1 auto}
+.drawer-body .tool{box-shadow:none;background:transparent;padding:0;border-radius:0}
+@media(max-width:620px){
+  .drawer{width:100vw;border-left:0;box-shadow:none}
+  .tool-open{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+  .drawer{transition:transform 0s, visibility 0s}
+  .scrim{transition:none}
+  .tool-open:hover{transform:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+<link rel="canonical" href="https://goudegroup.com/briefing/archive/no-010/your-next-copilot-seat-arrives-with-the-meter-already/" />
+<style>.art-mast{padding:120px 24px 8px;max-width:1080px;margin:0 auto}.art-mast .kicker{opacity:.75}.art-mast a{color:inherit}.art-back{padding:8px 24px 64px;max-width:1080px;margin:0 auto}</style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Your next Copilot seat arrives with the meter already running, and every new agent is approved before anyone asks you.","description":"Microsoft posted on September 16 that from November 2, new Microsoft 365 Copilot Business licenses bought through a reseller ship with pay-as-you-go billing…","url":"https://goudegroup.com/briefing/archive/no-010/your-next-copilot-seat-arrives-with-the-meter-already/","mainEntityOfPage":"https://goudegroup.com/briefing/archive/no-010/your-next-copilot-seat-arrives-with-the-meter-already/","datePublished":"2026-09-21","image":"https://goudegroup.com/briefing/og/no-010.png","isPartOf":{"@type":"PublicationIssue","issueNumber":"10","name":"The Briefing, No. 010","url":"https://goudegroup.com/briefing/archive/no-010/"},"author":{"@type":"Organization","name":"The Goude Group","url":"https://goudegroup.com/"},"publisher":{"@type":"Organization","name":"The Goude Group","url":"https://goudegroup.com/","logo":{"@type":"ImageObject","url":"https://goudegroup.com/goude-logo.png"}}}</script>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+  <div class="nav-right"><a class="nav-arch" href="/briefing/archive/">Archive</a><span class="nav-tag">Weekly Intelligence &middot; No. 010</span></div>
+</nav>
+
+<header class="art-mast"><div class="kicker">The Briefing &middot; No. 010 &middot; September 21, 2026 &middot; The Default</div></header>
+
+<section class="topic open" id="t1">
+  <div class="topic-inner">
+    <div class="kicker"><span>01 / The Default</span><span class="rt">Brief &middot; 45 sec</span></div>
+    <h2>Your next Copilot seat arrives with the meter already running, and every new agent is approved before anyone asks you.</h2>
+    <div class="brief">
+      <div>
+        <span class="label">What moved</span>
+        <p>Microsoft posted on September 16 that from November 2, new Microsoft 365 Copilot Business licenses bought through a reseller ship with pay-as-you-go billing switched on by default. The metered services named are Copilot Cowork, Work IQ APIs and GitHub Copilot Harness. The seat itself lists at $18 a user a month on annual terms. Cowork bills in credits at about a cent each, and a heavy task runs past $7.</p>
+      </div>
+      <div>
+        <span class="label">What it changes</span>
+        <p>The seat price used to be the ceiling on the line item. After November 2 it becomes the floor. At 150 seats, a quarter of your people running two heavy tasks a day is five figures a year that never went through a purchase decision. The default configuration allows every new pay-as-you-go agent, so what your staff can spend is set by whoever releases the next agent, not by you.</p>
+      </div>
+      <div>
+        <span class="label">What not to do</span>
+        <p>Do not sign a Copilot purchase or renewal through your IT provider after November 2 without written spending caps in place first. Do not assume the reseller configured limits; the default is on, and the setup is automatic. Do not approve metered agents company wide because a pilot group liked them. Cap by group, review the first invoice line by line, then widen.</p>
+      </div>
+    </div>
+    <div class="actions">
+      <button class="tool-open" type="button" data-tool-open="cp" aria-controls="dw-cp" aria-expanded="false"><span class="tk">Free tool</span><span class="tnm">The Meter Policy</span><span class="tar">&rarr;</span></button>
+      <button class="deep-toggle" data-deep="t1" aria-expanded="true">Close <span class="arrow">+</span></button>
+      <button class="share" type="button" data-share="t1" data-title="Your next Copilot seat arrives with the meter already running, and every new agent is approved before anyone asks you."><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v9"/><path d="M8.5 8.5 12 5l3.5 3.5"/><path d="M5 12v6a1.5 1.5 0 0 0 1.5 1.5h11A1.5 1.5 0 0 0 19 18v-6"/></svg><span class="sl">Send this one</span></button>
+    </div>
+    <div class="deep">
+      <div class="deep-grid">
+        <div class="deep-main">
+          <h3>The tape</h3>
+          <div class="tape">
+            <div class="tape-row"><span class="d">Jun 2026</span><span>Copilot Cowork is described by partners as off by default and billed separately, with admins opting in to usage-based billing for a named group.</span></div>
+            <div class="tape-row"><span class="d">Sep 16</span><span>Microsoft posts in its Partner Center announcements that new Copilot Business licenses sold through resellers will carry pay-as-you-go billing by default from November 2.</span></div>
+            <div class="tape-row"><span class="d">Sep 20</span><span>Partner analysis confirms the date and notes the new default allows all new pay-as-you-go agents and services, with at least one cost management policy required.</span></div>
+            <div class="tape-row"><span class="d">Nov 2</span><span>The default takes effect for new Copilot Business purchases, standalone and bundled, through distributors, indirect resellers and direct bill partners. Existing caps you have not written do not exist.</span></div>
+          </div>
+          <h3>The purchase order stops being the control</h3>
+          <p>Seat licensing had one useful property for an owner: the bill was a headcount times a price, and the controller could forecast it to the dollar. Metered agent work breaks that. Cost now tracks how many tasks people hand to the software and how heavy those tasks are, and neither number sits in any system your finance team reads. Microsoft does let an admin set a hard cap for the tenant, a group or a single user. The problem is that the cap is optional and the billing is not.</p>
+          <p>Treat the November 2 date as a contract term, not an IT setting. Before any new Copilot Business seats land, have your IT provider set a tenant ceiling and group caps, and confirm in writing who can release a new pay-as-you-go agent. Keep the ceiling low for the first ninety days and let actual usage argue for more. The trade is some friction for heavy users in exchange for knowing your number. At this size that trade is worth making every time.</p>
+          <h3>The play</h3>
+          <ol>
+            <li>Your controller asks the IT provider or reseller this week for a list of every Copilot Business seat you hold and when each renews.</li>
+            <li>Your IT lead sets a tenant-wide monthly ceiling and separate caps for heavy-use groups in the Microsoft 365 admin center before November 2.</li>
+            <li>You name one person who approves any new pay-as-you-go agent, and the reseller gets that name in writing.</li>
+            <li>Write the caps, the approver and the review date on one page your provider signs with the free tool, The Meter Policy.</li>
+          </ol>
+          <div class="sources">
+            <span class="label">Sources</span>
+            <p><a href="https://learn.microsoft.com/en-us/partner-center/announcements/2026-september" target="_blank" rel="noopener">Microsoft Partner Center: September 2026 announcements, the November 2 default</a> &middot; <a href="https://blog-en.topedia.com/2026/09/new-microsoft-365-copilot-business-subscriptions-from-csp-partners-will-come-with-payg-preconfigured/" target="_blank" rel="noopener">Topedia: Copilot Business via resellers ships with pay-as-you-go preconfigured</a> &middot; <a href="https://www.microsoft.com/en-us/microsoft-365-copilot/pricing" target="_blank" rel="noopener">Microsoft: Copilot plans and seat prices</a> &middot; <a href="https://quisitive.com/copilot-cowork-pricing-2026-how-usage-based-billing-works/" target="_blank" rel="noopener">Quisitive: Cowork credit pricing and spending caps</a></p>
+          </div>
+        </div>
+        <aside class="deep-aside">
+          <div class="pull"><p>Seat pricing tied the bill to headcount. Metered credits tie it to task volume, which nobody in finance can see until the invoice lands.</p></div>
+        </aside>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="art-back"><p>One of five articles in <a href="https://goudegroup.com/briefing/archive/no-010/">The Briefing, No. 010</a>. Every article carries a free tool that runs in the page. <a href="/briefing/archive/">Every issue</a></p></div>
+
+<section class="close-field">
+  <div class="close-inner">
+    <div>
+      <span class="label">Next issue</span>
+      <h2>Five more things will move by Monday. We will bring the tools.</h2>
+    </div>
+    <div class="close-copy">
+      <p>The Briefing arrives weekly: what moved, what it changes, what not to do, and a working tool for each. Every issue gives the tools away, free and built for the week they cover. No product tours, no victory laps. If it stops earning the read, unsubscribe.</p>
+      <form class="signup" id="signupForm" data-src="close section">
+        <input name="email" type="email" placeholder="you@company.com" aria-label="Email" required />
+        <button type="submit">Get the next one</button>
+      </form>
+    </div>
+  </div>
+  <div class="pass-it">
+    <span class="label">Back issue</span>
+    <p>This is back issue No. 010. Every tool in it still runs. <a href="/briefing/">Read the current issue</a> &middot; <a href="/briefing/archive/">Open the archive</a></p>
+  </div>
+  <div class="partner">
+    <div class="partner-note">
+      <span class="label">One more thing</span>
+      <p>If something in here lands on a problem you are already working, and you would rather not work it alone, write to <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a> and tell us what you are exploring. You get a reply from a person, not a sequence.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <a href="/" class="brand" aria-label="GOUDE group home"><img src="/goude-logo.png" alt="GOUDE group" /></a>
+    <div class="foot-meta">
+      Brand architecture for the AI-shaped company<br>
+      Exploring something? <a href="mailto:hello@goudegroup.com">hello@goudegroup.com</a><br>
+      &copy; 2026 The Goude Group<br>
+      <a href="/privacy/">Privacy Policy</a> &middot; <a href="/terms/">Terms of Service</a>
+    </div>
+  </div>
+</footer>
+
+<div class="scrim" data-tool-close hidden></div>
+<div class="drawers">
+  <aside class="drawer" id="dw-cp" role="dialog" aria-modal="false" aria-label="The Meter Policy" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="cp">
+            <span class="tlabel">writes the policy</span>
+            <span class="tname">The Meter Policy</span>
+            <span class="tsub">Four answers. It writes the spending policy your IT provider signs before November 2.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="cp-co">COMPANY NAME</label><input id="cp-co" type="text" placeholder="e.g. Harbor Supply Co." /></div>
+              <div><label class="fl" for="cp-seats">COPILOT SEATS YOU HOLD OR PLAN TO BUY</label><input id="cp-seats" type="number" inputmode="numeric" min="0" placeholder="e.g. 120" /></div>
+              <div><label class="fl" for="cp-cap">MONTHLY METERED CEILING FOR THE WHOLE COMPANY, IN DOLLARS</label><input id="cp-cap" type="number" inputmode="numeric" min="0" placeholder="e.g. 1500" /></div>
+              <div><label class="fl" for="cp-appr">WHO APPROVES ANY NEW METERED AGENT</label><input id="cp-appr" type="text" placeholder="e.g. Dana Ruiz, Controller" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="cp">Write the policy</button>
+            <div class="out" id="cp-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="cp-out" style="display:none" id="cp-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-rt" role="dialog" aria-modal="false" aria-label="The Reprice" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="rt">
+            <span class="tlabel">live</span>
+            <span class="tname">The Reprice</span>
+            <span class="tsub">Three numbers. It prices the hike taken and the one projected on your floating debt, and what it does to coverage.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="rt-bal">FLOATING-RATE BALANCE DRAWN, IN DOLLARS</label><input id="rt-bal" type="number" inputmode="numeric" min="0" placeholder="e.g. 8000000" data-live="rt" /></div>
+              <div><label class="fl" for="rt-rate">YOUR ALL-IN RATE TODAY, PERCENT</label><input id="rt-rate" type="number" inputmode="numeric" min="0" placeholder="e.g. 8.25" data-live="rt" /></div>
+              <div><label class="fl" for="rt-ebit">ANNUAL EBITDA, IN DOLLARS (OPTIONAL)</label><input id="rt-ebit" type="number" inputmode="numeric" min="0" placeholder="e.g. 3500000" data-live="rt" /></div>
+            </div>
+            <div class="readout" id="rt-readout" style="display:none">
+              <div class="big" id="rt-big">$0</div>
+              <div class="cap" id="rt-cap"></div>
+            </div>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-nt" role="dialog" aria-modal="false" aria-label="The Recording Rule" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="nt">
+            <span class="tlabel">writes the policy</span>
+            <span class="tname">The Recording Rule</span>
+            <span class="tsub">Four answers. It writes the one-page note-taker policy you issue to staff this week.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="nt-co">COMPANY NAME</label><input id="nt-co" type="text" placeholder="e.g. Harbor Supply Co." /></div>
+              <div><label class="fl" for="nt-tool">THE ONE NOTE-TAKER YOU WILL APPROVE</label><input id="nt-tool" type="text" placeholder="e.g. Teams Premium recap" /></div>
+              <div><label class="fl" for="nt-own">WHO OWNS THIS POLICY</label><input id="nt-own" type="text" placeholder="e.g. Dana Ruiz, COO" /></div>
+              <div><label class="fl" for="nt-st">STATES WHERE YOU REGULARLY CALL CLIENTS OR CANDIDATES</label><input id="nt-st" type="text" placeholder="e.g. California, Illinois, Texas" /></div>
+            </div>
+            <button class="tbtn" type="button" data-build="nt">Write the rule</button>
+            <div class="out" id="nt-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="nt-out" style="display:none" id="nt-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-ai" role="dialog" aria-modal="false" aria-label="The Register" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="ai">
+            <span class="tlabel">writes the register</span>
+            <span class="tname">The Register</span>
+            <span class="tsub">Your list of tools, one per line. It writes the automated decision register counsel reviews before January 1.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="ai-co">COMPANY NAME</label><input id="ai-co" type="text" placeholder="e.g. Harbor Supply Co." /></div>
+              <div><label class="fl" for="ai-own">WHO OWNS THE REGISTER</label><input id="ai-own" type="text" placeholder="e.g. Priya Shah, HR Director" /></div>
+              <div><label class="fl" for="ai-list">TOOLS THAT TOUCH HIRING, SCHEDULING, PAY OR DISCIPLINE, ONE PER LINE</label><textarea id="ai-list" rows="4" placeholder="Applicant tracking system
+Shift scheduler
+Performance platform"></textarea></div>
+            </div>
+            <button class="tbtn" type="button" data-build="ai">Build the register</button>
+            <div class="out" id="ai-out"></div>
+            <button class="tbtn ghost" type="button" data-copy="ai-out" style="display:none" id="ai-copy">Copy to clipboard</button>
+          </div>
+
+    </div>
+  </aside>
+  <aside class="drawer" id="dw-am" role="dialog" aria-modal="false" aria-label="The Drift" aria-hidden="true">
+    <div class="drawer-head">
+      <span class="dh-k">Free tool</span>
+      <button class="drawer-x" type="button" data-tool-close aria-label="Close">&times;</button>
+    </div>
+    <div class="drawer-body">
+      <div class="tool" data-tool="am">
+            <span class="tlabel">live</span>
+            <span class="tname">The Drift</span>
+            <span class="tsub">Two numbers. It prices what a 16 percent rise in acquisition cost does to your search budget over a year.</span>
+            <span class="tfree">Free to use, like every tool in every issue</span>
+            <div class="fieldset">
+              <div><label class="fl" for="am-spend">MONTHLY GOOGLE SEARCH SPEND, IN DOLLARS</label><input id="am-spend" type="number" inputmode="numeric" min="0" placeholder="e.g. 50000" data-live="am" /></div>
+              <div><label class="fl" for="am-cpa">YOUR COST PER ACQUISITION TODAY, IN DOLLARS</label><input id="am-cpa" type="number" inputmode="numeric" min="0" placeholder="e.g. 220" data-live="am" /></div>
+            </div>
+            <div class="readout" id="am-readout" style="display:none">
+              <div class="big" id="am-big">$0</div>
+              <div class="cap" id="am-cap"></div>
+            </div>
+          </div>
+
+    </div>
+  </aside>
+</div>
+
+<script>
+const NEWSLETTER_ENDPOINT='https://formspree.io/f/xrenkbwg';
+const ISSUE_URL='https://goudegroup.com/briefing/archive/no-010/';
+
+/* nav scroll state */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+const $=(s,r=document)=>r.querySelector(s);
+const money=n=>'$'+Math.round(n).toLocaleString('en-US');
+
+/* one delegated listener for toggles, builds, copies, shares */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-deep],[data-build],[data-copy],[data-share],[data-tool-open],[data-tool-close]');
+  if(!t) return;
+
+  if(t.hasAttribute('data-tool-close')){ closeDrawer(); return; }
+  if(t.dataset.toolOpen){ openDrawer(t.dataset.toolOpen,t); return; }
+
+  if(t.dataset.deep){
+    const topic=t.closest('.topic');
+    const open=topic.classList.toggle('open');
+    t.setAttribute('aria-expanded',open?'true':'false');
+    t.firstChild.textContent=open?'Close ':'Go deeper ';
+    return;
+  }
+  if(t.dataset.build){ build(t.dataset.build); return; }
+  if(t.dataset.copy){
+    const box=document.getElementById(t.dataset.copy);
+    if(box){ copyText(box.textContent,()=>{
+      const o=t.textContent; t.textContent='Copied'; setTimeout(()=>t.textContent=o,1400); }); }
+    return;
+  }
+  if(t.dataset.share){ doShare(t); return; }
+});
+
+/* ---------- the free tool, as a drawer ---------- */
+const scrim=document.querySelector('.scrim');
+let openTool=null, lastOpener=null;
+function openDrawer(pre,btn){
+  if(openTool===pre){ closeDrawer(); return; }
+  if(openTool) closeDrawer(true);
+  const d=document.getElementById('dw-'+pre);
+  if(!d) return;
+  openTool=pre; lastOpener=btn||null;
+  scrim.hidden=false;
+  requestAnimationFrame(()=>{ scrim.classList.add('on'); d.classList.add('on'); });
+  d.setAttribute('aria-hidden','false');
+  if(btn) btn.setAttribute('aria-expanded','true');
+  document.body.style.overflow='hidden';
+  const f=d.querySelector('input,textarea,select,button');
+  if(f) setTimeout(()=>f.focus({preventScroll:true}),340);
+}
+function closeDrawer(quiet){
+  if(!openTool) return;
+  const d=document.getElementById('dw-'+openTool);
+  if(d){ d.classList.remove('on'); d.setAttribute('aria-hidden','true'); }
+  const b=document.querySelector('[data-tool-open="'+openTool+'"]');
+  if(b) b.setAttribute('aria-expanded','false');
+  openTool=null;
+  if(!quiet){
+    scrim.classList.remove('on');
+    setTimeout(()=>{ if(!openTool) scrim.hidden=true; },340);
+    document.body.style.overflow='';
+    if(lastOpener) lastOpener.focus({preventScroll:true});
+  }
+  lastOpener=null;
+}
+addEventListener('keydown',e=>{ if(e.key==='Escape') closeDrawer(); });
+
+/* ---------- sharing ---------- */
+function shareLink(id){ return id==='issue'?ISSUE_URL:ISSUE_URL+'#'+id; }
+function flash(btn,msg){
+  const sl=btn.querySelector('.sl'); if(!sl) return;
+  const o=sl.textContent; sl.textContent=msg||'Link copied';
+  setTimeout(()=>{ sl.textContent=o; },1600);
+}
+function copyText(text,done){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,()=>legacyCopy(text,done));
+  }else{ legacyCopy(text,done); }
+}
+function legacyCopy(text,done){
+  const ta=document.createElement('textarea');
+  ta.value=text; ta.setAttribute('readonly','');
+  ta.style.position='fixed'; ta.style.left='-9999px';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); }catch(err){}
+  document.body.removeChild(ta);
+  if(done) done();
+}
+function doShare(btn){
+  const url=shareLink(btn.dataset.share);
+  const title=btn.dataset.title||document.title;
+  if(navigator.share){
+    navigator.share({title:title,url:url}).catch(()=>{});
+  }else{
+    copyText(url,()=>flash(btn,'Link copied'));
+  }
+}
+/* a link ending in #tN lands with that article's go-deeper open */
+function openFromHash(){
+  const h=(location.hash||'').replace('#','');
+  if(!/^t[1-5]$/.test(h)) return;
+  const topic=document.getElementById(h);
+  if(!topic||topic.classList.contains('open')) return;
+  topic.classList.add('open');
+  const b=topic.querySelector('.deep-toggle');
+  if(b){ b.setAttribute('aria-expanded','true'); b.firstChild.textContent='Close '; }
+  setTimeout(()=>{ topic.scrollIntoView({behavior:'smooth',block:'start'}); },80);
+}
+addEventListener('hashchange',openFromHash);
+openFromHash();
+
+/* live calculators */
+document.addEventListener('input',e=>{
+  const el=e.target.closest('[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='rt') calc_rt();
+  if(el.dataset.live==='am') calc_am();
+});
+document.addEventListener('change',e=>{
+  const el=e.target.closest('select[data-live]');
+  if(!el) return;
+  if(el.dataset.live==='rt') calc_rt();
+  if(el.dataset.live==='am') calc_am();
+});
+
+function calc_rt(){
+  const bal=parseFloat($('#rt-bal').value)||0;
+  const rate=parseFloat($('#rt-rate').value)||0;
+  const ebit=parseFloat($('#rt-ebit').value)||0;
+  const ro=$('#rt-readout');
+  if(!bal||!rate){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const both=bal*0.005;
+  const now=bal*rate/100;
+  const next=bal*(rate+0.25)/100;
+  $('#rt-big').textContent=money(both)+'/yr';
+  let cov='';
+  if(ebit){ cov=' Interest coverage on this debt moves from <b>'+(ebit/(bal*(rate-0.25)/100)).toFixed(1)+'x</b> before the hike to <b>'+(ebit/next).toFixed(1)+'x</b> after the next one.'; }
+  $('#rt-cap').innerHTML='At '+rate+' percent you pay about <b>'+money(now/12)+' a month</b>. The September hike is already <b>'+money(bal*0.0025)+' a year</b>, and the projected December move adds the same again, <b>'+money(both)+'</b> in total.'+cov+' Get a fix or swap quote before October 27.';
+}
+
+function calc_am(){
+  const spend=parseFloat($('#am-spend').value)||0;
+  const cpa=parseFloat($('#am-cpa').value)||0;
+  const ro=$('#am-readout');
+  if(!spend||!cpa){ ro.style.display='none'; return; }
+  ro.style.display='block';
+  const drift=spend*0.16*12;
+  const conv=spend/cpa;
+  $('#am-big').textContent=money(drift)+'/yr';
+  $('#am-cap').innerHTML='You buy about <b>'+Math.round(conv).toLocaleString()+' customers a month</b> at <b>'+money(cpa)+'</b> each. At the median 16 percent drift the same customers cost <b>'+money(cpa*1.16)+'</b>, or <b>'+money(drift)+' a year</b> more. Google says you gain 7 percent. Check it against your own CRM before you believe either number.';
+}
+
+/* generators */
+function build(kind){
+  const v=id=>($('#'+id).value||'').trim();
+  if(kind==='cp'){
+const co=v('cp-co')||'[Company]';
+const seats=parseFloat(v('cp-seats'))||0;
+const cap=parseFloat(v('cp-cap'))||0;
+const appr=v('cp-appr')||'[Name, title]';
+const per=(seats&&cap)?Math.max(1,Math.round(cap/seats)):0;
+const capTxt=cap?('$'+cap.toLocaleString()):'$[amount]';
+const perTxt=per?('$'+per):'$[amount]';
+const out=
+'COPILOT METERED SPEND POLICY \u00b7 '+co+'\n\n'+
+'From November 2, 2026, new Microsoft 365 Copilot Business licenses bought through a reseller carry pay-as-you-go billing by default. This policy sets the limits before any metered use is billed to us.\n\n'+
+'1. CEILING. Company-wide metered spend is capped at '+capTxt+' per month, set as a hard cap in the Microsoft 365 admin center. Seats covered: '+(seats||'[number]')+'.\n\n'+
+'2. GROUP CAPS. No individual user may exceed '+perTxt+' per month unless placed in a named heavy-use group. Heavy-use groups: [group], cap $[amount].\n\n'+
+'3. AGENTS. No new pay-as-you-go agent or service is enabled without written approval from '+appr+'. The default setting that allows all new agents is switched off.\n\n'+
+'4. REPORTING. The provider sends a metered usage report by user and by agent on the 5th of each month to '+appr+'.\n\n'+
+'5. OVERRUN. If spend reaches 80 percent of the ceiling, the provider notifies us the same day. At 100 percent, metered services pause until approved.\n\n'+
+'6. REVIEW. Limits are reviewed on [date, 90 days out] against actual usage.\n\n'+
+'Agreed for '+co+': ______________________  Date: ________\n'+
+'Agreed for [IT provider]: ______________________  Date: ________\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'Ask the provider to confirm in writing that the caps are live before the first seat is added. Start the ceiling low; usage will argue for more.';
+    show('cp-out','cp-copy',out); return;
+  }
+  if(kind==='nt'){
+const co=v('nt-co')||'[Company]';
+const tl=v('nt-tool')||'[approved tool]';
+const own=v('nt-own')||'[Name, title]';
+const st=v('nt-st')||'[states]';
+const out=
+'MEETING RECORDING AND NOTE-TAKER POLICY \u00b7 '+co+'\n\n'+
+'Recording a call without every participant agreeing can create legal exposure in several states, and courts are now treating some note-taking vendors as separate listeners. This policy sets one standard for every call with someone outside the company.\n\n'+
+'1. APPROVED TOOL. The only permitted note-taker is '+tl+', on the company account. Personal and free accounts of any note-taker are not permitted for company calls and must be removed by [date].\n\n'+
+'2. TRAINING. We use this tool only under terms stating our audio and transcripts are not used to train the vendor\u2019s models. Confirmation on file: [date].\n\n'+
+'3. CONSENT. At the start of any external call, say: "We use a note-taker on our calls. Are you comfortable with us recording this one?" If anyone declines, turn it off and take notes by hand.\n\n'+
+'4. HIGHER-RISK CALLS. Calls with candidates, and any call with participants in '+st+', are not recorded unless consent is given on the recording.\n\n'+
+'5. RETENTION. Recordings are deleted after [number] days unless a manager marks them for a client file.\n\n'+
+'6. QUESTIONS. Contact '+own+'.\n\n'+
+'Effective [date]. Reviewed [date, 6 months out].\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'Have counsel confirm the consent line for your states. Check the vendor contract for the training clause before you name the tool.';
+    show('nt-out','nt-copy',out); return;
+  }
+  if(kind==='ai'){
+const co=v('ai-co')||'[Company]';
+const own=v('ai-own')||'[Name, title]';
+const raw=($('#ai-list').value||'').split(/\n|,/).map(s=>s.trim()).filter(Boolean);
+const items=raw.length?raw:['[tool]'];
+let rows='';
+items.forEach((s,i)=>{ rows+=(i+1)+'. '+s+'\n   Decision it touches: [hiring / scheduling / pay / promotion / discipline / termination]\n   States covered: [CA / CO / other]\n   Human review: [who, and what they actually check]\n   Vendor logs kept: [what, how long]\n   Notice in place: [yes / no, date]\n\n'; });
+const out=
+'AUTOMATED EMPLOYMENT DECISION REGISTER \u00b7 '+co+'\n\n'+
+'California automated decision rules and Colorado SB 26-189 both take effect January 1, 2027. This register lists every tool that makes or shapes an employment decision so notices, human review and record keeping can be put in place before then.\n\n'+
+'Owner: '+own+'. Last updated: [date].\n\n'+
+'TOOLS IN USE\n\n'+rows+
+'OPEN ACTIONS\n'+
+'   Pre-use notices drafted for each tool: [date]\n'+
+'   Opt-out or human review process documented: [date]\n'+
+'   Records retention set to four years (CA) and three years (CO): [date]\n'+
+'   Counsel review of notices: [firm, date]\n\n'+
+'NOTES TO YOURSELF, DELETE BEFORE SENDING\n'+
+'A manager approving every recommendation without checking the inputs is not human review. Note which ones are real. Watch for Newsom\u2019s decision on SB 947 by September 30.';
+    show('ai-out','ai-copy',out); return;
+  }
+}
+function show(outId,copyId,text){
+  const o=document.getElementById(outId); o.textContent=text; o.classList.add('show');
+  const c=document.getElementById(copyId); if(c) c.style.display='';
+}
+
+/* newsletter: the reminder row under the contents and the form in the close section */
+document.querySelectorAll('form.signup').forEach(form=>{
+  form.addEventListener('submit',e=>{
+    e.preventDefault();
+    const email=form.querySelector('input[type=email]').value.trim();
+    if(!email) return;
+    const btn=form.querySelector('button'); if(btn){btn.disabled=true;btn.textContent='Adding you…';}
+    fetch(NEWSLETTER_ENDPOINT,{
+      method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({email:email,source:'Briefing No. 010',placement:form.getAttribute('data-src')||''})
+    }).catch(()=>{}).finally(()=>{
+      form.innerHTML='<p class="signup-done">On the list. No. 011 comes your way next week.</p>';
+    });
+  });
+});
+</script>
+</body>
+</html>
