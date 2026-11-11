@@ -174,7 +174,7 @@
       };
       if (kind === 'text') opts.textOnly = true; else { opts.textOnly = false; opts.connectionType = 'webrtc'; }
       /* A second session in the same visit should not greet from the top again. */
-      if (history.length) opts.overrides = { agent: { firstMessage: kind === 'voice' ? 'Okay, I can hear you now. Go ahead.' : 'I\'m here. Go ahead.' } };
+      if (history.length) opts.overrides = { agent: { firstMessage: kind === 'voice' ? 'Go ahead.' : 'Go ahead.' } };
       return EL.Conversation.startSession(opts);
     }).then(function (c) {
       convo = c; mode = kind; starting = null;
